@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuestas azul eléctrico</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* Índice de propuestas: azul eléctrico a sangre, tarjetas con la portada en móvil. */
+:root { --klein: #1433FF; --ice: #DCE3FF; --white: #FFFFFF; --ink: #050A2E; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--klein); color: var(--white); font-family: "Archivo", Arial, sans-serif; font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 36px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { margin: 0; font-weight: 900; font-variation-settings: "wdth" 62; text-transform: uppercase; font-size: clamp(48px, 13vw, 120px); line-height: .86; letter-spacing: -.02em; text-wrap: balance; }
+h1 em { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; text-transform: none; color: var(--ice); }
+.intro { margin-top: 18px; max-width: 46ch; color: var(--ice); }
+.grid { display: grid; gap: 18px; margin-top: 34px; }
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+a.card { display: flex; flex-direction: column; color: var(--ink); background: var(--white); text-decoration: none; overflow: hidden; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+a.card:hover { transform: translateY(-6px); }
+a.card:focus-visible { outline: 3px solid var(--white); outline-offset: 4px; }
+.shot { aspect-ratio: 390 / 600; overflow: hidden; background: var(--ink); }
+.shot img { width: 100%; display: block; }
+.txt { padding: 14px 14px 16px; display: grid; gap: 6px; }
+.txt b { font-weight: 900; font-variation-settings: "wdth" 70; text-transform: uppercase; font-size: 26px; line-height: 1; }
+.txt span { font-size: 14.5px; color: rgba(5,10,46,.75); }
+.txt i { font-style: normal; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--klein); margin-top: 4px; }
+.note { margin-top: 30px; font-size: 14px; color: var(--ice); max-width: 60ch; }
+@media (prefers-reduced-motion: reduce) { a.card { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Cuatro <em>estilos</em> para la web</h1>
+  <p class="intro">La misma portada y la misma sección de perfiles, con cuatro estilos distintos sacados de tu tablero. Ábrelas en el móvil y baja despacio para ver las animaciones.</p>
+  <div class="grid">
+    <a class="card" href="1-grano.html"><div class="shot"><img src="capturas/1-grano-movil-portada.jpg" alt="Portada de la propuesta 1 en móvil"></div>
+      <div class="txt"><b>1 · Grano azul</b><span>Azul eléctrico a sangre con grano, estrellas de cuatro puntas desenfocadas que respiran y letras que pasan de borrosas a nítidas.</span><i>Abrir →</i></div></a>
+    <a class="card" href="2-revista.html"><div class="shot"><img src="capturas/2-revista-movil-portada.jpg" alt="Portada de la propuesta 2 en móvil"></div>
+      <div class="txt"><b>2 · Revista</b><span>Papel gris con tinta azul y un amanecer azul desenfocado. Cifras en serif cursiva y un gráfico de puntos, como una revista.</span><i>Abrir →</i></div></a>
+    <a class="card" href="3-ascii.html"><div class="shot"><img src="capturas/3-ascii-movil-portada.jpg" alt="Portada de la propuesta 3 en móvil"></div>
+      <div class="txt"><b>3 · Trama ASCII</b><span>Fondo casi negro. “IA” dibujada con letras que se mueven, títulos que se descifran y barras hechas de bloques de texto.</span><i>Abrir →</i></div></a>
+    <a class="card" href="4-poster.html"><div class="shot"><img src="capturas/4-poster-movil-portada.jpg" alt="Portada de la propuesta 4 en móvil"></div>
+      <div class="txt"><b>4 · Póster líquido</b><span>Una cinta azul granulada que se dibuja sola, banda azul con borde de papel rasgado y texto en diagonal con eco borroso.</span><i>Abrir →</i></div></a>
+  </div>
+  <p class="note">Son solo muestras: la web original no se ha tocado. Se pueden mezclar, por ejemplo la portada de una con los gráficos de otra.</p>
+</div>
+</body>
+</html>

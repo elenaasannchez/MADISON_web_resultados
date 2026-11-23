@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuesta 3 · Trama ASCII</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Doto:wght@700;900&display=swap" rel="stylesheet">
+<style>
+/* PROPUESTA 3 · TRAMA ASCII
+   Fondo casi negro con azul eléctrico. La portada dibuja "IA" con caracteres de texto,
+   los títulos se "descifran" letra a letra, las cifras van en tipografía de puntos
+   y las barras se rellenan con bloques de texto. */
+:root {
+  --night: #04061A;
+  --night-2: #0A0F33;
+  --volt: #2A4BFF;
+  --volt-hi: #7D93FF;
+  --white: #F2F4FF;
+  --dim: rgba(242, 244, 255, .62);
+  --grot: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Space Mono", ui-monospace, monospace;
+  --dots: "Doto", "Space Mono", monospace;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--night); color: var(--white); font-family: var(--mono); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+.tiny { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+
+/* ---------- PORTADA ---------- */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; isolation: isolate; }
+#ascii { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+.hero::before { content: ""; position: absolute; inset: auto 0 0 0; height: 62%; z-index: -1; background: linear-gradient(to top, var(--night) 18%, rgba(4,6,26,.85) 55%, rgba(4,6,26,0)); }
+.hud { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: max(16px, env(safe-area-inset-top, 0px)) max(18px, env(safe-area-inset-right, 0px)) 0 max(18px, env(safe-area-inset-left, 0px)); }
+.hud span:nth-child(2) { color: var(--volt-hi); }
+.hero .inner { padding-block: 0 calc(30px + env(safe-area-inset-bottom, 0px)); }
+.hero h1 { margin: 0; font-family: var(--grot); font-weight: 700; text-transform: uppercase; font-size: clamp(42px, 12.2vw, 116px); line-height: .92; letter-spacing: -.035em; }
+.hero h1 .l { display: block; white-space: nowrap; }
+.hero h1 em { font-family: var(--mono); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: -.06em; color: var(--volt-hi); font-size: .86em; }
+.hero .answer { margin: 22px 0 0; max-width: 38ch; color: var(--dim); }
+.hero .answer b { color: var(--white); font-family: var(--grot); font-weight: 700; letter-spacing: .04em; }
+.prompt { display: inline-flex; gap: 8px; margin-top: 24px; color: var(--volt-hi); text-decoration: none; }
+.prompt::after { content: "_"; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- PERFILES ---------- */
+.perfiles { padding-block: 90px 80px; position: relative; }
+.perfiles::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
+  background-image: radial-gradient(rgba(42,75,255,.55) 1px, transparent 1.4px); background-size: 14px 14px;
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 40%); mask-image: linear-gradient(to bottom, #000, transparent 40%); }
+.perfiles h2 { margin: 0; font-family: var(--grot); font-weight: 700; text-transform: uppercase; font-size: clamp(32px, 8.4vw, 76px); line-height: .95; letter-spacing: -.03em; text-wrap: balance; max-width: 16ch; }
+.perfiles h2 em { font-family: var(--mono); font-style: italic; font-weight: 400; text-transform: none; color: var(--volt-hi); letter-spacing: -.05em; font-size: .86em; }
+.src { margin-top: 16px; display: block; }
+.src::before { content: "> "; color: var(--volt-hi); }
+
+.term { margin-top: 40px; display: grid; gap: 14px; }
+@media (min-width: 860px) { .term { grid-template-columns: 1.6fr 1fr 1fr; } }
+.pf { border: 1px solid rgba(125,147,255,.35); padding: 16px 16px 18px; position: relative; background: rgba(10,15,51,.6); }
+.pf::before { content: attr(data-tag); position: absolute; top: -9px; left: 12px; padding: 0 6px; background: var(--night); font-size: 10.5px; letter-spacing: .1em; color: var(--volt-hi); }
+.pf .big { font-family: var(--dots); font-weight: 900; font-size: clamp(88px, 27vw, 150px); line-height: .9; color: var(--volt); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.pf:first-child .big { color: var(--white); }
+.pf h3 { margin: 6px 0 0; font-family: var(--grot); font-weight: 700; font-size: 24px; text-transform: uppercase; letter-spacing: .02em; }
+.pf p { margin: 8px 0 0; color: var(--dim); font-size: 14px; }
+.pf:first-child { background: var(--volt); border-color: var(--volt); }
+.pf:first-child::before { background: var(--night); color: var(--white); }
+.pf:first-child p { color: rgba(242,244,255,.9); }
+
+/* Barras de caracteres */
+.chart { margin-top: 56px; border-top: 1px dashed rgba(125,147,255,.5); padding-top: 22px; }
+.chart h4 { margin: 0; font-family: var(--grot); font-weight: 700; font-size: 20px; line-height: 1.2; text-transform: uppercase; letter-spacing: .01em; }
+.key { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; }
+.k1 { color: var(--white); } .k2 { color: var(--volt-hi); } .k3 { color: #5468C9; }
+.grp { margin-top: 18px; }
+.grp .name { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+.ln { display: grid; grid-template-columns: 1fr auto; gap: 10px; font-size: 14px; line-height: 1.35; white-space: pre; overflow: hidden; }
+.ln .v { font-variant-numeric: tabular-nums; }
+@media (min-width: 860px) { .grps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; } }
+
+.callout { margin-top: 56px; padding: 22px 18px; border: 1px solid var(--volt-hi); position: relative; }
+.callout::before { content: "!"; position: absolute; top: -1px; left: -1px; width: 28px; height: 28px; display: grid; place-items: center; background: var(--volt-hi); color: var(--night); font-weight: 700; }
+.callout b { display: block; font-family: var(--grot); font-weight: 700; font-size: clamp(22px, 5.8vw, 34px); line-height: 1.1; text-transform: uppercase; margin: 6px 0 10px 18px; }
+.callout p { margin: 0; color: var(--dim); }
+
+.end { padding-block: 22px calc(22px + env(safe-area-inset-bottom, 0px)); border-top: 1px dashed rgba(125,147,255,.4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.end a { color: var(--volt-hi); }
+
+.js .rv { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d, 0s); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .hero .answer, .js .prompt, .js .hud { opacity: 0; transition: opacity .6s ease 1.2s; }
+.ready .hero .answer, .ready .prompt, .ready .hud { opacity: 1; }
+a:focus-visible { outline: 2px solid var(--volt-hi); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .rv, .js .hero .answer, .js .prompt, .js .hud { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<script>document.body.classList.add('js');</script>
+
+<header class="hero">
+  <canvas id="ascii" aria-hidden="true"></canvas>
+  <div class="hud tiny"><span>Econo-Reto Madison</span><span>[ UVa · 2026 ]</span><span>n=170</span></div>
+  <div class="wrap inner">
+    <h1 aria-label="¿La IA ayuda a aprender o solo a terminar antes?">
+      <span class="l" data-scr>¿La IA ayuda</span>
+      <span class="l">a <em data-scr>aprender</em></span>
+      <span class="l" data-scr>o solo a</span>
+      <span class="l"><em data-scr>terminar antes</em>?</span>
+    </h1>
+    <p class="answer"><b>DEPENDE DE CÓMO SE USE.</b> Aquí tienes todo lo que descubrimos.</p>
+    <a class="prompt tiny" href="#perfiles">Desliza y descubre ↓</a>
+  </div>
+</header>
+
+<section class="perfiles" id="perfiles">
+  <div class="wrap">
+    <h2 class="rv">No existen <em>los que usan la IA</em> y <em>los que no</em>. Hay tres perfiles</h2>
+    <span class="src tiny rv">Encuesta a 170 estudiantes</span>
+
+    <div class="term">
+      <article class="pf rv" data-tag="PERFIL_01" style="--d:0s">
+        <div class="big"><span class="count" data-to="58">58</span>%</div>
+        <h3>Activo</h3>
+        <p>Lo intenta primero, pregunta a la IA para entender, repregunta, comprueba y lo reescribe a su manera. Usa la IA como un profesor particular.</p>
+      </article>
+      <article class="pf rv" data-tag="PERFIL_02" style="--d:.1s">
+        <div class="big"><span class="count" data-to="22">22</span>%</div>
+        <h3>Mixto</h3>
+        <p>Hace casi todo como el activo: piensa e itera. Pero se fía de lo que dice la IA y no lo comprueba.</p>
+      </article>
+      <article class="pf rv" data-tag="PERFIL_03" style="--d:.2s">
+        <div class="big"><span class="count" data-to="20">20</span>%</div>
+        <h3>Pasivo</h3>
+        <p>Le pide el resultado a la IA y lo entrega. La IA piensa por él.</p>
+      </article>
+    </div>
+
+    <figure class="chart rv" id="chart" role="img" aria-label="Nota media de cada perfil en los cuatro hábitos, de 1 a 5" style="margin-left:0;margin-right:0">
+      <h4>Cómo puntúa cada perfil en los cuatro hábitos (de 1 a 5)</h4>
+      <div class="key"><span class="k1">█ Activo</span><span class="k2">▓ Mixto</span><span class="k3">▒ Pasivo</span></div>
+      <div class="grps" id="grps"></div>
+    </figure>
+
+    <div class="callout rv">
+      <b>El perfil sorpresa es el mixto.</b>
+      <p>Piensa e itera tanto como el activo, pero es el que menos comprueba de los tres, incluso menos que el pasivo. No lo esperábamos: si la IA se equivoca, aprende el error.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap end tiny">
+  <span>Propuesta 3 de 4 · Trama ASCII</span>
+  <a href="index.html">Ver las otras propuestas</a>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var GLYPH = '!<>-_/[]{}=+*^?#01ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  /* --- Portada: "IA" dibujada con caracteres --- */
+  var cv = document.getElementById('ascii'), ctx = cv.getContext('2d');
+  var RAMP = ' .·:-=+*%#@', FILL = '01#%@&$IA+*', cell, cols, rows, mask, born, W, H, t0 = performance.now();
+  function build() {
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cell = W < 600 ? 9 : 11; cols = Math.ceil(W / cell); rows = Math.ceil(H / (cell * 1.25));
+    var off = document.createElement('canvas'); off.width = cols; off.height = rows; var o = off.getContext('2d');
+    o.fillStyle = '#000'; o.fillRect(0, 0, cols, rows); o.fillStyle = '#fff'; o.textAlign = 'center'; o.textBaseline = 'middle';
+    var small = W < 600, fs = small ? rows * 0.36 : rows * 0.6;
+    o.font = '900 ' + fs + 'px "Space Grotesk", Arial, sans-serif';
+    o.save(); o.translate(cols * (small ? .5 : .76), rows * (small ? .3 : .36)); o.scale(small ? 1.25 : 1.05, 1); o.fillText('IA', 0, 0); o.restore();
+    var d = o.getImageData(0, 0, cols, rows).data; mask = new Float32Array(cols * rows); born = new Float32Array(cols * rows);
+    for (var i = 0; i < cols * rows; i++) { mask[i] = d[i * 4] / 255; born[i] = Math.random() * 1200 + (i % cols) * 6; }
+  }
+  var px = -1e3, py = -1e3;
+  window.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top; }, { passive: true });
+  var last = 0;
+  function draw(now) {
+    if (now - last < 33 && !reduce) { requestAnimationFrame(draw); return; } last = now;
+    var t = reduce ? 1e5 : now - t0, ch = cell * 1.25;
+    ctx.fillStyle = '#04061A'; ctx.fillRect(0, 0, W, H);
+    ctx.font = '700 ' + (cell * 1.05) + 'px "Space Mono", monospace'; ctx.textBaseline = 'top';
+    var cx = W * (W < 600 ? .5 : .76) + Math.sin(t / 2400) * W * .08, cy = H * .4 + Math.cos(t / 3000) * H * .06, R = Math.max(W, H) * .55;
+    for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) {
+      var i = y * cols + x, X = x * cell, Y = y * ch;
+      var dx = X - cx, dy = Y - cy, glow = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / R) * .45;
+      var wave = (Math.sin(x * .18 + t / 700) + Math.sin(y * .22 - t / 900)) * .06;
+      var pd = Math.hypot(X - px, Y - py), push = pd < 90 ? (1 - pd / 90) * .6 : 0;
+      var v = Math.min(1, mask[i] * .95 + glow + wave + push);
+      if (v < .12) continue;
+      var c;
+      if (t < born[i]) { if (Math.random() < .5) continue; c = GLYPH[(Math.random() * GLYPH.length) | 0]; }
+      else if (mask[i] > .5) { var hsh = Math.sin(x * 12.9898 + y * 78.233 + Math.floor(t / 650) * 3.1) * 43758.5; c = FILL[Math.floor((hsh - Math.floor(hsh)) * FILL.length)]; }
+      else c = RAMP[Math.min(RAMP.length - 1, (v * RAMP.length) | 0)];
+      ctx.fillStyle = mask[i] > .5 ? (v > .9 ? '#F2F4FF' : '#7D93FF') : 'rgba(42,75,255,' + (0.25 + v * .7).toFixed(2) + ')';
+      ctx.fillText(c, X, Y);
+    }
+    if (!reduce) requestAnimationFrame(draw);
+  }
+  function start() { build(); requestAnimationFrame(draw); }
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(start);
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { build(); if (reduce) draw(0); }, 150); });
+
+  /* --- Texto que se descifra --- */
+  function scramble(el, delay) {
+    if (reduce) return; var final = el.textContent, len = final.length, f = 0;
+    el.style.minWidth = el.offsetWidth + 'px';
+    setTimeout(function tick() {
+      var out = '';
+      for (var i = 0; i < len; i++) { var s = final[i]; out += (s === ' ' || f > i * 1.6 + 8) ? s : GLYPH[(Math.random() * GLYPH.length) | 0]; }
+      el.textContent = out; f++;
+      if (f < len * 1.6 + 10) setTimeout(tick, 34); else { el.textContent = final; el.style.minWidth = ''; }
+    }, delay);
+  }
+  document.querySelectorAll('[data-scr]').forEach(function (el, i) { scramble(el, 150 + i * 160); });
+
+  /* --- Barras de caracteres --- */
+  var H4 = [['Pensar primero', 4.0, 4.2, 2.2], ['Iterar', 4.1, 4.1, 2.3], ['Verificar', 3.8, 2.1, 2.6], ['Hacerlo mío', 4.2, 3.8, 3.2]];
+  var ch = ['█', '▓', '▒'], kc = ['k1', 'k2', 'k3'], N = window.innerWidth < 420 ? 22 : 28, host = document.getElementById('grps'), lines = [];
+  H4.forEach(function (h) {
+    var g = document.createElement('div'); g.className = 'grp'; g.innerHTML = '<div class="name">' + h[0] + '</div>';
+    h.slice(1).forEach(function (v, i) {
+      var n = Math.round(v / 5 * N), ln = document.createElement('div'); ln.className = 'ln ' + kc[i];
+      ln.innerHTML = '<span class="b"></span><span class="v">' + v.toFixed(1).replace('.', ',') + '</span>';
+      var b = ln.querySelector('.b'); lines.push([b, n, ch[i]]);
+      b.textContent = reduce ? ch[i].repeat(n) + '·'.repeat(N - n) : '·'.repeat(N);
+      g.appendChild(ln);
+    });
+    host.appendChild(g);
+  });
+  function fillBars() {
+    if (reduce) return; var step = 0;
+    (function tick() {
+      lines.forEach(function (l, j) { var k = Math.max(0, Math.min(l[1], step - j)); l[0].textContent = l[2].repeat(k) + '·'.repeat(N - k); });
+      step++; if (step < N + lines.length + 2) setTimeout(tick, 40);
+    })();
+  }
+
+  requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.add('ready'); }); });
+  function count(el) {
+    if (reduce) return; var end = +el.dataset.to, t0 = null;
+    function s(ts) { if (!t0) t0 = ts; var p = Math.min(1, (ts - t0) / 1200); el.textContent = p < 1 ? String(Math.floor(Math.random() * 90 + 10)) : end; if (p < 1) setTimeout(function () { requestAnimationFrame(s); }, 40); }
+    requestAnimationFrame(s);
+  }
+  if (!('IntersectionObserver' in window)) { document.querySelectorAll('.rv').forEach(function (e) { e.classList.add('in'); }); fillBars(); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return; e.target.classList.add('in');
+      e.target.querySelectorAll('.count').forEach(count);
+      if (e.target.id === 'chart') fillBars();
+      io.unobserve(e.target);
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
+</html>

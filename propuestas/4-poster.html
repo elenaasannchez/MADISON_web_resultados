@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuesta 4 · Póster líquido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* PROPUESTA 4 · PÓSTER LÍQUIDO
+   Papel blanco roto con una cinta azul "líquida" y granulada que se dibuja sola,
+   banda azul a sangre con borde de papel rasgado, texto en diagonal con eco desenfocado
+   y bloques de color proporcionales a las cifras. */
+:root {
+  --paper: #F2F3F7;
+  --blue: #1D3BFF;
+  --blue-dk: #0B1A9E;
+  --ice: #C9D2FF;
+  --ink: #0A0F2E;
+  --white: #FFFFFF;
+  --grot: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+  --serif: "Fraunces", Georgia, serif;
+  --mono: "DM Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(.22, .9, .24, 1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--grot); font-variation-settings: "wdth" 100, "opsz" 14; font-weight: 500; font-size: 17px; line-height: 1.5; overflow-x: hidden; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--mono); font-size: 11px; letter-spacing: .03em; line-height: 1.4; }
+
+/* ---------- PORTADA ---------- */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; }
+.ribbon { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; }
+.ribbon path { fill: none; stroke: var(--blue); stroke-linecap: round; }
+.ribbon .main { stroke-width: 120; filter: url(#liquid); }
+.ribbon .echo { stroke-width: 40; opacity: .35; filter: url(#blurry); }
+.edge { display: flex; justify-content: space-between; gap: 10px; padding-block: max(16px, env(safe-area-inset-top, 0px)) 0; }
+.edge span:last-child { text-align: right; }
+.hero .inner { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-block: 40px 120px; }
+.hero h1 { margin: 0; font-weight: 800; font-variation-settings: "wdth" 75, "opsz" 96; text-transform: uppercase; font-size: clamp(56px, 16.5vw, 156px); line-height: .84; letter-spacing: -.02em; }
+.hero h1 .l { display: block; white-space: nowrap; }
+.hero h1 .w { display: inline-block; }
+.hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 300; text-transform: none; letter-spacing: -.02em; font-size: .9em; color: var(--ink); font-variation-settings: "opsz" 144; }
+.hero > .wrap { width: 100%; }
+.hero .answer { margin: 24px 0 0; max-width: 30ch; font-size: 17px; }
+.hero .answer b { font-weight: 800; font-variation-settings: "wdth" 85; letter-spacing: .03em; font-size: 20px; display: block; }
+.badge { position: absolute; right: max(18px, env(safe-area-inset-right, 0px)); bottom: calc(26px + env(safe-area-inset-bottom, 0px)); width: 96px; height: 96px; border-radius: 50%; background: var(--ink); color: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-align: center; text-decoration: none; font-family: var(--mono); font-size: 10.5px; line-height: 1.25; letter-spacing: .06em; text-transform: uppercase; }
+.badge span { display: block; font-size: 18px; line-height: 1; animation: dn 1.8s var(--ease) infinite; }
+@keyframes dn { 0%,100% { transform: translateY(-2px); } 50% { transform: translateY(5px); } }
+
+.js .ribbon .main, .js .ribbon .echo { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.2s var(--ease) .1s; }
+.js .ribbon .echo { transition-delay: .35s; }
+.ready .ribbon .main, .ready .ribbon .echo { stroke-dashoffset: 0; }
+.js .hero h1 .w { opacity: 0; transform: translateY(.4em) rotate(4deg); filter: blur(10px); transition: opacity .9s ease, transform 1.1s var(--ease), filter 1s ease; transition-delay: calc(var(--n) * .07s + .3s); }
+.ready .hero h1 .w { opacity: 1; transform: none; filter: none; }
+.js .hero .answer, .js .badge, .js .edge { opacity: 0; transition: opacity .8s ease 1.1s; }
+.ready .hero .answer, .ready .badge, .ready .edge { opacity: 1; }
+
+/* ---------- BANDA AZUL ---------- */
+.band { position: relative; background: var(--blue); color: var(--white); padding-block: 20px 90px; margin-top: 30px; }
+.band::before { content: ""; position: absolute; left: 0; right: 0; top: -22px; height: 24px; background: var(--blue);
+  clip-path: polygon(0 60%, 4% 20%, 9% 70%, 13% 30%, 18% 80%, 23% 10%, 28% 60%, 33% 35%, 38% 85%, 43% 25%, 48% 65%, 53% 15%, 58% 70%, 63% 40%, 68% 90%, 73% 20%, 78% 55%, 83% 30%, 88% 75%, 93% 15%, 97% 60%, 100% 35%, 100% 100%, 0 100%); }
+.tape { position: relative; margin: 30px 0 50px; height: 130px; overflow: hidden; }
+.tape .row { position: absolute; left: -10%; width: 120%; top: 26px; transform: rotate(-6deg); white-space: nowrap; font-weight: 800; font-variation-settings: "wdth" 75, "opsz" 96; text-transform: uppercase; font-size: 44px; line-height: 1; }
+.tape .row span { display: inline-block; animation: slide 22s linear infinite; padding-right: 0; }
+.tape .row.blur { filter: blur(5px); opacity: .6; top: 70px; color: var(--ice); }
+.tape .row.blur span { animation-duration: 30s; animation-direction: reverse; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+.band h2 { margin: 0; font-weight: 800; font-variation-settings: "wdth" 75, "opsz" 96; text-transform: uppercase; font-size: clamp(40px, 11vw, 100px); line-height: .88; letter-spacing: -.01em; text-wrap: balance; max-width: 13ch; }
+.band h2 em { font-family: var(--serif); font-style: italic; font-weight: 300; text-transform: none; color: var(--ice); font-size: .9em; font-variation-settings: "opsz" 144; }
+.band .src { margin-top: 18px; color: var(--ice); }
+
+/* Bloques proporcionales */
+.blocks { display: flex; margin-top: 44px; height: 170px; }
+.blk { position: relative; flex: 0 0 var(--w); display: flex; flex-direction: column; justify-content: space-between; padding: 10px 10px 12px; overflow: hidden; transform-origin: bottom; }
+.blk .pct { font-weight: 800; font-variation-settings: "wdth" 75, "opsz" 96; font-size: clamp(46px, 12vw, 110px); line-height: .85; font-variant-numeric: tabular-nums; }
+.blk .who { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 4.6vw, 30px); line-height: 1; }
+.b-act { background: var(--white); color: var(--blue); }
+.b-mix { background: var(--ice); color: var(--ink); }
+.b-pas { background: var(--ink); color: var(--white); }
+@media (max-width: 520px) { .b-mix .pct, .b-pas .pct { font-size: 34px; } .b-mix .who, .b-pas .who { font-size: 16px; } .blk { padding: 8px 7px 10px; } }
+.descs { display: grid; gap: 18px; margin-top: 22px; }
+@media (min-width: 820px) { .descs { grid-template-columns: 58fr 22fr 20fr; gap: 24px; } }
+.descs div { border-top: 2px solid currentColor; padding-top: 10px; font-size: 15.5px; }
+.descs b { display: block; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; font-size: 13px; margin-bottom: 4px; color: var(--ice); }
+
+/* Gráfico de columnas pequeñas */
+.mini { margin-top: 64px; }
+.mini h3 { margin: 0; font-weight: 800; font-variation-settings: "wdth" 85, "opsz" 32; text-transform: uppercase; font-size: 22px; line-height: 1.05; max-width: 26ch; }
+.key { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; color: var(--ice); }
+.key i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; }
+.cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px 18px; margin-top: 22px; }
+@media (min-width: 820px) { .cols { grid-template-columns: repeat(4, 1fr); gap: 28px; } }
+.hab .plot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; align-items: end; height: 150px; border-bottom: 2px solid var(--white); }
+.hab .c { position: relative; height: calc(var(--v) / 5 * 100%); transform-origin: bottom; }
+.hab .c span { position: absolute; top: -18px; left: 0; right: 0; text-align: center; font-family: var(--mono); font-size: 11px; color: var(--white); }
+.hab .name { margin-top: 8px; font-weight: 700; font-size: 15px; }
+
+/* Pegatina */
+.sticker { margin-top: 70px; background: var(--paper); color: var(--ink); padding: 24px 20px 22px; transform: rotate(-1.6deg); box-shadow: 0 24px 40px -20px rgba(5,10,60,.6); max-width: 640px; }
+.sticker b { display: block; font-weight: 800; font-variation-settings: "wdth" 75, "opsz" 96; text-transform: uppercase; font-size: clamp(30px, 8vw, 52px); line-height: .9; }
+.sticker b em { font-family: var(--serif); font-style: italic; font-weight: 300; text-transform: none; color: var(--blue); }
+.sticker p { margin: 12px 0 0; }
+
+.end { background: var(--blue-dk); color: var(--ice); }
+.end .wrap { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding-block: 20px calc(20px + env(safe-area-inset-bottom, 0px)); }
+.end a { color: var(--white); }
+
+.js .rv { opacity: 0; transform: translateY(36px) rotate(1deg); transition: opacity .9s var(--ease), transform 1s var(--ease); transition-delay: var(--d, 0s); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .sticker.rv.in { transform: rotate(-1.6deg); }
+.js .blocks .blk { transform: scaleY(0); transition: transform 1s var(--ease); transition-delay: var(--d); }
+.js .blocks.in .blk { transform: none; }
+.js .hab .c { transform: scaleY(0); transition: transform 1.1s var(--ease); transition-delay: var(--d); }
+.js .cols.in .hab .c { transform: none; }
+a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.band a:focus-visible, .end a:focus-visible { outline-color: var(--white); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .rv, .js .hero h1 .w, .js .hero .answer, .js .badge, .js .edge { opacity: 1; transform: none; filter: none; }
+  .js .ribbon .main, .js .ribbon .echo { stroke-dashoffset: 0; }
+  .js .blocks .blk, .js .hab .c { transform: none; }
+  .js .sticker.rv { transform: rotate(-1.6deg); }
+}
+</style>
+</head>
+<body>
+<script>document.body.classList.add('js');</script>
+
+<header class="hero">
+  <svg class="ribbon" viewBox="0 0 400 860" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="liquid" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency=".012" numOctaves="2" seed="4" result="w"/>
+        <feDisplacementMap in="SourceGraphic" in2="w" scale="34" result="d"/>
+        <feGaussianBlur in="d" stdDeviation="2" result="b"/>
+        <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="2" result="g"/>
+        <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.45" result="gm"/>
+        <feComposite in="b" in2="gm" operator="in"/>
+      </filter>
+      <filter id="blurry" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+    </defs>
+    <path class="echo" pathLength="1" d="M-60 640 C 80 520, 300 700, 420 520"/>
+    <path class="main" pathLength="1" d="M470 120 C 260 60, 120 220, 250 360 C 380 500, 300 720, 60 700 C -60 690, -80 600, -40 560"/>
+  </svg>
+  <div class="wrap edge mono"><span>Econo-Reto Madison<br>Universidad de Valladolid</span><span>2026<br>170 + 38 + 7 + 55</span></div>
+  <div class="wrap inner">
+    <h1>
+      <span class="l"><span class="w" style="--n:0">¿La</span> <span class="w" style="--n:1">IA</span> <span class="w" style="--n:2">ayuda</span></span>
+      <span class="l"><span class="w" style="--n:3">a</span> <em class="w" style="--n:4">aprender</em></span>
+      <span class="l"><span class="w" style="--n:5">o</span> <span class="w" style="--n:6">solo</span> <span class="w" style="--n:7">a</span></span>
+      <span class="l"><em class="w" style="--n:8">terminar antes</em><span class="w" style="--n:9">?</span></span>
+    </h1>
+    <p class="answer"><b>DEPENDE DE CÓMO SE USE.</b> Aquí tienes todo lo que descubrimos.</p>
+  </div>
+  <a class="badge" href="#perfiles">Desliza<br>y descubre<span aria-hidden="true">↓</span></a>
+</header>
+
+<section class="band" id="perfiles">
+  <div class="tape" aria-hidden="true">
+    <div class="row blur"><span>Activo · Mixto · Pasivo · Activo · Mixto · Pasivo · Activo · Mixto · Pasivo · Activo · Mixto · Pasivo · </span></div>
+    <div class="row"><span>Depende de cómo se use · Depende de cómo se use · Depende de cómo se use · Depende de cómo se use · </span></div>
+  </div>
+  <div class="wrap">
+    <h2 class="rv">No existen <em>los que usan la IA</em> y <em>los que no</em>. Hay tres perfiles</h2>
+    <p class="src mono rv">Encuesta a 170 estudiantes</p>
+
+    <div class="blocks rv" role="img" aria-label="Activo 58 %, Mixto 22 %, Pasivo 20 %">
+      <div class="blk b-act" style="--w:58%;--d:.1s"><span class="pct"><span class="count" data-to="58">58</span>%</span><span class="who">Activo</span></div>
+      <div class="blk b-mix" style="--w:22%;--d:.25s"><span class="pct"><span class="count" data-to="22">22</span>%</span><span class="who">Mixto</span></div>
+      <div class="blk b-pas" style="--w:20%;--d:.4s"><span class="pct"><span class="count" data-to="20">20</span>%</span><span class="who">Pasivo</span></div>
+    </div>
+    <div class="descs">
+      <div class="rv" style="--d:0s"><b>Activo</b>Lo intenta primero, pregunta a la IA para entender, repregunta, comprueba y lo reescribe a su manera. Usa la IA como un profesor particular.</div>
+      <div class="rv" style="--d:.1s"><b>Mixto</b>Hace casi todo como el activo: piensa e itera. Pero se fía de lo que dice la IA y no lo comprueba.</div>
+      <div class="rv" style="--d:.2s"><b>Pasivo</b>Le pide el resultado a la IA y lo entrega. La IA piensa por él.</div>
+    </div>
+
+    <div class="mini">
+      <h3 class="rv">Cómo puntúa cada perfil en los cuatro hábitos (de 1 a 5)</h3>
+      <div class="key mono rv"><span><i style="background:var(--white)"></i>Activo</span><span><i style="background:var(--ice)"></i>Mixto</span><span><i style="background:var(--ink)"></i>Pasivo</span></div>
+      <div class="cols rv" id="cols" role="img" aria-label="Pensar primero: activo 4,0, mixto 4,2, pasivo 2,2. Iterar: 4,1, 4,1, 2,3. Verificar: 3,8, 2,1, 2,6. Hacerlo mío: 4,2, 3,8, 3,2."></div>
+    </div>
+
+    <div class="sticker rv">
+      <b>El perfil sorpresa es el <em>mixto</em>.</b>
+      <p>Piensa e itera tanto como el activo, pero es el que menos comprueba de los tres, incluso menos que el pasivo. No lo esperábamos: si la IA se equivoca, aprende el error.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="end mono"><div class="wrap">
+  <span>Propuesta 4 de 4 · Póster líquido</span>
+  <a href="index.html">Ver las otras propuestas</a>
+</div></footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var H = [['Pensar primero', 4.0, 4.2, 2.2], ['Iterar', 4.1, 4.1, 2.3], ['Verificar', 3.8, 2.1, 2.6], ['Hacerlo mío', 4.2, 3.8, 3.2]];
+  var bg = ['var(--white)', 'var(--ice)', 'var(--ink)'], host = document.getElementById('cols'), k = 0;
+  H.forEach(function (h) {
+    var d = document.createElement('div'); d.className = 'hab';
+    d.innerHTML = '<div class="plot">' + h.slice(1).map(function (v, i) {
+      return '<div class="c" style="--v:' + v + ';background:' + bg[i] + ';--d:' + (0.1 + (k++) * 0.06) + 's"><span>' + v.toFixed(1).replace('.', ',') + '</span></div>';
+    }).join('') + '</div><div class="name">' + h[0] + '</div>';
+    host.appendChild(d);
+  });
+  requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.add('ready'); }); });
+
+  // La cinta azul se mueve un poco al hacer scroll
+  var rib = document.querySelector('.ribbon'), tick = false;
+  if (!reduce) window.addEventListener('scroll', function () {
+    if (tick) return; tick = true;
+    requestAnimationFrame(function () { var p = Math.min(1, scrollY / innerHeight); rib.style.transform = 'translateY(' + (p * 80) + 'px) rotate(' + (p * -6) + 'deg) scale(' + (1 + p * .1) + ')'; tick = false; });
+  }, { passive: true });
+
+  function count(el) {
+    if (reduce) return; var end = +el.dataset.to, t0 = null;
+    function s(ts) { if (!t0) t0 = ts; var p = Math.min(1, (ts - t0) / 1300); p = 1 - Math.pow(1 - p, 4); el.textContent = Math.round(end * p); if (p < 1) requestAnimationFrame(s); }
+    requestAnimationFrame(s);
+  }
+  if (!('IntersectionObserver' in window)) { document.querySelectorAll('.rv').forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('.count').forEach(count); io.unobserve(e.target); });
+  }, { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
+</html>
