@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuesta 5 · Píxel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Jersey+10&family=Schibsted+Grotesk:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* PROPUESTA 5 · PÍXEL
+   Letra de pantalla antigua (píxel) con acento lima, como el póster "A better you".
+   Fondos tramados en movimiento (puntos de dos colores, efecto de impresión barata),
+   también detrás de los datos. Barras por segmentos, como una barra de vida de videojuego. */
+:root {
+  --blue: #1838FF;
+  --blue-lt: #6F86FF;
+  --lime: #D7FF3A;
+  --ink: #070A24;
+  --white: #FFFFFF;
+  --pix: "Silkscreen", "Courier New", monospace;
+  --tall: "Jersey 10", "Silkscreen", monospace;
+  --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ink); color: var(--white); font-family: var(--body); font-size: 17px; line-height: 1.5; overflow-x: hidden; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+canvas.dither { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; image-rendering: pixelated; image-rendering: crisp-edges; }
+.pix { font-family: var(--pix); font-weight: 400; text-transform: uppercase; letter-spacing: .02em; }
+
+/* ---------- PORTADA ---------- */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; isolation: isolate; overflow: hidden; }
+.top { position: absolute; top: max(16px, env(safe-area-inset-top, 0px)); left: 0; right: 0; }
+.top .wrap { display: flex; justify-content: space-between; font-size: 11px; color: var(--lime); }
+.top span { background: var(--ink); padding: 3px 6px; }
+.hero h1 { margin: 0; font-family: var(--tall); font-weight: 400; text-transform: uppercase; font-size: clamp(52px, 15.4vw, 140px); line-height: .86; letter-spacing: .01em; color: var(--white); text-shadow: 4px 4px 0 var(--ink); }
+.hero h1 .l { display: block; white-space: nowrap; }
+.hero h1 em { font-style: normal; color: var(--lime); }
+.cursor { display: inline-block; width: .3em; height: .7em; background: var(--lime); vertical-align: -.02em; margin-left: .08em; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.hero .answer { margin: 26px 0 0; max-width: 30ch; background: var(--ink); padding: 12px 14px; display: inline-block; box-shadow: 6px 6px 0 var(--lime); }
+.hero .answer b { display: block; font-weight: 800; letter-spacing: .02em; }
+.start { display: inline-flex; gap: 10px; align-items: center; margin-top: 30px; color: var(--ink); background: var(--lime); padding: 10px 14px; text-decoration: none; font-size: 13px; }
+.start span { animation: bob 1s steps(2) infinite; }
+@keyframes bob { 50% { transform: translateY(3px); } }
+
+/* ---------- PERFILES ---------- */
+.perfiles { position: relative; isolation: isolate; overflow: hidden; padding-block: 80px 90px; }
+.perfiles h2 { margin: 0; font-family: var(--tall); font-weight: 400; text-transform: uppercase; font-size: clamp(46px, 12.6vw, 104px); line-height: .88; text-wrap: balance; max-width: 18ch; text-shadow: 3px 3px 0 var(--ink); }
+.perfiles h2 em { font-style: normal; color: var(--lime); }
+.src { display: inline-block; margin-top: 16px; background: var(--ink); color: var(--lime); padding: 4px 8px; font-size: 11px; }
+
+.cards { display: grid; gap: 16px; margin-top: 38px; }
+@media (min-width: 860px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+.card { background: var(--ink); border: 3px solid var(--white); padding: 16px; box-shadow: 8px 8px 0 rgba(7,10,36,.6); }
+.card .row { display: flex; justify-content: space-between; align-items: baseline; }
+.card .big { font-family: var(--tall); font-weight: 400; font-size: clamp(96px, 28vw, 140px); line-height: .9; color: var(--lime); }
+.card h3 { margin: 0; font-family: var(--pix); font-weight: 400; font-size: 22px; text-transform: uppercase; }
+.hp { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; margin-top: 14px; }
+.hp i { height: 14px; background: rgba(255,255,255,.14); }
+.hp i.on { background: var(--lime); }
+.card p { margin: 12px 0 0; font-size: 15px; color: rgba(255,255,255,.85); }
+.card:nth-child(2) { border-color: var(--blue-lt); } .card:nth-child(2) .hp i.on { background: var(--blue-lt); } .card:nth-child(2) .big { color: var(--blue-lt); }
+.card:nth-child(3) { border-color: rgba(255,255,255,.5); } .card:nth-child(3) .hp i.on { background: var(--white); } .card:nth-child(3) .big { color: var(--white); }
+
+.chart { margin-top: 56px; background: var(--white); color: var(--ink); padding: 20px 16px; box-shadow: 8px 8px 0 var(--lime); }
+.chart h4 { margin: 0; font-family: var(--tall); font-weight: 400; font-size: 30px; line-height: .95; text-transform: uppercase; }
+.key { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; font-size: 11px; }
+.key i { display: inline-block; width: 11px; height: 11px; margin-right: 5px; vertical-align: -1px; }
+.habits { display: grid; gap: 16px; margin-top: 16px; }
+@media (min-width: 860px) { .chart { padding: 28px 32px; } .habits { grid-template-columns: repeat(2, 1fr); gap: 18px 40px; } }
+.habit .name { font-weight: 800; font-size: 15px; margin-bottom: 6px; }
+.seg { display: grid; grid-template-columns: 1fr 34px; gap: 8px; align-items: center; margin-top: 4px; }
+.seg .cells { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; }
+.seg .cells i { height: 12px; background: rgba(7,10,36,.08); }
+.seg .v { font-family: var(--pix); font-size: 12px; text-align: right; }
+.c1 i.on { background: var(--blue); } .c2 i.on { background: var(--blue-lt); } .c3 i.on { background: var(--ink); }
+.c-half { background: linear-gradient(90deg, var(--c) 50%, rgba(7,10,36,.08) 50%) !important; }
+
+.dialog { margin-top: 56px; background: var(--ink); border: 3px solid var(--lime); padding: 18px 16px 20px; position: relative; max-width: 680px; }
+.dialog::after { content: "▼"; position: absolute; right: 14px; bottom: 8px; color: var(--lime); font-size: 12px; animation: blink 1s steps(1) infinite; }
+.dialog b { display: block; font-family: var(--tall); font-weight: 400; color: var(--lime); text-transform: uppercase; font-size: clamp(34px, 9vw, 52px); line-height: .9; }
+.dialog p { margin: 10px 0 0; }
+
+.end { background: var(--ink); border-top: 3px solid var(--lime); }
+.end .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-block: 18px calc(18px + env(safe-area-inset-bottom, 0px)); font-size: 11px; }
+.end a { color: var(--lime); }
+
+/* Animación: aparece a saltos, como en una pantalla antigua */
+.js .rv { opacity: 0; transform: translateY(24px); transition: opacity .5s steps(4), transform .5s steps(4); transition-delay: var(--d, 0s); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .hero .answer, .js .start, .js .top { opacity: 0; transition: opacity .4s steps(3) 1.6s; }
+.ready .hero .answer, .ready .start, .ready .top { opacity: 1; }
+a:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .rv, .js .hero .answer, .js .start, .js .top { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<script>document.body.classList.add('js');</script>
+
+<header class="hero">
+  <canvas class="dither" data-pal="hero" aria-hidden="true"></canvas>
+  <div class="top pix"><div class="wrap"><span>Econo-Reto Madison</span><span>UVa · 2026</span></div></div>
+  <div class="wrap">
+    <h1 id="title" aria-label="¿La IA ayuda a aprender o solo a terminar antes?">
+      <span class="l">¿La IA ayuda</span>
+      <span class="l">a <em>aprender</em></span>
+      <span class="l">o solo a</span>
+      <span class="l"><em>terminar antes</em>?<i class="cursor" aria-hidden="true"></i></span>
+    </h1>
+    <p class="answer"><b>DEPENDE DE CÓMO SE USE.</b> Aquí tienes todo lo que descubrimos.</p><br>
+    <a class="start pix" href="#perfiles">Desliza y descubre <span aria-hidden="true">▼</span></a>
+  </div>
+</header>
+
+<section class="perfiles" id="perfiles">
+  <canvas class="dither" data-pal="data" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h2 class="rv">No existen <em>los que usan la IA</em> y <em>los que no</em>. Hay tres perfiles</h2>
+    <span class="src pix rv">Encuesta a 170 estudiantes</span>
+
+    <div class="cards">
+      <article class="card rv" style="--d:0s"><div class="row"><h3>Activo</h3><span class="big"><span class="count" data-to="58">58</span>%</span></div><div class="hp" data-v="58"></div>
+        <p>Lo intenta primero, pregunta a la IA para entender, repregunta, comprueba y lo reescribe a su manera. Usa la IA como un profesor particular.</p></article>
+      <article class="card rv" style="--d:.1s"><div class="row"><h3>Mixto</h3><span class="big"><span class="count" data-to="22">22</span>%</span></div><div class="hp" data-v="22"></div>
+        <p>Hace casi todo como el activo: piensa e itera. Pero se fía de lo que dice la IA y no lo comprueba.</p></article>
+      <article class="card rv" style="--d:.2s"><div class="row"><h3>Pasivo</h3><span class="big"><span class="count" data-to="20">20</span>%</span></div><div class="hp" data-v="20"></div>
+        <p>Le pide el resultado a la IA y lo entrega. La IA piensa por él.</p></article>
+    </div>
+
+    <figure class="chart rv" id="chart" role="img" aria-label="Nota media de cada perfil en los cuatro hábitos, de 1 a 5" style="margin-left:0;margin-right:0">
+      <h4>Cómo puntúa cada perfil en los cuatro hábitos (de 1 a 5)</h4>
+      <div class="key pix"><span><i style="background:var(--blue)"></i>Activo</span><span><i style="background:var(--blue-lt)"></i>Mixto</span><span><i style="background:var(--ink)"></i>Pasivo</span></div>
+      <div class="habits" id="habits"></div>
+    </figure>
+
+    <div class="dialog rv">
+      <b>El perfil sorpresa es el mixto.</b>
+      <p>Piensa e itera tanto como el activo, pero es el que menos comprueba de los tres, incluso menos que el pasivo. No lo esperábamos: si la IA se equivoca, aprende el error.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="end pix"><div class="wrap"><span>Propuesta 5 · Píxel</span><a href="index.html">Ver las otras propuestas</a></div></footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Fondo tramado: degradado en movimiento convertido en puntos de dos colores */
+  var BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  var PAL = { hero: [[24, 56, 255], [111, 134, 255], [215, 255, 58]], data: [[7, 10, 36], [24, 56, 255], [111, 134, 255]] };
+  function dither(cv) {
+    var ctx = cv.getContext('2d'), pal = PAL[cv.dataset.pal], S = window.innerWidth < 600 ? 4 : 5, w, h, img;
+    function size() { w = Math.ceil(cv.clientWidth / S); h = Math.ceil(cv.clientHeight / S); cv.width = w; cv.height = h; img = ctx.createImageData(w, h); }
+    size(); window.addEventListener('resize', size);
+    var last = 0, visible = true;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(cv);
+    function frame(now) {
+      if (!reduce) requestAnimationFrame(frame);
+      if (!visible || now - last < 80) return; last = now;
+      var t = reduce ? 0 : now / 1000, d = img.data, data = pal === PAL.data;
+      var b1x = w * (.7 + .2 * Math.sin(t * .4)), b1y = h * (data ? .25 : .3) + h * .1 * Math.cos(t * .3);
+      var b2x = w * (.2 + .15 * Math.cos(t * .35)), b2y = h * (data ? .75 : .85) + h * .08 * Math.sin(t * .5);
+      var r1 = Math.max(w, h) * (data ? .45 : .6), r2 = Math.max(w, h) * .4;
+      for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
+        var a = Math.max(0, 1 - Math.hypot(x - b1x, y - b1y) / r1), b = Math.max(0, 1 - Math.hypot(x - b2x, y - b2y) / r2);
+        var v = Math.min(1.999, (a * 1.4 + b * 1.1) * 1.2), lvl = Math.floor(v), f = v - lvl;
+        var th = (BAYER[(y & 3) * 4 + (x & 3)] + .5) / 16, c = pal[Math.min(2, lvl + (f > th ? 1 : 0))], i = (y * w + x) * 4;
+        d[i] = c[0]; d[i + 1] = c[1]; d[i + 2] = c[2]; d[i + 3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+    }
+    requestAnimationFrame(frame);
+  }
+  document.querySelectorAll('canvas.dither').forEach(dither);
+
+  /* Barras de vida y barras por segmentos */
+  document.querySelectorAll('.hp').forEach(function (el) { var n = Math.round(+el.dataset.v / 5); for (var i = 0; i < 20; i++) { var c = document.createElement('i'); c.dataset.on = i < n ? 1 : 0; el.appendChild(c); } });
+  var H = [['Pensar primero', 4.0, 4.2, 2.2], ['Iterar', 4.1, 4.1, 2.3], ['Verificar', 3.8, 2.1, 2.6], ['Hacerlo mío', 4.2, 3.8, 3.2]], host = document.getElementById('habits');
+  H.forEach(function (h) {
+    var d = document.createElement('div'); d.className = 'habit';
+    d.innerHTML = '<div class="name">' + h[0] + '</div>' + h.slice(1).map(function (v, i) {
+      var cells = ''; for (var k = 0; k < 10; k++) cells += '<i data-on="' + (k < Math.round(v * 2) ? 1 : 0) + '"></i>';
+      return '<div class="seg c' + (i + 1) + '"><div class="cells">' + cells + '</div><span class="v">' + v.toFixed(1).replace('.', ',') + '</span></div>';
+    }).join('');
+    host.appendChild(d);
+  });
+  function light(root) {
+    var cells = root.querySelectorAll('[data-on="1"]');
+    if (reduce) { cells.forEach(function (c) { c.classList.add('on'); }); return; }
+    cells.forEach(function (c, i) { setTimeout(function () { c.classList.add('on'); }, 200 + i * 28); });
+  }
+
+  /* Título que se escribe solo */
+  var lines = document.querySelectorAll('#title .l');
+  if (!reduce) {
+    var store = [];
+    lines.forEach(function (l) { var nodes = []; (function walk(n) { n.childNodes.forEach(function (c) { if (c.nodeType === 3) { nodes.push([c, c.textContent]); c.textContent = ''; } else if (c.tagName !== 'I') walk(c); }); })(l); store.push(nodes); });
+    var all = []; store.forEach(function (ns) { ns.forEach(function (n) { all.push(n); }); });
+    var ni = 0, ci = 0;
+    (function type() {
+      if (ni >= all.length) return; var n = all[ni]; ci++; n[0].textContent = n[1].slice(0, ci);
+      if (ci >= n[1].length) { ni++; ci = 0; }
+      setTimeout(type, 38);
+    })();
+  }
+  requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.add('ready'); }); });
+
+  function count(el) {
+    if (reduce) return; var end = +el.dataset.to, v = 0;
+    (function s() { v = Math.min(end, v + Math.ceil(end / 14)); el.textContent = v; if (v < end) setTimeout(s, 60); })();
+  }
+  if (!('IntersectionObserver' in window)) { document.querySelectorAll('.rv').forEach(function (e) { e.classList.add('in'); light(e); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('.count').forEach(count); light(e.target); io.unobserve(e.target); });
+  }, { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
+</html>

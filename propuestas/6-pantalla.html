@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuesta 6 · Pantalla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* PROPUESTA 6 · PANTALLA
+   Como el póster "Signal that reaches further": una sala a oscuras con pantallas azules que brillan.
+   Letra suiza en minúsculas, apretada y limpia (nada de mayúsculas), con una parte fina y otra gruesa.
+   Los datos se proyectan en pantallas que se encienden al llegar a ellas. */
+:root {
+  --room: #02030B;
+  --screen: #1F3DFF;
+  --screen-hi: #4D66FF;
+  --glow: rgba(31, 61, 255, .55);
+  --white: #FFFFFF;
+  --fog: rgba(255, 255, 255, .7);
+  --sans: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--room); color: var(--white); font-family: var(--sans); font-weight: 300; font-size: 17px; line-height: 1.5; overflow-x: hidden; }
+body::after { content: ""; position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: .18; mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .6  0 0 0 0 1  0 0 0 .7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--mono); font-size: 10.5px; letter-spacing: .02em; line-height: 1.4; }
+
+/* Pantalla: rectángulo azul con brillo y reflejo en el suelo */
+.screen { position: relative; background: linear-gradient(170deg, var(--screen-hi), var(--screen) 55%, #1630D9); color: var(--white);
+  box-shadow: 0 0 60px 10px var(--glow), 0 0 160px 40px rgba(31,61,255,.25); }
+.screen::after { content: ""; position: absolute; left: 6%; right: 6%; top: 100%; height: 70px; background: radial-gradient(50% 100% at 50% 0, rgba(31,61,255,.45), transparent); filter: blur(10px); pointer-events: none; }
+
+/* ---------- PORTADA ---------- */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; isolation: isolate; padding-block: 64px 70px; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(80% 50% at 50% 45%, rgba(31,61,255,.35), transparent 70%); }
+.hero .screen { padding: 22px 20px 26px; min-height: 56vh; display: flex; flex-direction: column; justify-content: space-between; }
+@media (min-width: 800px) { .hero .screen { padding: 40px 44px 44px; min-height: 62vh; } }
+.hero .screen .mono { display: flex; justify-content: space-between; color: rgba(255,255,255,.85); }
+.hero h1 { margin: 34px 0 0; font-weight: 500; font-size: clamp(46px, 13.2vw, 120px); line-height: .9; letter-spacing: -.065em; }
+.hero h1 .l { display: block; white-space: nowrap; }
+.hero h1 em { font-style: normal; font-weight: 200; letter-spacing: -.05em; }
+.hero .answer { margin: 26px 0 0; max-width: 32ch; font-size: 17px; font-weight: 300; }
+.hero .answer b { font-weight: 600; letter-spacing: .02em; }
+.crowd { position: absolute; left: 0; right: 0; bottom: 0; height: 170px; z-index: 2; pointer-events: none; }
+.crowd svg { width: 100%; height: 100%; display: block; filter: blur(1.2px); }
+.go { position: absolute; z-index: 3; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; color: var(--fog); text-decoration: none; }
+
+/* La pantalla se enciende */
+.js .hero .screen { transform: scaleY(.006) scaleX(.6); filter: brightness(3); opacity: 0; transition: transform .9s var(--ease) .2s, filter 1.2s ease .5s, opacity .2s ease .2s; }
+.ready .hero .screen { transform: none; filter: none; opacity: 1; }
+.js .hero h1 .l, .js .hero .answer, .js .hero .screen .mono { opacity: 0; transform: translateY(10px); transition: opacity .8s ease, transform .8s var(--ease); transition-delay: calc(1s + var(--n, 0) * .12s); }
+.ready .hero h1 .l, .ready .hero .answer, .ready .hero .screen .mono { opacity: 1; transform: none; }
+
+/* ---------- PERFILES ---------- */
+.perfiles { position: relative; isolation: isolate; padding-block: 70px 100px; }
+.perfiles::before { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(60% 30% at 80% 20%, rgba(31,61,255,.28), transparent 70%), radial-gradient(60% 30% at 10% 65%, rgba(31,61,255,.22), transparent 70%), linear-gradient(var(--room), #050820 60%, var(--room)); }
+.perfiles h2 { margin: 0; font-weight: 500; font-size: clamp(34px, 9vw, 80px); line-height: .95; letter-spacing: -.055em; text-wrap: balance; max-width: 15ch; }
+.perfiles h2 em { font-style: normal; font-weight: 200; color: var(--screen-hi); }
+.src { margin-top: 14px; color: var(--fog); }
+
+.screens { display: grid; gap: 70px 24px; margin-top: 50px; }
+@media (min-width: 860px) { .screens { grid-template-columns: 1.4fr 1fr 1fr; align-items: end; } }
+.pf { padding: 18px 18px 22px; }
+.pf .top { display: flex; justify-content: space-between; color: rgba(255,255,255,.8); }
+.pf .big { font-weight: 200; font-size: clamp(110px, 34vw, 190px); line-height: .82; letter-spacing: -.08em; margin-top: 18px; }
+.pf .big small { font-size: .35em; letter-spacing: 0; margin-left: .06em; }
+.pf h3 { margin: 10px 0 0; font-weight: 600; font-size: 30px; letter-spacing: -.04em; line-height: 1; }
+.pf p { margin: 8px 0 0; font-size: 15.5px; color: rgba(255,255,255,.88); }
+.pf.s2 { background: linear-gradient(170deg, #2A3FB8, #18288A); box-shadow: 0 0 50px 6px rgba(31,61,255,.35); }
+.pf.s3 { background: linear-gradient(170deg, #161E5C, #0B1040); box-shadow: 0 0 40px 4px rgba(31,61,255,.2); }
+@media (min-width: 860px) { .pf.s2 .big, .pf.s3 .big { font-size: 130px; } }
+
+.big-screen { margin-top: 100px; padding: 22px 18px 26px; }
+@media (min-width: 860px) { .big-screen { padding: 36px 40px 40px; } }
+.big-screen h4 { margin: 0; font-weight: 500; font-size: 24px; letter-spacing: -.035em; line-height: 1.1; max-width: 26ch; }
+.key { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; color: rgba(255,255,255,.85); }
+.key i { display: inline-block; width: 18px; height: 2px; margin-right: 6px; vertical-align: 3px; }
+.lines { display: grid; gap: 22px; margin-top: 24px; }
+@media (min-width: 860px) { .lines { grid-template-columns: repeat(4, 1fr); gap: 32px; } }
+.hb .name { font-weight: 500; font-size: 17px; letter-spacing: -.02em; border-top: 1px solid rgba(255,255,255,.5); padding-top: 8px; }
+.ln { display: grid; grid-template-columns: 1fr 30px; align-items: center; gap: 10px; margin-top: 10px; }
+.ln .bar { height: 2px; position: relative; }
+.ln .bar i { position: absolute; left: 0; top: -1px; height: 4px; width: calc(var(--v) / 5 * 100%); background: var(--c); transform-origin: left; }
+.ln .bar i::after { content: ""; position: absolute; right: -4px; top: -3px; width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.ln .v { text-align: right; }
+.c1 { --c: #FFFFFF; } .c2 { --c: #A9B6FF; } .c3 { --c: #06082A; }
+.c3 .bar i { background: var(--room); } .c3 .bar i::after { background: var(--room); box-shadow: 0 0 0 1.5px #fff; }
+
+.say { margin-top: 90px; display: grid; gap: 14px; }
+@media (min-width: 860px) { .say { grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: end; } }
+.say b { font-weight: 500; font-size: clamp(40px, 11vw, 92px); line-height: .9; letter-spacing: -.065em; }
+.say b span { font-weight: 200; color: var(--screen-hi); }
+.say p { margin: 0; color: var(--fog); }
+
+.end { border-top: 1px solid rgba(255,255,255,.15); }
+.end .wrap { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding-block: 18px calc(18px + env(safe-area-inset-bottom, 0px)); color: var(--fog); }
+.end a { color: var(--white); }
+
+/* Al bajar, cada pantalla se enciende */
+.js .on-scroll { filter: brightness(.15) saturate(.3); opacity: .5; transform: translateY(30px); transition: filter 1.2s ease, opacity .8s ease, transform 1s var(--ease); transition-delay: var(--d, 0s); }
+.js .on-scroll.in { filter: none; opacity: 1; transform: none; }
+.js .rv { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .ln .bar i { transform: scaleX(0); transition: transform 1.3s var(--ease); transition-delay: var(--d); }
+.js .big-screen.in .ln .bar i { transform: none; }
+a:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .hero .screen, .js .hero h1 .l, .js .hero .answer, .js .hero .screen .mono, .js .on-scroll, .js .rv, .js .ln .bar i { opacity: 1; transform: none; filter: none; }
+}
+</style>
+</head>
+<body>
+<script>document.body.classList.add('js');</script>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="screen">
+      <div class="mono"><span>econo-reto madison · uva</span><span>2026</span></div>
+      <div>
+        <h1>
+          <span class="l" style="--n:0">¿La IA ayuda</span>
+          <span class="l" style="--n:1">a <em>aprender</em></span>
+          <span class="l" style="--n:2">o solo a</span>
+          <span class="l" style="--n:3"><em>terminar antes</em>?</span>
+        </h1>
+        <p class="answer" style="--n:4"><b>DEPENDE DE CÓMO SE USE.</b> Aquí tienes todo lo que descubrimos.</p>
+      </div>
+    </div>
+  </div>
+  <div class="crowd" aria-hidden="true">
+    <svg viewBox="0 0 400 130" preserveAspectRatio="xMidYMax slice">
+      <g fill="#02030B">
+        <circle cx="40" cy="58" r="17"/><path d="M8 130 C 8 92, 72 92, 72 130Z"/>
+        <circle cx="120" cy="66" r="15"/><path d="M92 130 C 92 98, 148 98, 148 130Z"/>
+        <circle cx="205" cy="52" r="18"/><path d="M170 130 C 170 88, 240 88, 240 130Z"/>
+        <circle cx="290" cy="64" r="16"/><path d="M260 130 C 260 96, 320 96, 320 130Z"/>
+        <circle cx="365" cy="56" r="17"/><path d="M333 130 C 333 92, 397 92, 397 130Z"/>
+      </g>
+    </svg>
+  </div>
+  <a class="go mono" href="#perfiles">desliza y descubre ↓</a>
+</header>
+
+<section class="perfiles" id="perfiles">
+  <div class="wrap">
+    <h2 class="rv">No existen <em>los que usan la IA</em> y <em>los que no</em>. Hay tres perfiles</h2>
+    <p class="src mono rv">encuesta a 170 estudiantes</p>
+
+    <div class="screens">
+      <article class="screen pf on-scroll" style="--d:0s"><div class="top mono"><span>perfil 1 de 3</span><span>activo</span></div>
+        <div class="big"><span class="count" data-to="58">58</span><small>%</small></div><h3>Activo</h3>
+        <p>Lo intenta primero, pregunta a la IA para entender, repregunta, comprueba y lo reescribe a su manera. Usa la IA como un profesor particular.</p></article>
+      <article class="screen pf s2 on-scroll" style="--d:.15s"><div class="top mono"><span>perfil 2 de 3</span><span>mixto</span></div>
+        <div class="big"><span class="count" data-to="22">22</span><small>%</small></div><h3>Mixto</h3>
+        <p>Hace casi todo como el activo: piensa e itera. Pero se fía de lo que dice la IA y no lo comprueba.</p></article>
+      <article class="screen pf s3 on-scroll" style="--d:.3s"><div class="top mono"><span>perfil 3 de 3</span><span>pasivo</span></div>
+        <div class="big"><span class="count" data-to="20">20</span><small>%</small></div><h3>Pasivo</h3>
+        <p>Le pide el resultado a la IA y lo entrega. La IA piensa por él.</p></article>
+    </div>
+
+    <figure class="screen big-screen on-scroll" role="img" aria-label="Nota media de cada perfil en los cuatro hábitos, de 1 a 5" style="margin-left:0;margin-right:0">
+      <h4>Cómo puntúa cada perfil en los cuatro hábitos (de 1 a 5)</h4>
+      <div class="key mono"><span><i style="background:#fff"></i>activo</span><span><i style="background:#A9B6FF"></i>mixto</span><span><i style="background:#06082A;box-shadow:0 0 0 1px #fff"></i>pasivo</span></div>
+      <div class="lines" id="lines"></div>
+    </figure>
+
+    <div class="say rv">
+      <b>El perfil sorpresa es el <span>mixto</span>.</b>
+      <p>Piensa e itera tanto como el activo, pero es el que menos comprueba de los tres, incluso menos que el pasivo. No lo esperábamos: si la IA se equivoca, aprende el error.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="end mono"><div class="wrap"><span>propuesta 6 · pantalla</span><a href="index.html">ver las otras propuestas</a></div></footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var H = [['Pensar primero', 4.0, 4.2, 2.2], ['Iterar', 4.1, 4.1, 2.3], ['Verificar', 3.8, 2.1, 2.6], ['Hacerlo mío', 4.2, 3.8, 3.2]], host = document.getElementById('lines'), k = 0;
+  H.forEach(function (h) {
+    var d = document.createElement('div'); d.className = 'hb';
+    d.innerHTML = '<div class="name">' + h[0] + '</div>' + h.slice(1).map(function (v, i) {
+      return '<div class="ln c' + (i + 1) + '"><div class="bar"><i style="--v:' + v + ';--d:' + (0.2 + (k++) * 0.06) + 's"></i></div><span class="v mono">' + v.toFixed(1).replace('.', ',') + '</span></div>';
+    }).join('');
+    host.appendChild(d);
+  });
+  requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.add('ready'); }); });
+  function count(el) {
+    if (reduce) return; var end = +el.dataset.to, t0 = null;
+    function s(ts) { if (!t0) t0 = ts; var p = Math.min(1, (ts - t0) / 1500); p = 1 - Math.pow(1 - p, 4); el.textContent = Math.round(end * p); if (p < 1) requestAnimationFrame(s); }
+    requestAnimationFrame(s);
+  }
+  var els = document.querySelectorAll('.rv, .on-scroll');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('.count').forEach(count); io.unobserve(e.target); });
+  }, { threshold: .2 });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
+</html>

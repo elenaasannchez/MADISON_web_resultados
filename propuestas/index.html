@@ -29,14 +29,28 @@ a.card:focus-visible { outline: 3px solid var(--white); outline-offset: 4px; }
 .txt b { font-weight: 900; font-variation-settings: "wdth" 70; text-transform: uppercase; font-size: 26px; line-height: 1; }
 .txt span { font-size: 14.5px; color: rgba(5,10,46,.75); }
 .txt i { font-style: normal; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--klein); margin-top: 4px; }
+.round { margin: 46px 0 0; font-weight: 800; font-variation-settings: "wdth" 80; text-transform: uppercase; font-size: 22px; line-height: 1.1; }
+.round em { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; text-transform: none; color: var(--ice); }
 .note { margin-top: 30px; font-size: 14px; color: var(--ice); max-width: 60ch; }
 @media (prefers-reduced-motion: reduce) { a.card { transition: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Cuatro <em>estilos</em> para la web</h1>
-  <p class="intro">La misma portada y la misma sección de perfiles, con cuatro estilos distintos sacados de tu tablero. Ábrelas en el móvil y baja despacio para ver las animaciones.</p>
+  <h1>Ocho <em>estilos</em> para la web</h1>
+  <p class="intro">La misma portada y la misma sección de perfiles en ocho estilos sacados de tu tablero. Ábrelas en el móvil y baja despacio para ver las animaciones.</p>
+  <h2 class="round">Segunda ronda: <em>otras letras</em> y datos con fondo vivo</h2>
+  <div class="grid">
+    <a class="card" href="5-pixel.html"><div class="shot"><img src="capturas/5-pixel-movil-portada.jpg" alt="Portada de la propuesta 5 en móvil"></div>
+      <div class="txt"><b>5 · Píxel</b><span>Letra de pantalla antigua con acento lima. Fondo tramado en movimiento también detrás de los datos, y barras por segmentos.</span><i>Abrir →</i></div></a>
+    <a class="card" href="6-pantalla.html"><div class="shot"><img src="capturas/6-pantalla-movil-portada.jpg" alt="Portada de la propuesta 6 en móvil"></div>
+      <div class="txt"><b>6 · Pantalla</b><span>Letra suiza en minúsculas, fina y gruesa. Una sala a oscuras donde cada dato es una pantalla azul que se enciende.</span><i>Abrir →</i></div></a>
+    <a class="card" href="7-extendida.html"><div class="shot"><img src="capturas/7-extendida-movil-portada.jpg" alt="Portada de la propuesta 7 en móvil"></div>
+      <div class="txt"><b>7 · Extendida</b><span>Letra muy ancha, degradado gris-azul y textos verticales. Datos en paneles de cristal y un gráfico de anillos.</span><i>Abrir →</i></div></a>
+    <a class="card" href="8-serif.html"><div class="shot"><img src="capturas/8-serif-movil-portada.jpg" alt="Portada de la propuesta 8 en móvil"></div>
+      <div class="txt"><b>8 · Libro</b><span>Serif elegante, recta y cursiva, sobre azul intenso. Los datos van impresos en hojas que se abren como un libro.</span><i>Abrir →</i></div></a>
+  </div>
+  <h2 class="round">Primera ronda</h2>
   <div class="grid">
     <a class="card" href="1-grano.html"><div class="shot"><img src="capturas/1-grano-movil-portada.jpg" alt="Portada de la propuesta 1 en móvil"></div>
       <div class="txt"><b>1 · Grano azul</b><span>Azul eléctrico a sangre con grano, estrellas de cuatro puntas desenfocadas que respiran y letras que pasan de borrosas a nítidas.</span><i>Abrir →</i></div></a>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuesta 7 · Extendida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* PROPUESTA 7 · EXTENDIDA
+   Como el cartel "E.A.T. Archives": letra muy ancha, degradado gris-azul desenfocado,
+   textos verticales en los márgenes y mucho aire. Los datos van sobre paneles de cristal
+   esmerilado que flotan encima de manchas de color en movimiento, y el gráfico son anillos. */
+:root {
+  --mist: #D9DDE6;
+  --mist-2: #B9C3DA;
+  --blue: #1E3CF0;
+  --blue-soft: #6C83FF;
+  --ink: #0C1236;
+  --glass: rgba(255, 255, 255, .42);
+  --wide: "Unbounded", "Arial Black", sans-serif;
+  --body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--mist); color: var(--ink); font-family: var(--body); font-size: 16.5px; line-height: 1.55; overflow-x: hidden; }
+body::after { content: ""; position: fixed; inset: 0; z-index: 40; pointer-events: none; opacity: .4; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1  0 0 0 0 .12  0 0 0 0 .3  0 0 0 .3 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(30px, env(safe-area-inset-left, 0px)); padding-right: max(30px, env(safe-area-inset-right, 0px)); }
+.lab { font-family: var(--wide); font-weight: 300; font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; line-height: 1.5; }
+.vert { position: absolute; top: 50%; writing-mode: vertical-rl; translate: 0 -50%; white-space: nowrap; z-index: 3; }
+.vert.l { left: 8px; transform: rotate(180deg); } .vert.r { right: 8px; }
+
+/* Manchas de color en movimiento, desenfocadas */
+.blobs { position: absolute; inset: -12%; z-index: -1; overflow: hidden; filter: blur(60px); }
+.blobs i { position: absolute; border-radius: 50%; animation: drift 18s ease-in-out infinite alternate; }
+.blobs i:nth-child(1) { width: 70vmax; height: 70vmax; left: -20vmax; top: -10vmax; background: var(--mist-2); }
+.blobs i:nth-child(2) { width: 60vmax; height: 60vmax; right: -25vmax; bottom: -20vmax; background: var(--blue); animation-duration: 22s; animation-delay: -6s; }
+.blobs i:nth-child(3) { width: 40vmax; height: 40vmax; left: 30%; top: 40%; background: var(--blue-soft); opacity: .7; animation-duration: 16s; animation-delay: -3s; }
+.blobs i:nth-child(4) { width: 35vmax; height: 35vmax; right: 10%; top: -10vmax; background: #FFFFFF; opacity: .8; animation-duration: 20s; }
+@keyframes drift { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(6vmax, -4vmax) scale(1.08); } 100% { transform: translate(-5vmax, 5vmax) scale(.95); } }
+
+/* ---------- PORTADA ---------- */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; isolation: isolate; overflow: hidden; padding-block: max(22px, env(safe-area-inset-top, 0px)) calc(26px + env(safe-area-inset-bottom, 0px)); }
+.hero > .wrap { width: 100%; }
+.hero .head { display: flex; justify-content: space-between; gap: 12px; color: var(--blue); }
+.hero h1 { margin: 0; font-family: var(--wide); font-weight: 700; color: var(--blue); font-size: clamp(30px, 8.6vw, 86px); line-height: 1.02; letter-spacing: -.03em; text-transform: uppercase; }
+.hero h1 .l { display: block; white-space: nowrap; overflow: hidden; }
+.hero h1 .l > span { display: inline-block; }
+.hero h1 em { font-style: normal; font-weight: 200; text-transform: none; letter-spacing: -.04em; }
+.hero .answer { margin: 22px 0 0; max-width: 32ch; }
+.hero .answer b { font-family: var(--wide); font-weight: 500; font-size: 13px; letter-spacing: .02em; display: block; margin-bottom: 4px; }
+.hero .foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; color: var(--ink); }
+.hero .foot a { color: var(--white, #fff); text-decoration: none; display: inline-flex; flex-direction: column; align-items: center; gap: 6px; color: var(--blue); }
+.hero .foot a i { display: block; width: 1px; height: 40px; background: var(--blue); transform-origin: top; animation: line 2s var(--ease) infinite; }
+@keyframes line { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+.js .hero h1 .l > span { transform: translateX(-30%); opacity: 0; letter-spacing: .2em; transition: transform 1.3s var(--ease), opacity 1s ease, letter-spacing 1.6s var(--ease); transition-delay: calc(var(--n) * .1s + .2s); }
+.ready .hero h1 .l > span { transform: none; opacity: 1; letter-spacing: inherit; }
+.js .hero .answer, .js .hero .head, .js .hero .foot, .js .vert { opacity: 0; transition: opacity 1s ease 1s; }
+.ready .hero .answer, .ready .hero .head, .ready .hero .foot, .ready .vert { opacity: 1; }
+
+/* ---------- PERFILES ---------- */
+.perfiles { position: relative; isolation: isolate; overflow: hidden; padding-block: 90px 100px; }
+.perfiles .blobs i:nth-child(1) { background: var(--blue); left: auto; right: -30vmax; top: 5%; }
+.perfiles .blobs i:nth-child(2) { background: var(--mist-2); left: -25vmax; right: auto; bottom: 10%; }
+.perfiles h2 { margin: 0; font-family: var(--wide); font-weight: 700; text-transform: uppercase; color: var(--ink); font-size: clamp(22px, 6vw, 54px); line-height: 1.08; letter-spacing: -.03em; max-width: 20ch; text-wrap: balance; }
+.perfiles h2 em { font-style: normal; font-weight: 200; text-transform: none; color: var(--blue); }
+.src { margin-top: 16px; color: var(--blue); }
+
+.glass { background: var(--glass); -webkit-backdrop-filter: blur(24px) saturate(1.3); backdrop-filter: blur(24px) saturate(1.3); border: 1px solid rgba(255,255,255,.65); border-radius: 22px; box-shadow: 0 30px 60px -30px rgba(12,18,54,.35); }
+.panel { margin-top: 40px; padding: 8px 20px; }
+.pr { display: grid; grid-template-columns: auto 1fr; gap: 4px 18px; align-items: start; padding: 20px 0; border-bottom: 1px solid rgba(12,18,54,.15); }
+.pr:last-child { border-bottom: 0; }
+.pr .big { font-family: var(--wide); font-weight: 200; font-size: clamp(54px, 16vw, 120px); line-height: .9; letter-spacing: -.06em; color: var(--blue); grid-row: span 2; min-width: 2.2ch; }
+.pr .big small { font-size: .4em; letter-spacing: 0; }
+.pr h3 { margin: 4px 0 0; font-family: var(--wide); font-weight: 500; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; }
+.pr p { margin: 0; font-size: 15px; }
+@media (min-width: 860px) { .panel { display: grid; grid-template-columns: repeat(3, 1fr); padding: 10px 32px; } .pr { grid-template-columns: 1fr; border-bottom: 0; border-right: 1px solid rgba(12,18,54,.15); padding: 28px 24px; } .pr:first-child { padding-left: 0; } .pr:last-child { border-right: 0; } .pr .big { grid-row: auto; } }
+
+.rings { margin-top: 30px; padding: 22px 18px 24px; }
+@media (min-width: 860px) { .rings { padding: 32px 36px; } }
+.rings h4 { margin: 0; font-family: var(--wide); font-weight: 500; font-size: 14px; letter-spacing: .02em; line-height: 1.35; text-transform: uppercase; max-width: 34ch; }
+.key { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; font-size: 13px; }
+.key i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+.rg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 14px; margin-top: 20px; }
+@media (min-width: 860px) { .rg { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+.ring { text-align: center; }
+.ring svg { width: 100%; max-width: 170px; display: block; margin: 0 auto; overflow: visible; }
+.ring circle { fill: none; stroke-width: 9; }
+.ring .bg { stroke: rgba(12,18,54,.08); }
+.ring .fg { stroke-linecap: round; transform: rotate(-90deg); transform-origin: 60px 60px; }
+.ring .name { margin-top: 8px; font-weight: 700; font-size: 14px; }
+.ring .vals { font-size: 12.5px; color: rgba(12,18,54,.75); font-variant-numeric: tabular-nums; }
+
+.quote { margin-top: 30px; padding: 24px 20px; }
+.quote b { display: block; font-family: var(--wide); font-weight: 700; text-transform: uppercase; font-size: clamp(20px, 5.6vw, 36px); line-height: 1.1; letter-spacing: -.03em; color: var(--blue); }
+.quote b span { font-weight: 200; text-transform: none; }
+.quote p { margin: 12px 0 0; max-width: 56ch; }
+
+.end .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-block: 18px calc(18px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid rgba(12,18,54,.2); color: var(--blue); }
+.end a { color: var(--blue); }
+
+.js .rv { opacity: 0; transform: translateY(30px) scale(.98); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: var(--d, 0s); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .ring .fg { stroke-dashoffset: var(--len); transition: stroke-dashoffset 1.6s var(--ease); transition-delay: var(--d); }
+.js .rings.in .ring .fg { stroke-dashoffset: var(--off); }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .rv, .js .hero h1 .l > span, .js .hero .answer, .js .hero .head, .js .hero .foot, .js .vert { opacity: 1; transform: none; letter-spacing: inherit; }
+  .js .ring .fg { stroke-dashoffset: var(--off); }
+}
+</style>
+</head>
+<body>
+<script>document.body.classList.add('js');</script>
+
+<header class="hero">
+  <div class="blobs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <span class="vert l lab" aria-hidden="true">Econo-Reto Madison · 2026</span>
+  <span class="vert r lab" aria-hidden="true">Universidad de Valladolid</span>
+  <div class="wrap head lab"><span>Archivo de resultados</span><span>170 · 38 · 7 · 55</span></div>
+  <div class="wrap">
+    <h1>
+      <span class="l"><span style="--n:0">¿La IA ayuda</span></span>
+      <span class="l"><span style="--n:1">a <em>aprender</em></span></span>
+      <span class="l"><span style="--n:2">o solo a</span></span>
+      <span class="l"><span style="--n:3"><em>terminar antes</em>?</span></span>
+    </h1>
+    <p class="answer"><b>DEPENDE DE CÓMO SE USE.</b> Aquí tienes todo lo que descubrimos.</p>
+  </div>
+  <div class="wrap foot lab"><span>Estudiantes · profesores<br>entrevistas · experimento</span><a href="#perfiles">Desliza y descubre<i aria-hidden="true"></i></a></div>
+</header>
+
+<section class="perfiles" id="perfiles">
+  <div class="blobs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <span class="vert l lab" aria-hidden="true">Perfiles · encuesta</span>
+  <div class="wrap">
+    <h2 class="rv">No existen <em>los que usan la IA</em> y <em>los que no</em>. Hay tres perfiles</h2>
+    <p class="src lab rv">Encuesta a 170 estudiantes</p>
+
+    <div class="glass panel rv">
+      <article class="pr"><div class="big"><span class="count" data-to="58">58</span><small>%</small></div><h3>Activo</h3><p>Lo intenta primero, pregunta a la IA para entender, repregunta, comprueba y lo reescribe a su manera. Usa la IA como un profesor particular.</p></article>
+      <article class="pr"><div class="big"><span class="count" data-to="22">22</span><small>%</small></div><h3>Mixto</h3><p>Hace casi todo como el activo: piensa e itera. Pero se fía de lo que dice la IA y no lo comprueba.</p></article>
+      <article class="pr"><div class="big"><span class="count" data-to="20">20</span><small>%</small></div><h3>Pasivo</h3><p>Le pide el resultado a la IA y lo entrega. La IA piensa por él.</p></article>
+    </div>
+
+    <figure class="glass rings rv" role="img" aria-label="Nota media de cada perfil en los cuatro hábitos, de 1 a 5" style="margin-left:0;margin-right:0">
+      <h4>Cómo puntúa cada perfil en los cuatro hábitos (de 1 a 5)</h4>
+      <div class="key"><span><i style="background:var(--blue)"></i>Activo (anillo de fuera)</span><span><i style="background:var(--blue-soft)"></i>Mixto</span><span><i style="background:var(--ink)"></i>Pasivo (de dentro)</span></div>
+      <div class="rg" id="rg"></div>
+    </figure>
+
+    <div class="glass quote rv">
+      <b>El perfil sorpresa es el <span>mixto</span>.</b>
+      <p>Piensa e itera tanto como el activo, pero es el que menos comprueba de los tres, incluso menos que el pasivo. No lo esperábamos: si la IA se equivoca, aprende el error.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="end lab"><div class="wrap"><span>Propuesta 7 · Extendida</span><a href="index.html">Ver las otras propuestas</a></div></footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var H = [['Pensar primero', 4.0, 4.2, 2.2], ['Iterar', 4.1, 4.1, 2.3], ['Verificar', 3.8, 2.1, 2.6], ['Hacerlo mío', 4.2, 3.8, 3.2]];
+  var col = ['#1E3CF0', '#6C83FF', '#0C1236'], R = [52, 39, 26], host = document.getElementById('rg'), k = 0;
+  H.forEach(function (h) {
+    var svg = '<svg viewBox="0 0 120 120" aria-hidden="true">' + h.slice(1).map(function (v, i) {
+      var len = 2 * Math.PI * R[i], off = len * (1 - v / 5);
+      return '<circle class="bg" cx="60" cy="60" r="' + R[i] + '"/><circle class="fg" cx="60" cy="60" r="' + R[i] + '" stroke="' + col[i] + '" stroke-dasharray="' + len.toFixed(1) + '" style="--len:' + len.toFixed(1) + ';--off:' + off.toFixed(1) + ';--d:' + (0.15 + (k++) * 0.07) + 's;stroke-dashoffset:' + off.toFixed(1) + '"/>';
+    }).join('') + '</svg>';
+    var d = document.createElement('div'); d.className = 'ring';
+    d.innerHTML = svg + '<div class="name">' + h[0] + '</div><div class="vals">' + h.slice(1).map(function (v) { return v.toFixed(1).replace('.', ','); }).join(' · ') + '</div>';
+    host.appendChild(d);
+  });
+  // El estilo en línea deja el anillo completo si no hay JS; con JS se anima desde cero
+  if (!reduce) host.querySelectorAll('.fg').forEach(function (c) { c.style.removeProperty('stroke-dashoffset'); });
+
+  requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.add('ready'); }); });
+  function count(el) {
+    if (reduce) return; var end = +el.dataset.to, t0 = null;
+    function s(ts) { if (!t0) t0 = ts; var p = Math.min(1, (ts - t0) / 1500); p = 1 - Math.pow(1 - p, 4); el.textContent = Math.round(end * p); if (p < 1) requestAnimationFrame(s); }
+    requestAnimationFrame(s);
+  }
+  if (!('IntersectionObserver' in window)) { document.querySelectorAll('.rv').forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('.count').forEach(count); io.unobserve(e.target); });
+  }, { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(function (e) { io.observe(e); });
+})();
+</script>
+</body>
+</html>
