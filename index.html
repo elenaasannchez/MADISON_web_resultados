@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@1,900&family=Playfair+Display:ital,wght@1,500;1,600&family=Geist:wght@400..700&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
@@ -30,12 +31,18 @@
   --display: "Anton", "Arial Narrow", sans-serif; /* títulos (parecida a Thunder) */
   --accent: "DM Serif Display", Georgia, serif; /* palabras destacadas, en cursiva (parecida a Emberly) */
   --body: "Fira Sans", "Segoe UI", system-ui, sans-serif; /* texto */
+  /* Tipografías de la nueva línea (combinación 4 y selección de Elena) */
+  --upper: "Archivo", "Arial Black", sans-serif; /* mayúsculas: Archivo negra cursiva */
+  --italic: "Playfair Display", Georgia, serif; /* palabras destacadas: Playfair Display cursiva */
+  --sans: "Geist", "Helvetica Neue", Arial, sans-serif; /* texto de la nueva línea */
+  --electric: #1E3CF0; /* azul eléctrico de la versión 7 */
+  --mist: #D9DDE6;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-weight: 300; font-size: 17px; line-height: 1.55; }
+body { margin: 0; overflow-x: clip; background: var(--bg); color: var(--ink); font-family: var(--body); font-weight: 300; font-size: 17px; line-height: 1.55; }
 .wrap { max-width: 760px; margin: 0 auto; padding: 0 18px; }
 h1, h2, h3 { font-family: var(--display); line-height: 1.05; text-wrap: balance; margin: 0; text-transform: uppercase; letter-spacing: .01em; }
 h1 { font-size: clamp(28px, 6.5vw, 44px); font-weight: 400; }
@@ -153,7 +160,6 @@ section { padding: 38px 0 8px; scroll-margin-top: 56px; }
 .method p + p { margin-top: 10px; }
 footer { margin-top: 40px; padding: 28px 0 40px; background: var(--cocoa); color: var(--blue); font-size: 15px; }
 footer b { color: var(--white); }
-.pending { border: 2px dashed var(--line); background: transparent; }
 
 /* Más presencia de las dos fuentes de los títulos fuera de los títulos */
 /* Anton: botones, navegación, rótulos de gráficos y números */
@@ -227,6 +233,11 @@ header.hero::after { content: ""; position: absolute; inset: 0; z-index: 3; poin
   .cue { left: 18px; bottom: 22px; width: 92px; height: 92px; }
 }
 
+/* Portada con la combinación 4: Archivo negra cursiva + Playfair Display cursiva */
+.hero h1 { font-family: var(--upper); font-weight: 900; font-style: italic; letter-spacing: -.035em; line-height: .98; font-size: clamp(32px, 9.4vw, 112px); }
+.hero h1 em { font-family: var(--italic); font-weight: 600; font-style: italic; letter-spacing: -.01em; font-size: .98em; top: -.12em; }
+@media (min-width: 701px) { .hero h1 { font-size: clamp(56px, 7.6vw, 112px); } }
+
 /* Entrada de la portada al cargar */
 .js .hero h1 .l > span { transform: translateY(110%); transition: transform 1s cubic-bezier(.16,.84,.24,1); }
 .js .hero h1 .l:nth-child(2) > span { transition-delay: .09s; } .js .hero h1 .l:nth-child(3) > span { transition-delay: .18s; } .js .hero h1 .l:nth-child(4) > span { transition-delay: .27s; }
@@ -261,7 +272,6 @@ section.band .legend span[style*="cocoa"] { --c: var(--yellow) !important; }
 section.band .q { border-color: rgba(255,255,255,.14); }
 section.band .opts label { background: transparent; color: var(--blue); border-color: rgba(255,255,255,.28); }
 section.band .opts input:checked + label { background: var(--yellow); color: var(--cocoa); border-color: var(--yellow); }
-section.band .pending { border-color: rgba(255,255,255,.3); background: transparent; }
 section.band .callout { background: var(--yellow); color: var(--cocoa); } section.band .callout b { color: var(--cocoa); }
 section.band .p-pas { border-color: rgba(255,255,255,.28); }
 section.band .card .num { color: var(--yellow); }
@@ -273,8 +283,47 @@ section.band-lemon .reco .card { border: 0; box-shadow: none; }
 section.band-lemon .reco .card:nth-child(1) { background: var(--cocoa); color: var(--blue); } section.band-lemon .reco .card:nth-child(1) h3 { color: var(--white); } section.band-lemon .reco .card:nth-child(1) .why { color: var(--blue); }
 section.band-lemon .reco .card:nth-child(2) { background: var(--blue); color: var(--cocoa); } section.band-lemon .reco .card:nth-child(2) .why { color: var(--muted); }
 section.band-lemon .reco .card:nth-child(3) { background: var(--blue-dark); color: var(--cocoa); } section.band-lemon .reco .card:nth-child(3) h3 { color: var(--cocoa); } section.band-lemon .reco .card:nth-child(3) .why { color: var(--cocoa); }
-section.band-lemon .reco .card:nth-child(4) { background: rgba(16,29,73,.08); color: var(--cocoa); }
 section.band-lemon + section, section.band + section { padding-top: 52px; }
+
+/* Test con la estética de la versión 7: niebla gris azulada, manchas azules y panel de cristal */
+section.v7 { --bandbg: var(--mist); position: relative; padding: 64px 0 60px; margin: 0; color: #0C1236; isolation: isolate;
+  background: var(--mist);
+  box-shadow: 0 0 0 100vmax var(--mist); clip-path: inset(0 -100vmax); }
+section.v7::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1; pointer-events: none;
+  background: radial-gradient(46vmax 36vmax at 100% 100%, rgba(30,60,240,.85), rgba(30,60,240,0) 70%), radial-gradient(40vmax 32vmax at 0% 30%, rgba(108,131,255,.45), rgba(108,131,255,0) 70%), radial-gradient(40vmax 30vmax at 85% 0%, rgba(255,255,255,.9), rgba(255,255,255,0) 70%); }
+section.v7 h2 { font-family: var(--upper); font-weight: 900; font-style: italic; letter-spacing: -.035em; line-height: 1; color: var(--electric); font-size: clamp(34px, 9vw, 64px); }
+section.v7 h2 em { font-family: var(--italic); font-weight: 600; font-size: .98em; top: -.1em; background: none; color: var(--electric); }
+section.v7 .lead { font-family: var(--sans); color: #0C1236; font-size: 17px; max-width: 46ch; }
+section.v7 .quiz { margin-top: 22px; padding: 20px 18px 18px; border-radius: 22px; background: rgba(255,255,255,.45); -webkit-backdrop-filter: blur(22px) saturate(1.3); backdrop-filter: blur(22px) saturate(1.3); border: 1px solid rgba(255,255,255,.7); box-shadow: 0 30px 60px -30px rgba(12,18,54,.4); font-family: var(--sans); }
+.qtop { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--electric); }
+.qtop span:first-child { white-space: nowrap; }
+.qbar { flex: 1; height: 3px; border-radius: 3px; background: rgba(12,18,54,.12); overflow: hidden; }
+.qbar i { display: block; height: 100%; width: 0; background: var(--electric); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+.qstep { padding-top: 18px; }
+.qstep[hidden] { display: none; }
+.qstep h3 { font-family: var(--sans); text-transform: none; font-weight: 600; letter-spacing: -.02em; font-size: clamp(22px, 5.6vw, 30px); line-height: 1.15; color: #0C1236; outline: none; }
+.qopts { display: grid; gap: 8px; margin-top: 16px; }
+.qopts button { font: inherit; font-size: 16px; font-weight: 500; text-align: left; padding: 13px 16px; border-radius: 12px; cursor: pointer; color: #0C1236; background: rgba(255,255,255,.55); border: 1px solid rgba(12,18,54,.14); display: flex; justify-content: space-between; align-items: center; transition: background .2s, color .2s, border-color .2s, transform .2s; }
+.qopts button::after { content: "→"; opacity: 0; transition: opacity .2s, transform .2s; transform: translateX(-4px); }
+.qopts button:hover { border-color: var(--electric); }
+.qopts button:hover::after { opacity: .6; transform: none; }
+.qopts button[aria-pressed="true"] { background: var(--electric); color: #FFFFFF; border-color: var(--electric); }
+.qopts button[aria-pressed="true"]::after { opacity: 1; transform: none; }
+.qopts button:focus-visible, .qback:focus-visible, .qagain:focus-visible { outline: 3px solid var(--electric); outline-offset: 2px; }
+.js .qstep.enter { animation: qin .45s cubic-bezier(.2,.8,.2,1); }
+@keyframes qin { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+.qback { margin-top: 14px; font: inherit; font-size: 14px; font-weight: 600; background: none; border: 0; padding: 4px 0; color: var(--electric); cursor: pointer; }
+section.v7 #quizOut { margin-top: 0; }
+.qres { padding-top: 18px; }
+.qres .qscore { font-family: var(--upper); font-weight: 900; font-style: italic; letter-spacing: -.04em; color: var(--electric); font-size: clamp(64px, 20vw, 120px); line-height: .9; }
+.qres .qscore small { font-size: .32em; letter-spacing: 0; }
+.qres h3 { margin-top: 10px; font-family: var(--sans); text-transform: none; font-weight: 600; font-size: 20px; letter-spacing: -.01em; color: #0C1236; }
+.qres h3 em { font-family: var(--italic); font-style: italic; font-weight: 600; font-size: 1.5em; color: var(--electric); top: 0; }
+.qres p { margin-top: 8px; font-size: 16px; }
+.qres .small { font-size: 14px; color: rgba(12,18,54,.75); }
+.qagain { margin-top: 16px; font: inherit; font-weight: 600; font-size: 15px; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--electric); background: transparent; color: var(--electric); cursor: pointer; }
+section.v7 + section { padding-top: 52px; }
+@media (prefers-reduced-motion: reduce) { .js .qstep.enter { animation: none; } .qbar i, .qopts button { transition: none; } }
 
 /* Aparición al bajar: cada bloque entra desde abajo */
 .js .rv { opacity: 0; transform: translateY(34px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
@@ -316,7 +365,8 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
     <a href="#evaluacion">Evaluación</a>
     <a href="#competencias">Competencias</a>
     <a href="#mapa">Mapa de usos</a>
-    <a href="#experimento">Experimento</a>
+    <a href="#experimento">Experimento 1</a>
+    <a href="#examen">Experimento 2</a>
     <a href="#profesores">Entrevistas</a>
     <a href="#recomendaciones">Recomendaciones</a>
     <a href="#metodo">Cómo lo hicimos</a>
@@ -327,23 +377,25 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
 
 <!-- RESUMEN -->
 <section id="resumen">
-  <h2>Cinco cosas que hemos <em>descubierto</em></h2>
+  <h2>Seis cosas que hemos <em>descubierto</em></h2>
   <ul class="facts">
     <li><b>Hay tres formas de usar la IA:</b> activa (6 de cada 10), mixta (2 de cada 10) y pasiva (2 de cada 10).</li>
     <li><b>Comprobar es lo que más falta.</b> 1 de cada 5 estudiantes usa la IA para aprender, pero se fía de lo que dice sin comprobarlo.</li>
     <li><b>Usarla mucho no es usarla mal.</b> Hay los mismos estudiantes pasivos entre quienes la usan a diario que entre quienes casi no la usan.</li>
     <li><b>Lo que decimos no es lo que hacemos.</b> En clase, quienes decían comprobar siempre se equivocaron igual que los demás.</li>
     <li><b>Controlar no cambia cómo se usa.</b> Cuando los profesores cambian la forma de evaluar, la IA no desaparece: se usa en otro momento.</li>
+    <li><b>Delegar se paga en el examen.</b> Quien dejó a la IA más de la mitad de una práctica sacó de media unos 3 puntos menos en el examen sin IA que quien hizo la mayor parte por su cuenta.</li>
   </ul>
 </section>
 
 <!-- TEST -->
-<section id="test" class="band">
+<section id="test" class="v7">
   <h2>¿Qué <em>perfil</em> eres?</h2>
   <p class="lead">Las mismas 8 frases que respondieron los 170 estudiantes. Contesta con sinceridad: nadie más ve tus respuestas.</p>
   <div class="quiz" id="quiz">
+    <div class="qtop"><span id="qCount">Frase 1 de 8</span><span class="qbar" aria-hidden="true"><i id="qFill"></i></span></div>
     <div id="qs"></div>
-    <button type="button" id="quizBtn">Ver mi perfil</button>
+    <button type="button" id="qBack" class="qback" hidden>← Anterior</button>
     <div id="quizOut" aria-live="polite"></div>
   </div>
 </section>
@@ -452,7 +504,6 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
   <ul class="facts">
     <li><b>Quienes han vivido cambios usan la IA igual de bien o de mal</b> que quienes no: los cambios no enseñan a usarla mejor.</li>
     <li><b>Los alumnos viven los cambios como control</b> (detectores y prohibiciones); <b>los profesores, como otra forma de enseñar</b> (más trabajo en clase y exposiciones).</li>
-    <li><b>Ningún profesor dice usar detectores de IA,</b> pero más de la mitad de los alumnos dice haberlos visto.</li>
     <li><b>Cambiar cuesta:</b> los profesores cuentan que corrigen más y que sienten que hacen una “labor detectivesca”.</li>
   </ul>
 </section>
@@ -504,7 +555,7 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
 <!-- EXPERIMENTO -->
 <section id="experimento">
   <h2>En una clase real, la IA <mark>se equivocó con más de la mitad</mark>, y casi nadie <em>lo notó</em> a tiempo</h2>
-  <span class="source">Práctica con 55 alumnos, 19 de noviembre de 2026</span>
+  <span class="source">Experimento 1 · Práctica con 55 alumnos, 19 de noviembre de 2026</span>
   <h3 style="margin-top:20px">Qué hicimos</h3>
   <ol class="steps">
     <li><b>El material:</b> un capítulo largo del informe FOESSA (Cáritas) sobre pobreza y desigualdad en España, en PDF.</li>
@@ -544,9 +595,9 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
     <div class="persona p-mix"><div class="head"><span class="num">2</span></div><h3>El pragmático</h3><p>Ni a favor ni en contra: se adapta, pero duda de que la IA sirva para aprender.</p></div>
   </div>
   <ul class="facts">
-    <li><b>Los 7 sospechan, pero no pueden demostrar</b> que un trabajo está hecho con IA. Solo lo descubren cuando el alumno tiene que explicarlo y no sabe.</li>
+    <li><b>5 de 7 sospechan, pero no pueden demostrar</b> que un trabajo está hecho con IA. Solo lo descubren cuando el alumno tiene que explicarlo y no sabe.</li>
     <li><b>Los 7 han pasado tareas a clase:</b> menos trabajos para casa y más exámenes a mano, prácticas en el aula y exposiciones.</li>
-    <li><b>Los 7 distinguen un buen uso y un mal uso de la IA,</b> y creen que lo decide el interés de cada alumno.</li>
+    <li><b>5 de 7 distinguen un buen uso y un mal uso de la IA,</b> y creen que lo decide el interés de cada alumno.</li>
     <li><b>A 6 de 7 les preocupa que se deje de pensar,</b> más que la copia: que el alumno se ahorre el esfuerzo de aprender y crea que ha aprendido.</li>
     <li><b>Los 7 desconfían de lo que declaran los alumnos,</b> y 5 reconocen que ellos también piensan que “los demás” la usan peor.</li>
     <li><b>Creen que alguien debería enseñar a usar la IA, pero nadie lo asume:</b> unos lo mandan al instituto, otros dicen que la universidad no tiene tiempo ni medios, y otros que no es tarea de su asignatura.</li>
@@ -555,23 +606,62 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
   </ul>
 </section>
 
-<!-- PENDIENTE -->
-<section id="martes" class="band">
-  <h2>¿Quién usa bien la IA <em>aprende más</em>… y termina antes?</h2>
-  <div class="card pending" style="margin-top:16px">
-    <p>Estamos analizando un segundo experimento con unos 40 alumnos y un examen sin IA. Aquí publicaremos si quien usa mejor la IA saca mejor nota sin ella, y si se puede aprender y terminar antes a la vez.</p>
-    <p style="margin-top:10px"><b>Lo que ya adelanta la encuesta:</b> el pasivo es el que más tiempo ahorra (91 % ahorra al menos 1 hora a la semana) y el que menos cree aprender (68 %, frente al 74 % del activo y el 84 % del mixto).</p>
+<!-- EXPERIMENTO 2 -->
+<section id="examen" class="band">
+  <h2>Con la IA la práctica sale mejor… pero <em>el examen sin ella</em>, no</h2>
+  <span class="source">Experimento 2 · 18 alumnos de Marketing, 24 de noviembre de 2026</span>
+  <h3 style="margin-top:20px">Qué hicimos</h3>
+  <ol class="steps">
+    <li><b>La práctica:</b> un caso de una marca ficticia (Mochibo) sobre cuota de mercado, satisfacción y NPS, en 30 minutos. Podían usar la IA como quisieran.</li>
+    <li><b>La encuesta:</b> justo después, cómo habían usado la IA y qué parte de la práctica hizo ella.</li>
+    <li><b>El examen sorpresa:</b> 8 minutos, sin IA, sin apuntes y sobre la misma práctica.</li>
+    <li><b>La comparación:</b> unimos las tres cosas de cada alumno con un código anónimo.</li>
+  </ol>
+
+  <h3 style="margin-top:26px">Pregunta rápida: ¿quién crees que sacó mejor nota en el examen sin IA?</h3>
+  <p class="lead">Los que no usaron la IA, los que la usaron un poco o los que la usaron bastante.</p>
+  <div class="reveal">
+    <button type="button" id="revealBtn2" aria-expanded="false" aria-controls="revealAns2">Ver la respuesta</button>
+    <div id="revealAns2" class="answer" hidden>
+      <div class="bars" id="notasBars">
+        <div class="title">Nota media de 0 a 10: práctica con IA frente a examen sin IA</div>
+        <div class="legend"><span style="--c: var(--blue-dark)">Práctica con IA</span><span style="--c: var(--cocoa)">Examen sin IA</span></div>
+      </div>
+      <div class="callout"><b>Los que no usaron la IA sacaron la peor nota en la práctica y la mejor en el examen.</b> Su nota subió casi 2 puntos. Los que la usaron bastante bajaron más de 4.</div>
+    </div>
   </div>
+
+  <div class="grid g2">
+    <div class="card stat"><span class="num t-teal">8,2 → 6,2</span><p>nota media de la práctica con IA frente a la del examen sin IA</p></div>
+    <div class="card stat"><span class="num t-red">−4,4</span><p>puntos que bajaron los que usaron bastante la IA</p></div>
+    <div class="card stat"><span class="num t-teal">7,7</span><p>nota media en el examen de quienes dejaron a la IA el 40 % de la práctica o menos</p></div>
+    <div class="card stat"><span class="num t-red">4,7</span><p>nota media en el examen de quienes le dejaron más del 60 %</p></div>
+  </div>
+  <div class="bars" id="delegaBars"><div class="title">Nota media en el examen sin IA según la parte de la práctica que hizo la IA</div></div>
+  <ul class="facts">
+    <li><b>Lo que se nota no es si usas la IA, sino cuánto le dejas hacer.</b> Cuanto mayor fue la parte de la práctica que hizo la IA, peor fue la nota sin ella.</li>
+    <li><b>Quien mejor nota sacó en la práctica tiende a sacar peor nota en el examen.</b> Una nota alta con IA no dice cuánto se ha aprendido.</li>
+    <li><b>Comprobar lo que dice la IA apunta a mejor nota</b>, aunque con tan pocos alumnos la diferencia se queda en el límite.</li>
+    <li><b>Lo que cada uno decía de sus hábitos en general no predijo su nota.</b> Lo que la marcó fue cuánto trabajo le dejó a la IA en esa práctica.</li>
+    <li><b>Tardar más o menos no cambió lo aprendido.</b> Lo que importó fue qué parte del trabajo hizo cada uno.</li>
+  </ul>
+
+  <h3 style="margin-top:26px">¿Se puede aprender y terminar antes a la vez?</h3>
+  <div class="grid g3">
+    <div class="card stat"><span class="num t-teal">57 %</span><p>dice que la IA le hace aprender más y ahorrar tiempo a la vez</p></div>
+    <div class="card stat"><span class="num t-red">91 %</span><p>de los pasivos ahorra al menos 1 hora a la semana, el que más</p></div>
+    <div class="card stat"><span class="num t-red">68 %</span><p>de los pasivos cree aprender más, el que menos (activo 74 %, mixto 84 %)</p></div>
+  </div>
+  <div class="callout"><b>Sí se puede, pero usar bien la IA cuesta tiempo.</b> Quien la usa de forma más activa cree aprender más, pero ahorra menos tiempo: lo invierte en aprender.</div>
 </section>
 
 <!-- RECOMENDACIONES -->
 <section id="recomendaciones" class="band-lemon">
   <h2>Qué <em>proponemos</em></h2>
   <div class="reco">
-    <div class="card"><h3>Para estudiantes</h3><p>La regla de los tres pasos: primero yo, luego la IA, y siempre compruebo. Y haz el test de esta página de vez en cuando para ver tu perfil.</p><p class="why">Porque comprobar es el hábito que más falta.</p></div>
-    <div class="card"><h3>Para la universidad</h3><p>Enseñar a usar la IA desde 1.º, en todas las carreras, y evaluar el razonamiento (“¿por qué lo hiciste así?”) en lugar de solo vigilar.</p><p class="why">Porque controlar no cambia el modo de uso, y 6 de 7 profesores lo apoyan.</p></div>
-    <div class="card"><h3>Para las empresas</h3><p>Una prueba práctica de selección: resolver un caso con IA, con tiempo limitado, en el que la IA comete errores. Gana quien los detecta.</p><p class="why">Porque lo que se declara no predice lo que se hace, y las empresas piden controlar la calidad de la IA.</p></div>
-    <div class="card"><h3>Además, para las empresas</h3><p>Formar en comprobar lo que da la IA a becarios y recién graduados, y usar el índice de uso activo para conocer cómo usan la IA sus equipos.</p><p style="margin-top:8px">Un estudio periódico, cada curso, sobre cómo se usa la IA en la universidad: sus datos interesan a las empresas que contratan a esos titulados y a las propias universidades.</p></div>
+    <div class="card"><h3>Para estudiantes</h3><p>No tengáis miedo de usar la IA, aunque la universidad intente evitarla: es vuestro futuro, y ahora es cuando podéis equivocaros y aprender a usarla bien. Seguid tres pasos: primero yo, luego la IA, y siempre compruebo. Y haced el test de esta página de vez en cuando.</p><p class="why">Porque comprobar es el hábito que más falta, y lo que se delega se nota en cuanto la IA desaparece.</p></div>
+    <div class="card"><h3>Para la universidad</h3><p>Un estudio anual sobre cómo usan la IA sus estudiantes, con este trabajo como año cero. Y enseñar a usar la IA desde 1.º, en todas las carreras, evaluando el razonamiento (“¿por qué lo hiciste así?”) en lugar de solo vigilar.</p><p class="why">Porque controlar no cambia el modo de uso, y 6 de 7 profesores apoyan enseñarlo desde 1.º.</p></div>
+    <div class="card"><h3>Para las empresas</h3><p>Una prueba práctica de selección: resolver un caso con IA, con tiempo limitado, en el que la IA comete errores, y después unas preguntas sin ella. Y aprovechar el estudio anual para conocer cómo llegan los futuros titulados.</p><p class="why">Porque lo que se declara no predice lo que se hace, y una nota conseguida con IA no dice cuánto sabe quien la consigue.</p></div>
   </div>
 </section>
 
@@ -582,7 +672,7 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
     <li><b>Encuesta online a 170 estudiantes</b> de la Universidad de Valladolid (27 oct – 17 nov 2026). Recibimos 208 respuestas y descartamos 38 por no superar los controles de calidad.</li>
     <li><b>La misma encuesta, adaptada, a profesores:</b> 38 registros.</li>
     <li><b>7 entrevistas largas a profesores,</b> con dinámicas de tarjetas y casos. Las analizamos por temas y las citamos de forma anónima.</li>
-    <li><b>Un experimento en clase</b> con 55 alumnos, con observación directa y cuestionario.</li>
+    <li><b>Dos experimentos en clase.</b> Uno con 55 alumnos de Sociología, con observación directa y cuestionario. Otro con 18 alumnos de Marketing: práctica con IA, encuesta y examen sorpresa sin IA.</li>
     <li><b>El índice de uso activo:</b> 8 frases sobre cuatro hábitos (pensar primero, iterar, verificar y hacerlo mío), convertidas en una nota de 0 a 100. Comprobamos que las 8 frases miden lo mismo.</li>
     <li><b>Los perfiles</b> salen de agrupar a los estudiantes según sus respuestas, no los elegimos nosotros.</li>
   </ol>
@@ -591,7 +681,7 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
     <ul style="margin:8px 0 0; padding-left:20px">
       <li>La muestra no representa a toda la universidad: hay más estudiantes de Economía y Empresa y de 1.º y 2.º.</li>
       <li>Las respuestas de las encuestas son autodeclaradas: recogen lo que cada persona dice que hace, no lo que hace. El experimento muestra que no siempre coincide.</li>
-      <li>El experimento fue con un solo profesor y una sola tarea, con pocos alumnos pasivos.</li>
+      <li>Cada experimento se hizo con un solo profesor y una sola tarea: el primero, con pocos alumnos pasivos; el segundo, con solo 18 alumnos.</li>
       <li>Algunas diferencias son pequeñas o dudosas, como las de género o carrera, y no las hemos destacado.</li>
       <li>Los datos de empresas vienen de informes de consultoras y tecnológicas, no de una encuesta nuestra.</li>
     </ul>
@@ -614,7 +704,7 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
       var d = document.createElement('div');
       d.className = 'bar';
       var pct = Math.max(2, r[1] / max * 100);
-      d.innerHTML = '<span>' + r[0] + '</span><div class="track"><div class="fill" style="width:' + pct + '%;' + (r[2] ? 'background:' + r[2] : (color ? 'background:' + color : '')) + '"></div><span class="val">' + r[1] + unit + '</span></div>';
+      d.innerHTML = '<span>' + r[0] + '</span><div class="track"><div class="fill" style="width:' + pct + '%;' + (r[2] ? 'background:' + r[2] : (color ? 'background:' + color : '')) + '"></div><span class="val">' + String(r[1]).replace('.', ',') + unit + '</span></div>';
       host.appendChild(d);
     });
   }
@@ -639,13 +729,17 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
   pairs('evalBars', [['Exámenes en clase o a mano', 66, 75], ['Detectores de IA', 57, 0], ['Prohibir la IA', 56, 12], ['Trabajos en clase', 34, 62], ['Exposiciones orales', 30, 75], ['Exámenes en vez de trabajos', 29, 50]], 100, ' %', [T, M]);
   bars('refBars', [['Activo', 76, T], ['Mixto', 79, A], ['Pasivo', 32, R]], 100, ' %');
   bars('taskBars', [['Entender conceptos', 72, 'var(--blue-dark)'], ['Resolver ejercicios', 67, 'var(--blue-dark)'], ['Hacer preguntas de práctica', 57, A], ['Buscar información', 48, A], ['Resumir apuntes', 48, R], ['Corregir textos', 34, A], ['Redactar textos', 32, A], ['Programar o analizar datos', 31, A], ['Hacer esquemas', 28, A], ['Organizarse', 24, R], ['Generar ideas', 21, A], ['Preparar presentaciones', 21, A], ['Traducir', 18, A]], 100, ' %');
+  pairs('notasBars', [['No la usaron (3)', '6.0', '8.0'], ['La usaron un poco (10)', '8.4', '6.3'], ['La usaron bastante (5)', '9.2', '4.9']], 10, '', [T, M]);
+  bars('delegaBars', [['No la usaron', '8.0'], ['0–20 %', '7.8'], ['21–40 %', '7.6'], ['41–60 % (solo 1)', '3.0'], ['61–80 %', '4.4'], ['81–100 %', '5.3']], 10, '');
   bars('expBars', [['Encontrar en qué parte del informe está', 56], ['Que le diera la respuesta', 44], ['Comprobar una respuesta suya', 24], ['Entender la pregunta', 7]], 100, ' %', 'var(--cocoa)');
 
   // Reveal
-  var btn = document.getElementById('revealBtn'), ans = document.getElementById('revealAns');
-  btn.addEventListener('click', function () {
-    var open = ans.hidden; ans.hidden = !open; btn.setAttribute('aria-expanded', String(open));
-    btn.textContent = open ? 'Ocultar la respuesta' : 'Ver la respuesta';
+  document.querySelectorAll('.reveal > button').forEach(function (btn) {
+    var ans = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.addEventListener('click', function () {
+      var open = ans.hidden; ans.hidden = !open; btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Ocultar la respuesta' : 'Ver la respuesta';
+    });
   });
 
   // Quiz
@@ -661,14 +755,13 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
     ['autoria', '¿Qué parte del resultado final es tuya?', 'h', ['0–20 %', '21–40 %', '41–60 %', '61–80 %', '81–100 %']]
   ];
   var qs = document.getElementById('qs');
-  Q.forEach(function (q) {
+  Q.forEach(function (q, n) {
     var opts = (q[3] || scale).map(function (lab, i) {
-      var id = 'q-' + q[0] + '-' + (i + 1);
-      return '<input type="radio" name="' + q[0] + '" id="' + id + '" value="' + (i + 1) + '"><label for="' + id + '">' + lab + '</label>';
+      return '<button type="button" data-v="' + (i + 1) + '" aria-pressed="false">' + lab + '</button>';
     }).join('');
     var div = document.createElement('div');
-    div.className = 'q';
-    div.innerHTML = '<p>' + q[1] + '</p><div class="opts" role="radiogroup" aria-label="' + q[1] + '">' + opts + '</div>';
+    div.className = 'qstep'; div.hidden = n > 0;
+    div.innerHTML = '<h3 tabindex="-1">' + q[1] + '</h3><div class="qopts" role="group" aria-label="' + q[1] + '">' + opts + '</div>';
     qs.appendChild(div);
   });
   var C = {
@@ -677,18 +770,35 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
     'Pasivo': [2.221, 2.324, 2.632, 3.221]
   };
   var info = {
-    'Activo': ['p-act', 'Usas la IA como un profesor particular: piensas, preguntas, compruebas y lo haces tuyo. Como el 58 % de los estudiantes.'],
-    'Mixto': ['p-mix', 'Piensas e iteras con la IA, pero te fías de lo que dice sin comprobarlo. Como el 22 % de los estudiantes. Tu siguiente paso: contrastar lo importante con otra fuente.'],
-    'Pasivo': ['p-pas', 'Dejas que la IA haga el trabajo por ti. Como el 20 % de los estudiantes. Tu siguiente paso: intentarlo tú primero y usar la IA para entender, no para entregar.']
+    'Activo': 'Usas la IA como un profesor particular: piensas, preguntas, compruebas y lo haces tuyo. Como el 58 % de los estudiantes.',
+    'Mixto': 'Piensas e iteras con la IA, pero te fías de lo que dice sin comprobarlo. Como el 22 % de los estudiantes. Tu siguiente paso: contrastar lo importante con otra fuente.',
+    'Pasivo': 'Dejas que la IA haga el trabajo por ti. Como el 20 % de los estudiantes. Tu siguiente paso: intentarlo tú primero y usar la IA para entender, no para entregar.'
   };
-  document.getElementById('quizBtn').addEventListener('click', function () {
-    var v = {}, missing = 0;
-    Q.forEach(function (q) {
-      var c = document.querySelector('input[name="' + q[0] + '"]:checked');
-      if (!c) missing++; else v[q[0]] = +c.value;
-    });
-    var out = document.getElementById('quizOut');
-    if (missing) { out.innerHTML = '<p class="t-red"><b>Te falta' + (missing > 1 ? 'n ' + missing + ' frases' : ' 1 frase') + ' por responder.</b></p>'; return; }
+  // Las frases aparecen de una en una: al responder, pasa a la siguiente
+  var steps = qs.children, cur = 0, v = {}, back = document.getElementById('qBack');
+  var count = document.getElementById('qCount'), fill = document.getElementById('qFill'), out = document.getElementById('quizOut');
+  function show(n, focus) {
+    for (var i = 0; i < steps.length; i++) { steps[i].hidden = i !== n; steps[i].classList.remove('enter'); }
+    cur = n; out.innerHTML = '';
+    if (n < steps.length) {
+      steps[n].classList.add('enter');
+      count.textContent = 'Frase ' + (n + 1) + ' de ' + Q.length;
+      if (focus) steps[n].querySelector('h3').focus({ preventScroll: true });
+    }
+    fill.style.width = (Math.min(n, Q.length) / Q.length * 100) + '%';
+    back.hidden = n === 0 || n >= Q.length;
+  }
+  qs.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var step = b.closest('.qstep'), n = Array.prototype.indexOf.call(steps, step);
+    step.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    v[Q[n][0]] = +b.dataset.v;
+    setTimeout(function () { if (n + 1 < Q.length) show(n + 1, true); else result(); }, 320);
+  });
+  back.addEventListener('click', function () { show(Math.max(0, (cur >= Q.length ? Q.length : cur) - 1), true); });
+  function result() {
+    show(Q.length);
+    count.textContent = 'Tu resultado';
     var d = [(v.entender + v.antes) / 2, (v.repreg + v.explicar) / 2, (v.contrasto + v.detecto) / 2, (v.reescribo + v.autoria) / 2];
     var sum = 0; Q.forEach(function (q) { sum += v[q[0]]; });
     var iua = Math.round((sum / 8 - 1) / 4 * 100);
@@ -697,8 +807,12 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
       var dist = 0; for (var i = 0; i < 4; i++) dist += Math.pow(d[i] - C[k][i], 2);
       if (dist < bd) { bd = dist; best = k; }
     });
-    out.innerHTML = '<div class="result persona ' + info[best][0] + '"><div class="head"><span class="num">' + iua + ' / 100</span></div><h3>Tu perfil: ' + best + '</h3><p>' + info[best][1] + '</p><p style="margin-top:8px;font-size:14px">La media de los estudiantes es 66.</p></div>';
-  });
+    out.innerHTML = '<div class="qres qstep enter"><div class="qscore">' + iua + '<small> / 100</small></div><h3 tabindex="-1">Tu perfil: <em>' + best + '</em></h3><p>' + info[best] + '</p><p class="small">La media de los estudiantes es 66.</p><p class="small">Ojo: en el experimento 2, lo que decidió la nota sin IA no fue lo que cada uno decía de sí mismo, sino cuánto trabajo dejó a la IA.</p><button type="button" class="qagain">Volver a empezar</button></div>';
+    out.querySelector('h3').focus({ preventScroll: true });
+    out.querySelector('.qagain').addEventListener('click', function () {
+      v = {}; qs.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); show(0, true);
+    });
+  }
 })();
 </script>
 <script>
@@ -720,6 +834,18 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
     });
   }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Si alguna línea del título de portada no cabe, reduce el tamaño hasta que quepa
+  var h1 = hero.querySelector('h1');
+  function fitHero() {
+    h1.style.fontSize = '';
+    // En el móvil ocupa todo el ancho; en ordenador, unas tres cuartas partes para dejar ver la esfera
+    var box = h1.clientWidth * (window.innerWidth > 700 ? 0.66 : 0.98), w = 0;
+    h1.querySelectorAll('.l > span').forEach(function (sp) { w = Math.max(w, sp.scrollWidth); });
+    if (w) h1.style.fontSize = Math.min(150, parseFloat(getComputedStyle(h1).fontSize) * box / w) + 'px';
+  }
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fitHero);
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fitHero, 150); });
 
   // Bloques que aparecen al bajar
   var sel = 'main section > h2, main section > h3, main section > .lead, main section > .source, main section > .callout, main section > .quiz, main section > .bars, main section > .card, main section > .semaforo > *, main section > .reveal, .grid > *, .facts > li, .steps > li, .reco > *';
