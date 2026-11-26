@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es" data-tema="oscuro">
+<html lang="es" data-fondo="a">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¿La IA ayuda a aprender o solo a terminar antes?</title>
 <meta name="description" content="Resultados del Econo-Reto Madison 2026: cómo usan la IA 170 estudiantes de la Universidad de Valladolid, qué piensan 38 profesores y qué pasó en dos experimentos en clase.">
-<meta name="theme-color" content="#04060E">
+<meta name="theme-color" content="#F2F3F7">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:title" content="¿La IA ayuda a aprender o solo a terminar antes?">
@@ -17,14 +17,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2304060E'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%232D47FF'/%3E%3Cpath d='M16 4v6M16 22v6M4 16h6M22 16h6' stroke='%23E9ECF4' stroke-width='1.6'/%3E%3C/svg%3E">
 <script>
-// Tema: ?tema=claro|oscuro manda; si no, #tema-claro|#tema-oscuro; si no, lo último elegido; si no, oscuro
+// Fondo: ?fondo=a|b manda; si no, #fondo-a|#fondo-b (las vistas previas quitan los parámetros); si no, a
 (function () {
-  var t = null;
-  try { var q = new URLSearchParams(location.search).get('tema'); if (q === 'claro' || q === 'oscuro') t = q; } catch (e) {}
-  if (!t) { if (location.hash === '#tema-claro') t = 'claro'; else if (location.hash === '#tema-oscuro') t = 'oscuro'; }
-  if (!t) { try { t = localStorage.getItem('madison-tema'); } catch (e) {} }
-  if (t !== 'claro' && t !== 'oscuro') t = 'oscuro';
-  document.documentElement.setAttribute('data-tema', t);
+  var f = null;
+  try { var q = new URLSearchParams(location.search).get('fondo'); if (q === 'a' || q === 'b') f = q; } catch (e) {}
+  if (!f && /fondo-b/.test(location.hash)) f = 'b';
+  if (!f && /fondo-a/.test(location.hash)) f = 'a';
+  document.documentElement.setAttribute('data-fondo', f || 'a');
   document.documentElement.classList.add('js');
 })();
 </script>
@@ -39,26 +38,19 @@
    Dos voces: alta (Archivo cursiva + Playfair + Anton) y baja (Inter Tight + Playfair).
    ========================================================= */
 :root {
-  /* Tema oscuro (por defecto) */
-  --bg: #04060E;
-  --bg-2: #0A0F2C;
-  --ink: #E9ECF4;
-  --ink-2: #8C93AA;
-  --line: rgba(233, 236, 244, .14);
-  --line-2: rgba(233, 236, 244, .3);
-  --electric: #2D47FF;
-  --electric-2: #5068FF;
-  --deep: #020414;
-  --paper: #E9ECF4;
+  /* Tokens de lectura sobre fondo claro (versión A y primera mitad de la B) */
+  --bg: #F2F3F7;
+  --bg-2: #E2E6EF;
+  --ink: #0A0D1A;
+  --ink-2: #333A52;
+  --line: rgba(10, 13, 26, .16);
+  --line-2: rgba(10, 13, 26, .34);
+  --electric: #1F38F2;
+  --electric-2: #6F84FF;
+  --deep: #060D3A;
   --on-e: #FFFFFF;
-  --glass: rgba(8, 12, 36, .55);
-  --blob-a: rgba(45, 71, 255, .9);
-  --blob-b: rgba(80, 104, 255, .5);
-  --blob-c: rgba(2, 4, 20, .9);
-  --frost: rgba(18, 22, 44, .72);
-  --grain-op: .16;
-  --grain-blend: screen;
-  --acento: #8193FF;
+  --panel: rgba(246, 247, 250, .78);
+  --acento: #1F38F2;
 
   /* Fuentes */
   --f-alta: "Archivo", "Arial Black", sans-serif;
@@ -84,44 +76,39 @@
   /* Movimiento */
   --e-out: cubic-bezier(.16, 1, .3, 1);
   --e-io: cubic-bezier(.65, 0, .35, 1);
-  color-scheme: dark;
-}
-:root[data-tema="claro"] {
-  --bg: #EDEFF3;
-  --bg-2: #DCE0E8;
-  --ink: #0A0D1A;
-  --ink-2: #535A6E;
-  --line: rgba(10, 13, 26, .14);
-  --line-2: rgba(10, 13, 26, .32);
-  --electric: #1F38F2;
-  --electric-2: #7186FF;
-  --deep: #060D3A;
-  --paper: #F7F8FA;
-  --glass: rgba(255, 255, 255, .55);
-  --blob-a: rgba(31, 56, 242, .85);
-  --blob-b: rgba(113, 134, 255, .55);
-  --blob-c: rgba(255, 255, 255, .95);
-  --frost: rgba(225, 228, 235, .7);
-  --grain-op: .22;
-  --grain-blend: multiply;
-  --acento: #1F38F2;
   color-scheme: light;
+}
+/* Zonas oscuras de la versión B: texto claro */
+[data-fondo="b"] .osc-b, :root[data-fondo="b"].barra-osc .barra {
+  --bg: #07080F;
+  --bg-2: #161A33;
+  --ink: #EEF0F7;
+  --ink-2: #A3AAC2;
+  --line: rgba(238, 240, 247, .18);
+  --line-2: rgba(238, 240, 247, .36);
+  --electric: #4A62FF;
+  --electric-2: #8FA0FF;
+  --deep: #020414;
+  --panel: rgba(8, 10, 22, .62);
+  --acento: #9AABFF;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-texto); font-size: var(--t-texto); line-height: 1.55; overflow-x: clip; -webkit-font-smoothing: antialiased; transition: background-color .4s, color .4s; }
+body { margin: 0; background: #F2F3F7; color: var(--ink); font-family: var(--f-texto); font-size: var(--t-texto); line-height: 1.55; overflow-x: clip; -webkit-font-smoothing: antialiased; transition: background-color .4s, color .4s; }
 p, h1, h2, h3, h4, ul, ol, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--electric); outline-offset: 3px; }
-.t-electrico :focus-visible, .bloque :focus-visible, .pantalla :focus-visible { outline-color: #FFFFFF; }
+.bloque :focus-visible { outline-color: #FFFFFF; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Grano: un único ruido fijo sobre toda la página, generado una vez */
-body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: var(--grain-op); mix-blend-mode: var(--grain-blend);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .52  0 0 0 0 .6  0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+/* Fondo: canvas fijo generado una vez por sección (formas → difuminado → grano) */
+.fondo { position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; z-index: -1; overflow: hidden; pointer-events: none; background: #F2F3F7; }
+[data-fondo="b"] .fondo { background: #FCFCFE; }
+.fondo canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; will-change: opacity, transform; }
 
 .wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding-left: var(--margen); padding-right: var(--margen-d); position: relative; z-index: 2; }
 .texto { max-width: 40rem; }
@@ -130,9 +117,9 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
    TIPOGRAFÍA
    ========================================================= */
 .h-alta { font-family: var(--f-alta); font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.035em; line-height: .98; font-size: var(--t-h2); text-wrap: balance; }
-.h-alta em { font-family: var(--f-acento); font-weight: 600; font-style: italic; text-transform: none; letter-spacing: -.01em; font-size: .98em; position: relative; top: -.08em; color: var(--acento, var(--electric)); }
+.h-alta em { font-family: var(--f-acento); font-weight: 600; font-style: italic; text-transform: none; letter-spacing: -.01em; font-size: .98em; position: relative; top: -.08em; color: var(--acento); }
 .h-baja { font-family: var(--f-baja); font-weight: 600; letter-spacing: -.045em; line-height: 1.02; font-size: var(--t-h2); text-wrap: balance; }
-.h-baja em { font-family: var(--f-acento); font-weight: 500; font-style: italic; letter-spacing: -.015em; color: var(--acento, var(--electric)); }
+.h-baja em { font-family: var(--f-acento); font-weight: 500; font-style: italic; letter-spacing: -.015em; color: var(--acento); }
 mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .h3 { font-family: var(--f-baja); font-weight: 600; font-size: var(--t-h3); letter-spacing: -.03em; line-height: 1.12; text-wrap: balance; }
 .lead { font-size: 18px; line-height: 1.5; color: var(--ink-2); max-width: 36rem; margin-top: var(--s5); }
@@ -144,32 +131,12 @@ mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webki
 /* =========================================================
    SECCIONES Y CAPAS COMUNES (fase 2)
    ========================================================= */
-.sec { position: relative; isolation: isolate; overflow: clip; padding-block: var(--s9) var(--s8); background: var(--sec-bg, var(--bg)); color: var(--sec-fg, var(--ink)); scroll-margin-top: 0; }
-.sec .lead, .sec .fuente { color: var(--sec-fg2, var(--ink-2)); }
-.sec > .bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.bg > * { position: absolute; }
-/* Manchas de luz: degradados radiales, nunca filter: blur */
-.blob { border-radius: 50%; will-change: transform; }
-.blob.a { background: radial-gradient(closest-side, var(--blob-a), transparent); }
-.blob.b { background: radial-gradient(closest-side, var(--blob-b), transparent); }
-.blob.c { background: radial-gradient(closest-side, var(--blob-c), transparent); }
-/* Cruces en retícula (ref. 01) */
-.cruces { inset: 0; opacity: .55;
-  background-image: linear-gradient(var(--sec-line, var(--line-2)), var(--sec-line, var(--line-2))), linear-gradient(var(--sec-line, var(--line-2)), var(--sec-line, var(--line-2)));
-  background-size: 1px 13px, 13px 1px; background-repeat: no-repeat; }
-.cruces { background: none; }
-.cruces::before { content: ""; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'><path d='M48 42v12M42 48h12' stroke='white' stroke-width='1'/></svg>");
-  background-size: 96px 96px; background-position: -48px -48px; opacity: .5; }
-:root[data-tema="claro"] .cruces::before { filter: invert(1); opacity: .45; }
-.sec.sobre-oscuro .cruces::before { filter: none; opacity: .5; }
-/* Retícula de líneas finas (ref. 05) */
-.reticula { inset: 0; background-image: linear-gradient(90deg, var(--sec-line, var(--line)) 1px, transparent 1px), linear-gradient(var(--sec-line, var(--line)) 1px, transparent 1px); background-size: 25% 100%, 100% 33.33%; opacity: .7; }
+.sec { position: relative; isolation: isolate; overflow: clip; padding-block: var(--s9) var(--s8); color: var(--ink); scroll-margin-top: 0; }
+.sec .lead, .sec .fuente { color: var(--ink-2); }
 /* Capa técnica: textos de esquina */
-.tec { position: absolute; z-index: 3; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; gap: 12px; padding: 76px var(--margen-d) 0 var(--margen); font-size: var(--t-tec); letter-spacing: .05em; color: var(--sec-fg2, var(--ink-2)); pointer-events: none; font-variant-numeric: tabular-nums; }
+.tec { position: absolute; z-index: 3; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; gap: 12px; padding: 76px var(--margen-d) 0 var(--margen); font-size: var(--t-tec); letter-spacing: .05em; color: var(--ink-2); pointer-events: none; font-variant-numeric: tabular-nums; }
 .tec span:first-child { white-space: nowrap; }
 .tec span:last-child { text-align: right; }
-/* Esquinas de selección (ref. 13) */
 .esquinas { position: relative; }
 .esquinas::before, .esquinas::after, .esquinas > .e3, .esquinas > .e4 { content: ""; position: absolute; width: 14px; height: 14px; border: 0 solid var(--esq, currentColor); pointer-events: none; }
 .esquinas::before { left: -1px; top: -1px; border-left-width: 1.5px; border-top-width: 1.5px; }
@@ -177,13 +144,6 @@ mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webki
 .esquinas > .e3 { left: -1px; bottom: -1px; border-left-width: 1.5px; border-bottom-width: 1.5px; }
 .esquinas > .e4 { right: -1px; bottom: -1px; border-right-width: 1.5px; border-bottom-width: 1.5px; }
 .cruz { display: inline-block; width: 13px; height: 13px; flex: none; background: linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat, linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat; }
-
-/* Tonos de sección */
-.t-oscuro { --sec-bg: var(--deep); --sec-fg: #E9ECF4; --sec-fg2: #9AA2BC; --sec-line: rgba(233,236,244,.16); --acento: #8FA0FF; --esq: #E9ECF4; }
-.t-electrico { --sec-bg: var(--electric); --sec-fg: #FFFFFF; --sec-fg2: rgba(255,255,255,.78); --sec-line: rgba(255,255,255,.22); --acento: #FFFFFF; --esq: #FFFFFF; }
-.t-electrico mark, .t-oscuro mark { background: #FFFFFF; color: var(--deep); }
-.t-gris { --sec-bg: var(--bg-2); }
-.t-negro { --sec-bg: #010207; --sec-fg: #E9ECF4; --sec-fg2: #8C93AA; --sec-line: rgba(233,236,244,.12); --acento: #8FA0FF; --esq: #E9ECF4; }
 
 /* =========================================================
    BARRA SUPERIOR E ÍNDICE
@@ -197,7 +157,8 @@ mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webki
 .barra .donde { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; margin-right: 6px; white-space: nowrap; }
 .barra button { background: none; border: 0; padding: 10px 8px; min-height: 44px; font-size: 13px; font-weight: 500; cursor: pointer; letter-spacing: .01em; }
 .barra button:hover { color: var(--electric); }
-.barra::before { content: ""; position: absolute; inset: 0; background: linear-gradient(var(--bg) 20%, transparent); opacity: .92; transition: opacity .3s; }
+.barra::before { content: ""; position: absolute; inset: 0 0 -18px; background: linear-gradient(var(--bg) 58%, transparent); opacity: .96; transition: background .4s; }
+.barra { transition: color .4s; }
 .barra .in { position: relative; }
 .progreso { position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; transform-origin: left; transform: scaleX(0); background: var(--electric); }
 .indice { position: fixed; inset: 0; z-index: 70; background: var(--bg); color: var(--ink); padding: calc(env(safe-area-inset-top, 0px) + 72px) var(--margen-d) 40px var(--margen); overflow-y: auto; }
@@ -212,70 +173,67 @@ mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webki
 /* =========================================================
    PORTADA
    ========================================================= */
-.portada { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-block: 110px 120px; --sec-bg: var(--bg); }
-.portada .bg .blob.a { width: 130vmax; height: 130vmax; right: -70vmax; bottom: -80vmax; }
-.portada .bg .blob.b { width: 80vmax; height: 80vmax; left: -40vmax; top: -30vmax; opacity: .6; }
-.portada .bg .blob.c { width: 70vmax; height: 70vmax; right: -10vmax; top: -40vmax; }
-.portada .velo { inset: 0; background: var(--frost); opacity: .35; }
+.portada { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-block: 110px 120px; }
 .portada h1 { font-family: var(--f-alta); font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.035em; line-height: .98; color: var(--ink); font-size: clamp(40px, 11.4vw, 150px); }
 .portada h1 .l { display: block; white-space: nowrap; overflow: hidden; padding: .02em .06em .04em 0; margin: -.02em 0 -.04em; }
 .portada h1 .l > span { display: inline-block; }
 .portada h1 em { font-family: var(--f-acento); font-weight: 600; font-style: italic; text-transform: none; letter-spacing: -.01em; font-size: .98em; position: relative; top: -.1em; color: var(--electric); }
-:root[data-tema="oscuro"] .portada h1 em { color: #8FA0FF; }
 .portada .respuesta { margin-top: var(--s6); max-width: 30rem; font-size: 18px; }
 .portada .respuesta b { font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 4px; }
 .portada .tec { padding-top: 76px; }
+/* Portada B: el título va en blanco sobre la mancha, como en la referencia 14 */
+[data-fondo="b"] .portada h1, [data-fondo="b"] .portada .respuesta { color: #FFFFFF; }
+[data-fondo="b"] .portada h1 em { color: #C9D0FF; }
+@media (min-width: 900px) { [data-fondo="b"] .portada .respuesta { color: var(--ink); } }
 .portada .pie { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 0 var(--margen-d) max(22px, env(safe-area-inset-bottom, 0px)) var(--margen); display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; font-size: var(--t-tec); letter-spacing: .05em; color: var(--ink-2); }
 .bajar { display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-size: 12px; letter-spacing: .04em; min-width: 44px; }
 .bajar .mira { width: 34px; height: 34px; color: var(--electric); }
-:root[data-tema="oscuro"] .bajar .mira { color: #8FA0FF; }
 
 /* =========================================================
    LISTAS CON CRUZ (hallazgos)
    ========================================================= */
-.hallazgos { margin-top: var(--s7); border-top: 1px solid var(--sec-line, var(--line)); }
-.hallazgos li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 0 10px; padding: 18px 0 20px; border-bottom: 1px solid var(--sec-line, var(--line)); }
-.hallazgos li > .cruz { margin-top: 7px; color: var(--acento, var(--electric)); }
-.hallazgos li p { color: var(--sec-fg2, var(--ink-2)); font-size: 16px; }
-.hallazgos li p b { display: block; font-family: var(--f-baja); font-weight: 600; font-size: 19px; letter-spacing: -.02em; line-height: 1.25; color: var(--sec-fg, var(--ink)); margin-bottom: 4px; }
+.hallazgos { margin-top: var(--s7); border-top: 1px solid var(--line); }
+.hallazgos li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 0 10px; padding: 18px 0 20px; border-bottom: 1px solid var(--line); }
+.hallazgos li > .cruz { margin-top: 7px; color: var(--acento); }
+.hallazgos li p { color: var(--ink-2); font-size: 16px; }
+.hallazgos li p b { display: block; font-family: var(--f-baja); font-weight: 600; font-size: 19px; letter-spacing: -.02em; line-height: 1.25; color: var(--ink); margin-bottom: 4px; }
 .hallazgos li p b + b { display: inline; font-size: inherit; font-family: inherit; letter-spacing: 0; }
-@media (min-width: 900px) { .hallazgos { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; border-top: 0; } .hallazgos li { border-top: 1px solid var(--sec-line, var(--line)); border-bottom: 0; } }
+@media (min-width: 900px) { .hallazgos { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; border-top: 0; } .hallazgos li { border-top: 1px solid var(--line); border-bottom: 0; } }
 .resumen .hallazgos li p b { font-size: 21px; }
 
 /* Bloque azul para destacar (ref. 09) */
 .bloque { position: relative; margin-top: var(--s7); padding: 26px 22px 28px; background: var(--electric); color: var(--on-e); max-width: 44rem; }
 .bloque p { font-size: 17px; line-height: 1.5; color: rgba(255,255,255,.86); }
 .bloque p b { display: block; font-family: var(--f-baja); font-weight: 600; font-size: clamp(21px, 5.4vw, 28px); letter-spacing: -.035em; line-height: 1.15; color: #FFFFFF; margin-bottom: 8px; }
-.t-electrico .bloque { background: var(--deep); }
 .bloque.esquinas { --esq: rgba(255,255,255,.9); }
 
 /* Cifras sueltas */
 .cifras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; margin-top: var(--s7); }
-.cifras > div { border-top: 1px solid var(--sec-line, var(--line)); padding-top: 14px; min-width: 0; }
-.cifras .n { display: block; font-size: var(--t-cifra); color: var(--acento, var(--electric)); white-space: nowrap; }
-.cifras p { margin-top: 10px; font-size: 15px; color: var(--sec-fg2, var(--ink-2)); max-width: 22ch; }
+.cifras > div { border-top: 1px solid var(--line); padding-top: 14px; min-width: 0; }
+.cifras .n { display: block; font-size: var(--t-cifra); color: var(--acento); white-space: nowrap; }
+.cifras p { margin-top: 10px; font-size: 15px; color: var(--ink-2); max-width: 22ch; }
 .cifras .ancha { grid-column: 1 / -1; }
 @media (min-width: 900px) { .cifras { grid-template-columns: repeat(4, minmax(0, 1fr)); } .cifras.tres { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* Pasos numerados (sí son secuencias) */
-.pasos { margin-top: var(--s6); counter-reset: p; border-top: 1px solid var(--sec-line, var(--line)); }
-.pasos li { counter-increment: p; display: grid; grid-template-columns: 40px minmax(0, 1fr); padding: 16px 0; border-bottom: 1px solid var(--sec-line, var(--line)); font-size: 16px; color: var(--sec-fg2, var(--ink-2)); }
-.pasos li::before { content: counter(p, decimal-leading-zero); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--acento, var(--electric)); padding-top: 4px; letter-spacing: .04em; }
-.pasos li b { color: var(--sec-fg, var(--ink)); font-weight: 600; }
-@media (min-width: 900px) { .pasos { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; border-top: 0; } .pasos li { border-top: 1px solid var(--sec-line, var(--line)); border-bottom: 0; } }
+.pasos { margin-top: var(--s6); counter-reset: p; border-top: 1px solid var(--line); }
+.pasos li { counter-increment: p; display: grid; grid-template-columns: 40px minmax(0, 1fr); padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 16px; color: var(--ink-2); }
+.pasos li::before { content: counter(p, decimal-leading-zero); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--acento); padding-top: 4px; letter-spacing: .04em; }
+.pasos li b { color: var(--ink); font-weight: 600; }
+@media (min-width: 900px) { .pasos { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; border-top: 0; } .pasos li { border-top: 1px solid var(--line); border-bottom: 0; } }
 
 /* Títulos de gráfico */
 .graf { margin-top: var(--s8); }
 .graf > .tit { font-family: var(--f-baja); font-weight: 600; font-size: 18px; letter-spacing: -.02em; line-height: 1.3; max-width: 34rem; }
-.leyenda { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 13px; color: var(--sec-fg2, var(--ink-2)); }
+.leyenda { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 13px; color: var(--ink-2); }
 .leyenda span { display: inline-flex; align-items: center; gap: 8px; }
 .leyenda i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: var(--c); border: 2px solid var(--b, var(--c)); }
 .graf svg { display: block; width: 100%; height: auto; overflow: visible; margin-top: 18px; }
 .graf svg text { font-family: var(--f-texto); fill: currentColor; }
 
 /* Botón para destapar (sin caja de plantilla) */
-.destapar { margin-top: var(--s5); background: none; border: 0; padding: 10px 0; min-height: 44px; display: inline-flex; align-items: center; gap: 12px; font-family: var(--f-baja); font-weight: 600; font-size: 19px; letter-spacing: -.02em; cursor: pointer; color: var(--sec-fg, var(--ink)); }
-.destapar .cruz { width: 15px; height: 15px; color: var(--acento, var(--electric)); transition: transform .5s var(--e-out); }
+.destapar { margin-top: var(--s5); background: none; border: 0; padding: 10px 0; min-height: 44px; display: inline-flex; align-items: center; gap: 12px; font-family: var(--f-baja); font-weight: 600; font-size: 19px; letter-spacing: -.02em; cursor: pointer; color: var(--ink); }
+.destapar .cruz { width: 15px; height: 15px; color: var(--acento); transition: transform .5s var(--e-out); }
 .destapar[aria-expanded="true"] .cruz { transform: rotate(45deg); }
 .destapar span:last-child { background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat; padding-bottom: 2px; }
 .destapar:hover span:last-child { background-size: 0 1px; transition: background-size .4s var(--e-out); }
@@ -284,85 +242,63 @@ mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webki
 /* =========================================================
    TEST (02)
    ========================================================= */
-.test .bg .orbita { left: 50%; top: 50%; border: 1px solid rgba(143,160,255,.22); border-radius: 50%; translate: -50% -50%; }
-.test .bg .orbita.o1 { width: 150vmax; height: 46vmax; rotate: -14deg; }
-.test .bg .orbita.o2 { width: 120vmax; height: 70vmax; rotate: 10deg; }
-.test .bg .haz { right: -30vw; top: 20%; width: 120vw; height: 60vh; background: radial-gradient(60% 40% at 100% 50%, rgba(80,104,255,.55), transparent 70%); }
-.test .bg .blob.a { width: 90vmax; height: 90vmax; left: -50vmax; bottom: -60vmax; opacity: .7; }
-.marco { position: relative; margin-top: var(--s7); padding: 26px 20px 22px; max-width: 46rem; background: rgba(8, 12, 40, .5); --esq: #E9ECF4; }
-.marco .qtop { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: .05em; color: #9AA2BC; font-variant-numeric: tabular-nums; }
-.marco .qbar { flex: 1; height: 1px; background: rgba(233,236,244,.2); position: relative; }
-.marco .qbar i { position: absolute; left: 0; top: -1px; height: 3px; width: 100%; background: #8FA0FF; transform-origin: left; transform: scaleX(0); transition: transform .6s var(--e-out); }
+.marco { position: relative; margin-top: var(--s7); padding: 26px 20px 22px; max-width: 46rem; background: var(--panel); --esq: var(--ink); }
+.marco .qtop { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: .05em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.marco .qbar { flex: 1; height: 1px; background: var(--line); position: relative; }
+.marco .qbar i { position: absolute; left: 0; top: -1px; height: 3px; width: 100%; background: var(--electric); transform-origin: left; transform: scaleX(0); transition: transform .6s var(--e-out); }
 .qpaso { padding-top: 20px; }
 .qpaso[hidden] { display: none; }
 .qpaso h3 { font-family: var(--f-baja); font-weight: 600; font-size: clamp(24px, 6.4vw, 34px); letter-spacing: -.035em; line-height: 1.12; outline: none; max-width: 22ch; }
-.qops { margin-top: 20px; border-top: 1px solid rgba(233,236,244,.16); }
-.qops button { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 12px; background: none; border: 0; border-bottom: 1px solid rgba(233,236,244,.16); min-height: 52px; padding: 12px 6px; text-align: left; font-size: 17px; cursor: pointer; color: #E9ECF4; position: relative; isolation: isolate; }
-.qops button::before { content: ""; position: absolute; inset: 0; z-index: -1; background: #2D47FF; transform: scaleX(0); transform-origin: left; transition: transform .45s var(--e-out); }
+.qops { margin-top: 20px; border-top: 1px solid var(--line); }
+.qops button { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 12px; background: none; border: 0; border-bottom: 1px solid var(--line); min-height: 52px; padding: 12px 6px; text-align: left; font-size: 17px; cursor: pointer; color: var(--ink); position: relative; isolation: isolate; }
+.qops button::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--electric); transform: scaleX(0); transform-origin: left; transition: transform .45s var(--e-out); }
 .qops button:hover::before { transform: scaleX(.02); }
 .qops button[aria-pressed="true"]::before { transform: scaleX(1); }
-.qops button .k { font-size: 11px; color: #9AA2BC; letter-spacing: .05em; font-variant-numeric: tabular-nums; }
+.qops button .k { font-size: 11px; color: var(--ink-2); letter-spacing: .05em; font-variant-numeric: tabular-nums; }
+.qops button[aria-pressed="true"] { color: #FFFFFF; }
 .qops button[aria-pressed="true"] .k { color: #FFFFFF; }
-.qatras { margin-top: 12px; background: none; border: 0; min-height: 44px; padding: 8px 0; font-size: 14px; color: #9AA2BC; cursor: pointer; }
-.qatras:hover { color: #FFFFFF; }
+.qatras { margin-top: 12px; background: none; border: 0; min-height: 44px; padding: 8px 0; font-size: 14px; color: var(--ink-2); cursor: pointer; }
+.qatras:hover { color: var(--ink); }
 .qres { padding-top: 18px; }
 .qres .grande { display: flex; align-items: baseline; gap: 10px; }
-.qres .grande .n { font-family: var(--f-cifra); font-size: clamp(110px, 38vw, 240px); line-height: .82; color: #FFFFFF; }
-.qres .grande small { font-size: 16px; color: #9AA2BC; }
+.qres .grande .n { font-family: var(--f-cifra); font-size: clamp(110px, 38vw, 240px); line-height: .82; color: var(--ink); }
+.qres .grande small { font-size: 16px; color: var(--ink-2); }
 .regla { position: relative; margin-top: 30px; height: 74px; }
-.regla .eje { position: absolute; left: 0; right: 0; top: 24px; height: 1px; background: rgba(233,236,244,.35); }
-.regla .t { position: absolute; top: 19px; width: 1px; height: 11px; background: rgba(233,236,244,.35); }
-.regla .m { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; font-size: 11px; letter-spacing: .04em; white-space: nowrap; color: #9AA2BC; }
+.regla .eje { position: absolute; left: 0; right: 0; top: 24px; height: 1px; background: var(--line-2); }
+.regla .t { position: absolute; top: 19px; width: 1px; height: 11px; background: var(--line-2); }
+.regla .m { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; font-size: 11px; letter-spacing: .04em; white-space: nowrap; color: var(--ink-2); }
 .regla .m i { width: 1px; height: 30px; background: currentColor; margin-top: 4px; }
 .regla .m:not(.tu) { top: 20px; flex-direction: column-reverse; }
 .regla .m:not(.tu) i { height: 22px; margin: 0 0 4px; }
-.regla .m.tu { color: #FFFFFF; }
-.regla .m.tu i { width: 3px; background: #8FA0FF; }
-.regla .ext { position: absolute; top: 34px; font-size: 11px; color: #9AA2BC; }
-.qres .perfil { margin-top: 26px; font-size: 15px; color: #9AA2BC; }
-.qres .perfil em { display: block; font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: clamp(48px, 15vw, 88px); line-height: 1; color: #FFFFFF; letter-spacing: -.02em; margin-top: 2px; }
-.qres p { margin-top: 14px; font-size: 17px; max-width: 34rem; color: #E9ECF4; }
-.qres .peq { font-size: 14px; color: #9AA2BC; margin-top: 10px; }
+.regla .m.tu { color: var(--ink); }
+.regla .m.tu i { width: 3px; background: var(--electric); }
+.regla .ext { position: absolute; top: 34px; font-size: 11px; color: var(--ink-2); }
+.qres .perfil { margin-top: 26px; font-size: 15px; color: var(--ink-2); }
+.qres .perfil em { display: block; font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: clamp(48px, 15vw, 88px); line-height: 1; color: var(--ink); letter-spacing: -.02em; margin-top: 2px; }
+.qres p { margin-top: 14px; font-size: 17px; max-width: 34rem; color: var(--ink); }
+.qres .peq { font-size: 14px; color: var(--ink-2); margin-top: 10px; }
 .qres .otra { margin-top: 22px; }
 
 /* =========================================================
    PERFILES (03) · Momento 1: siluetas
    ========================================================= */
-.perfiles { padding: 0; }
-.perfiles .escena { position: relative; min-height: 100vh; min-height: 100svh; padding: 110px 0 36px; display: flex; flex-direction: column; overflow: hidden; }
-.perfiles .escena .bg .blob.a { width: 110vmax; height: 110vmax; left: -30vmax; top: -40vmax; background: radial-gradient(closest-side, rgba(120,140,255,.6), transparent); }
-.perfiles .escena .bg .blob.c { width: 90vmax; height: 90vmax; right: -50vmax; bottom: -50vmax; background: radial-gradient(closest-side, rgba(2,4,20,.65), transparent); }
-.siluetas { position: relative; margin-top: 26px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; height: min(42svh, 380px); }
-.sil { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
-.sil svg { width: 100%; height: 100%; display: block; overflow: visible; }
-.sil .etq { position: absolute; top: 4%; left: 50%; transform: translateX(-50%); display: inline-flex; gap: 6px; align-items: baseline; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.7); font-size: 12px; letter-spacing: .04em; white-space: nowrap; }
-.sil .etq b { font-weight: 600; }
-.enfoque { position: absolute; left: 0; top: 0; width: 33.333%; height: 100%; pointer-events: none; --esq: #FFFFFF; }
-.enfoque .x { position: absolute; left: 50%; top: 52%; width: 18px; height: 18px; translate: -50% -50%; color: #FFFFFF; }
 .desc-perfiles { position: relative; margin-top: 22px; }
-.desc-perfiles article { padding: 16px 0; border-top: 1px solid rgba(255,255,255,.3); }
+.desc-perfiles article { padding: 16px 0; border-top: 1px solid var(--line-2); }
 .desc-perfiles .cab { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .desc-perfiles h3 { font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: clamp(40px, 11vw, 72px); line-height: 1; letter-spacing: -.02em; }
-.desc-perfiles .n { font-family: var(--f-cifra); font-size: clamp(52px, 15vw, 104px); line-height: .9; }
-.desc-perfiles p { margin-top: 8px; font-size: 17px; max-width: 34rem; color: rgba(255,255,255,.88); }
-/* Con animación: las tres descripciones ocupan el mismo sitio */
-.anim .desc-perfiles { display: grid; }
-.anim .desc-perfiles article { grid-area: 1 / 1; }
-.perfiles .datos { padding-block: var(--s8) var(--s8); position: relative; }
+.desc-perfiles .n { font-family: var(--f-cifra); font-size: clamp(52px, 15vw, 104px); line-height: .9; color: var(--acento); white-space: nowrap; }
+.desc-perfiles p { margin-top: 8px; font-size: 17px; max-width: 34rem; color: var(--ink-2); }
+@media (min-width: 900px) { .desc-perfiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: var(--s7); } }
+@media (min-width: 900px) { .desc-perfiles .n { font-size: clamp(52px, 5vw, 80px); } .desc-perfiles h3 { font-size: clamp(34px, 3.3vw, 54px); } }
+.perfiles .datos { padding-top: var(--s8); position: relative; }
 
 /* =========================================================
    USO (04)
    ========================================================= */
-.uso .bg .circulos { inset: 0; background:
-  radial-gradient(circle at 82% 22%, var(--blob-b) 0 9vmax, transparent 16vmax),
-  radial-gradient(circle at 12% 48%, var(--blob-b) 0 6vmax, transparent 12vmax),
-  radial-gradient(circle at 70% 70%, var(--blob-a) 0 12vmax, transparent 22vmax),
-  radial-gradient(circle at 25% 92%, var(--blob-b) 0 5vmax, transparent 10vmax); opacity: .55; }
-.uso .bg .blob.a { width: 100vmax; height: 100vmax; right: -60vmax; top: -30vmax; }
 .burbujas { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 22px 14px; margin-top: 22px; }
 .burbuja { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 64px; }
 .burbuja svg { margin: 0; width: var(--d); height: var(--d); }
-.burbuja .nom { font-size: 13px; color: var(--sec-fg2, var(--ink-2)); text-align: center; }
+.burbuja .nom { font-size: 13px; color: var(--ink-2); text-align: center; }
 .burbuja .v { font-family: var(--f-cifra); font-size: 22px; line-height: 1; }
 .dos-listas { display: grid; gap: 40px; margin-top: var(--s8); }
 @media (min-width: 900px) { .dos-listas { grid-template-columns: 1fr 1fr; gap: 56px; } }
@@ -371,15 +307,13 @@ mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webki
 .piruletas .fila { display: flex; justify-content: space-between; gap: 12px; font-size: 16px; }
 .piruletas .fila b { font-variant-numeric: tabular-nums; font-weight: 600; }
 .piruletas .pista { position: relative; height: 9px; margin-top: 6px; }
-.piruletas .pista::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 1px; background: var(--sec-line, var(--line-2)); }
+.piruletas .pista::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 1px; background: var(--line-2); }
 .piruletas .pista i { position: absolute; left: 0; top: 4px; height: 1px; width: var(--v); background: var(--electric); transform-origin: left; }
 .piruletas .pista i::after { content: ""; position: absolute; right: -4px; top: -4px; width: 9px; height: 9px; border-radius: 50%; background: var(--electric); }
 
 /* =========================================================
    CÓMO (05)
    ========================================================= */
-.como .bg .diag { inset: -20%; background: repeating-linear-gradient(-45deg, transparent 0 70px, var(--blob-b) 70px 130px, transparent 130px 260px); opacity: .45; -webkit-mask-image: radial-gradient(60% 50% at 70% 40%, #000, transparent); mask-image: radial-gradient(60% 50% at 70% 40%, #000, transparent); }
-.como .bg .blob.a { width: 100vmax; height: 100vmax; left: -40vmax; top: -70vmax; opacity: .8; }
 .eje-v { position: relative; margin-top: 26px; height: 380px; max-width: 34rem; }
 
 /* =========================================================
@@ -388,24 +322,18 @@ mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webki
 .frente { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: var(--s7); align-items: end; }
 .frente > div { border-top: 1px solid var(--line-2); padding-top: 12px; min-width: 0; }
 .frente .n { font-size: min(var(--t-gigante), 19vw); white-space: nowrap; display: block; line-height: .82; }
-.frente .a .n { color: var(--electric); }
-:root[data-tema="oscuro"] .frente .a .n { color: #8FA0FF; }
+.frente .a .n { color: var(--acento); }
 .frente p { margin-top: 12px; font-size: 15px; color: var(--ink-2); max-width: 20ch; }
 .sillas { margin-top: 18px; display: grid; gap: 22px; }
 .sillas .fila p { font-size: 14px; color: var(--ink-2); display: flex; justify-content: space-between; gap: 12px; }
 .sillas .fila p b { color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
 .sillas .asientos { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin-top: 8px; }
 .sillas .asientos svg { margin: 0; width: 100%; height: auto; }
-.sillas .medido p b { color: var(--electric); }
-:root[data-tema="oscuro"] .sillas .medido p b { color: #8FA0FF; }
+.sillas .medido p b { color: var(--acento); }
 
 /* =========================================================
    EVALUACIÓN (07)
    ========================================================= */
-.evaluacion .bg .cuad { width: 46vmax; height: 46vmax; border-radius: 18%; background: radial-gradient(closest-side, var(--blob-a), transparent 92%); }
-.evaluacion .bg .cuad.q1 { right: -14vmax; top: 6%; opacity: .7; }
-.evaluacion .bg .cuad.q2 { right: 18vmax; top: 30%; width: 26vmax; height: 26vmax; opacity: .45; }
-.evaluacion .bg .cuad.q3 { left: -16vmax; bottom: 4%; width: 36vmax; height: 36vmax; opacity: .35; }
 .mariposa { margin-top: 20px; }
 .mariposa .fila { padding: 12px 0; border-top: 1px solid var(--line); }
 .mariposa .fila > p { font-size: 15px; text-align: center; margin-bottom: 8px; }
@@ -424,26 +352,20 @@ mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webki
 /* =========================================================
    COMPETENCIAS (08) · Momento 3: cartón rasgado
    ========================================================= */
-.competencias .bg .blob.a { width: 120vmax; height: 120vmax; left: -30vmax; bottom: -70vmax; background: radial-gradient(closest-side, rgba(45,71,255,.9), rgba(2,4,20,.0)); }
-.competencias .bg .blob.c { width: 60vmax; height: 60vmax; left: 0; bottom: -20vmax; background: radial-gradient(closest-side, rgba(1,2,7,.95), transparent); }
 .medidores { margin-top: 22px; display: grid; gap: 18px; }
 .medidor .fila { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .medidor .fila span { font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: 24px; }
 .medidor .fila b { font-family: var(--f-cifra); font-weight: 400; font-size: 34px; line-height: 1; }
 .medidor .casillas { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 8px; }
-.medidor .casillas i { position: relative; height: 28px; border: 1px solid rgba(233,236,244,.35); overflow: hidden; }
-.medidor .casillas i::after { content: ""; position: absolute; inset: 0; background: #8FA0FF; transform: scaleX(var(--f, 0)); transform-origin: left; }
-.medidor p { margin-top: 6px; font-size: 14px; color: var(--sec-fg2); }
-.columnas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: end; height: 260px; margin-top: 22px; border-bottom: 1px solid var(--sec-line); }
+.medidor .casillas i { position: relative; height: 28px; border: 1px solid var(--line-2); overflow: hidden; }
+.medidor .casillas i::after { content: ""; position: absolute; inset: 0; background: var(--electric); transform: scaleX(var(--f, 0)); transform-origin: left; }
+.medidor p { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
+.columnas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: end; height: 260px; margin-top: 22px; border-bottom: 1px solid var(--line); }
 .columna { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; text-align: left; }
 .columna b { font-family: var(--f-cifra); font-weight: 400; font-size: clamp(34px, 10vw, 56px); line-height: 1; }
-.columna i { display: block; height: var(--h); background: linear-gradient(#8FA0FF, #2D47FF); margin-top: 8px; transform-origin: bottom; }
+.columna i { display: block; height: var(--h); background: linear-gradient(var(--electric-2), var(--electric)); margin-top: 8px; transform-origin: bottom; }
 .columna span { display: block; font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: 20px; margin-top: 10px; }
-.carton { position: relative; margin-top: var(--s8); aspect-ratio: 4 / 3; max-height: 70svh; width: 100%; max-width: 760px; }
-.carton .papel { position: absolute; inset: 7% 2%; background: #F2F1EC; color: #0A0D1A; display: flex; flex-direction: column; justify-content: center; padding: 8% 14%; }
-.carton .papel p { font-family: var(--f-baja); font-weight: 600; font-size: clamp(24px, 6.6vw, 46px); letter-spacing: -.04em; line-height: 1.08; }
 svg[id^="gra"] { max-width: 720px; }
-.carton svg.tapa { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; overflow: visible; }
 @media (min-width: 900px) { .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; } }
 
 /* =========================================================
@@ -473,81 +395,54 @@ svg[id^="gra"] { max-width: 720px; }
 /* =========================================================
    EXPERIMENTO 1 (10) · Momento 4: revista
    ========================================================= */
-.experimento .bg .halo { left: 50%; top: 34%; width: 150vmax; height: 150vmax; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, #010207 0 38%, rgba(45,71,255,.85) 58%, rgba(45,71,255,0) 74%); opacity: .9; }
-.revista { position: relative; margin-top: var(--s7); perspective: 1600px; }
-.revista .abierta { position: relative; display: grid; grid-template-columns: 1fr 1fr; transform: rotateX(16deg) rotateZ(-5deg); transform-style: preserve-3d; max-width: 760px; margin: 0 auto; box-shadow: 0 50px 80px -30px rgba(0,0,0,.8); }
-.revista .pag { position: relative; aspect-ratio: 3 / 4.1; background: #1F38F2; color: #FFFFFF; padding: 9% 9% 8%; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-.revista .pag::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
-.revista .izq::after { background: linear-gradient(90deg, rgba(0,0,0,.0) 70%, rgba(0,0,0,.35)); }
-.revista .der::after { background: linear-gradient(90deg, rgba(0,0,0,.35), rgba(0,0,0,0) 22%); }
-.revista .izq { transform-origin: right center; backface-visibility: hidden; }
-.revista .izq .cita { font-family: var(--f-acento); font-style: italic; font-weight: 500; font-size: clamp(18px, 5.2vw, 38px); line-height: 1.06; letter-spacing: -.01em; }
-.revista .izq .texto-peq { font-size: clamp(10px, 2.6vw, 14px); line-height: 1.4; opacity: .9; }
-.revista .folio { display: flex; justify-content: space-between; font-size: clamp(8px, 2vw, 11px); opacity: .75; letter-spacing: .04em; }
-.revista .der .num-fila { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(255,255,255,.4); padding-top: 4px; }
-.revista .der .num-fila b { font-family: var(--f-cifra); font-weight: 400; font-size: clamp(38px, 12vw, 92px); line-height: .95; }
-.revista .der .num-fila span { font-size: clamp(9px, 2.4vw, 13px); text-align: right; max-width: 11ch; line-height: 1.25; }
 .reticulas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 18px; margin-top: 22px; }
 @media (min-width: 900px) { .reticulas { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .reticulas figure { min-width: 0; }
 .reticulas .rej { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; }
-.reticulas .rej i { aspect-ratio: 1; background: rgba(233,236,244,.14); }
-.reticulas .rej i.on { background: #8FA0FF; }
-.reticulas figcaption { margin-top: 10px; font-size: 14px; color: var(--sec-fg2); }
-.reticulas figcaption b { display: block; font-family: var(--f-cifra); font-weight: 400; font-size: 34px; line-height: 1; color: #FFFFFF; margin-bottom: 4px; }
+.reticulas .rej i { aspect-ratio: 1; background: var(--line); }
+.reticulas .rej i.on { background: var(--electric); }
+.reticulas figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+.reticulas figcaption b { display: block; font-family: var(--f-cifra); font-weight: 400; font-size: 34px; line-height: 1; color: var(--ink); margin-bottom: 4px; }
 
 /* =========================================================
    PROFESORES (11)
    ========================================================= */
-.cabezas { display: grid; grid-template-columns: 3fr 2fr 2fr; gap: 14px; margin-top: var(--s7); }
-.cabezas .grupo { min-width: 0; border-top: 1px solid var(--line-2); padding-top: 12px; }
-.cabezas .caras { display: flex; gap: 2px; }
-.cabezas .caras svg { width: 100%; max-width: 90px; height: auto; color: var(--electric); }
-:root[data-tema="oscuro"] .cabezas .caras svg { color: #8FA0FF; }
-.cabezas h3 { font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: clamp(19px, 5vw, 30px); line-height: 1.05; margin-top: 10px; }
-.cabezas h3 .n { font-family: var(--f-cifra); font-style: normal; font-weight: 400; display: block; font-size: 34px; color: var(--electric); }
-:root[data-tema="oscuro"] .cabezas h3 .n { color: #8FA0FF; }
-.cabezas p { font-size: 14px; color: var(--ink-2); margin-top: 6px; }
-@media (max-width: 560px) { .cabezas { grid-template-columns: 1fr; gap: 26px; } .cabezas .caras svg { max-width: 76px; } .cabezas .caras svg { max-width: 64px; } }
+.tipos-prof { display: grid; gap: 0; margin-top: var(--s7); border-top: 1px solid var(--line-2); }
+.tipos-prof .grupo { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 16px; padding: 16px 0 18px; border-bottom: 1px solid var(--line); }
+.tipos-prof .n { grid-row: span 2; font-family: var(--f-cifra); font-size: 56px; line-height: .9; color: var(--acento); }
+.tipos-prof h3 { font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: clamp(24px, 6vw, 32px); line-height: 1.05; }
+.tipos-prof p { font-size: 15px; color: var(--ink-2); margin-top: 4px; }
+@media (min-width: 900px) { .tipos-prof { grid-template-columns: repeat(3, 1fr); column-gap: 40px; border-top: 0; } .tipos-prof .grupo { border-top: 1px solid var(--line-2); border-bottom: 0; } }
 .siete { display: grid; grid-template-columns: repeat(7, 7px); gap: 3px; margin-top: 8px; }
 .siete i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--line-2); }
-.siete i.on { background: var(--electric); border-color: var(--electric); }
-:root[data-tema="oscuro"] .siete i.on { background: #8FA0FF; border-color: #8FA0FF; }
+.siete i.on { background: var(--acento); border-color: var(--acento); }
 .hallazgos.con-siete li { grid-template-columns: 68px minmax(0, 1fr); }
 
 /* =========================================================
    EXPERIMENTO 2 (12)
    ========================================================= */
-.examen .bg .blob.a { width: 120vmax; height: 120vmax; right: -60vmax; top: -50vmax; background: radial-gradient(closest-side, rgba(120,140,255,.55), transparent); }
-.examen .bg .reticula { opacity: .9; }
 .pendientes text { font-size: 12px; }
-.columnas-n { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; align-items: end; height: 280px; margin-top: 22px; border-bottom: 1px solid var(--sec-line); }
+.columnas-n { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; align-items: end; height: 280px; margin-top: 22px; border-bottom: 1px solid var(--line); }
 .columnas-n .c { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; }
 .columnas-n .c b { font-family: var(--f-cifra); font-weight: 400; font-size: clamp(20px, 5.6vw, 34px); line-height: 1; }
-.columnas-n .c i { display: block; height: var(--h); background: rgba(255,255,255,.92); margin-top: 6px; transform-origin: bottom; }
-.columnas-n .c.cero i { background: var(--deep); outline: 1px solid rgba(255,255,255,.7); outline-offset: -1px; }
-.columnas-n-et { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin-top: 8px; font-size: 12px; line-height: 1.25; color: var(--sec-fg2); }
+.columnas-n .c i { display: block; height: var(--h); background: var(--electric); margin-top: 6px; transform-origin: bottom; }
+.columnas-n .c.cero i { background: var(--ink); }
+.columnas-n-et { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin-top: 8px; font-size: 12px; line-height: 1.25; color: var(--ink-2); }
 
 /* =========================================================
    RECOMENDACIONES (13) · Momento 5: cartel luminoso
    ========================================================= */
-.recomendaciones { padding-bottom: 0; }
-.pantalla { position: relative; margin-top: var(--s7); background: #2D47FF; color: #FFFFFF; padding: 30px 22px 150px; box-shadow: 0 0 120px 10px rgba(45,71,255,.45), 0 0 340px 40px rgba(45,71,255,.25); }
-.pantalla .reco { padding: 20px 0 22px; border-top: 1px solid rgba(255,255,255,.35); }
-.pantalla .reco:first-child { border-top: 0; padding-top: 0; }
-.pantalla .reco h3 { font-family: var(--f-baja); font-weight: 500; font-size: clamp(30px, 8vw, 44px); letter-spacing: -.045em; line-height: 1; }
-.pantalla .reco p { margin-top: 12px; font-size: 17px; line-height: 1.5; max-width: 40rem; }
-.pantalla .reco .por { font-size: 15px; color: rgba(255,255,255,.75); margin-top: 10px; }
-@media (min-width: 900px) { .pantalla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; padding: 48px 44px 200px; } .pantalla .reco { border-top: 0; padding-top: 0; } }
-.gente { position: relative; height: 0; }
-.gente .personas { position: absolute; left: 0; right: 0; bottom: -18px; height: 190px; display: flex; justify-content: center; gap: 4vw; pointer-events: none; }
-.gente svg { height: 100%; width: auto; margin: 0; }
-.suelo { height: 140px; background: linear-gradient(180deg, rgba(45,71,255,.35), rgba(1,2,7,0) 80%); -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent); }
+.recos { margin-top: var(--s7); border-top: 1px solid var(--line-2); }
+.recos .reco { padding: 22px 0 24px; border-bottom: 1px solid var(--line); }
+.recos .reco h3 { font-family: var(--f-baja); font-weight: 600; font-size: clamp(28px, 7.4vw, 40px); letter-spacing: -.045em; line-height: 1.02; }
+.recos .reco p { margin-top: 12px; font-size: 17px; line-height: 1.5; max-width: 40rem; }
+.recos .reco .por { font-size: 15px; color: var(--ink-2); margin-top: 10px; }
+@media (min-width: 900px) { .recos { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 40px; border-top: 0; } .recos .reco { border-top: 1px solid var(--line-2); border-bottom: 0; } }
 
 /* =========================================================
    MÉTODO (14) y PIE
    ========================================================= */
-.cautela { position: relative; margin-top: var(--s7); padding: 26px 22px; max-width: 48rem; background: var(--glass); }
+.cautela { position: relative; margin-top: var(--s7); padding: 26px 22px; max-width: 48rem; background: var(--panel); }
 .cautela h3 { font-family: var(--f-baja); font-weight: 600; font-size: 21px; letter-spacing: -.03em; }
 .cautela ul { margin-top: 12px; }
 .cautela li { position: relative; padding: 8px 0 8px 22px; font-size: 16px; color: var(--ink-2); border-top: 1px solid var(--line); }
@@ -555,16 +450,12 @@ svg[id^="gra"] { max-width: 720px; }
 .pie-web { padding-block: 56px max(40px, env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); }
 .pie-web .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
 .pie-web b { color: var(--ink); font-weight: 600; }
+[data-fondo="b"] .pie-web { background: #05050A; }
 
 /* Escritorio */
 @media (min-width: 900px) {
   .sec { padding-block: 140px 110px; }
   .dos-col { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: start; }
-  .perfiles .escena { padding-top: 120px; }
-  .perfiles .escena .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: end; }
-  .perfiles .escena .wrap > .h-alta { grid-column: 1 / -1; }
-  .siluetas { height: min(56svh, 520px); }
-  .desc-perfiles { margin-top: 0; }
 }
 
 /* Sin movimiento */
@@ -572,16 +463,10 @@ svg[id^="gra"] { max-width: 720px; }
   *, *::before, *::after { transition-duration: 0s !important; animation: none !important; scroll-behavior: auto !important; }
 }
 
-/* Animación (solo con GSAP y sin reducción de movimiento) */
-.pal { display: inline-block; }
-.marco.esquinas::before { translate: var(--o, 0px) var(--o, 0px); }
-.marco.esquinas::after { translate: calc(-1 * var(--o, 0px)) var(--o, 0px); }
-.marco.esquinas > .e3 { translate: var(--o, 0px) calc(-1 * var(--o, 0px)); }
-.marco.esquinas > .e4 { translate: calc(-1 * var(--o, 0px)) calc(-1 * var(--o, 0px)); }
-@media (max-width: 899px) { .anim .siluetas { height: min(34svh, 320px); } .anim .perfiles .escena { padding-top: 96px; } }
 </style>
 </head>
 <body>
+<div class="fondo" id="fondo" aria-hidden="true"></div>
 <a class="sr" href="#resumen">Saltar al contenido</a>
 
 <header class="barra" id="barra">
@@ -589,7 +474,6 @@ svg[id^="gra"] { max-width: 720px; }
     <a class="marca" href="#top"><span class="cruz" aria-hidden="true"></span>Madison<span class="marca-larga"> · IA y aprendizaje</span></a>
     <div class="der">
       <span class="donde" id="donde" aria-hidden="true"></span>
-      <button type="button" id="btnTema" aria-label="Cambiar a tema claro">Claro</button>
       <button type="button" id="btnIndice" aria-expanded="false" aria-controls="indice">Índice</button>
     </div>
   </div>
@@ -618,7 +502,6 @@ svg[id^="gra"] { max-width: 720px; }
 
 <!-- 00 · PORTADA -->
 <section class="sec portada" id="top" data-n="00" data-nombre="Portada">
-  <div class="bg" aria-hidden="true"><div class="blob c"></div><div class="blob b"></div><div class="blob a" id="manchaPortada"></div><div class="velo"></div><div class="cruces"></div></div>
   <div class="tec" aria-hidden="true"><span>Econo-Reto Madison 2026</span><span>Universidad de Valladolid</span></div>
   <div class="wrap">
     <h1 id="titulo"><span class="l"><span>¿La IA ayuda</span></span><span class="l"><span>a <em>aprender</em></span></span><span class="l"><span>o solo a</span></span><span class="l"><span><em>terminar antes</em>?</span></span></h1>
@@ -637,7 +520,6 @@ svg[id^="gra"] { max-width: 720px; }
 
 <!-- 01 · RESUMEN -->
 <section class="sec resumen" id="resumen" data-n="01" data-nombre="Resumen">
-  <div class="bg" aria-hidden="true"><div class="reticula"></div></div>
   <div class="tec" aria-hidden="true"><span>01 Resumen</span><span>Encuesta, entrevistas y dos experimentos</span></div>
   <div class="wrap">
     <h2 class="h-baja">Seis cosas que hemos <em>descubierto</em></h2>
@@ -653,8 +535,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 02 · TEST -->
-<section class="sec test t-oscuro sobre-oscuro" id="test" data-n="02" data-nombre="Test">
-  <div class="bg" aria-hidden="true"><div class="blob a"></div><div class="haz"></div><div class="orbita o1"></div><div class="orbita o2"></div></div>
+<section class="sec test" id="test" data-n="02" data-nombre="Test">
   <div class="tec" aria-hidden="true"><span>02 Test</span><span>Índice de uso activo, 0 a 100</span></div>
   <div class="wrap">
     <h2 class="h-baja">¿Qué <em>perfil</em> eres?</h2>
@@ -669,24 +550,15 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 03 · PERFILES -->
-<section class="sec perfiles" id="perfiles" data-n="03" data-nombre="Perfiles">
-  <div class="escena t-electrico" id="escenaPerfiles" style="background:var(--sec-bg);color:var(--sec-fg)">
-    <div class="bg" aria-hidden="true"><div class="blob a"></div><div class="blob c"></div></div>
-    <div class="tec" aria-hidden="true"><span>03 Perfiles</span><span>Encuesta a 170 estudiantes</span></div>
-    <div class="wrap">
+<section class="sec perfiles osc-b" id="perfiles" data-n="03" data-nombre="Perfiles">
+  <div class="tec" aria-hidden="true"><span>03 Perfiles</span><span>Encuesta a 170 estudiantes</span></div>
+  <div class="wrap">
       <h2 class="h-alta">No existen <em>los que usan la IA</em> y <em>los que no</em>. Hay tres perfiles</h2>
-      <div class="siluetas" id="siluetas" aria-hidden="true">
-        <div class="sil"><svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMax meet"><use href="#busto"/></svg><span class="etq"><b>58 %</b> Activo</span></div>
-        <div class="sil"><svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMax meet"><use href="#busto" transform="translate(12 22) scale(.9)"/></svg><span class="etq"><b>22 %</b> Mixto</span></div>
-        <div class="sil"><svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMax meet"><use href="#busto" transform="translate(6 12) scale(.95)"/></svg><span class="etq"><b>20 %</b> Pasivo</span></div>
-        <div class="enfoque esquinas" id="enfoque"><i class="e3"></i><i class="e4"></i><span class="cruz x"></span></div>
-      </div>
       <div class="desc-perfiles" id="descPerfiles">
         <article><div class="cab"><h3>Activo</h3><span class="n">58 %</span></div><p>Lo intenta primero, pregunta a la IA para entender, repregunta, comprueba y lo reescribe a su manera. Usa la IA como un profesor particular.</p></article>
         <article><div class="cab"><h3>Mixto</h3><span class="n">22 %</span></div><p>Hace casi todo como el activo: piensa e itera. Pero se fía de lo que dice la IA y no lo comprueba.</p></article>
         <article><div class="cab"><h3>Pasivo</h3><span class="n">20 %</span></div><p>Le pide el resultado a la IA y lo entrega. La IA piensa por él.</p></article>
       </div>
-    </div>
   </div>
   <div class="datos">
     <div class="wrap">
@@ -712,8 +584,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 04 · USO -->
-<section class="sec uso" id="uso" data-n="04" data-nombre="Cómo la usan">
-  <div class="bg" aria-hidden="true"><div class="circulos"></div><div class="blob a" id="manchaUso"></div></div>
+<section class="sec uso osc-b" id="uso" data-n="04" data-nombre="Cómo la usan">
   <div class="tec" aria-hidden="true"><span>04 Uso</span><span>Encuesta a 170 estudiantes</span></div>
   <div class="wrap">
     <h2 class="h-alta">Casi todos <mark>usan la IA</mark>, y <em>casi a diario</em></h2>
@@ -739,8 +610,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 05 · CÓMO -->
-<section class="sec como t-gris" id="como" data-n="05" data-nombre="Cómo, no cuánto">
-  <div class="bg" aria-hidden="true"><div class="blob a" id="manchaComo"></div><div class="diag"></div></div>
+<section class="sec como osc-b" id="como" data-n="05" data-nombre="Cómo, no cuánto">
   <div class="tec" aria-hidden="true"><span>05 Cómo, no cuánto</span><span>Encuesta a 170 estudiantes</span></div>
   <div class="wrap dos-col">
     <div>
@@ -760,8 +630,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 06 · BRECHA -->
-<section class="sec brecha" id="brecha" data-n="06" data-nombre="Profes y alumnos">
-  <div class="bg" aria-hidden="true"><div class="cruces"></div></div>
+<section class="sec brecha osc-b" id="brecha" data-n="06" data-nombre="Profes y alumnos">
   <div class="tec" aria-hidden="true"><span>06 Profesores y alumnos</span><span>170 estudiantes y 38 profesores</span></div>
   <div class="wrap">
     <h2 class="h-alta"><mark>Profesores y alumnos</mark> ven la IA <em>al revés</em></h2>
@@ -793,8 +662,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 07 · EVALUACIÓN -->
-<section class="sec evaluacion t-gris" id="evaluacion" data-n="07" data-nombre="Evaluación">
-  <div class="bg" aria-hidden="true"><div class="cuad q1"></div><div class="cuad q2"></div><div class="cuad q3"></div></div>
+<section class="sec evaluacion osc-b" id="evaluacion" data-n="07" data-nombre="Evaluación">
   <div class="tec" aria-hidden="true"><span>07 Evaluación</span><span>170 estudiantes, 38 profesores y 7 entrevistas</span></div>
   <div class="wrap">
     <h2 class="h-baja">Cuando los profesores cambian cómo evalúan, la IA cambia de sitio, <em>no de forma</em></h2>
@@ -816,8 +684,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 08 · COMPETENCIAS -->
-<section class="sec competencias t-negro sobre-oscuro" id="competencias" data-n="08" data-nombre="Competencias">
-  <div class="bg" aria-hidden="true"><div class="blob a"></div><div class="blob c"></div></div>
+<section class="sec competencias osc-b" id="competencias" data-n="08" data-nombre="Competencias">
   <div class="tec" aria-hidden="true"><span>08 Competencias</span><span>170 estudiantes e informes de empleo 2024–2026</span></div>
   <div class="wrap">
     <h2 class="h-alta"><mark>Usar bien la IA</mark> refuerza habilidades, y son las que <em>piden las empresas</em></h2>
@@ -843,15 +710,12 @@ svg[id^="gra"] { max-width: 720px; }
       <li><span class="cruz" aria-hidden="true"></span><p><b>Analizar:</b> 7 de cada 10 empresas consideran esencial el pensamiento analítico (Foro Económico Mundial 2025).</p></li>
       <li><span class="cruz" aria-hidden="true"></span><p><b>Y saber usar la IA:</b> el 66 % de los directivos no contrataría a alguien sin habilidades de IA (Microsoft y LinkedIn 2024).</p></li>
     </ul>
-    <div class="carton" id="carton">
-      <div class="papel"><p>Las empresas no piden menos IA: piden saber controlarla.</p></div>
-      <svg class="tapa" id="tapa" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"></svg>
-    </div>
+    <div class="bloque"><p><b>Las empresas no piden menos IA: piden saber controlarla.</b></p></div>
   </div>
 </section>
 
 <!-- 09 · MAPA -->
-<section class="sec mapa" id="mapa" data-n="09" data-nombre="Mapa de usos">
+<section class="sec mapa osc-b" id="mapa" data-n="09" data-nombre="Mapa de usos">
   <div class="tec" aria-hidden="true"><span>09 Mapa de usos</span><span>Encuesta a 170 estudiantes</span></div>
   <div class="wrap">
     <h2 class="h-baja">La IA se usa sobre todo para <em>estudiar</em>, no para hacer trabajos</h2>
@@ -875,8 +739,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 10 · EXPERIMENTO 1 -->
-<section class="sec experimento t-negro sobre-oscuro" id="experimento" data-n="10" data-nombre="Experimento 1">
-  <div class="bg" aria-hidden="true"><div class="halo"></div></div>
+<section class="sec experimento osc-b" id="experimento" data-n="10" data-nombre="Experimento 1">
   <div class="tec" aria-hidden="true"><span>10 Experimento 1</span><span>19 de noviembre de 2026</span></div>
   <div class="wrap">
     <h2 class="h-alta">En una clase real, la IA <mark>se equivocó con más de la mitad</mark>, y casi nadie <em>lo notó</em> a tiempo</h2>
@@ -890,19 +753,13 @@ svg[id^="gra"] { max-width: 720px; }
       <li><span><b>Nosotros:</b> observábamos a los grupos sin intervenir.</span></li>
       <li><span><b>Al final:</b> un cuestionario individual por QR sobre cómo usaron la IA, con las mismas 8 frases del test.</span></li>
     </ol>
-    <div class="revista" id="revista">
-      <div class="abierta" id="abierta">
-        <div class="pag izq" id="pagIzq">
-          <p class="cita">Antes de la clase, probamos nosotros las IAs.</p>
-          <p class="texto-peq">Gemini acertó las 15 preguntas tipo test. ChatGPT acertó 14 la primera vez… y solo 6 la segunda, con el mismo PDF y las mismas preguntas.</p>
-          <p class="folio"><span>Experimento 1</span><span>10</span></p>
-        </div>
-        <div class="pag der" aria-hidden="true">
-          <div class="num-fila"><b>15</b><span>Gemini, de 15</span></div>
-          <div class="num-fila"><b>14</b><span>ChatGPT, la primera vez</span></div>
-          <div class="num-fila"><b>6</b><span>ChatGPT, la segunda</span></div>
-          <p class="folio"><span>Mismo PDF</span><span>11</span></p>
-        </div>
+    <div class="graf">
+      <p class="tit">Antes de la clase, probamos nosotros las IAs.</p>
+      <p class="lead" style="margin-top:8px">Gemini acertó las 15 preguntas tipo test. ChatGPT acertó 14 la primera vez… y solo 6 la segunda, con el mismo PDF y las mismas preguntas.</p>
+      <div class="cifras tres" style="margin-top:var(--s5)">
+        <div><span class="n num-alta">15</span><p>Gemini, de 15</p></div>
+        <div><span class="n num-alta">14</span><p>ChatGPT, la primera vez</p></div>
+        <div><span class="n num-alta">6</span><p>ChatGPT, la segunda</p></div>
       </div>
     </div>
     <h3 class="h3" style="margin-top:var(--s8)">Qué pasó</h3>
@@ -929,16 +786,15 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 11 · PROFESORES -->
-<section class="sec profesores t-gris" id="profesores" data-n="11" data-nombre="Entrevistas">
-  <div class="bg" aria-hidden="true"><div class="cruces"></div></div>
+<section class="sec profesores osc-b" id="profesores" data-n="11" data-nombre="Entrevistas">
   <div class="tec" aria-hidden="true"><span>11 Entrevistas</span><span>7 profesores</span></div>
   <div class="wrap">
     <h2 class="h-baja">Lo que dicen los <em>profesores</em></h2>
     <p class="fuente">7 entrevistas a profesores de Economía, Marketing, Sociología e Historia Económica</p>
-    <div class="cabezas" id="cabezas">
-      <div class="grupo"><div class="caras" data-n="3"></div><h3><span class="n">3</span>El escéptico</h3><p>Suele usar poco la IA y le preocupa que los alumnos dejen de pensar. Ha pasado todo a clase: papel, boli y sin móviles.</p></div>
-      <div class="grupo"><div class="caras" data-n="2"></div><h3><span class="n">2</span>El integrador</h3><p>La usa mucho. Deja usarla si se declara y evalúa cómo razona el alumno.</p></div>
-      <div class="grupo"><div class="caras" data-n="2"></div><h3><span class="n">2</span>El pragmático</h3><p>Ni a favor ni en contra: se adapta, pero duda de que la IA sirva para aprender.</p></div>
+    <div class="tipos-prof" id="tiposProf">
+      <div class="grupo"><span class="n">3</span><h3>El escéptico</h3><p>Suele usar poco la IA y le preocupa que los alumnos dejen de pensar. Ha pasado todo a clase: papel, boli y sin móviles.</p></div>
+      <div class="grupo"><span class="n">2</span><h3>El integrador</h3><p>La usa mucho. Deja usarla si se declara y evalúa cómo razona el alumno.</p></div>
+      <div class="grupo"><span class="n">2</span><h3>El pragmático</h3><p>Ni a favor ni en contra: se adapta, pero duda de que la IA sirva para aprender.</p></div>
     </div>
     <ul class="hallazgos con-siete">
       <li><span class="siete" data-on="5" aria-hidden="true"></span><p><b>5 de 7 sospechan, pero no pueden demostrar</b> que un trabajo está hecho con IA. Solo lo descubren cuando el alumno tiene que explicarlo y no sabe.</p></li>
@@ -954,8 +810,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 12 · EXPERIMENTO 2 -->
-<section class="sec examen t-electrico" id="examen" data-n="12" data-nombre="Experimento 2">
-  <div class="bg" aria-hidden="true"><div class="blob a"></div><div class="reticula"></div></div>
+<section class="sec examen osc-b" id="examen" data-n="12" data-nombre="Experimento 2">
   <div class="tec" aria-hidden="true"><span>12 Experimento 2</span><span>24 de noviembre de 2026</span></div>
   <div class="wrap">
     <h2 class="h-alta">Con la IA la práctica sale mejor… pero <em>el examen sin ella</em>, no</h2>
@@ -1009,27 +864,20 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 13 · RECOMENDACIONES -->
-<section class="sec recomendaciones t-negro sobre-oscuro" id="recomendaciones" data-n="13" data-nombre="Recomendaciones">
+<section class="sec recomendaciones osc-b" id="recomendaciones" data-n="13" data-nombre="Recomendaciones">
   <div class="tec" aria-hidden="true"><span>13 Recomendaciones</span><span>Estudiantes, universidad y empresas</span></div>
   <div class="wrap">
     <h2 class="h-alta">Qué <em>proponemos</em></h2>
-    <div class="pantalla" id="pantalla">
+    <div class="recos" id="recos">
       <div class="reco"><h3>Para estudiantes</h3><p>No tengáis miedo de usar la IA, aunque la universidad intente evitarla: es vuestro futuro, y ahora es cuando podéis equivocaros y aprender a usarla bien. Seguid tres pasos: primero yo, luego la IA, y siempre compruebo. Y haced el test de esta página de vez en cuando.</p><p class="por">Porque comprobar es el hábito que más falta, y lo que se delega se nota en cuanto la IA desaparece.</p></div>
       <div class="reco"><h3>Para la universidad</h3><p>Un estudio anual sobre cómo usan la IA sus estudiantes, con este trabajo como año cero. Y enseñar a usar la IA desde 1.º, en todas las carreras, evaluando el razonamiento (“¿por qué lo hiciste así?”) en lugar de solo vigilar.</p><p class="por">Porque controlar no cambia el modo de uso, y 6 de 7 profesores apoyan enseñarlo desde 1.º.</p></div>
       <div class="reco"><h3>Para las empresas</h3><p>Una prueba práctica de selección: resolver un caso con IA, con tiempo limitado, en el que la IA comete errores, y después unas preguntas sin ella. Y aprovechar el estudio anual para conocer cómo llegan los futuros titulados.</p><p class="por">Porque lo que se declara no predice lo que se hace, y una nota conseguida con IA no dice cuánto sabe quien la consigue.</p></div>
     </div>
-    <div class="gente" aria-hidden="true"><div class="personas" id="personas">
-      <svg viewBox="0 0 60 180"><use href="#persona"/></svg>
-      <svg viewBox="0 0 60 180" style="height:92%"><use href="#persona"/></svg>
-      <svg viewBox="0 0 60 180" style="height:97%"><use href="#persona"/></svg>
-    </div></div>
   </div>
-  <div class="suelo" aria-hidden="true"></div>
 </section>
 
 <!-- 14 · MÉTODO -->
-<section class="sec metodo" id="metodo" data-n="14" data-nombre="Cómo lo hicimos">
-  <div class="bg" aria-hidden="true"><div class="reticula"></div></div>
+<section class="sec metodo osc-b" id="metodo" data-n="14" data-nombre="Cómo lo hicimos">
   <div class="tec" aria-hidden="true"><span>14 Método</span><span>Octubre y noviembre de 2026</span></div>
   <div class="wrap">
     <h2 class="h-baja">Cómo lo hicimos y qué hay que <em>tener en cuenta</em></h2>
@@ -1055,21 +903,13 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 </main>
 
-<footer class="pie-web">
+<footer class="pie-web osc-b">
   <div class="wrap">
     <p><b>Econo-Reto Madison 2026</b> · Universidad de Valladolid</p>
     <p>Informe técnico completo disponible bajo petición.</p>
   </div>
 </footer>
 
-<!-- Formas reutilizables -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <filter id="difuso" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter>
-    <g id="busto" filter="url(#difuso)"><ellipse cx="100" cy="92" rx="40" ry="48" fill="#020414" fill-opacity=".82"/><path d="M18 300 C20 214 56 168 100 166 C144 168 180 214 182 300 Z" fill="#020414" fill-opacity=".82"/></g>
-    <g id="persona"><circle cx="30" cy="14" r="11" fill="#010207"/><path d="M13 31 Q30 24 47 31 L51 94 L44 96 L42 180 L33 180 L31 114 L29 114 L27 180 L18 180 L16 96 L9 94 Z" fill="#010207"/></g>
-  </defs>
-</svg>
 
 <!-- ===== Datos y gráficos (sin librerías; funcionan aunque falle la animación) ===== -->
 <script>
@@ -1212,24 +1052,6 @@ svg[id^="gra"] { max-width: 720px; }
     });
   })();
 
-  // 08 · Cartón rasgado: borde irregular generado una vez
-  (function () {
-    var svg = document.getElementById('tapa'); if (!svg) return;
-    var seed = 7; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
-    var cx = 200, cy = 150, pts = [], n = 64;
-    for (var i = 0; i < n; i++) {
-      var a = i / n * Math.PI * 2, rx = 168, ry = 108;
-      var j = 1 + (rnd() - .5) * .16 + (i % 2 ? .03 : -.03);
-      pts.push([cx + Math.cos(a) * rx * j, cy + Math.sin(a) * ry * j]);
-    }
-    var d = 'M' + pts.map(function (p) { return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' L') + ' Z';
-    svg.innerHTML = '<defs><filter id="fibra" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9 .06" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .05  0 0 0 0 .12  0 0 0 0 .7  0 0 0 .35 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>' +
-      '<mask id="agujero" maskUnits="userSpaceOnUse" x="-50" y="-50" width="500" height="400"><rect x="-50" y="-50" width="500" height="400" fill="#fff"/><path id="hueco" d="' + d + '" fill="#000"/></mask></defs>' +
-      '<g mask="url(#agujero)"><rect x="0" y="0" width="400" height="300" fill="#1F38F2"/><rect x="0" y="0" width="400" height="300" fill="#1F38F2" filter="url(#fibra)"/></g>' +
-      '<path id="borde" d="' + d + '" fill="none" stroke="#F2F1EC" stroke-opacity=".85" stroke-width="2.5" stroke-dasharray="3 2 6 2 1 3"/>' +
-      '<g id="trozo" style="opacity:0"><path d="' + d + '" fill="#1F38F2"/><path d="' + d + '" fill="#1F38F2" filter="url(#fibra)"/></g>';
-  })();
-
   // 09 · Mapa de áreas (squarify) por grupos del semáforo
   (function () {
     var host = document.getElementById('graMapa'); if (!host) return;
@@ -1271,10 +1093,9 @@ svg[id^="gra"] { max-width: 720px; }
     });
   })();
 
-  // 11 · Cabezas punteadas y puntos de 7
+  // 11 · Puntos de 7
   (function () {
-    var cab = '<svg viewBox="0 0 80 100" aria-hidden="true"><defs><pattern id="pp" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.25" fill="currentColor"/></pattern><clipPath id="cc"><ellipse cx="40" cy="34" rx="20" ry="24"/><path d="M4 100 C6 70 22 58 40 57 C58 58 74 70 76 100 Z"/></clipPath></defs><rect width="80" height="100" fill="url(#pp)" clip-path="url(#cc)"/></svg>';
-    document.querySelectorAll('.cabezas .caras').forEach(function (c) { var n = +c.dataset.n, s = ''; for (var i = 0; i < n; i++) s += cab; c.innerHTML = s; });
+
     document.querySelectorAll('.siete[data-on]').forEach(function (s) { var on = +s.dataset.on, h = ''; for (var i = 0; i < 7; i++) h += '<i' + (i < on ? ' class="on"' : '') + '></i>'; s.innerHTML = h; });
   })();
 
@@ -1387,16 +1208,7 @@ svg[id^="gra"] { max-width: 720px; }
   }
   show(0, false);
 
-  // ===== Barra, índice y tema =====
-  var root = document.documentElement, btnTema = document.getElementById('btnTema');
-  function rotulaTema() { var t = root.getAttribute('data-tema'); btnTema.textContent = t === 'oscuro' ? 'Claro' : 'Oscuro'; btnTema.setAttribute('aria-label', 'Cambiar a tema ' + (t === 'oscuro' ? 'claro' : 'oscuro')); document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'oscuro' ? '#04060E' : '#EDEFF3'); }
-  rotulaTema();
-  btnTema.addEventListener('click', function () {
-    var t = root.getAttribute('data-tema') === 'oscuro' ? 'claro' : 'oscuro';
-    root.setAttribute('data-tema', t); try { localStorage.setItem('madison-tema', t); } catch (e) {}
-    try { var u = new URL(location.href); u.searchParams.set('tema', t); history.replaceState(null, '', u.pathname + u.search + location.hash); } catch (e) {}
-    rotulaTema();
-  });
+  // ===== Barra e índice =====
   var ind = document.getElementById('indice'), bi = document.getElementById('btnIndice'), bc = document.getElementById('btnCerrar');
   function abrirIndice(a) { ind.hidden = !a; bi.setAttribute('aria-expanded', String(a)); document.body.style.overflow = a ? 'hidden' : ''; if (a) ind.querySelector('a').focus(); else bi.focus(); }
   bi.addEventListener('click', function () { abrirIndice(ind.hidden); });
@@ -1425,7 +1237,257 @@ svg[id^="gra"] { max-width: 720px; }
   var ra; addEventListener('resize', function () { clearTimeout(ra); ra = setTimeout(ajusta, 150); });
 })();
 </script>
-<!-- Animación: GSAP + ScrollTrigger. Si no cargan, la página se lee igual. -->
+<!-- Fondo: canvas generado una vez por sección; al bajar, cada escena se funde con la siguiente -->
+<script>
+/* Motor del fondo: formas → difuminado (campo suave) → grano de aerógrafo. Corre en un worker si se puede. */
+function motorFondo() {
+
+  function rng(seed) { var s = seed >>> 0 || 1; return function () { s ^= s << 13; s >>>= 0; s ^= s >> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; }; }
+  function mezcla(lut, t) {
+    if (t <= lut[0][0]) return lut[0][1];
+    for (var i = 1; i < lut.length; i++) if (t <= lut[i][0]) {
+      var a = lut[i - 1], b = lut[i], k = (t - a[0]) / (b[0] - a[0]);
+      return [a[1][0] + (b[1][0] - a[1][0]) * k, a[1][1] + (b[1][1] - a[1][1]) * k, a[1][2] + (b[1][2] - a[1][2]) * k];
+    }
+    return lut[lut.length - 1][1];
+  }
+  // Valor de una forma en un punto (x, y en px)
+  function forma(f, x, y, u, W, H) {
+    var cx = f.x * W, cy = f.y * H, dx = x - cx, dy = y - cy;
+    var c = Math.cos(f.rot || 0), s = Math.sin(f.rot || 0);
+    var px = dx * c + dy * s, py = -dx * s + dy * c;
+    var rx = f.rx * u, ry = f.ry * u;
+    var th = Math.atan2(py / ry, px / rx);
+    var wob = 1; if (f.w) for (var k = 0; k < f.w.length; k++) wob += f.w[k][0] * Math.sin((k + 2) * th + f.w[k][1]);
+    var rho = Math.sqrt(px * px / (rx * rx) + py * py / (ry * ry)) / wob;
+    var amp = f.a * (1 + (f.v || 0) * Math.sin(th + (f.vf || 0)) + (f.v2 || 0) * Math.sin(2 * th + (f.vf2 || 0)));
+    if (amp < 0) amp = 0;
+    var sg = f.s * u;
+    if (f.t === 'anillo') { var d = (rho - 1) * (rx + ry) / 2; return amp * Math.exp(-d * d / (2 * sg * sg)); }
+    // mancha: núcleo lleno que se deshace
+    var e = Math.max(0, rho - (f.n || 0)) * (rx + ry) / 2;
+    return amp * Math.exp(-e * e / (2 * sg * sg));
+  }
+  function datos(esc, W, H, q) {
+    var cw = Math.round(W * q), ch = Math.round(H * q);
+    var u = Math.min(W, H * .95);
+    // 1) campo a baja resolución (difuminado analítico)
+    var st = 6, gw = Math.ceil(W / st) + 2, gh = Math.ceil(H / st) + 2, campo = new Float32Array(gw * gh);
+    // nubosidad: ruido de baja frecuencia que hace irregular el azul
+    var nr = rng((esc.semilla || 7) * 31), ns = esc.nubeEscala || 70, nbw = Math.ceil(W / ns) + 2, nbh = Math.ceil(H / ns) + 2, nube = new Float32Array(nbw * nbh);
+    for (var z0 = 0; z0 < nube.length; z0++) nube[z0] = nr();
+    function nubeEn(x, y) { var fx = x / ns, fy = y / ns, i = fx | 0, j = fy | 0, tx = fx - i, ty = fy - j; i = i % (nbw - 1); j = j % (nbh - 1); tx = tx * tx * (3 - 2 * tx); ty = ty * ty * (3 - 2 * ty); var o = j * nbw + i; return (nube[o] * (1 - tx) + nube[o + 1] * tx) * (1 - ty) + (nube[o + nbw] * (1 - tx) + nube[o + nbw + 1] * tx) * ty; }
+    var nk = esc.nube == null ? .5 : esc.nube;
+    for (var j = 0; j < gh; j++) for (var i = 0; i < gw; i++) {
+      var x = i * st, y = j * st, sum = 0;
+      for (var k = 0; k < esc.formas.length; k++) sum += forma(esc.formas[k], x, y, u, W, H);
+      sum *= 1 - nk / 2 + nk * (nubeEn(x, y) * .65 + nubeEn(x * 2.3 + 500, y * 2.3) * .35);
+      campo[j * gw + i] = 1 - Math.exp(-sum * (esc.ganancia || 1.4));
+    }
+    // 2) LUT de color
+    var N = 512, lut = new Uint8ClampedArray(N * 3);
+    for (var n = 0; n < N; n++) { var c = mezcla(esc.lut, n / (N - 1)); lut[n * 3] = c[0]; lut[n * 3 + 1] = c[1]; lut[n * 3 + 2] = c[2]; }
+    // 3) píxel a píxel: campo interpolado + grano de aerógrafo
+    var d = new Uint8ClampedArray(cw * ch * 4), r = rng(esc.semilla || 7), G = esc.grano, gb = esc.granoFondo || 0;
+    // grano de punto fino: una partícula ocupa ~1 px CSS
+    var gs = Math.max(1, Math.round(q * (esc.punto || 1))), nw = Math.ceil(cw / gs) + 1, nh = Math.ceil(ch / gs) + 1, ruido = new Float32Array(nw * nh);
+    for (var z = 0; z < ruido.length; z++) ruido[z] = r() + r() - 1;
+    for (var py = 0; py < ch; py++) {
+      var fy = py / q / st, j0 = fy | 0, ty = fy - j0;
+      for (var px = 0; px < cw; px++) {
+        var fx = px / q / st, i0 = fx | 0, tx = fx - i0, o = j0 * gw + i0;
+        var t = (campo[o] * (1 - tx) + campo[o + 1] * tx) * (1 - ty) + (campo[o + gw] * (1 - tx) + campo[o + gw + 1] * tx) * ty;
+        var nn = ruido[((py / gs) | 0) * nw + ((px / gs) | 0)] * .8 + (r() - .5) * .4;
+        t += nn * (G * (t * (1 - t) * 2.6 + t * .25) + gb);
+        t = t < 0 ? 0 : t > 1 ? 1 : t;
+        var li = (t * (N - 1)) | 0, p = (py * cw + px) * 4;
+        d[p] = lut[li * 3]; d[p + 1] = lut[li * 3 + 1]; d[p + 2] = lut[li * 3 + 2]; d[p + 3] = 255;
+      }
+    }
+    return { w: cw, h: ch, px: d };
+  }
+  
+  function mx(a, b, k) { return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k]; }
+
+  // ---------- VERSIÓN A: anillos y lazos azules con grano de aerógrafo (ref. 18) ----------
+  var lutA = [[0,[242,243,247]],[.16,[226,232,246]],[.38,[188,204,241]],[.6,[136,163,237]],[.8,[84,120,237]],[1,[34,82,244]]];
+  var portadaA = [
+    { t:'mancha', x:.3, y:.25, rx:.5, ry:.4, s:.3, a:.22, n:0 },
+    { t:'mancha', x:.8, y:.8, rx:.4, ry:.3, s:.25, a:.18, n:0 },
+    { t:'anillo', x:.60, y:.37, rx:.46, ry:.30, rot:-.12, s:.08, a:.75, v:.45, vf:2.4, v2:.25, vf2:1, w:[[.1,1],[.05,2]] },
+    { t:'anillo', x:.47, y:.71, rx:.56, ry:.38, rot:.15, s:.095, a:.85, v:.35, vf:-1.2, v2:.3, vf2:2.5, w:[[.12,.4],[.04,1.6]] },
+    { t:'anillo', x:.60, y:.53, rx:.22, ry:.08, rot:.12, s:.04, a:.55, v:.6, vf:.5 },
+    { t:'anillo', x:.02, y:.16, rx:.24, ry:.36, rot:.1, s:.075, a:.7, v:.4, vf:1.6 },
+    { t:'anillo', x:-.25, y:.40, rx:.42, ry:.62, rot:.08, s:.10, a:.55, v:.5, vf:0, v2:.3 },
+    { t:'anillo', x:.36, y:-.06, rx:.14, ry:.22, rot:.35, s:.07, a:.6, v:.4, vf:1.6 },
+    { t:'anillo', x:.86, y:-.05, rx:.12, ry:.2, rot:-.35, s:.07, a:.5, v:.4, vf:2 },
+    { t:'anillo', x:1.2, y:.58, rx:.32, ry:.5, rot:-.1, s:.09, a:.45, v:.5, vf:3 },
+    { t:'mancha', x:.22, y:.6, rx:.06, ry:.05, s:.05, a:.35, n:0 },
+    { t:'mancha', x:.82, y:.6, rx:.06, ry:.05, s:.05, a:.3, n:0 }
+  ];
+  // Composiciones de las secciones: [x, y, rx, ry, giro] de cada anillo; el resto sale de la semilla
+  var planA = [
+    null,
+    [[.92,.22,.42,.3,.3],[.1,.78,.5,.34,-.2],[.62,.62,.2,.08,.1]],
+    [[.18,.3,.48,.36,-.3],[.9,.82,.4,.46,.2],[.5,.5,.18,.07,0]],
+    [[.75,.4,.55,.42,.15],[-.05,.9,.36,.3,.4],[.15,.12,.2,.14,-.4]],
+    [[.3,.62,.5,.4,.25],[1.05,.15,.38,.3,-.2],[.72,.86,.22,.09,.2]],
+    [[.95,.5,.42,.55,0],[.12,.2,.34,.24,.5],[.3,.85,.4,.22,-.1]],
+    [[.5,.28,.62,.3,-.08],[.5,.82,.55,.3,.1],[-.1,.55,.3,.4,.2]],
+    [[.08,.45,.46,.5,.1],[.88,.25,.3,.22,-.4],[.7,.8,.34,.18,.3]],
+    [[.65,.7,.5,.36,-.2],[.2,.2,.42,.26,.25],[1.1,.3,.3,.4,0]],
+    [[.4,.4,.6,.45,.4],[.9,.9,.3,.2,-.2],[.05,.05,.3,.2,0]],
+    [[.85,.6,.46,.4,-.3],[.15,.32,.32,.4,.2],[.5,.08,.3,.12,.1]],
+    [[.3,.5,.5,.55,0],[.9,.18,.3,.25,.3],[.75,.85,.3,.16,-.2]],
+    [[.6,.3,.5,.3,.2],[.35,.75,.58,.34,-.15],[.62,.53,.2,.07,.1]],
+    [[.1,.65,.5,.42,-.1],[.85,.3,.42,.32,.2],[.5,.95,.3,.15,0]],
+    [[.55,.45,.6,.4,.1],[-.1,.1,.3,.3,0],[1.05,.92,.3,.3,0]]
+  ];
+  function escenaA(i) {
+    var formas;
+    if (i === 0) formas = portadaA;
+    else {
+      var r = rng(101 + i * 17), p = planA[i];
+      formas = [
+        { t:'mancha', x:r(), y:r(), rx:.5, ry:.4, s:.3, a:.18, n:0 },
+        { t:'mancha', x:r(), y:r(), rx:.4, ry:.3, s:.25, a:.14, n:0 }
+      ];
+      p.forEach(function (q, k) {
+        formas.push({ t:'anillo', x:q[0], y:q[1], rx:q[2], ry:q[3], rot:q[4], s: q[2] < .25 ? .05 : .1 + r() * .03,
+          a: (k === 0 ? .7 : .58) + r() * .12, v:.55 + r() * .25, vf:r() * 6.3, v2:.25 + r() * .15, vf2:r() * 6.3, w:[[.1 + r() * .08, r() * 6], [.05 + r() * .04, r() * 6]] });
+        // un segundo trazo pegado al primero, como en el aerógrafo
+        if (q[2] >= .25) formas.push({ t:'anillo', x:q[0] + (r() - .5) * .12, y:q[1] + (r() - .5) * .08, rx:q[2] * (.75 + r() * .2), ry:q[3] * (.8 + r() * .3), rot:q[4] + (r() - .5), s:.09, a:.3 + r() * .15, v:.8, vf:r() * 6.3, w:[[.12, r() * 6]] });
+      });
+    }
+    return { lut: lutA, grano: .17, granoFondo: .045, ganancia: i === 0 ? 1.05 : .7, punto: 1, nube: .7, semilla: 11 + i, formas: formas };
+  }
+
+  // ---------- VERSIÓN B: manchas azules con núcleo oscuro que se oscurecen al bajar (ref. 14 → 23–25) ----------
+  function lutB(bg, core) {
+    var oscuro = (bg[0] + bg[1] + bg[2]) / 3 < 100;
+    if (oscuro) return [[0, bg], [.12, mx(bg, [16, 34, 130], .45)], [.3, [20, 48, 178]], [.5, [22, 54, 196]], [.64, [14, 34, 140]], [.76, [6, 14, 62]], [.88, [3, 4, 16]], [1, core]];
+    return [[0, bg], [.18, mx(bg, [190, 192, 255], .6)], [.4, [112, 118, 252]], [.58, [44, 52, 226]], [.68, [36, 44, 214]], [.78, mx([22, 28, 170], core, .35)], [.92, mx([16, 20, 128], core, .7)], [1, core]];
+  }
+  // fondo de cada sección: claro al principio, oscuro desde la 7
+  // fondo de cada sección: blanco en la portada, gris claro en el test y, desde perfiles, cada vez más oscuro (de azul noche a casi negro)
+  var fondosB = [[252,252,254],[246,247,250],[236,238,244],
+                 [30,34,56],[26,29,50],[23,26,44],[20,22,39],[17,19,34],[15,16,30],[13,14,26],[11,12,22],[9,10,18],[8,8,15],[6,6,12],[5,5,9]];
+  var OSCURO_DESDE = 3;
+  // [x, y, rx, ry, giro, intensidad]
+  var planB = [
+    null,
+    [[1.22,-.02,.42,.36,.3,1.5],[-.2,1.04,.36,.3,0,1.3]],
+    [[-.22,.12,.4,.36,.2,1.4],[1.2,.95,.34,.3,0,1.3]],
+    [[.72,.3,.5,.42,.3,1.6],[.08,.9,.14,.1,0,.9]],
+    [[.25,.62,.55,.45,-.2,1.7],[.95,.08,.22,.18,0,1]],
+    [[.85,.5,.48,.46,.1,1.7],[.1,.12,.26,.2,0,1.1]],
+    [[.5,1.05,.72,.38,0,1.8],[.15,.2,.3,.25,0,1.2]],
+    [[.65,.42,.55,.48,.4,1.7],[.1,.85,.12,.09,0,.9]],
+    [[.25,.6,.6,.5,-.2,1.8],[.9,.12,.2,.16,0,1]],
+    [[.8,.35,.5,.45,.1,1.7],[.15,.92,.3,.2,0,1.2]],
+    [[.5,.45,.72,.58,0,2.0]],
+    [[.2,.3,.5,.45,.3,1.7],[.95,.85,.35,.3,0,1.4]],
+    [[.7,.65,.62,.5,-.2,1.9],[.1,.08,.2,.15,0,1]],
+    [[.5,.4,.7,.6,0,2.0],[.85,.95,.2,.12,0,.9]],
+    [[.4,.55,.75,.6,.2,2.0]]
+  ];
+  function escenaB(i) {
+    var bg = fondosB[i], oscuro = i >= OSCURO_DESDE;
+    var core = oscuro ? [2, 2, 5] : mx([14, 18, 112], [10, 13, 84], i / 2);
+    var formas;
+    if (i === 0) formas = [
+      { t:'mancha', x:.56, y:.47, rx:.56, ry:.44, rot:.5, s:.22, a:1.6, n:.3, w:[[.1,.5],[.06,2]] },
+      { t:'mancha', x:.22, y:.46, rx:.3, ry:.22, rot:.2, s:.16, a:1.0, n:.2 },
+      { t:'mancha', x:.5, y:.66, rx:.28, ry:.2, rot:.2, s:.17, a:.9, n:.15 },
+      { t:'mancha', x:.18, y:.8, rx:.07, ry:.045, s:.07, a:.75, n:0 },
+      { t:'mancha', x:.1, y:.62, rx:.16, ry:.12, rot:.2, s:.14, a:.8, n:.1 },
+      { t:'mancha', x:.3, y:.18, rx:.5, ry:.3, s:.3, a:.35, n:0 }
+    ];
+    else {
+      var r = rng(301 + i * 13);
+      formas = planB[i].map(function (q) { return { t:'mancha', x:q[0], y:q[1], rx:q[2], ry:q[3], rot:q[4], s: oscuro ? .26 + q[2] * .16 : .17 + q[2] * .12, a:q[5] * (oscuro ? 1.7 : 1), n:oscuro ? .1 : .25, w:[[.06 + r() * .06, r() * 6], [.03 + r() * .04, r() * 6]] }; });
+      // en lo oscuro, cada mancha deja un resplandor azul amplio alrededor (ref. 24 y 25)
+      if (oscuro) planB[i].forEach(function (q) { formas.push({ t:'mancha', x:q[0], y:q[1], rx:q[2] * 1.5, ry:q[3] * 1.5, rot:q[4], s:.32, a:.4, n:0 }); });
+      formas.push({ t:'mancha', x:r(), y:r(), rx:.5, ry:.4, s:.3, a:oscuro ? .15 : .22, n:0 });
+    }
+    return { lut: lutB(bg, core), grano: oscuro ? .09 : .07, granoFondo: oscuro ? .03 : .015, ganancia: 1, punto: 1, nube: .2, semilla: 21 + i, formas: formas, oscuro: oscuro, bg: bg };
+  }
+  
+
+  return { datos: datos, escena: function (v, i) { return v === 'b' ? escenaB(i) : escenaA(i); }, total: 15 };
+}
+/* Fondo continuo: cada sección tiene su escena; al bajar, una escena se funde con la siguiente (solo opacity y transform). */
+(function () {
+  var raiz = document.documentElement, v = raiz.getAttribute('data-fondo') === 'b' ? 'b' : 'a';
+  var cont = document.getElementById('fondo'); if (!cont || !window.Uint8ClampedArray) return;
+  var secs = Array.prototype.slice.call(document.querySelectorAll('.sec[data-n]'));
+  var quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var M = motorFondo(), total = Math.min(M.total, secs.length);
+  var W = 0, H = 0, Q = 1, gen = 0, cache = {}, pedidos = {}, worker = null;
+
+  try {
+    var src = 'var M=(' + motorFondo.toString() + ')();onmessage=function(e){var d=e.data,r=M.datos(M.escena(d.v,d.i),d.W,d.H,d.q);postMessage({i:d.i,gen:d.gen,w:r.w,h:r.h,px:r.px.buffer},[r.px.buffer]);};';
+    worker = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
+    worker.onmessage = function (e) { recibe(e.data.i, e.data.gen, e.data.w, e.data.h, new Uint8ClampedArray(e.data.px)); };
+    worker.onerror = function () { worker = null; pedidos = {}; actualiza(); };
+  } catch (e) { worker = null; }
+
+  function medidas() {
+    var w = cont.clientWidth, h = cont.clientHeight;
+    if (w === W && Math.abs(h - H) < 120) return false;
+    W = w; H = h;
+    Q = Math.max(1, Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(1.4e6 / (W * H))));
+    gen++; for (var k in cache) cache[k].remove(); cache = {}; pedidos = {};
+    return true;
+  }
+  function recibe(i, g, w, h, px) {
+    if (g !== gen) return;
+    var c = document.createElement('canvas'); c.width = w; c.height = h;
+    c.getContext('2d').putImageData(new ImageData(px, w, h), 0, 0);
+    c.style.opacity = 0; cont.appendChild(c); cache[i] = c; delete pedidos[i];
+    if (!cont.classList.contains('listo')) cont.classList.add('listo');
+    actualiza();
+  }
+  function pide(i) {
+    if (i < 0 || i >= total || cache[i] || pedidos[i]) return;
+    pedidos[i] = true;
+    var g = gen;
+    if (worker) worker.postMessage({ v: v, i: i, W: W, H: H, q: Q, gen: g });
+    else setTimeout(function () { if (g !== gen) return; var r = M.datos(M.escena(v, i), W, H, Q); recibe(i, g, r.w, r.h, r.px); }, 30);
+  }
+  // Posiciones de las secciones (se recalculan si cambia la altura de la página)
+  var tops = [];
+  function mide() { var y = window.pageYOffset; tops = secs.map(function (s) { return s.getBoundingClientRect().top + y; }); }
+  var pend = false;
+  function actualiza() {
+    pend = false;
+    var y = window.pageYOffset, vh = window.innerHeight, k = 0;
+    for (var i = 1; i < total; i++) if (tops[i] <= y + vh) k = i;
+    var f = k === 0 ? 1 : Math.min(1, Math.max(0, (y + vh - tops[k]) / vh));
+    var abajo = f >= 1 ? k : k - 1, arriba = f >= 1 ? -1 : k;
+    pide(abajo); pide(arriba); pide(k + 1); pide(abajo - 1);
+    // limpia lo que queda lejos
+    for (var c in cache) if (Math.abs(c - k) > 2) { cache[c].remove(); delete cache[c]; }
+    for (var j in cache) {
+      var el = cache[j], n = +j, o = 0, t = '';
+      if (n === abajo) { o = 1; t = quieto ? '' : 'translate3d(0,' + (-2.5 * (arriba < 0 ? 0 : f)) + '%,0) scale(' + (1.04 + .05 * (arriba < 0 ? 0 : f)) + ')'; }
+      else if (n === arriba) { o = cache[abajo] ? f : 1; t = quieto ? '' : 'translate3d(0,' + (2.5 * (1 - f)) + '%,0) scale(' + (1.09 - .05 * f) + ')'; }
+      el.style.opacity = o; el.style.transform = t; el.style.zIndex = n === arriba ? 2 : 1;
+    }
+    // tono de la barra según la sección que hay debajo
+    var actual = f > .5 ? k : Math.max(0, k - 1);
+    raiz.classList.toggle('barra-osc', !!(secs[actual] && secs[actual].classList.contains('osc-b') && v === 'b'));
+  }
+  function alScroll() { if (!pend) { pend = true; requestAnimationFrame(actualiza); } }
+  function todo() { medidas(); mide(); actualiza(); }
+  todo();
+  addEventListener('scroll', alScroll, { passive: true });
+  var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(todo, 200); });
+  if ('ResizeObserver' in window) new ResizeObserver(function () { mide(); alScroll(); }).observe(document.body);
+  else setInterval(function () { mide(); }, 1500);
+})();
+</script>
+<!-- Animación sencilla: GSAP + ScrollTrigger. Si no cargan, la página se lee igual. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
@@ -1433,247 +1495,40 @@ svg[id^="gra"] { max-width: 720px; }
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ ignoreMobileResize: true });
-  var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
-  var root = document.documentElement;
-  var OUT = 'expo.out', IO = 'power3.inOut';
-  var mm = gsap.matchMedia();
+  var mm = gsap.matchMedia(), E = 'power2.out';
 
   mm.add('(prefers-reduced-motion: no-preference)', function () {
-    root.classList.add('anim');
+    // Portada: el título y la frase entran suaves
+    gsap.from('#titulo .l > span', { y: 28, opacity: 0, duration: 1, ease: E, stagger: .1, delay: .1 });
+    gsap.from('.portada .respuesta, .portada .tec, .portada .pie', { opacity: 0, duration: 1, ease: E, delay: .6 });
 
-    // Al entrar en pantalla (una vez). Los nodos se buscan en ese momento, así sirven también para lo que se dibuja con JS.
-    function alEntrar(trigger, fn, start) {
-      if (!trigger) return;
-      ScrollTrigger.create({ trigger: trigger, start: start || 'top 88%', once: true, onEnter: function () { fn(trigger); } });
-    }
+    // Textos y bloques: suben un poco y aparecen, en el orden en que llegan
+    var lista = ':not(ul):not(ol):not(.cifras):not(.desc-perfiles):not(.tipos-prof):not(.recos):not(.dos-col):not(.dos-listas)';
+    var piezas = $$('.sec:not(.portada) .wrap > ' + lista + ', .dos-col > ' + lista + ', .dos-listas > *, .hallazgos > li, .pasos > li, .cifras > div, .desc-perfiles > article, .tipos-prof > .grupo, .recos > .reco, .semaforo > li');
+    gsap.set(piezas, { opacity: 0, y: 22 });
+    ScrollTrigger.batch(piezas, { start: 'top 90%', once: true, onEnter: function (b) { gsap.to(b, { opacity: 1, y: 0, duration: .9, ease: E, stagger: .07, overwrite: true }); } });
 
-    // ---------- Portada ----------
-    var tl = gsap.timeline({ defaults: { ease: OUT } });
-    tl.from('#titulo .l > span', { clipPath: 'inset(0 100% 0 0)', duration: 1.6, stagger: .14 })
-      .from('#titulo em', { yPercent: 30, opacity: 0, duration: 1.1, stagger: .2 }, .35)
-      .from('.portada .respuesta', { y: 18, opacity: 0, duration: 1.1 }, .9)
-      .from('.portada .tec, .portada .pie', { opacity: 0, duration: 1.1 }, 1.1)
-      .from('.portada .bg .blob', { scale: .7, opacity: 0, duration: 1.6, stagger: .15 }, 0);
-    var mira = $('#miraPortada');
-    if (mira) {
-      gsap.to(mira, { y: 8, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-      // La mira cae con el scroll...
-      gsap.to(mira.parentNode, { y: function () { return innerHeight * .5; }, opacity: 0, rotate: 90, ease: 'none',
-        scrollTrigger: { trigger: '.portada', start: 'top top', end: 'bottom 30%', scrub: true } });
-    }
-    // ...y se convierte en las cruces de los hallazgos (y del resto de listas)
-    $$('.hallazgos').forEach(function (ul) {
-      gsap.from($$('li > .cruz, li > .siete', ul), { scale: 0, rotate: -90, duration: .6, ease: OUT, stagger: .08,
-        scrollTrigger: { trigger: ul, start: 'top 85%', once: true } });
-      gsap.from($$('li > p', ul), { x: 18, opacity: 0, duration: 1.1, ease: OUT, stagger: .08,
-        scrollTrigger: { trigger: ul, start: 'top 85%', once: true } });
-    });
+    // Gráficos: se construyen al entrar, sin rebotes
+    function alEntrar(el, fn) { if (el) ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: function () { fn(el); } }); }
+    alEntrar(document.getElementById('graHabitos'), function (g) { gsap.from($$('circle', g), { opacity: 0, duration: .8, ease: E, stagger: .03, delay: .2 }); });
+    alEntrar(document.getElementById('graHerramientas'), function (g) { gsap.from($$('svg', g), { scale: .6, opacity: 0, duration: 1, ease: E, stagger: .06 }); });
+    $$('.piruletas').forEach(function (u) { alEntrar(u, function () { gsap.from($$('.pista i', u), { scaleX: 0, duration: 1.1, ease: E, stagger: .06 }); }); });
+    alEntrar(document.getElementById('graFrecuencia'), function (g) { gsap.from($$(':scope > *', g), { opacity: 0, duration: .9, ease: E, stagger: .03 }); });
+    alEntrar(document.getElementById('graPesas'), function (g) { gsap.from($$('.pesa', g), { opacity: 0, x: -10, duration: .9, ease: E, stagger: .08 }); });
+    alEntrar(document.getElementById('graMariposa'), function (g) { gsap.from($$('.lado i', g), { scaleX: 0, duration: 1, ease: E, stagger: .04 }); });
+    alEntrar(document.getElementById('graMedidores'), function (g) { gsap.from($$('.casillas i', g), { opacity: 0, duration: .6, ease: E, stagger: .02 }); });
+    alEntrar(document.getElementById('graColumnas'), function (g) { gsap.from($$('i', g), { scaleY: 0, transformOrigin: '50% 100%', duration: 1.1, ease: E, stagger: .1 }); });
+    alEntrar(document.getElementById('graMapa'), function (g) { gsap.from($$('.z', g), { opacity: 0, duration: .8, ease: E, stagger: .03 }); });
+    alEntrar(document.getElementById('graReticulas'), function (g) { gsap.from($$('i.on', g), { opacity: 0, duration: .5, ease: E, stagger: { amount: .8 } }); });
+    alEntrar(document.getElementById('graDelega'), function (g) { gsap.from($$('i', g), { scaleY: 0, duration: 1.1, ease: E, stagger: .08 }); });
 
-    // ---------- Títulos: voz alta se destapa, voz baja sube línea a línea ----------
-    $$('h2.h-alta').forEach(function (h) {
-      gsap.from(h, { clipPath: 'inset(-10% 100% -10% 0)', duration: 1.1, ease: OUT, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
-    });
-    function partePalabras(el) {
-      $$('*', el).concat([el]).forEach(function (n) {
-        Array.prototype.slice.call(n.childNodes).forEach(function (t) {
-          if (t.nodeType !== 3 || !t.textContent.trim()) return;
-          var frag = document.createDocumentFragment();
-          t.textContent.split(/(\s+)/).forEach(function (w) {
-            if (!w) return;
-            if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); return; }
-            var s = document.createElement('span'); s.className = 'pal'; s.textContent = w; frag.appendChild(s);
-          });
-          n.replaceChild(frag, t);
-        });
-      });
-      return $$('.pal', el);
-    }
-    $$('h2.h-baja').forEach(function (h) {
-      var pals = partePalabras(h);
-      alEntrar(h, function () {
-        var tops = [], idx = pals.map(function (p) { var t = Math.round(p.offsetTop); if (tops.indexOf(t) < 0) tops.push(t); return tops.indexOf(t); });
-        pals.forEach(function (p, i) { gsap.from(p, { yPercent: 70, opacity: 0, duration: 1.1, ease: OUT, delay: idx[i] * .12 }); });
-      }, 'top 90%');
-    });
-
-    // ---------- Cifras que cuentan ----------
-    $$('[data-cuenta]').forEach(function (el) {
-      var txt = el.textContent, m = txt.match(/-?\d+(?:,\d+)?/); if (!m) return;
-      var fin = parseFloat(m[0].replace(',', '.')), dec = (m[0].split(',')[1] || '').length, o = { v: 0 };
-      alEntrar(el, function () {
-        gsap.to(o, { v: fin, duration: 1.6, ease: OUT, onUpdate: function () { el.textContent = txt.replace(m[0], o.v.toFixed(dec).replace('.', ',')); } });
-        gsap.from(el, { yPercent: 25, opacity: 0, duration: 1.1, ease: OUT });
-      });
-    });
-    $$('.cifras').forEach(function (c) { gsap.from($$(':scope > div', c), { '--b': 0, opacity: 0, y: 20, duration: 1.1, ease: OUT, stagger: .1, scrollTrigger: { trigger: c, start: 'top 88%', once: true } }); });
-
-    // ---------- Bloques azules: se destapan de izquierda a derecha ----------
-    $$('.bloque').forEach(function (b) {
-      gsap.from(b, { clipPath: 'inset(0 100% 0 0)', duration: 1.1, ease: IO, scrollTrigger: { trigger: b, start: 'top 85%', once: true } });
-      gsap.from(b.children, { opacity: 0, x: -12, duration: .6, ease: OUT, delay: .6, scrollTrigger: { trigger: b, start: 'top 85%', once: true } });
-    });
-    $$('.pasos').forEach(function (p) { gsap.from($$('li', p), { opacity: 0, x: -16, duration: 1.1, ease: OUT, stagger: .08, scrollTrigger: { trigger: p, start: 'top 85%', once: true } }); });
-
-    // ---------- Manchas de luz: se mueven con el scroll (solo transform) ----------
-    $$('.sec').forEach(function (s) {
-      var bl = $$('.bg .blob', s); if (!bl.length || s.classList.contains('portada')) return;
-      bl.forEach(function (b, i) { gsap.fromTo(b, { yPercent: i % 2 ? 10 : -10 }, { yPercent: i % 2 ? -10 : 10, ease: 'none', scrollTrigger: { trigger: s, start: 'top bottom', end: 'bottom top', scrub: true } }); });
-    });
-
-    // ---------- 02 Test: las cruces se abren en las cuatro esquinas ----------
-    var quiz = $('#quiz');
-    if (quiz) {
-      gsap.fromTo(quiz, { '--o': '-36px' }, { '--o': '0px', duration: 1.1, ease: OUT, scrollTrigger: { trigger: quiz, start: 'top 80%', once: true } });
-      gsap.from(quiz, { opacity: 0, duration: .6, scrollTrigger: { trigger: quiz, start: 'top 80%', once: true } });
-    }
-    window.__entraPaso = function (paso) {
-      gsap.from(paso.querySelector('h3'), { y: 18, opacity: 0, duration: .6, ease: OUT });
-      gsap.from(paso.querySelectorAll('.qops button'), { x: 16, opacity: 0, duration: .6, ease: OUT, stagger: .05 });
-    };
-    window.__resultado = function (out, iua) {
-      var n = out.querySelector('.grande .n'), o = { v: 0 };
-      if (n) gsap.to(o, { v: iua, duration: 1.6, ease: OUT, onUpdate: function () { n.textContent = Math.round(o.v); } });
-      var tu = out.querySelector('.regla .m.tu');
-      if (tu) gsap.from(tu, { x: function () { return -tu.parentNode.clientWidth * iua / 100; }, duration: 1.6, ease: OUT });
-      gsap.from(out.querySelectorAll('.perfil em'), { clipPath: 'inset(0 100% 0 0)', duration: 1.1, ease: OUT, delay: .5 });
-      gsap.from(out.querySelectorAll('.perfil ~ p, .otra'), { opacity: 0, y: 12, duration: .6, ease: OUT, stagger: .08, delay: .8 });
-    };
-
-    // ---------- 03 Perfiles · Momento 1: siluetas fijadas, el enfoque las recorre ----------
-    var escena = $('#escenaPerfiles'), enf = $('#enfoque'), sils = $$('#siluetas .sil'), descs = $$('.desc-perfiles article');
-    if (escena && enf && sils.length === 3) {
-      gsap.set(descs.slice(1), { autoAlpha: 0, y: 24 });
-      gsap.set(sils.slice(1), { opacity: .45 });
-      var tp = gsap.timeline({ defaults: { ease: IO, duration: 1 },
-        scrollTrigger: { trigger: escena, start: 'top top', end: '+=180%', pin: true, scrub: .6, anticipatePin: 1, invalidateOnRefresh: true } });
-      tp.from(enf, { scale: 1.25, opacity: 0, duration: .6 })
-        .to({}, { duration: .5 });
-      [1, 2].forEach(function (k) {
-        tp.to(enf, { xPercent: 100 * k })
-          .to(sils[k - 1], { opacity: .45 }, '<')
-          .to(sils[k], { opacity: 1 }, '<')
-          .to(descs[k - 1], { autoAlpha: 0, y: -24, duration: .5 }, '<')
-          .to(descs[k], { autoAlpha: 1, y: 0, duration: .5 }, '<.4')
-          .to({}, { duration: .5 });
-      });
-    }
-    var hab = $('#graHabitos');
-    alEntrar(hab, function () {
-      gsap.from($$('line', hab), { scaleX: 0, transformOrigin: '0 50%', duration: 1.1, ease: OUT, stagger: .05 });
-      gsap.from($$('circle', hab), { scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box', duration: .6, ease: 'back.out(2)', stagger: .04, delay: .4 });
-    });
-
-    // ---------- 04 Uso: burbujas y piruletas; la mancha baja hasta "Cómo" ----------
-    alEntrar($('#graHerramientas'), function (h) { gsap.from($$('svg', h), { scale: 0, duration: 1.1, ease: 'back.out(1.4)', stagger: .07 }); gsap.from($$('.v, .nom', h), { opacity: 0, duration: .6, stagger: .04, delay: .4 }); });
-    $$('.piruletas').forEach(function (u) { alEntrar(u, function () { gsap.from($$('.pista i', u), { scaleX: 0, duration: 1.1, ease: OUT, stagger: .07 }); }); });
-    var mancha = $('#manchaUso');
-    if (mancha) gsap.to(mancha, { y: function () { return innerHeight * .9; }, ease: 'none', scrollTrigger: { trigger: '#uso', start: 'center center', end: 'bottom top', scrub: true } });
-    var manchaComo = $('.como .bg .blob.a');
-    if (manchaComo) gsap.from(manchaComo, { y: function () { return -innerHeight * .6; }, scale: .6, ease: 'none', scrollTrigger: { trigger: '#como', start: 'top bottom', end: 'top top', scrub: true } });
-
-    // ---------- 05 Cómo: el eje 0–100 crece... ----------
-    var fr = $('#graFrecuencia');
-    alEntrar(fr, function () {
-      gsap.from('#ejeFrec', { scaleY: 0, transformOrigin: '50% 100%', duration: 1.6, ease: OUT });
-      gsap.from($$(':scope > g, :scope > circle, :scope > path', fr), { opacity: 0, x: -14, duration: 1.1, ease: OUT, stagger: .1, delay: .5 });
-    });
-    // ---------- 06 Brecha: ...y se alarga como eje de las pesas ----------
-    var pe = $('#graPesas');
-    alEntrar(pe, function () {
-      gsap.from('#ejePesas', { scaleX: 0, transformOrigin: '0 50%', duration: 1.6, ease: OUT });
-      $$('.pesa', pe).forEach(function (g, i) {
-        var l = $('line', g), c = $$('circle', g);
-        if (l) gsap.from(l, { scaleX: 0, transformOrigin: '0 50%', transformBox: 'fill-box', duration: 1.1, ease: OUT, delay: .3 + i * .1 });
-        gsap.from(c, { scale: 0, transformOrigin: '50% 50%', transformBox: 'fill-box', duration: .6, ease: 'back.out(2)', delay: .3 + i * .1, stagger: .25 });
-        gsap.from($$('text', g), { opacity: 0, duration: .6, delay: .5 + i * .1 });
-      });
-    });
-    // Momento 2: sillas que se llenan al destapar la respuesta
-    window.__alDestapar = function (ans) {
-      if (!ans) return;
-      $$('.asientos', ans).forEach(function (a, i) { gsap.from($$('svg', a), { y: 14, opacity: 0, duration: .6, ease: OUT, stagger: .04, delay: i * .25 }); });
-      gsap.from($$('.fila p, .bloque, .pendientes, .leyenda', ans), { opacity: 0, y: 14, duration: 1.1, ease: OUT, stagger: .12 });
-      var pend = $('#graPendientes', ans) || (ans.id === 'graPendientes' ? ans : null);
-      if (pend) $$('.trazo', pend).forEach(function (t, i) {
-        var L = t.getTotalLength ? t.getTotalLength() : 220;
-        gsap.fromTo(t, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.6, ease: OUT, delay: .2 + i * .2 });
-      });
-    };
-
-    // ---------- 07 Evaluación: mariposa ----------
-    alEntrar($('#graMariposa'), function (m) { $$('.fila', m).forEach(function (f, i) { gsap.from($$('.lado i', f), { scaleX: 0, duration: 1.1, ease: OUT, delay: i * .08 }); }); });
-
-    // ---------- 08 Competencias: medidores, columnas y Momento 3 (cartón rasgado) ----------
-    alEntrar($('#graMedidores'), function (m) { $$('.casillas', m).forEach(function (c, i) { gsap.from($$('i', c), { opacity: 0, scaleY: .2, duration: .6, ease: OUT, stagger: .05, delay: i * .2 }); }); });
-    alEntrar($('#graColumnas'), function (m) { gsap.from($$('i', m), { scaleY: 0, transformOrigin: '50% 100%', duration: 1.6, ease: OUT, stagger: .12 }); gsap.from($$('b', m), { opacity: 0, y: 10, duration: .6, delay: .6, stagger: .12 }); });
-    var carton = $('#carton'), trozo = $('#trozo');
-    if (carton && trozo) {
-      gsap.set(trozo, { opacity: 1 });
-      var tc = gsap.timeline({ scrollTrigger: { trigger: carton, start: 'top 70%', once: true } });
-      tc.to(trozo, { x: 70, y: -50, rotate: 16, transformOrigin: '80% 20%', duration: 1.1, ease: 'power3.in' })
-        .to(trozo, { opacity: 0, duration: .3 }, '-=.3')
-        .from('#carton .papel p', { scale: .94, opacity: 0, duration: 1.1, ease: OUT }, '-=.2');
-    }
-
-    // ---------- 09 Mapa: bloques que entran por grupos y se pliegan al salir ----------
-    var mapa = $('#graMapa');
-    alEntrar(mapa, function () { ['v', 'a', 'r'].forEach(function (g, i) { gsap.from($$('.z.' + g, mapa), { opacity: 0, scale: .92, duration: 1.1, ease: OUT, stagger: .04, delay: i * .25 }); }); });
-    if (mapa) gsap.to(mapa, { rotateX: 55, opacity: .25, transformPerspective: 900, transformOrigin: '50% 0%', ease: 'none',
-      scrollTrigger: { trigger: mapa, start: 'bottom 35%', end: 'bottom -10%', scrub: true } });
-    $$('.semaforo').forEach(function (s) { alEntrar(s, function () { gsap.from($$('i', s), { scale: 0, duration: .6, ease: 'back.out(2)', stagger: .06 }); }); });
-
-    // ---------- 10 Experimento 1 · Momento 4: la revista se abre ----------
-    var rev = $('#revista'), izq = $('#pagIzq'), ab = $('#abierta');
-    if (rev && izq && ab) {
-      var tr = gsap.timeline({ scrollTrigger: { trigger: rev, start: 'top 85%', end: 'center 50%', scrub: .8 } });
-      tr.from(ab, { rotateX: 48, rotateZ: -12, scale: .8, y: 60, ease: 'none' })
-        .from(izq, { rotateY: -178, ease: 'none' }, 0);
-    }
-    var halo = $('.experimento .bg .halo');
-    if (halo) gsap.from(halo, { scale: .5, opacity: 0, ease: 'none', scrollTrigger: { trigger: '#experimento', start: 'top bottom', end: 'top top', scrub: true } });
-    alEntrar($('#graReticulas'), function (h) { $$('.rej', h).forEach(function (r, i) { gsap.from($$('i.on', r), { opacity: 0, scale: .3, duration: .6, ease: OUT, stagger: { amount: .9 }, delay: i * .15 }); }); });
-
-    // ---------- 11 Profesores: cabezas punteadas → puntos de 7 ----------
-    alEntrar($('#cabezas'), function (c) { gsap.from($$('.caras svg', c), { y: 24, opacity: 0, duration: 1.1, ease: OUT, stagger: .08 }); });
-    $$('.siete').forEach(function (s) { alEntrar(s, function () { gsap.from($$('i', s), { scale: 0, duration: .6, ease: 'back.out(2)', stagger: .05 }); }); });
-
-    // ---------- 12 Experimento 2: columnas ----------
-    alEntrar($('#graDelega'), function (m) { gsap.from($$('i', m), { scaleY: 0, duration: 1.6, ease: OUT, stagger: .1 }); gsap.from($$('b', m), { opacity: 0, duration: .6, delay: .6, stagger: .1 }); });
-
-    // ---------- 13 Recomendaciones · Momento 5: el cartel se enciende ----------
-    var pant = $('#pantalla');
-    if (pant) {
-      var te = gsap.timeline({ scrollTrigger: { trigger: pant, start: 'top 75%', once: true } });
-      te.from(pant, { opacity: 0, duration: .12 })
-        .to(pant, { opacity: .35, duration: .08 })
-        .to(pant, { opacity: 1, duration: .1 })
-        .to(pant, { opacity: .6, duration: .06 })
-        .to(pant, { opacity: 1, duration: .5 })
-        .from($$('.reco', pant), { y: 24, opacity: 0, duration: 1.1, ease: OUT, stagger: .15 }, '-=.3')
-        .from('#personas svg', { y: 60, opacity: 0, duration: 1.6, ease: OUT, stagger: .2 }, '-=1');
-    }
-
-    return function () { root.classList.remove('anim'); };
-  });
-
-  // Desplazamiento suave solo en ordenador
-  mm.add('(prefers-reduced-motion: no-preference) and (min-width: 1024px) and (pointer: fine)', function () {
-    var s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
-    var lenis;
-    s.onload = function () {
-      if (!window.Lenis) return;
-      lenis = new Lenis({ lerp: .12 });
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add(function (t) { lenis && lenis.raf(t * 1000); });
-      gsap.ticker.lagSmoothing(0);
-      document.querySelectorAll('a[href^="#"]').forEach(function (a) { a.addEventListener('click', function (e) { var id = a.getAttribute('href'); if (id.length < 2 || id.indexOf('#tema') === 0) return; var t = document.querySelector(id); if (t) { e.preventDefault(); lenis.scrollTo(t); } }); });
-    };
-    document.body.appendChild(s);
-    return function () { if (lenis) { lenis.destroy(); lenis = null; } };
+    window.__entraPaso = function (paso) { gsap.from(paso, { opacity: 0, y: 12, duration: .5, ease: E }); };
+    window.__resultado = function (out) { gsap.from(out.children, { opacity: 0, y: 14, duration: .7, ease: E, stagger: .08 }); };
+    window.__alDestapar = function (ans) { if (ans) gsap.from(ans, { opacity: 0, y: 14, duration: .7, ease: E }); };
   });
 })();
 </script>
+
 </body>
 </html>

@@ -1,24 +1,18 @@
-# Resumen del rediseño
+# Resumen de la web
 
-**Qué es:** la web de resultados rediseñada de arriba abajo según `ENCARGO.md`, con el mismo contenido y los mismos datos. Sigue siendo un solo `index.html`.
+**Qué es:** la web de resultados con el mismo contenido, test y gráficos, y los fondos rehechos (26 nov). Sigue siendo un solo `index.html`.
 
-**Cómo se ve**
-- Universo azul eléctrico sobre negro azulado (o sobre gris frío en el tema claro), con manchas de luz con grano, cruces finas, esquinas de selección y textos técnicos en las esquinas.
-- Dos voces tipográficas: Archivo cursiva + Playfair + Anton para los golpes; Inter Tight + Playfair para explicar; Geist para el texto.
-- Un hilo conductor, la mira (cruz y esquinas), que cae desde la portada, marca los hallazgos, enmarca el test y recorre las siluetas.
-- Cinco momentos: siluetas fijadas en perfiles, sillas en la pregunta rápida, cartón rasgado en competencias, revista que se abre en el experimento 1 y cartel luminoso con siluetas en las recomendaciones.
-- Un tipo de gráfico distinto en cada sección, dibujado a mano en SVG.
+**Fondos (dos versiones para elegir)**
+- `?fondo=a` (por defecto): anillos y lazos azules muy difuminados con grano de aerógrafo sobre blanco roto, como la referencia 18.
+- `?fondo=b`: manchas de azul ultramar con núcleo negro; empieza claro (ref. 14) y se oscurece al bajar hasta casi negro (ref. 23–25). Desde perfiles, el texto pasa a claro.
+- En las dos, el estampado cambia de posición, tamaño e intensidad en cada sección y se transforma suavemente al hacer scroll. Se pinta en canvas, una vez por sección, y solo se anima opacidad y posición.
 
-**Cómo verlo**
-- Abrir `index.html`. Tema: botón de la barra, `?tema=claro` o `?tema=oscuro`.
-- La calculadora del test funciona igual que antes (mismas frases, mismo índice y mismos perfiles).
+**Qué se ha quitado**
+- El interruptor de tema claro/oscuro, la revista, el cartón rasgado, el cartel con personas y las siluetas. Sus datos siguen, con el estilo del resto.
 
 **Comprobado**
-- Capturas a 390×844 y 1440 de todas las secciones, en los dos temas.
+- Capturas a 390×844, 1024 y 1440 de todas las secciones en las dos versiones, al lado de las referencias (parecido 9/10).
 - Sin desbordamiento horizontal ni errores en la consola.
-- Con movimiento reducido y con GSAP bloqueado, todo el contenido se ve.
 
 **Falta (fuera de esta web)**
-- Publicarla, poner la URL absoluta en `og:image` y generar el QR.
-
-Las decisiones y su porqué están en `DECISIONES.md`.
+- Elegir A o B, publicarla, poner la URL absoluta en `og:image` y generar el QR.
