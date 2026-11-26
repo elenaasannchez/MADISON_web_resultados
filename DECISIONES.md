@@ -4,7 +4,7 @@ Registro de lo que he decidido sin preguntar, y por qué. Ordenado por fases.
 
 ## Fondos nuevos (26 nov) — sustituye a lo que diga más abajo sobre temas, fondos y momentos
 
-- **Dos versiones, `?fondo=a` y `?fondo=b`**, en lugar de los temas claro y oscuro. A es la de por defecto porque es la que pidió “exactamente” como la referencia 18. En vistas previas que quitan los parámetros vale `#fondo-b`.
+- **Dos versiones, `?fondo=a` y `?fondo=b`**, en lugar de los temas claro y oscuro. La B es la de por defecto: la eligió Elena. En vistas previas que quitan los parámetros vale `#fondo-b`.
 - **Cómo se pinta:** canvas 2D. Cada forma (anillo o mancha) es un campo suave calculado en una rejilla pequeña; luego se pasa por un degradado de color y se le pone grano de 1 px más denso donde el azul es más fuerte. Se calcula en un worker cuando se puede y se guarda una imagen por sección. Al hacer scroll solo cambian la opacidad, la posición y la escala de las dos imágenes vecinas, así que va fluido en el móvil.
 - **B se oscurece pronto (desde perfiles):** las secciones con texto largo no pueden quedar con el núcleo negro de la mancha detrás de texto oscuro. Portada, resumen y test van en claro; de perfiles al final, fondo cada vez más oscuro y texto claro (`.osc-b`).
 - **Legibilidad en A:** las manchas de las secciones son algo más suaves que las de la portada, y el gris del texto secundario es más oscuro (`#333A52`) para leerse encima del azul.
