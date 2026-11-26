@@ -1,654 +1,1152 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-fondo="a">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>¿La IA os ayuda a aprender?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿La IA ayuda a aprender o solo a terminar antes?</title>
+<meta name="description" content="Resultados del Econo-Reto Madison 2026: cómo usan la IA 170 estudiantes de la Universidad de Valladolid, qué piensan 38 profesores y qué pasó en dos experimentos en clase.">
+<meta name="theme-color" content="#F2F3F7">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="¿La IA ayuda a aprender o solo a terminar antes?">
+<meta property="og:description" content="Depende de cómo se use. Resultados del Econo-Reto Madison 2026 en la Universidad de Valladolid.">
+<meta property="og:url" content="https://elenaasannchez.github.io/MADISON_web_resultados/">
+<meta property="og:image" content="https://elenaasannchez.github.io/MADISON_web_resultados/og-image.jpg">
+<meta property="og:image:alt" content="¿La IA ayuda a aprender o solo a terminar antes? Depende de cómo se use.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2304060E'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%232D47FF'/%3E%3Cpath d='M16 4v6M16 22v6M4 16h6M22 16h6' stroke='%23E9ECF4' stroke-width='1.6'/%3E%3C/svg%3E">
+<script>
+// Fondo: ?fondo=a|b manda; si no, #fondo-a|#fondo-b (las vistas previas quitan los parámetros); si no, b (elegida por Elena)
+(function () {
+  var f = null;
+  try { var q = new URLSearchParams(location.search).get('fondo'); if (q === 'a' || q === 'b') f = q; } catch (e) {}
+  if (!f && /fondo-b/.test(location.hash)) f = 'b';
+  if (!f && /fondo-a/.test(location.hash)) f = 'a';
+  document.documentElement.setAttribute('data-fondo', f || 'b');
+  document.documentElement.classList.add('js');
+})();
+</script>
+<link rel="apple-touch-icon" href="icono.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@1,900&family=Geist:wght@400;500;600&family=Inter+Tight:wght@300;500;600&family=Playfair+Display:ital,wght@1,500;1,600&display=swap">
 <style>
+/* =========================================================
+   SISTEMA (fase 1)
+   Paleta: azul eléctrico, negros azulados, blancos rotos y grises fríos.
+   Dos voces: alta (Archivo cursiva + Playfair + Anton) y baja (Inter Tight + Playfair).
+   ========================================================= */
 :root {
-  /* Paleta del equipo: Glacier Blue (fondo), Navy (texto y tarjetas oscuras), Lemon (acento) y blanco para detalles. */
-  --blue: #82B0DB; /* Glacier Blue */
-  --blue-dark: #5F95C9; /* mismo azul, más oscuro: barras y tarjetas */
-  --cocoa: #101D49; /* Navy */
-  --yellow: #F7EB4F; /* Lemon */
-  --white: #FFFFFF;
-  --ink: var(--cocoa);
-  --bg: var(--blue);
-  --surface: rgba(16, 29, 73, .06);
-  --line: rgba(16, 29, 73, .22);
-  --muted: rgba(16, 29, 73, .72);
-  --teal: var(--blue);
-  --amber: var(--yellow);
-  --red: var(--cocoa);
-  --green: var(--blue);
-  --display: "Anton", "Arial Narrow", sans-serif; /* títulos (parecida a Thunder) */
-  --accent: "DM Serif Display", Georgia, serif; /* palabras destacadas, en cursiva (parecida a Emberly) */
-  --body: "Fira Sans", "Segoe UI", system-ui, sans-serif; /* texto */
+  /* Tokens de lectura sobre fondo claro (versión A y primera mitad de la B) */
+  --bg: #F2F3F7;
+  --bg-2: #E2E6EF;
+  --ink: #0A0D1A;
+  --ink-2: #333A52;
+  --line: rgba(10, 13, 26, .16);
+  --line-2: rgba(10, 13, 26, .34);
+  --electric: #1F38F2;
+  --electric-2: #6F84FF;
+  --deep: #060D3A;
+  --on-e: #FFFFFF;
+  --panel: rgba(246, 247, 250, .78);
+  --acento: #1F38F2;
+
+  /* Fuentes */
+  --f-alta: "Archivo", "Arial Black", sans-serif;
+  --f-acento: "Playfair Display", Georgia, serif;
+  --f-cifra: "Anton", "Arial Narrow", sans-serif;
+  --f-baja: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --f-texto: "Geist", "Helvetica Neue", Arial, sans-serif;
+
+  /* Escala */
+  --t-h2: clamp(32px, 8.6vw, 76px);
+  --t-h3: clamp(21px, 5.4vw, 30px);
+  --t-gigante: clamp(84px, 27vw, 220px);
+  --t-cifra: clamp(46px, 13.5vw, 96px);
+  --t-texto: 17px;
+  --t-peq: 14px;
+  --t-tec: 11px;
+
+  /* Espacios */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 72px; --s9: 112px;
+  --margen: max(20px, env(safe-area-inset-left, 0px));
+  --margen-d: max(20px, env(safe-area-inset-right, 0px));
+
+  /* Movimiento */
+  --e-out: cubic-bezier(.16, 1, .3, 1);
+  --e-io: cubic-bezier(.65, 0, .35, 1);
   color-scheme: light;
 }
+/* Zonas oscuras de la versión B: texto claro */
+[data-fondo="b"] .osc-b, :root[data-fondo="b"].barra-osc .barra {
+  --bg: #07080F;
+  --bg-2: #161A33;
+  --ink: #EEF0F7;
+  --ink-2: #A3AAC2;
+  --line: rgba(238, 240, 247, .18);
+  --line-2: rgba(238, 240, 247, .36);
+  --electric: #4A62FF;
+  --electric-2: #8FA0FF;
+  --deep: #020414;
+  --panel: rgba(8, 10, 22, .62);
+  --acento: #9AABFF;
+  color-scheme: dark;
+}
+
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-weight: 300; font-size: 17px; line-height: 1.55; }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 18px; }
-h1, h2, h3 { font-family: var(--display); line-height: 1.05; text-wrap: balance; margin: 0; text-transform: uppercase; letter-spacing: .01em; }
-h1 { font-size: clamp(28px, 6.5vw, 44px); font-weight: 400; }
-h2 { font-size: clamp(26px, 5.6vw, 36px); font-weight: 400; }
-h3 { font-size: 19px; font-weight: 400; letter-spacing: .02em; }
-/* Palabras destacadas: DM Serif cursiva, en minúscula y un poco más pequeñas */
-h1 em, h2 em, h3 em { font-family: var(--accent); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: .9em; line-height: 1; position: relative; top: -.14em; }
-.hero h1 .l { display: block; white-space: nowrap; }
-p { margin: 0; }
-.num { font-family: var(--display); font-weight: 400; font-variant-numeric: tabular-nums; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: #F2F3F7; color: var(--ink); font-family: var(--f-texto); font-size: var(--t-texto); line-height: 1.55; overflow-x: clip; -webkit-font-smoothing: antialiased; transition: background-color .4s, color .4s; }
+p, h1, h2, h3, h4, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--electric); outline-offset: 3px; }
+.bloque :focus-visible { outline-color: #FFFFFF; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-header.hero { background: var(--yellow); color: var(--cocoa); padding: 40px 0 30px; }
-.hero .kicker { color: var(--yellow); font-weight: 700; letter-spacing: .04em; font-size: 14px; text-transform: uppercase; }
-.hero h1 { margin: 0 0 16px; font-weight: 400; letter-spacing: .005em; line-height: .92; font-size: clamp(48px, 13vw, 86px); }
-.hero .answer { font-size: 20px; font-weight: 400; color: var(--cocoa); max-width: 34ch; }
-.hero .answer b { color: var(--cocoa); font-weight: 700; }
+/* Fondo: canvas fijo generado una vez por sección (formas → difuminado → grano) */
+.fondo { position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; z-index: -1; overflow: hidden; pointer-events: none; background: #F2F3F7; }
+[data-fondo="b"] .fondo { background: #FCFCFE; }
+.fondo canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; will-change: opacity, transform; }
 
+.wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding-left: var(--margen); padding-right: var(--margen-d); position: relative; z-index: 2; }
+.texto { max-width: 40rem; }
 
-nav.chips { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
-nav.chips .wrap { display: flex; gap: 8px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
-nav.chips a { flex: none; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px; font-size: 14px; font-weight: 600; }
-nav.chips a:focus-visible, button:focus-visible { outline: 3px solid var(--cocoa); outline-offset: 2px; }
+/* =========================================================
+   TIPOGRAFÍA
+   ========================================================= */
+.h-alta { font-family: var(--f-alta); font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.035em; line-height: .98; font-size: var(--t-h2); text-wrap: balance; }
+.h-alta em { font-family: var(--f-acento); font-weight: 600; font-style: italic; text-transform: none; letter-spacing: -.01em; font-size: .98em; position: relative; top: -.08em; color: var(--acento); }
+.h-baja { font-family: var(--f-baja); font-weight: 600; letter-spacing: -.045em; line-height: 1.02; font-size: var(--t-h2); text-wrap: balance; }
+.h-baja em { font-family: var(--f-acento); font-weight: 500; font-style: italic; letter-spacing: -.015em; color: var(--acento); }
+mark { background: var(--electric); color: var(--on-e); padding: 0 .12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.h3 { font-family: var(--f-baja); font-weight: 600; font-size: var(--t-h3); letter-spacing: -.03em; line-height: 1.12; text-wrap: balance; }
+.lead { font-size: 18px; line-height: 1.5; color: var(--ink-2); max-width: 36rem; margin-top: var(--s5); }
+.fuente { display: flex; align-items: center; gap: 10px; margin-top: var(--s5); font-size: var(--t-tec); letter-spacing: .04em; color: var(--ink-2); }
+.fuente::before { content: ""; width: 11px; height: 11px; flex: none; background: linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat, linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat; }
+.num-alta { font-family: var(--f-cifra); font-weight: 400; line-height: .9; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.num-baja { font-family: var(--f-baja); font-weight: 300; line-height: .9; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
 
-section { padding: 38px 0 8px; scroll-margin-top: 56px; }
-.eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--cocoa); background: var(--yellow); border-radius: 999px; padding: 3px 10px; margin-bottom: 10px; }
-.lead { color: var(--muted); margin-top: 10px; font-size: 17px; }
-.source { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; margin-top: 12px; }
-.source::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--blue-dark); }
+/* =========================================================
+   SECCIONES Y CAPAS COMUNES (fase 2)
+   ========================================================= */
+.sec { position: relative; isolation: isolate; overflow: clip; padding-block: var(--s9) var(--s8); color: var(--ink); scroll-margin-top: 0; }
+.sec .lead, .sec .fuente { color: var(--ink-2); }
+/* Capa técnica: textos de esquina */
+.tec { position: absolute; z-index: 3; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; gap: 12px; padding: 76px var(--margen-d) 0 var(--margen); font-size: var(--t-tec); letter-spacing: .05em; color: var(--ink-2); pointer-events: none; font-variant-numeric: tabular-nums; }
+.tec span:first-child { white-space: nowrap; }
+.tec span:last-child { text-align: right; }
+.esquinas { position: relative; }
+.esquinas::before, .esquinas::after, .esquinas > .e3, .esquinas > .e4 { content: ""; position: absolute; width: 14px; height: 14px; border: 0 solid var(--esq, currentColor); pointer-events: none; }
+.esquinas::before { left: -1px; top: -1px; border-left-width: 1.5px; border-top-width: 1.5px; }
+.esquinas::after { right: -1px; top: -1px; border-right-width: 1.5px; border-top-width: 1.5px; }
+.esquinas > .e3 { left: -1px; bottom: -1px; border-left-width: 1.5px; border-bottom-width: 1.5px; }
+.esquinas > .e4 { right: -1px; bottom: -1px; border-right-width: 1.5px; border-bottom-width: 1.5px; }
+.cruz { display: inline-block; width: 13px; height: 13px; flex: none; background: linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat, linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat; }
 
-.grid { display: grid; gap: 12px; margin-top: 18px; }
-.g2 { grid-template-columns: repeat(2, 1fr); }
-.g3 { grid-template-columns: repeat(3, 1fr); }
-@media (max-width: 560px) { .g3 { grid-template-columns: 1fr; } }
-@media (max-width: 400px) { .g2 { grid-template-columns: 1fr; } }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.stat .num { font-size: 36px; display: block; line-height: 1; margin-bottom: 6px; }
-.stat p { font-size: 15px; }
-.t-teal, .t-green { color: var(--cocoa); }
-.t-red, .t-amber { color: var(--cocoa); background: linear-gradient(transparent 58%, var(--yellow) 58%); padding: 0 2px; }
+/* =========================================================
+   BARRA SUPERIOR E ÍNDICE
+   ========================================================= */
+.barra { position: fixed; z-index: 50; top: 0; left: 0; right: 0; padding-top: env(safe-area-inset-top, 0px); color: var(--ink); pointer-events: none; }
+.barra .in { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px var(--margen-d) 14px var(--margen); }
+.barra .marca { font-family: var(--f-baja); font-weight: 600; font-size: 14px; letter-spacing: -.02em; text-decoration: none; pointer-events: auto; display: inline-flex; align-items: center; gap: 8px; }
+@media (max-width: 520px) { .barra .marca-larga { display: none; } }
+.barra .marca .cruz { width: 11px; height: 11px; color: var(--electric); }
+.barra .der { display: flex; align-items: center; gap: 4px; pointer-events: auto; }
+.barra .donde { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; margin-right: 6px; white-space: nowrap; }
+.barra button { background: none; border: 0; padding: 10px 8px; min-height: 44px; font-size: 13px; font-weight: 500; cursor: pointer; letter-spacing: .01em; }
+.barra button:hover { color: var(--electric); }
+.barra::before { content: ""; position: absolute; inset: 0 0 -18px; background: linear-gradient(var(--bg) 58%, transparent); opacity: .96; transition: background .4s; }
+.barra { transition: color .4s; }
+.barra .in { position: relative; }
+.progreso { position: absolute; left: 0; bottom: 0; height: 1px; width: 100%; transform-origin: left; transform: scaleX(0); background: var(--electric); }
+.indice { position: fixed; inset: 0; z-index: 70; background: var(--bg); color: var(--ink); padding: calc(env(safe-area-inset-top, 0px) + 72px) var(--margen-d) 40px var(--margen); overflow-y: auto; }
+.indice[hidden] { display: none; }
+.indice ol { display: grid; gap: 0; max-width: 720px; }
+.indice li { border-top: 1px solid var(--line); }
+.indice a { display: flex; gap: 16px; align-items: baseline; padding: 12px 0; text-decoration: none; font-family: var(--f-baja); font-weight: 600; font-size: clamp(22px, 6vw, 34px); letter-spacing: -.035em; line-height: 1.1; }
+.indice a span { font-family: var(--f-texto); font-weight: 400; font-size: 12px; letter-spacing: .04em; color: var(--ink-2); width: 2ch; font-variant-numeric: tabular-nums; }
+.indice a:hover { color: var(--electric); }
+.indice .cerrar { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 14px); right: var(--margen-d); background: none; border: 0; min-height: 44px; padding: 10px 8px; font-size: 13px; cursor: pointer; }
 
-.facts { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
-.facts li { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px 12px 42px; position: relative; }
-.facts li::before { content: "→"; position: absolute; left: 15px; top: 11px; color: var(--cocoa); font-weight: 800; }
-.facts li b { font-weight: 700; }
+/* =========================================================
+   PORTADA
+   ========================================================= */
+.portada { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-block: 110px 120px; }
+.portada h1 { font-family: var(--f-alta); font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.035em; line-height: .98; color: var(--ink); font-size: clamp(40px, 11.4vw, 150px); }
+.portada h1 .l { display: block; white-space: nowrap; overflow: hidden; padding: .02em .06em .04em 0; margin: -.02em 0 -.04em; }
+.portada h1 .l > span { display: inline-block; }
+.portada h1 em { font-family: var(--f-acento); font-weight: 600; font-style: italic; text-transform: none; letter-spacing: -.01em; font-size: .98em; position: relative; top: -.1em; color: var(--electric); }
+.portada .respuesta { margin-top: var(--s6); max-width: 30rem; font-size: 18px; }
+.portada .respuesta b { font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 4px; }
+.portada .tec { padding-top: 76px; }
+/* Portada B: el título va en blanco sobre la mancha, como en la referencia 14 */
+[data-fondo="b"] .portada h1, [data-fondo="b"] .portada .respuesta { color: #FFFFFF; }
+[data-fondo="b"] .portada h1 em { color: #C9D0FF; }
+@media (min-width: 900px) { [data-fondo="b"] .portada .respuesta { color: var(--ink); } }
+.portada .pie { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 0 var(--margen-d) max(22px, env(safe-area-inset-bottom, 0px)) var(--margen); display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; font-size: var(--t-tec); letter-spacing: .05em; color: var(--ink-2); }
+.bajar { display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-size: 12px; letter-spacing: .04em; min-width: 44px; }
+.bajar .mira { width: 34px; height: 34px; color: var(--electric); }
 
-.persona { border-radius: 14px; padding: 16px; border: 1px solid var(--line); }
-.persona .head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-.persona .num { font-size: 34px; }
-.persona h3 { margin-top: 4px; }
-.persona p { font-size: 15px; margin-top: 6px; }
-.p-act { background: var(--blue-dark); border-color: var(--blue-dark); } .p-act .num { color: var(--cocoa); }
-.p-mix { background: var(--yellow); border-color: var(--yellow); color: var(--cocoa); } .p-mix .num, .p-mix h3 { color: var(--cocoa); }
-.p-pas { background: var(--cocoa); border-color: var(--cocoa); color: var(--blue); } .p-pas .num { color: var(--yellow); } .p-pas h3 { color: var(--white); }
+/* =========================================================
+   LISTAS CON CRUZ (hallazgos)
+   ========================================================= */
+.hallazgos { margin-top: var(--s7); border-top: 1px solid var(--line); }
+.hallazgos li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 0 10px; padding: 18px 0 20px; border-bottom: 1px solid var(--line); }
+.hallazgos li > .cruz { margin-top: 7px; color: var(--acento); }
+.hallazgos li p { color: var(--ink-2); font-size: 16px; }
+.hallazgos li p b { display: block; font-family: var(--f-baja); font-weight: 600; font-size: 19px; letter-spacing: -.02em; line-height: 1.25; color: var(--ink); margin-bottom: 4px; }
+.hallazgos li p b + b { display: inline; font-size: inherit; font-family: inherit; letter-spacing: 0; }
+@media (min-width: 900px) { .hallazgos { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; border-top: 0; } .hallazgos li { border-top: 1px solid var(--line); border-bottom: 0; } }
+.resumen .hallazgos li p b { font-size: 21px; }
 
-.bars { margin-top: 18px; display: grid; gap: 10px; }
-.bars .title { font-weight: 700; font-size: 15px; }
-.bar { display: grid; grid-template-columns: minmax(110px, 38%) 1fr; gap: 10px; align-items: center; font-size: 15px; }
-.bar .track { background: rgba(16, 29, 73, .1); border-radius: 6px; height: 22px; position: relative; }
-.bar .fill { height: 100%; border-radius: 6px; background: var(--blue-dark); }
-.bar .val { position: absolute; right: 6px; top: 0; line-height: 22px; font-size: 13px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
-.bar .fill.alt { background: var(--muted); }
-.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
-.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; background: var(--c); vertical-align: -1px; border: 1px solid rgba(16, 29, 73, .35); }
-.pair .track { height: 14px; }
-.pair .val { line-height: 14px; font-size: 12px; }
-.pair-group { display: grid; gap: 4px; }
+/* Bloque azul para destacar (ref. 09) */
+.bloque { position: relative; margin-top: var(--s7); padding: 26px 22px 28px; background: var(--electric); color: var(--on-e); max-width: 44rem; }
+.bloque p { font-size: 17px; line-height: 1.5; color: rgba(255,255,255,.86); }
+.bloque p b { display: block; font-family: var(--f-baja); font-weight: 600; font-size: clamp(21px, 5.4vw, 28px); letter-spacing: -.035em; line-height: 1.15; color: #FFFFFF; margin-bottom: 8px; }
+.bloque.esquinas { --esq: rgba(255,255,255,.9); }
 
-.callout { margin-top: 18px; border-radius: 14px; padding: 16px; background: var(--cocoa); color: var(--blue); }
-.callout b { color: var(--white); }
-.warn { background: var(--yellow); color: var(--cocoa); }
-.warn b { color: var(--cocoa); }
+/* Cifras sueltas */
+.cifras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; margin-top: var(--s7); }
+.cifras > div { border-top: 1px solid var(--line); padding-top: 14px; min-width: 0; }
+.cifras .n { display: block; font-size: var(--t-cifra); color: var(--acento); white-space: nowrap; }
+.cifras p { margin-top: 10px; font-size: 15px; color: var(--ink-2); max-width: 22ch; }
+.cifras .ancha { grid-column: 1 / -1; }
+@media (min-width: 900px) { .cifras { grid-template-columns: repeat(4, minmax(0, 1fr)); } .cifras.tres { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-.reveal { margin-top: 18px; }
-.reveal button { font: inherit; font-weight: 700; background: var(--yellow); color: var(--cocoa); border: 0; border-radius: 10px; padding: 10px 16px; cursor: pointer; }
-.reveal .answer { margin-top: 12px; }
+/* Pasos numerados (sí son secuencias) */
+.pasos { margin-top: var(--s6); counter-reset: p; border-top: 1px solid var(--line); }
+.pasos li { counter-increment: p; display: grid; grid-template-columns: 40px minmax(0, 1fr); padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 16px; color: var(--ink-2); }
+.pasos li::before { content: counter(p, decimal-leading-zero); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--acento); padding-top: 4px; letter-spacing: .04em; }
+.pasos li b { color: var(--ink); font-weight: 600; }
+@media (min-width: 900px) { .pasos { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; border-top: 0; } .pasos li { border-top: 1px solid var(--line); border-bottom: 0; } }
 
-.steps { counter-reset: s; list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
-.steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px 12px 52px; position: relative; }
-.steps li::before { content: counter(s); position: absolute; left: 14px; top: 12px; width: 26px; height: 26px; border-radius: 50%; background: var(--yellow); color: var(--cocoa); font-weight: 700; font-size: 14px; display: grid; place-items: center; }
+/* Títulos de gráfico */
+.graf { margin-top: var(--s8); }
+.graf > .tit { font-family: var(--f-baja); font-weight: 600; font-size: 18px; letter-spacing: -.02em; line-height: 1.3; max-width: 34rem; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 13px; color: var(--ink-2); }
+.leyenda span { display: inline-flex; align-items: center; gap: 8px; }
+.leyenda i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: var(--c); border: 2px solid var(--b, var(--c)); }
+.graf svg { display: block; width: 100%; height: auto; overflow: visible; margin-top: 18px; }
+.graf svg text { font-family: var(--f-texto); fill: currentColor; }
 
-.semaforo { display: grid; gap: 10px; margin-top: 18px; }
-.sem { border-radius: 12px; padding: 14px 16px; }
-.sem h3 { font-size: 17px; }
-.sem p { font-size: 15px; margin-top: 4px; }
-.sem.v { background: var(--blue-dark); } .sem.v h3 { color: var(--cocoa); }
-.sem.r { background: var(--cocoa); color: var(--blue); } .sem.r h3 { color: var(--white); }
-.sem.a { background: var(--yellow); color: var(--cocoa); } .sem.a h3 { color: var(--cocoa); }
+/* Botón para destapar (sin caja de plantilla) */
+.destapar { margin-top: var(--s5); background: none; border: 0; padding: 10px 0; min-height: 44px; display: inline-flex; align-items: center; gap: 12px; font-family: var(--f-baja); font-weight: 600; font-size: 19px; letter-spacing: -.02em; cursor: pointer; color: var(--ink); }
+.destapar .cruz { width: 15px; height: 15px; color: var(--acento); transition: transform .5s var(--e-out); }
+.destapar[aria-expanded="true"] .cruz { transform: rotate(45deg); }
+.destapar span:last-child { background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat; padding-bottom: 2px; }
+.destapar:hover span:last-child { background-size: 0 1px; transition: background-size .4s var(--e-out); }
+.respuesta-oculta { margin-top: var(--s5); }
 
-/* Test */
-.quiz { margin-top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
-.q { padding: 12px 0; border-bottom: 1px solid var(--line); }
-.q:last-of-type { border-bottom: 0; }
-.q p { font-weight: 600; font-size: 16px; }
-.opts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.opts input { position: absolute; opacity: 0; pointer-events: none; }
-.opts label { border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; font-size: 14px; cursor: pointer; background: var(--bg); }
-.opts input:checked + label { background: var(--yellow); border-color: var(--yellow); color: var(--cocoa); font-weight: 600; }
-.opts input:focus-visible + label { outline: 3px solid var(--cocoa); outline-offset: 2px; }
-#quizBtn { margin-top: 14px; font: inherit; font-weight: 700; background: var(--yellow); color: var(--cocoa); border: 0; border-radius: 10px; padding: 11px 18px; cursor: pointer; }
-#quizOut { margin-top: 14px; }
-.result { border-radius: 14px; padding: 16px; }
-.result .num { font-size: 40px; }
+/* =========================================================
+   TEST (02)
+   ========================================================= */
+.marco { position: relative; margin-top: var(--s7); padding: 26px 20px 22px; max-width: 46rem; background: var(--panel); --esq: var(--ink); }
+.marco .qtop { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: .05em; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.marco .qbar { flex: 1; height: 1px; background: var(--line); position: relative; }
+.marco .qbar i { position: absolute; left: 0; top: -1px; height: 3px; width: 100%; background: var(--electric); transform-origin: left; transform: scaleX(0); transition: transform .6s var(--e-out); }
+.qpaso { padding-top: 20px; }
+.qpaso[hidden] { display: none; }
+.qpaso h3 { font-family: var(--f-baja); font-weight: 600; font-size: clamp(24px, 6.4vw, 34px); letter-spacing: -.035em; line-height: 1.12; outline: none; max-width: 22ch; }
+.qops { margin-top: 20px; border-top: 1px solid var(--line); }
+.qops button { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 12px; background: none; border: 0; border-bottom: 1px solid var(--line); min-height: 52px; padding: 12px 6px; text-align: left; font-size: 17px; cursor: pointer; color: var(--ink); position: relative; isolation: isolate; }
+.qops button::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--electric); transform: scaleX(0); transform-origin: left; transition: transform .45s var(--e-out); }
+.qops button:hover::before { transform: scaleX(.02); }
+.qops button[aria-pressed="true"]::before { transform: scaleX(1); }
+.qops button .k { font-size: 11px; color: var(--ink-2); letter-spacing: .05em; font-variant-numeric: tabular-nums; }
+.qops button[aria-pressed="true"] { color: #FFFFFF; }
+.qops button[aria-pressed="true"] .k { color: #FFFFFF; }
+.qatras { margin-top: 12px; background: none; border: 0; min-height: 44px; padding: 8px 0; font-size: 14px; color: var(--ink-2); cursor: pointer; }
+.qatras:hover { color: var(--ink); }
+.qres { padding-top: 18px; }
+.qres .grande { display: flex; align-items: baseline; gap: 10px; }
+.qres .grande .n { font-family: var(--f-cifra); font-size: clamp(110px, 38vw, 240px); line-height: .82; color: var(--ink); }
+.qres .grande small { font-size: 16px; color: var(--ink-2); }
+.regla { position: relative; margin-top: 30px; height: 74px; }
+.regla .eje { position: absolute; left: 0; right: 0; top: 24px; height: 1px; background: var(--line-2); }
+.regla .t { position: absolute; top: 19px; width: 1px; height: 11px; background: var(--line-2); }
+.regla .m { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; font-size: 11px; letter-spacing: .04em; white-space: nowrap; color: var(--ink-2); }
+.regla .m i { width: 1px; height: 30px; background: currentColor; margin-top: 4px; }
+.regla .m:not(.tu) { top: 20px; flex-direction: column-reverse; }
+.regla .m:not(.tu) i { height: 22px; margin: 0 0 4px; }
+.regla .m.tu { color: var(--ink); }
+.regla .m.tu i { width: 3px; background: var(--electric); }
+.regla .ext { position: absolute; top: 34px; font-size: 11px; color: var(--ink-2); }
+.qres .perfil { margin-top: 26px; font-size: 15px; color: var(--ink-2); }
+.qres .perfil em { display: block; font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: clamp(48px, 15vw, 88px); line-height: 1; color: var(--ink); letter-spacing: -.02em; margin-top: 2px; }
+.qres p { margin-top: 14px; font-size: 17px; max-width: 34rem; color: var(--ink); }
+.qres .peq { font-size: 14px; color: var(--ink-2); margin-top: 10px; }
+.qres .otra { margin-top: 22px; }
 
-.reco { display: grid; gap: 12px; margin-top: 18px; }
-.reco .card h3 { color: var(--cocoa); }
-.reco .card:nth-child(1) { background: var(--blue-dark); border-color: var(--blue-dark); }
-.reco .card:nth-child(2) { background: var(--yellow); border-color: var(--yellow); color: var(--cocoa); }
-.reco .card:nth-child(2) .why { color: var(--cocoa); }
-.reco .card:nth-child(3) { background: var(--cocoa); border-color: var(--cocoa); color: var(--blue); }
-.reco .card:nth-child(3) h3 { color: var(--white); }
-.reco .card:nth-child(3) .why { color: var(--blue); }
-.reco .card p { margin-top: 6px; font-size: 16px; }
-.reco .card .why { margin-top: 8px; font-size: 14px; color: var(--muted); }
+/* =========================================================
+   PERFILES (03) · Momento 1: siluetas
+   ========================================================= */
+.desc-perfiles { position: relative; margin-top: 22px; }
+.desc-perfiles article { padding: 16px 0; border-top: 1px solid var(--line-2); }
+.desc-perfiles .cab { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.desc-perfiles h3 { font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: clamp(40px, 11vw, 72px); line-height: 1; letter-spacing: -.02em; }
+.desc-perfiles .n { font-family: var(--f-cifra); font-size: clamp(52px, 15vw, 104px); line-height: .9; color: var(--acento); white-space: nowrap; }
+.desc-perfiles p { margin-top: 8px; font-size: 17px; max-width: 34rem; color: var(--ink-2); }
+@media (min-width: 900px) { .desc-perfiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: var(--s7); } }
+@media (min-width: 900px) { .desc-perfiles .n { font-size: clamp(52px, 5vw, 80px); } .desc-perfiles h3 { font-size: clamp(34px, 3.3vw, 54px); } }
+.perfiles .datos { padding-top: var(--s8); position: relative; }
 
-.method p + p { margin-top: 10px; }
-footer { margin-top: 40px; padding: 28px 0 40px; background: var(--cocoa); color: var(--blue); font-size: 15px; }
-footer b { color: var(--white); }
-.pending { border: 2px dashed var(--line); background: transparent; }
+/* =========================================================
+   USO (04)
+   ========================================================= */
+.burbujas { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 22px 14px; margin-top: 22px; }
+.burbuja { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 64px; }
+.burbuja svg { margin: 0; width: var(--d); height: var(--d); }
+.burbuja .nom { font-size: 13px; color: var(--ink-2); text-align: center; }
+.burbuja .v { font-family: var(--f-cifra); font-size: 22px; line-height: 1; }
+.dos-listas { display: grid; gap: 40px; margin-top: var(--s8); }
+@media (min-width: 900px) { .dos-listas { grid-template-columns: 1fr 1fr; gap: 56px; } }
+.piruletas { margin-top: 16px; }
+.piruletas li { padding: 10px 0 12px; }
+.piruletas .fila { display: flex; justify-content: space-between; gap: 12px; font-size: 16px; }
+.piruletas .fila b { font-variant-numeric: tabular-nums; font-weight: 600; }
+.piruletas .pista { position: relative; height: 9px; margin-top: 6px; }
+.piruletas .pista::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 1px; background: var(--line-2); }
+.piruletas .pista i { position: absolute; left: 0; top: 4px; height: 1px; width: var(--v); background: var(--electric); transform-origin: left; }
+.piruletas .pista i::after { content: ""; position: absolute; right: -4px; top: -4px; width: 9px; height: 9px; border-radius: 50%; background: var(--electric); }
 
-/* Más presencia de las dos fuentes de los títulos fuera de los títulos */
-/* Anton: botones, navegación, rótulos de gráficos y números */
-nav.chips a, #quizBtn, .reveal button, .bars .title, .steps li::before, .bar .val { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .04em; }
-nav.chips a { font-size: 14px; }
-#quizBtn, .reveal button { font-size: 18px; letter-spacing: .05em; }
-.bars .title { font-size: 17px; }
-.bar .val { letter-spacing: .02em; white-space: nowrap; background: var(--bg); color: var(--cocoa); border-radius: 4px; padding: 0 4px; right: 3px; }
-/* DM Serif: frases que abren cada idea, avisos y entradillas */
-.hero .answer { font-size: 19px; }
-.hero .answer b { display: block; font-family: var(--accent); font-style: italic; font-weight: 400; font-size: 30px; line-height: 1.1; margin-bottom: 4px; }
-.facts li b { font-family: var(--accent); font-weight: 400; font-size: 1.12em; }
-.callout b, .warn b { font-family: var(--accent); font-style: italic; font-weight: 400; font-size: 1.12em; }
-.lead { font-family: var(--accent); font-style: italic; font-size: 20px; line-height: 1.35; color: var(--cocoa); }
+/* =========================================================
+   CÓMO (05)
+   ========================================================= */
+.eje-v { position: relative; margin-top: 26px; height: 380px; max-width: 34rem; }
 
-/* ====== Rediseño: portada a pantalla completa, bandas de color y movimiento ====== */
-body { font-weight: 400; }
-:root { --surface: rgba(255,255,255,.26); --line: rgba(16,29,73,.16); --muted: rgba(16,29,73,.78); }
-.card, .facts li, .steps li, .quiz { box-shadow: 0 1px 0 rgba(255,255,255,.35) inset; }
-.bar .track { background: rgba(255,255,255,.32); }
+/* =========================================================
+   BRECHA (06) · Momento 2: sillas
+   ========================================================= */
+.frente { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: var(--s7); align-items: end; }
+.frente > div { border-top: 1px solid var(--line-2); padding-top: 12px; min-width: 0; }
+.frente .n { font-size: min(var(--t-gigante), 19vw); white-space: nowrap; display: block; line-height: .82; }
+.frente .a .n { color: var(--acento); }
+.frente p { margin-top: 12px; font-size: 15px; color: var(--ink-2); max-width: 20ch; }
+.sillas { margin-top: 18px; display: grid; gap: 22px; }
+.sillas .fila p { font-size: 14px; color: var(--ink-2); display: flex; justify-content: space-between; gap: 12px; }
+.sillas .fila p b { color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.sillas .asientos { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin-top: 8px; }
+.sillas .asientos svg { margin: 0; width: 100%; height: auto; }
+.sillas .medido p b { color: var(--acento); }
 
-/* Subrayado amarillo: siempre en los títulos de sección y en las cursivas */
-main h2 em, main h2 mark, .hl { background: linear-gradient(transparent 66%, var(--yellow) 66%); color: inherit; padding: 0 .06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-mark { background: none; color: inherit; }
-.t-red, .t-amber { background: none; padding: 0; }
-.hl { display: inline; }
+/* =========================================================
+   EVALUACIÓN (07)
+   ========================================================= */
+.mariposa { margin-top: 20px; }
+.mariposa .fila { padding: 12px 0; border-top: 1px solid var(--line); }
+.mariposa .fila > p { font-size: 15px; text-align: center; margin-bottom: 8px; }
+.mariposa .barras { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; align-items: center; }
+.mariposa .lado { position: relative; height: 22px; display: flex; align-items: center; }
+.mariposa .lado.al { justify-content: flex-end; }
+.mariposa .lado i { display: block; height: 100%; width: var(--v); background: var(--electric); }
+.mariposa .lado.pr i { background: var(--ink); }
+.mariposa .lado.al i { transform-origin: right; }
+.mariposa .lado.pr i { transform-origin: left; }
+.mariposa .lado span { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; padding: 0 8px; white-space: nowrap; }
+.mariposa .cabeza { display: grid; grid-template-columns: 1fr 1fr; font-size: 13px; color: var(--ink-2); margin-top: 14px; }
+.mariposa .cabeza span:first-child { text-align: right; padding-right: 10px; }
+.mariposa .cabeza span:last-child { padding-left: 10px; }
 
-/* Tipografías fuera de los títulos */
-.hero .answer b { display: inline; font-family: var(--body); font-style: normal; font-weight: 700; font-size: .82em; text-transform: uppercase; letter-spacing: .07em; line-height: inherit; margin: 0; }
-.facts li b { font-family: var(--body); font-weight: 600; font-size: 1em; }
-.lead { font-family: var(--body); font-style: normal; font-size: 18px; color: var(--muted); }
-.persona h3 { font-family: var(--accent); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 30px; line-height: 1.05; margin-top: 2px; }
+/* =========================================================
+   COMPETENCIAS (08) · Momento 3: cartón rasgado
+   ========================================================= */
+.medidores { margin-top: 22px; display: grid; gap: 18px; }
+.medidor .fila { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.medidor .fila span { font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: 24px; }
+.medidor .fila b { font-family: var(--f-cifra); font-weight: 400; font-size: 34px; line-height: 1; }
+.medidor .casillas { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 8px; }
+.medidor .casillas i { position: relative; height: 28px; border: 1px solid var(--line-2); overflow: hidden; }
+.medidor .casillas i::after { content: ""; position: absolute; inset: 0; background: var(--electric); transform: scaleX(var(--f, 0)); transform-origin: left; }
+.medidor p { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
+.columnas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: end; height: 260px; margin-top: 22px; border-bottom: 1px solid var(--line); }
+.columna { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; text-align: left; }
+.columna b { font-family: var(--f-cifra); font-weight: 400; font-size: clamp(34px, 10vw, 56px); line-height: 1; }
+.columna i { display: block; height: var(--h); background: linear-gradient(var(--electric-2), var(--electric)); margin-top: 8px; transform-origin: bottom; }
+.columna span { display: block; font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: 20px; margin-top: 10px; }
+svg[id^="gra"] { max-width: 720px; }
+@media (min-width: 900px) { .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; } }
 
-/* Portada */
-header.hero { position: relative; min-height: 100vh; min-height: 100svh; padding: 0; display: flex; align-items: center; overflow: hidden; isolation: isolate;
-  background: radial-gradient(120% 90% at 8% 4%, #FFF8B8 0%, #F7EB4F 40%, #F0DA2E 78%, #E9CF1F 100%); }
-header.hero::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: .22; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.06  0 0 0 0 0.11  0 0 0 0 0.29  0 0 0 .6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
-.hero-in { position: relative; z-index: 4; width: 100%; padding-top: 72px; padding-bottom: 150px; will-change: transform, opacity;
-  transform: translateY(calc(var(--p, 0) * -90px)); opacity: calc(1 - var(--p, 0) * 1.4); }
-.hero h1 { font-size: clamp(54px, 13.5vw, 128px); line-height: .9; margin-bottom: 26px; }
-.hero h1 .l { display: block; white-space: nowrap; overflow: hidden; padding: .04em 0 .02em; margin: -.04em 0 -.02em; }
-.hero h1 .l > span { display: inline-block; }
-.hero h1 em { background: linear-gradient(transparent 70%, rgba(130,176,219,.9) 70%); padding: 0 .05em; }
-@media (min-width: 701px) { .hero-in { max-width: 1240px; padding-left: 48px; padding-right: 48px; } .hero h1 { font-size: clamp(64px, 9vw, 118px); } .hero-art { right: -12vw; width: min(56vw, 760px); } header.hero .cue { left: 48px; } }
-.hero .answer { font-size: clamp(18px, 2.4vw, 22px); max-width: 30ch; color: var(--cocoa); }
+/* =========================================================
+   MAPA (09)
+   ========================================================= */
+.mapa-areas { position: relative; margin-top: 22px; width: 100%; height: 560px; }
+@media (min-width: 900px) { .mapa-areas { height: 520px; } }
+.mapa-areas .z { position: absolute; padding: 8px 9px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--bg); font-size: 13px; line-height: 1.2; }
+.mapa-areas .z b { font-family: var(--f-cifra); font-weight: 400; font-size: clamp(22px, 6vw, 40px); line-height: 1; }
+.mapa-areas .z.peq { padding: 6px; font-size: 11px; }
+.mapa-areas .z.peq b { font-size: 20px; white-space: nowrap; }
+.mapa-areas .z.peq span { overflow: hidden; text-overflow: ellipsis; }
+.mapa-areas .z.v { background: var(--electric); color: #FFFFFF; }
+.mapa-areas .z.a { background: var(--bg-2); color: var(--ink); }
+.mapa-areas .z.r { background: var(--ink); color: var(--bg); }
+.semaforo { margin-top: var(--s6); border-top: 1px solid var(--line); }
+.semaforo li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.semaforo .luz { display: grid; gap: 4px; align-content: start; padding-top: 4px; }
+.semaforo .luz i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--line-2); }
+.semaforo .v .luz i:nth-child(3), .semaforo .a .luz i:nth-child(2), .semaforo .r .luz i:nth-child(1) { border: 0; }
+.semaforo .v .luz i:nth-child(3) { background: var(--electric); }
+.semaforo .a .luz i:nth-child(2) { background: var(--bg-2); box-shadow: inset 0 0 0 1px var(--line-2); }
+.semaforo .r .luz i:nth-child(1) { background: var(--ink); }
+.semaforo h3 { font-family: var(--f-baja); font-weight: 600; font-size: 19px; letter-spacing: -.02em; }
+.semaforo p { font-size: 16px; color: var(--ink-2); margin-top: 2px; }
 
-.hero-art { position: absolute; z-index: 1; right: -16vw; top: 50%; width: min(70vw, 760px); aspect-ratio: 1; pointer-events: none;
-  transform: translateY(-50%) translateY(calc(var(--p, 0) * 140px)) rotate(calc(var(--p, 0) * 18deg)) scale(calc(1 + var(--p, 0) * .12)); }
-.lens { position: absolute; inset: 0; border-radius: 50%; overflow: hidden;
-  background: radial-gradient(circle at 32% 28%, #E4EEF8 0%, #A9C8E6 22%, #82B0DB 40%, #3F6496 68%, #101D49 100%);
-  box-shadow: 0 40px 80px -30px rgba(16,29,73,.55); filter: saturate(.75); }
-.lens .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(16,29,73,.6) 1.3px, transparent 1.8px); background-size: 10px 10px;
-  -webkit-mask-image: linear-gradient(125deg, transparent 18%, #000 78%); mask-image: linear-gradient(125deg, transparent 18%, #000 78%); }
-.lens .ia { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); font-family: var(--display); font-size: 46cqw; font-size: clamp(120px, 30vw, 330px); line-height: 1;
-  color: transparent; -webkit-text-stroke: 2px rgba(247,235,79,.85); letter-spacing: .02em; }
+/* =========================================================
+   EXPERIMENTO 1 (10) · Momento 4: revista
+   ========================================================= */
+.reticulas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 18px; margin-top: 22px; }
+@media (min-width: 900px) { .reticulas { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.reticulas figure { min-width: 0; }
+.reticulas .rej { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; }
+.reticulas .rej i { aspect-ratio: 1; background: var(--line); }
+.reticulas .rej i.on { background: var(--electric); }
+.reticulas figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+.reticulas figcaption b { display: block; font-family: var(--f-cifra); font-weight: 400; font-size: 34px; line-height: 1; color: var(--ink); margin-bottom: 4px; }
 
-.cue { position: absolute; z-index: 5; left: max(18px, calc((100vw - 760px) / 2 + 18px)); bottom: 28px; width: 104px; height: 104px; display: grid; place-items: center; color: var(--cocoa); text-decoration: none; opacity: calc(1 - var(--p, 0) * 3); }
-.cue svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 16s linear infinite; }
-.cue text { font-family: var(--display); font-size: 11.5px; letter-spacing: .12em; fill: var(--cocoa); }
-.cue .arr { width: 44px; height: 44px; border-radius: 50%; background: var(--cocoa); color: var(--yellow); display: grid; place-items: center; font-size: 22px; font-weight: 700; animation: nudge 1.8s ease-in-out infinite; }
-.cue:focus-visible { outline: 3px solid var(--cocoa); outline-offset: 4px; border-radius: 50%; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes nudge { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(5px); } }
+/* =========================================================
+   PROFESORES (11)
+   ========================================================= */
+.tipos-prof { display: grid; gap: 0; margin-top: var(--s7); border-top: 1px solid var(--line-2); }
+.tipos-prof .grupo { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 16px; padding: 16px 0 18px; border-bottom: 1px solid var(--line); }
+.tipos-prof .n { grid-row: span 2; font-family: var(--f-cifra); font-size: 56px; line-height: .9; color: var(--acento); }
+.tipos-prof h3 { font-family: var(--f-acento); font-style: italic; font-weight: 600; font-size: clamp(24px, 6vw, 32px); line-height: 1.05; }
+.tipos-prof p { font-size: 15px; color: var(--ink-2); margin-top: 4px; }
+@media (min-width: 900px) { .tipos-prof { grid-template-columns: repeat(3, 1fr); column-gap: 40px; border-top: 0; } .tipos-prof .grupo { border-top: 1px solid var(--line-2); border-bottom: 0; } }
+.siete { display: grid; grid-template-columns: repeat(7, 7px); gap: 3px; margin-top: 8px; }
+.siete i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--line-2); }
+.siete i.on { background: var(--acento); border-color: var(--acento); }
+.hallazgos.con-siete li { grid-template-columns: 68px minmax(0, 1fr); }
 
-@media (max-width: 700px) {
-  header.hero { align-items: flex-start; }
-  .hero-in { padding-top: 13vh; }
-  .hero-art { top: auto; bottom: -22vw; right: -30vw; width: 112vw; transform: translateY(calc(var(--p, 0) * 90px)) rotate(calc(var(--p, 0) * 18deg)); }
-  .lens .ia { font-size: 44vw; top: 44%; left: 46%; }
-  .cue { left: 18px; bottom: 22px; width: 92px; height: 92px; }
+/* =========================================================
+   EXPERIMENTO 2 (12)
+   ========================================================= */
+.pendientes text { font-size: 12px; }
+.columnas-n { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; align-items: end; height: 280px; margin-top: 22px; border-bottom: 1px solid var(--line); }
+.columnas-n .c { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; }
+.columnas-n .c b { font-family: var(--f-cifra); font-weight: 400; font-size: clamp(20px, 5.6vw, 34px); line-height: 1; }
+.columnas-n .c i { display: block; height: var(--h); background: var(--electric); margin-top: 6px; transform-origin: bottom; }
+.columnas-n .c.cero i { background: var(--ink); }
+.columnas-n-et { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin-top: 8px; font-size: 12px; line-height: 1.25; color: var(--ink-2); }
+
+/* =========================================================
+   RECOMENDACIONES (13) · Momento 5: cartel luminoso
+   ========================================================= */
+.recos { margin-top: var(--s7); border-top: 1px solid var(--line-2); }
+.recos .reco { padding: 22px 0 24px; border-bottom: 1px solid var(--line); }
+.recos .reco h3 { font-family: var(--f-baja); font-weight: 600; font-size: clamp(28px, 7.4vw, 40px); letter-spacing: -.045em; line-height: 1.02; }
+.recos .reco p { margin-top: 12px; font-size: 17px; line-height: 1.5; max-width: 40rem; }
+.recos .reco .por { font-size: 15px; color: var(--ink-2); margin-top: 10px; }
+@media (min-width: 900px) { .recos { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 40px; border-top: 0; } .recos .reco { border-top: 1px solid var(--line-2); border-bottom: 0; } }
+
+/* =========================================================
+   MÉTODO (14) y PIE
+   ========================================================= */
+.cautela { position: relative; margin-top: var(--s7); padding: 26px 22px; max-width: 48rem; background: var(--panel); }
+.cautela h3 { font-family: var(--f-baja); font-weight: 600; font-size: 21px; letter-spacing: -.03em; }
+.cautela ul { margin-top: 12px; }
+.cautela li { position: relative; padding: 8px 0 8px 22px; font-size: 16px; color: var(--ink-2); border-top: 1px solid var(--line); }
+.cautela li::before { content: ""; position: absolute; left: 0; top: 16px; width: 9px; height: 9px; background: linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat, linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat; color: var(--electric); }
+.pie-web { padding-block: 56px max(40px, env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); }
+.pie-web .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+.pie-web b { color: var(--ink); font-weight: 600; }
+[data-fondo="b"] .pie-web { background: #05050A; }
+
+/* Escritorio */
+@media (min-width: 900px) {
+  .sec { padding-block: 140px 110px; }
+  .dos-col { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: start; }
 }
 
-/* Entrada de la portada al cargar */
-.js .hero h1 .l > span { transform: translateY(110%); transition: transform 1s cubic-bezier(.16,.84,.24,1); }
-.js .hero h1 .l:nth-child(2) > span { transition-delay: .09s; } .js .hero h1 .l:nth-child(3) > span { transition-delay: .18s; } .js .hero h1 .l:nth-child(4) > span { transition-delay: .27s; }
-.js .hero .answer, .js .cue { opacity: 0; transition: opacity .8s ease .6s; }
-.js .hero-art .lens { transform: scale(.82) rotate(-12deg); opacity: 0; transition: transform 1.4s cubic-bezier(.16,.84,.24,1) .1s, opacity 1s ease .1s; }
-.js.ready .hero h1 .l > span { transform: none; }
-.js.ready .hero .answer { opacity: 1; }
-.js.ready .cue { opacity: calc(1 - var(--p, 0) * 3); }
-.js.ready .hero-art .lens { transform: none; opacity: 1; }
-
-/* Navegación: marca la sección en la que estás */
-nav.chips { background: rgba(130,176,219,.86); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-nav.chips a { transition: background .25s, color .25s, border-color .25s; }
-nav.chips a.on { background: var(--cocoa); color: var(--yellow); border-color: var(--cocoa); }
-
-/* Bandas a todo lo ancho para dar contraste */
-section.band, section.band-lemon { position: relative; padding: 64px 0 56px; margin: 0; box-shadow: 0 0 0 100vmax var(--bandbg); clip-path: inset(0 -100vmax); background: var(--bandbg); }
-section.band { --bandbg: var(--cocoa); color: var(--blue); }
-section.band h2, section.band h3, section.band .q p, section.band .bars .title { color: var(--white); }
-section.band h2 em { background: none; color: var(--yellow); }
-section.band h2 mark { background: linear-gradient(transparent 62%, rgba(130,176,219,.55) 62%); }
-section.band .lead { color: var(--blue); }
-section.band .card, section.band .facts li, section.band .quiz { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.16); box-shadow: none; }
-section.band .facts li::before { color: var(--yellow); }
-section.band .facts li b { color: var(--white); }
-section.band .source { color: var(--blue); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
-section.band .bar { color: var(--blue); }
-section.band .bar .track { background: rgba(255,255,255,.1); }
-section.band .fill[style*="--cocoa"] { background: var(--yellow) !important; }
-section.band .legend { color: var(--blue); }
-section.band .legend span[style*="cocoa"] { --c: var(--yellow) !important; }
-section.band .q { border-color: rgba(255,255,255,.14); }
-section.band .opts label { background: transparent; color: var(--blue); border-color: rgba(255,255,255,.28); }
-section.band .opts input:checked + label { background: var(--yellow); color: var(--cocoa); border-color: var(--yellow); }
-section.band .pending { border-color: rgba(255,255,255,.3); background: transparent; }
-section.band .callout { background: var(--yellow); color: var(--cocoa); } section.band .callout b { color: var(--cocoa); }
-section.band .p-pas { border-color: rgba(255,255,255,.28); }
-section.band .card .num { color: var(--yellow); }
-section.band :focus-visible { outline-color: var(--yellow); }
-
-section.band-lemon { --bandbg: var(--yellow); margin-bottom: 0; }
-section.band-lemon h2 em { background: linear-gradient(transparent 60%, var(--blue) 60%); }
-section.band-lemon .reco .card { border: 0; box-shadow: none; }
-section.band-lemon .reco .card:nth-child(1) { background: var(--cocoa); color: var(--blue); } section.band-lemon .reco .card:nth-child(1) h3 { color: var(--white); } section.band-lemon .reco .card:nth-child(1) .why { color: var(--blue); }
-section.band-lemon .reco .card:nth-child(2) { background: var(--blue); color: var(--cocoa); } section.band-lemon .reco .card:nth-child(2) .why { color: var(--muted); }
-section.band-lemon .reco .card:nth-child(3) { background: var(--blue-dark); color: var(--cocoa); } section.band-lemon .reco .card:nth-child(3) h3 { color: var(--cocoa); } section.band-lemon .reco .card:nth-child(3) .why { color: var(--cocoa); }
-section.band-lemon .reco .card:nth-child(4) { background: rgba(16,29,73,.08); color: var(--cocoa); }
-section.band-lemon + section, section.band + section { padding-top: 52px; }
-
-/* Aparición al bajar: cada bloque entra desde abajo */
-.js .rv { opacity: 0; transform: translateY(34px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
-.js .rv.in { opacity: 1; transform: none; }
-.js main h2.rv { transform: translateY(46px); }
-.js .bars .fill { transform-origin: left center; transform: scaleX(0); transition: transform 1.1s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, .1s); }
-.js .bars.in .fill { transform: none; }
-
+/* Sin movimiento */
 @media (prefers-reduced-motion: reduce) {
-  .js .rv, .js .bars .fill, .js .hero h1 .l > span, .js .hero .answer, .js .cue, .js .hero-art .lens { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .cue svg, .cue .arr { animation: none; }
-  .hero-in, .hero-art { transform: none !important; opacity: 1 !important; }
+  *, *::before, *::after { transition-duration: 0s !important; animation: none !important; scroll-behavior: auto !important; }
 }
+
 </style>
 </head>
 <body>
+<div class="fondo" id="fondo" aria-hidden="true"></div>
+<a class="sr" href="#resumen">Saltar al contenido</a>
 
-<header class="hero" id="top">
-  <div class="hero-art" aria-hidden="true">
-    <div class="lens"><div class="dots"></div><span class="ia">IA</span></div>
-  </div>
-  <div class="wrap hero-in">
-    <h1><span class="l"><span>¿La IA ayuda</span></span><span class="l"><span>a <em>aprender</em></span></span><span class="l"><span>o solo a</span></span><span class="l"><span><em>terminar antes</em>?</span></span></h1>
-    <p class="answer"><b>Depende de cómo se use.</b> Aquí tienes todo lo que descubrimos.</p>
-  </div>
-  <a class="cue" href="#resumen" aria-label="Bajar a los resultados">
-    <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="cuePath" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text><textPath href="#cuePath" textLength="272">DESLIZA · Y DESCUBRE · DESLIZA · Y DESCUBRE ·</textPath></text></svg>
-    <span class="arr" aria-hidden="true">↓</span>
-  </a>
-</header>
-
-<nav class="chips" aria-label="Secciones">
-  <div class="wrap">
-    <a href="#test">¿Qué perfil eres?</a>
-    <a href="#perfiles">Perfiles</a>
-    <a href="#uso">Cómo la usan</a>
-    <a href="#como">Cómo, no cuánto</a>
-    <a href="#brecha">Profes y alumnos</a>
-    <a href="#evaluacion">Evaluación</a>
-    <a href="#competencias">Competencias</a>
-    <a href="#mapa">Mapa de usos</a>
-    <a href="#experimento">Experimento</a>
-    <a href="#profesores">Entrevistas</a>
-    <a href="#recomendaciones">Recomendaciones</a>
-    <a href="#metodo">Cómo lo hicimos</a>
-  </div>
-</nav>
-
-<main class="wrap">
-
-<!-- RESUMEN -->
-<section id="resumen">
-  <h2>Cinco cosas que hemos <em>descubierto</em></h2>
-  <ul class="facts">
-    <li><b>Hay tres formas de usar la IA:</b> activa (6 de cada 10), mixta (2 de cada 10) y pasiva (2 de cada 10).</li>
-    <li><b>Comprobar es lo que más falta.</b> 1 de cada 5 estudiantes usa la IA para aprender, pero se fía de lo que dice sin comprobarlo.</li>
-    <li><b>Usarla mucho no es usarla mal.</b> Hay los mismos estudiantes pasivos entre quienes la usan a diario que entre quienes casi no la usan.</li>
-    <li><b>Lo que decimos no es lo que hacemos.</b> En clase, quienes decían comprobar siempre se equivocaron igual que los demás.</li>
-    <li><b>Controlar no cambia cómo se usa.</b> Cuando los profesores cambian la forma de evaluar, la IA no desaparece: se usa en otro momento.</li>
-  </ul>
-</section>
-
-<!-- TEST -->
-<section id="test" class="band">
-  <h2>¿Qué <em>perfil</em> eres?</h2>
-  <p class="lead">Las mismas 8 frases que respondieron los 170 estudiantes. Contesta con sinceridad: nadie más ve tus respuestas.</p>
-  <div class="quiz" id="quiz">
-    <div id="qs"></div>
-    <button type="button" id="quizBtn">Ver mi perfil</button>
-    <div id="quizOut" aria-live="polite"></div>
-  </div>
-</section>
-
-<!-- PERFILES -->
-<section id="perfiles">
-  <h2>No existen <em>los que usan la IA</em> y <em>los que no</em>. Hay tres perfiles</h2>
-  <span class="source">Encuesta a 170 estudiantes</span>
-  <div class="grid g3">
-    <div class="persona p-act"><div class="head"><span class="num">58 %</span></div><h3>Activo</h3><p>Lo intenta primero, pregunta a la IA para entender, repregunta, comprueba y lo reescribe a su manera. Usa la IA como un profesor particular.</p></div>
-    <div class="persona p-mix"><div class="head"><span class="num">22 %</span></div><h3>Mixto</h3><p>Hace casi todo como el activo: piensa e itera. Pero se fía de lo que dice la IA y no lo comprueba.</p></div>
-    <div class="persona p-pas"><div class="head"><span class="num">20 %</span></div><h3>Pasivo</h3><p>Le pide el resultado a la IA y lo entrega. La IA piensa por él.</p></div>
-  </div>
-  <div class="bars" role="img" aria-label="Nota media de cada perfil en los cuatro hábitos">
-    <div class="title">Cómo puntúa cada perfil en los cuatro hábitos (de 1 a 5)</div>
-    <div class="legend"><span style="--c: var(--blue-dark)">Activo</span><span style="--c: var(--yellow)">Mixto</span><span style="--c: var(--cocoa)">Pasivo</span></div>
-    <div id="habitBars"></div>
-  </div>
-  <div class="callout"><b>El perfil sorpresa es el mixto.</b> Piensa e itera tanto como el activo, pero es el que menos comprueba de los tres, incluso menos que el pasivo. No lo esperábamos: si la IA se equivoca, aprende el error.</div>
-  <ul class="facts">
-    <li><b>La frecuencia no decide el perfil:</b> hay un 20 % de pasivos tanto entre quienes usan la IA a diario como entre quienes la usan poco.</li>
-    <li><b>Los cursos altos tienen menos pasivos:</b> 9 % en 3.º o más, frente a más del 20 % en 1.º y 2.º.</li>
-    <li><b>El mixto es el que más usa la IA para estudiar:</b> para entender conceptos, hacer ejercicios y organizarse.</li>
-    <li><b>Uno de cada cuatro mixtos casi nunca duda de la IA.</b> En los otros dos perfiles, nadie.</li>
-    <li><b>Cada perfil busca algo distinto:</b> el pasivo, ahorrar tiempo (91 %); el mixto, sacar mejor nota (37 %, el doble que los demás).</li>
-  </ul>
-</section>
-
-<!-- USO -->
-<section id="uso">
-  <h2>Casi todos <mark>usan la IA</mark>, y <em>casi a diario</em></h2>
-  <span class="source">Encuesta a 170 estudiantes</span>
-  <div class="grid g2">
-    <div class="card stat"><span class="num t-teal">61 %</span><p>la usa para estudiar casi a diario</p></div>
-    <div class="card stat"><span class="num t-teal">0</span><p>estudiantes dicen no usarla nunca</p></div>
-    <div class="card stat"><span class="num t-green">75 %</span><p>cree que con la IA aprende más</p></div>
-    <div class="card stat"><span class="num t-teal">74 %</span><p>ahorra al menos 1 hora a la semana</p></div>
-  </div>
-  <div class="bars" id="toolBars"><div class="title">Herramientas que usan (pueden marcar varias)</div></div>
-  <div class="grid g2">
-    <div class="card"><h3 class="hl">Lo que más les aporta</h3><p style="margin-top:6px">Entender mejor la materia (80 %) · ahorrar tiempo (78 %) · desbloquearse cuando se atascan (60 %) · mejorar la calidad (39 %) · sacar mejor nota (21 %)</p></div>
-    <div class="card"><h3 class="hl">Lo que más les preocupa</h3><p style="margin-top:6px">Depender demasiado (94 %) · que se invente datos o se equivoque (78 %) · plagiar sin darse cuenta (34 %) · aprender menos (18 %)</p></div>
-  </div>
-  <ul class="facts">
-    <li><b>Se fían “bastante” de la IA:</b> el 59 %. Solo el 2 % se fía totalmente.</li>
-    <li><b>Dudan de la IA sobre todo cuando ya saben del tema:</b> el 86 % duda cuando ve algo raro en algo que conoce; solo el 28 % cuando la IA cita autores o leyes.</li>
-  </ul>
-</section>
-
-<!-- COMO -->
-<section id="como" class="band">
-  <h2>Lo que importa es <em>cómo usas la IA</em>, no cuánto ni con qué</h2>
-  <span class="source">Encuesta a 170 estudiantes</span>
-  <div class="bars" id="freqBars"><div class="title">Nota media del índice de uso activo (0–100) según la frecuencia</div></div>
-  <ul class="facts">
-    <li><b>Quien usa la IA a diario la usa igual de bien</b> que quien la usa una o dos veces por semana.</li>
-    <li><b>La herramienta no cambia nada:</b> usar ChatGPT, Gemini, Claude o Copilot no hace que se use mejor ni peor.</li>
-    <li><b>NotebookLM es la excepción:</b> quien la usa saca 11 puntos más. Trabaja con los apuntes del propio alumno, así que es una señal de buenos hábitos.</li>
-    <li><b>Lo que decide es cada persona:</b> la frecuencia y la herramienta explican muy poco; los hábitos, casi todo.</li>
-  </ul>
-</section>
-
-<!-- BRECHA -->
-<section id="brecha">
-  <h2><mark>Profesores y alumnos</mark> ven la IA <em>al revés</em></h2>
-  <span class="source">Misma encuesta a 170 estudiantes y a 38 profesores</span>
-  <div class="grid g2">
-    <div class="card stat"><span class="num t-teal">80 %</span><p>de los alumnos dice que la IA le ayuda a entender mejor</p></div>
-    <div class="card stat"><span class="num t-red">5 %</span><p>de los profesores piensa lo mismo</p></div>
-  </div>
-  <div class="bars" id="compBars">
-    <div class="title">% que cree que la IA debilita cada habilidad</div>
-    <div class="legend"><span style="--c: var(--blue-dark)">Alumnos</span><span style="--c: var(--cocoa)">Profesores</span></div>
-  </div>
-  <div class="callout"><b>El mayor choque es la comprensión.</b> El 68 % de los alumnos cree que la IA se la refuerza; el 63 % de los profesores cree que se la debilita.</div>
-
-  <h3 style="margin-top:26px">Pregunta rápida: de cada 10 alumnos, ¿cuántos entregan lo de la IA sin revisarlo?</h3>
-  <p class="lead">Piensa un número antes de mirar.</p>
-  <div class="reveal">
-    <button type="button" id="revealBtn" aria-expanded="false" aria-controls="revealAns">Ver la respuesta</button>
-    <div id="revealAns" class="answer" hidden>
-      <div class="bars" id="guessBars"></div>
-      <div class="callout"><b>Todo el mundo cree que los demás la usan peor.</b> Los alumnos lo exageran de sus compañeros y los profesores, de sus alumnos. Un estudio de la Universidad de Chicago (2026) encontró lo mismo.</div>
+<header class="barra" id="barra">
+  <div class="in">
+    <a class="marca" href="#top"><span class="cruz" aria-hidden="true"></span>Madison<span class="marca-larga"> · IA y aprendizaje</span></a>
+    <div class="der">
+      <span class="donde" id="donde" aria-hidden="true"></span>
+      <button type="button" id="btnIndice" aria-expanded="false" aria-controls="indice">Índice</button>
     </div>
   </div>
-  <ul class="facts">
-    <li><b>El 82 % de los profesores cree que sabe distinguir un trabajo hecho con IA.</b> Pero en las entrevistas, los 7 reconocen que no pueden demostrarlo.</li>
-    <li><b>Los alumnos creen que sus notas bajarían sin IA;</b> los profesores, que se quedarían igual.</li>
-    <li><b>Los dos coinciden en algo:</b> la IA perjudica la creatividad y el trabajo por tu cuenta.</li>
-  </ul>
-</section>
+  <i class="progreso" id="progreso" aria-hidden="true"></i>
+</header>
 
-<!-- EVALUACION -->
-<section id="evaluacion" class="band">
-  <h2>Cuando los profesores cambian cómo evalúan, la IA cambia de sitio, <em>no de forma</em></h2>
-  <span class="source">Encuesta a 170 estudiantes y a 38 profesores · 7 entrevistas</span>
-  <p class="lead">Por la IA, muchos profesores han cambiado cómo ponen las notas: más exámenes en clase y a mano, exposiciones orales, trabajos hechos en el aula o prohibir la IA. Preguntamos a los 77 alumnos que lo han vivido.</p>
-  <div class="grid g2">
-    <div class="card stat"><span class="num t-red">6 %</span><p>usa menos la IA en esa asignatura</p></div>
-    <div class="card stat"><span class="num t-teal">47 %</span><p>la sigue usando, pero de otra forma: en otro momento o para otra cosa</p></div>
-  </div>
-  <div class="bars" id="evalBars">
-    <div class="title">Qué cambios mencionan (%)</div>
-    <div class="legend"><span style="--c: var(--blue-dark)">Alumnos (lo que han visto)</span><span style="--c: var(--cocoa)">Profesores (lo que dicen hacer)</span></div>
-  </div>
-  <ul class="facts">
-    <li><b>Quienes han vivido cambios usan la IA igual de bien o de mal</b> que quienes no: los cambios no enseñan a usarla mejor.</li>
-    <li><b>Los alumnos viven los cambios como control</b> (detectores y prohibiciones); <b>los profesores, como otra forma de enseñar</b> (más trabajo en clase y exposiciones).</li>
-    <li><b>Ningún profesor dice usar detectores de IA,</b> pero más de la mitad de los alumnos dice haberlos visto.</li>
-    <li><b>Cambiar cuesta:</b> los profesores cuentan que corrigen más y que sienten que hacen una “labor detectivesca”.</li>
-  </ul>
-</section>
-
-<!-- COMPETENCIAS -->
-<section id="competencias">
-  <h2><mark>Usar bien la IA</mark> refuerza habilidades, y son las que <em>piden las empresas</em></h2>
-  <span class="source">Encuesta a 170 estudiantes · informes de empleo 2024–2026</span>
-  <div class="grid g3">
-    <div class="card stat"><span class="num t-teal">1,6</span><p>habilidades (de 7) que el activo siente debilitadas</p></div>
-    <div class="card stat"><span class="num t-amber">2,4</span><p>las que siente el mixto</p></div>
-    <div class="card stat"><span class="num t-red">3,2</span><p>las que siente el pasivo: el doble que el activo</p></div>
-  </div>
-  <div class="bars" id="refBars">
-    <div class="title">% que dice que la IA le refuerza la comprensión profunda</div>
-  </div>
-  <ul class="facts">
-    <li><b>Cuanto mejor se usa la IA, más se siente que mejora la comprensión</b>, la búsqueda de información y la resolución de problemas.</li>
-    <li><b>Quien la usa mejor se siente más capaz de hacer las cosas sin ella.</b></li>
-  </ul>
-  <h3 style="margin-top:26px">Lo que piden las empresas</h3>
-  <ul class="facts">
-    <li><b>Comprobar:</b> controlar la calidad de lo que da la IA es la habilidad humana que más importa al trabajar con ella (50 %, Microsoft 2026, 20.000 trabajadores). Es justo lo que le falta al mixto.</li>
-    <li><b>Pensar primero:</b> los directores de recursos humanos españoles ven falta de autonomía en el 89 % de los empleados jóvenes (IESE 2025).</li>
-    <li><b>Analizar:</b> 7 de cada 10 empresas consideran esencial el pensamiento analítico (Foro Económico Mundial 2025).</li>
-    <li><b>Y saber usar la IA:</b> el 66 % de los directivos no contrataría a alguien sin habilidades de IA (Microsoft y LinkedIn 2024).</li>
-  </ul>
-  <div class="callout"><b>Las empresas no piden menos IA: piden saber controlarla.</b></div>
-</section>
-
-<!-- MAPA -->
-<section id="mapa">
-  <h2>La IA se usa sobre todo para <em>estudiar</em>, no para hacer trabajos</h2>
-  <span class="source">Encuesta a 170 estudiantes</span>
-  <div class="bars" id="taskBars"><div class="title">% que la usa a menudo o siempre para cada tarea</div></div>
-  <h3 style="margin-top:26px">El semáforo: ¿en qué tareas se aprende y en cuáles se delega?</h3>
-  <div class="semaforo">
-    <div class="sem v"><h3>Verde · para aprender</h3><p>Entender conceptos y resolver ejercicios. Quien más las usa, mejor usa la IA. Y son las dos más usadas.</p></div>
-    <div class="sem a"><h3>Amarillo · depende de cómo</h3><p>Buscar información, hacer preguntas de práctica, redactar, corregir, traducir, esquemas, ideas, programar y presentaciones.</p></div>
-    <div class="sem r"><h3>Rojo · para delegar</h3><p>Resumir apuntes y organizarse. Quien más las usa, más pasivo es.</p></div>
-  </div>
-  <ul class="facts">
-    <li><b>Las tareas de hacer el trabajo son las que más tiempo ahorran:</b> presentaciones, redactar, traducir y esquemas.</li>
-    <li><b>El pasivo destaca en resumir apuntes y hacer esquemas:</b> tareas en las que la IA hace la síntesis por él.</li>
-    <li><b>El mixto es quien más usa la IA para entender y hacer ejercicios:</b> aprende con ella, pero sin comprobar si es correcto.</li>
-  </ul>
-</section>
-
-<!-- EXPERIMENTO -->
-<section id="experimento">
-  <h2>En una clase real, la IA <mark>se equivocó con más de la mitad</mark>, y casi nadie <em>lo notó</em> a tiempo</h2>
-  <span class="source">Práctica con 55 alumnos, 19 de noviembre de 2026</span>
-  <h3 style="margin-top:20px">Qué hicimos</h3>
-  <ol class="steps">
-    <li><b>El material:</b> un capítulo largo del informe FOESSA (Cáritas) sobre pobreza y desigualdad en España, en PDF.</li>
-    <li><b>Los grupos:</b> 55 alumnos de una asignatura de Sociología, en 13 grupos de 4 o 5.</li>
-    <li><b>La tarea:</b> 16 preguntas en las que había que encontrar un dato y decir en qué página y apartado estaba.</li>
-    <li><b>La regla:</b> podían usar la IA. Cada respuesta se llevaba a la mesa del profesor y cada fallo restaba 0,25.</li>
-    <li><b>Nosotros:</b> observábamos a los grupos sin intervenir.</li>
-    <li><b>Al final:</b> un cuestionario individual por QR sobre cómo usaron la IA, con las mismas 8 frases del test.</li>
+<nav class="indice" id="indice" hidden aria-label="Secciones">
+  <button type="button" class="cerrar" id="btnCerrar">Cerrar</button>
+  <ol>
+    <li><a href="#resumen"><span>01</span>Lo que hemos descubierto</a></li>
+    <li><a href="#test"><span>02</span>¿Qué perfil eres?</a></li>
+    <li><a href="#perfiles"><span>03</span>Los tres perfiles</a></li>
+    <li><a href="#uso"><span>04</span>Cómo la usan</a></li>
+    <li><a href="#como"><span>05</span>Cómo, no cuánto</a></li>
+    <li><a href="#brecha"><span>06</span>Profesores y alumnos</a></li>
+    <li><a href="#evaluacion"><span>07</span>Evaluación</a></li>
+    <li><a href="#competencias"><span>08</span>Competencias</a></li>
+    <li><a href="#mapa"><span>09</span>Mapa de usos</a></li>
+    <li><a href="#experimento"><span>10</span>Experimento 1</a></li>
+    <li><a href="#profesores"><span>11</span>Entrevistas</a></li>
+    <li><a href="#examen"><span>12</span>Experimento 2</a></li>
+    <li><a href="#recomendaciones"><span>13</span>Recomendaciones</a></li>
+    <li><a href="#metodo"><span>14</span>Cómo lo hicimos</a></li>
   </ol>
-  <div class="callout"><b>Antes de la clase, probamos nosotros las IAs.</b> Gemini acertó las 15 preguntas tipo test. ChatGPT acertó 14 la primera vez… y solo 6 la segunda, con el mismo PDF y las mismas preguntas.</div>
-  <h3 style="margin-top:26px">Qué pasó</h3>
-  <div class="grid g2">
-    <div class="card stat"><span class="num t-teal">73 %</span><p>dice que su grupo usó la IA</p></div>
-    <div class="card stat"><span class="num t-teal">88 %</span><p>de ellos le pasó el PDF entero</p></div>
-    <div class="card stat"><span class="num t-red">54 %</span><p>recibió alguna respuesta equivocada de la IA</p></div>
-    <div class="card stat"><span class="num t-red">12 de 22</span><p>solo se dieron cuenta del error al fallar en la mesa</p></div>
-  </div>
-  <div class="bars" id="expBars"><div class="title">¿Para qué usaron la IA? (%)</div></div>
-  <ul class="facts">
-    <li><b>Con prisa y nota en juego, la IA se usa como un buscador.</b> Casi nadie la usó para entender.</li>
-    <li><b>Quien decía que siempre comprueba lo que dice la IA no detectó antes los errores</b> que quien decía que no. Lo que declaramos no es lo que hacemos.</li>
-    <li><b>El 91 % se fía igual de la IA después de la práctica</b>, aunque a muchos les dio respuestas equivocadas.</li>
-    <li><b>Escondían la IA cuando pasaba un observador,</b> aunque estaba permitida.</li>
-    <li><b>La pregunta más fallada fue la única en la que había que argumentar,</b> no buscar un dato.</li>
-    <li><b>“No usar IA = quedar los últimos”,</b> escribió un alumno. Los grupos que más la usaron resolvieron algo más de preguntas.</li>
-  </ul>
-  <div class="callout"><b>Por eso proponemos una prueba práctica para seleccionar personal:</b> una encuesta no basta para saber si alguien comprueba lo que dice la IA.</div>
-</section>
+</nav>
 
-<!-- PROFESORES -->
-<section id="profesores">
-  <h2>Lo que dicen los <em>profesores</em></h2>
-  <span class="source">7 entrevistas a profesores de Economía, Marketing, Sociología e Historia Económica</span>
-  <div class="grid g3">
-    <div class="persona p-pas"><div class="head"><span class="num">3</span></div><h3>El escéptico</h3><p>Suele usar poco la IA y le preocupa que los alumnos dejen de pensar. Ha pasado todo a clase: papel, boli y sin móviles.</p></div>
-    <div class="persona p-act"><div class="head"><span class="num">2</span></div><h3>El integrador</h3><p>La usa mucho. Deja usarla si se declara y evalúa cómo razona el alumno.</p></div>
-    <div class="persona p-mix"><div class="head"><span class="num">2</span></div><h3>El pragmático</h3><p>Ni a favor ni en contra: se adapta, pero duda de que la IA sirva para aprender.</p></div>
+<!-- 00 · PORTADA -->
+<section class="sec portada" id="top" data-n="00" data-nombre="Portada">
+  <div class="tec" aria-hidden="true"><span>Econo-Reto Madison 2026</span><span>Universidad de Valladolid</span></div>
+  <div class="wrap">
+    <h1 id="titulo"><span class="l"><span>¿La IA ayuda</span></span><span class="l"><span>a <em>aprender</em></span></span><span class="l"><span>o solo a</span></span><span class="l"><span><em>terminar antes</em>?</span></span></h1>
+    <p class="respuesta"><b>Depende de cómo se use.</b> Aquí tienes todo lo que descubrimos.</p>
   </div>
-  <ul class="facts">
-    <li><b>Los 7 sospechan, pero no pueden demostrar</b> que un trabajo está hecho con IA. Solo lo descubren cuando el alumno tiene que explicarlo y no sabe.</li>
-    <li><b>Los 7 han pasado tareas a clase:</b> menos trabajos para casa y más exámenes a mano, prácticas en el aula y exposiciones.</li>
-    <li><b>Los 7 distinguen un buen uso y un mal uso de la IA,</b> y creen que lo decide el interés de cada alumno.</li>
-    <li><b>A 6 de 7 les preocupa que se deje de pensar,</b> más que la copia: que el alumno se ahorre el esfuerzo de aprender y crea que ha aprendido.</li>
-    <li><b>Los 7 desconfían de lo que declaran los alumnos,</b> y 5 reconocen que ellos también piensan que “los demás” la usan peor.</li>
-    <li><b>Creen que alguien debería enseñar a usar la IA, pero nadie lo asume:</b> unos lo mandan al instituto, otros dicen que la universidad no tiene tiempo ni medios, y otros que no es tarea de su asignatura.</li>
-    <li><b>4 de 7 creen que la mayoría de sus alumnos “termina antes, pero no aprende”.</b></li>
-    <li><b>6 de 7 apoyan enseñar a usar la IA desde 1.º.</b></li>
-  </ul>
-</section>
-
-<!-- PENDIENTE -->
-<section id="martes" class="band">
-  <h2>¿Quién usa bien la IA <em>aprende más</em>… y termina antes?</h2>
-  <div class="card pending" style="margin-top:16px">
-    <p>Estamos analizando un segundo experimento con unos 40 alumnos y un examen sin IA. Aquí publicaremos si quien usa mejor la IA saca mejor nota sin ella, y si se puede aprender y terminar antes a la vez.</p>
-    <p style="margin-top:10px"><b>Lo que ya adelanta la encuesta:</b> el pasivo es el que más tiempo ahorra (91 % ahorra al menos 1 hora a la semana) y el que menos cree aprender (68 %, frente al 74 % del activo y el 84 % del mixto).</p>
+  <div class="pie">
+    <span>170 estudiantes<br>38 profesores<br>7 entrevistas<br>2 experimentos</span>
+    <a class="bajar" href="#resumen" aria-label="Bajar a los resultados">
+      <svg class="mira" id="miraPortada" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 3v28M3 17h28" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M1 8V1h7M26 1h7v7M33 26v7h-7M8 33H1v-7" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+      <span>Desliza</span>
+    </a>
   </div>
 </section>
 
-<!-- RECOMENDACIONES -->
-<section id="recomendaciones" class="band-lemon">
-  <h2>Qué <em>proponemos</em></h2>
-  <div class="reco">
-    <div class="card"><h3>Para estudiantes</h3><p>La regla de los tres pasos: primero yo, luego la IA, y siempre compruebo. Y haz el test de esta página de vez en cuando para ver tu perfil.</p><p class="why">Porque comprobar es el hábito que más falta.</p></div>
-    <div class="card"><h3>Para la universidad</h3><p>Enseñar a usar la IA desde 1.º, en todas las carreras, y evaluar el razonamiento (“¿por qué lo hiciste así?”) en lugar de solo vigilar.</p><p class="why">Porque controlar no cambia el modo de uso, y 6 de 7 profesores lo apoyan.</p></div>
-    <div class="card"><h3>Para las empresas</h3><p>Una prueba práctica de selección: resolver un caso con IA, con tiempo limitado, en el que la IA comete errores. Gana quien los detecta.</p><p class="why">Porque lo que se declara no predice lo que se hace, y las empresas piden controlar la calidad de la IA.</p></div>
-    <div class="card"><h3>Además, para las empresas</h3><p>Formar en comprobar lo que da la IA a becarios y recién graduados, y usar el índice de uso activo para conocer cómo usan la IA sus equipos.</p><p style="margin-top:8px">Un estudio periódico, cada curso, sobre cómo se usa la IA en la universidad: sus datos interesan a las empresas que contratan a esos titulados y a las propias universidades.</p></div>
-  </div>
-</section>
+<main>
 
-<!-- METODO -->
-<section id="metodo" class="method">
-  <h2>Cómo lo hicimos y qué hay que <em>tener en cuenta</em></h2>
-  <ol class="steps">
-    <li><b>Encuesta online a 170 estudiantes</b> de la Universidad de Valladolid (27 oct – 17 nov 2026). Recibimos 208 respuestas y descartamos 38 por no superar los controles de calidad.</li>
-    <li><b>La misma encuesta, adaptada, a profesores:</b> 38 registros.</li>
-    <li><b>7 entrevistas largas a profesores,</b> con dinámicas de tarjetas y casos. Las analizamos por temas y las citamos de forma anónima.</li>
-    <li><b>Un experimento en clase</b> con 55 alumnos, con observación directa y cuestionario.</li>
-    <li><b>El índice de uso activo:</b> 8 frases sobre cuatro hábitos (pensar primero, iterar, verificar y hacerlo mío), convertidas en una nota de 0 a 100. Comprobamos que las 8 frases miden lo mismo.</li>
-    <li><b>Los perfiles</b> salen de agrupar a los estudiantes según sus respuestas, no los elegimos nosotros.</li>
-  </ol>
-  <div class="callout warn" style="margin-top:18px">
-    <b>Para tomar con cautela.</b>
-    <ul style="margin:8px 0 0; padding-left:20px">
-      <li>La muestra no representa a toda la universidad: hay más estudiantes de Economía y Empresa y de 1.º y 2.º.</li>
-      <li>Las respuestas de las encuestas son autodeclaradas: recogen lo que cada persona dice que hace, no lo que hace. El experimento muestra que no siempre coincide.</li>
-      <li>El experimento fue con un solo profesor y una sola tarea, con pocos alumnos pasivos.</li>
-      <li>Algunas diferencias son pequeñas o dudosas, como las de género o carrera, y no las hemos destacado.</li>
-      <li>Los datos de empresas vienen de informes de consultoras y tecnológicas, no de una encuesta nuestra.</li>
+<!-- 01 · RESUMEN -->
+<section class="sec resumen" id="resumen" data-n="01" data-nombre="Resumen">
+  <div class="tec" aria-hidden="true"><span>01 Resumen</span><span>Encuesta, entrevistas y dos experimentos</span></div>
+  <div class="wrap">
+    <h2 class="h-baja">Seis cosas que hemos <em>descubierto</em></h2>
+    <ul class="hallazgos" id="hallazgos">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Hay tres formas de usar la IA:</b> activa (6 de cada 10), mixta (2 de cada 10) y pasiva (2 de cada 10).</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Comprobar es lo que más falta.</b> 1 de cada 5 estudiantes usa la IA para aprender, pero se fía de lo que dice sin comprobarlo.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Usarla mucho no es usarla mal.</b> Hay los mismos estudiantes pasivos entre quienes la usan a diario que entre quienes casi no la usan.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Lo que decimos no es lo que hacemos.</b> En clase, quienes decían comprobar siempre se equivocaron igual que los demás.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Controlar no cambia cómo se usa.</b> Cuando los profesores cambian la forma de evaluar, la IA no desaparece: se usa en otro momento.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Delegar se paga en el examen.</b> Quien dejó a la IA más de la mitad de una práctica sacó de media unos 3 puntos menos en el examen sin IA que quien hizo la mayor parte por su cuenta.</p></li>
     </ul>
+  </div>
+</section>
+
+<!-- 02 · TEST -->
+<section class="sec test" id="test" data-n="02" data-nombre="Test">
+  <div class="tec" aria-hidden="true"><span>02 Test</span><span>Índice de uso activo, 0 a 100</span></div>
+  <div class="wrap">
+    <h2 class="h-baja">¿Qué <em>perfil</em> eres?</h2>
+    <p class="lead">Las mismas 8 frases que respondieron los 170 estudiantes. Contesta con sinceridad: nadie más ve tus respuestas.</p>
+    <div class="marco esquinas" id="quiz"><i class="e3"></i><i class="e4"></i>
+      <div class="qtop"><span id="qCount">Frase 1 de 8</span><span class="qbar" aria-hidden="true"><i id="qFill"></i></span></div>
+      <div id="qs"><noscript><p style="padding-top:18px">El test necesita JavaScript para calcular tu perfil.</p></noscript></div>
+      <button type="button" id="qBack" class="qatras" hidden>← Frase anterior</button>
+      <div id="quizOut" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · PERFILES -->
+<section class="sec perfiles osc-b" id="perfiles" data-n="03" data-nombre="Perfiles">
+  <div class="tec" aria-hidden="true"><span>03 Perfiles</span><span>Encuesta a 170 estudiantes</span></div>
+  <div class="wrap">
+      <h2 class="h-alta">No existen <em>los que usan la IA</em> y <em>los que no</em>. Hay tres perfiles</h2>
+      <div class="desc-perfiles" id="descPerfiles">
+        <article><div class="cab"><h3>Activo</h3><span class="n">58 %</span></div><p>Lo intenta primero, pregunta a la IA para entender, repregunta, comprueba y lo reescribe a su manera. Usa la IA como un profesor particular.</p></article>
+        <article><div class="cab"><h3>Mixto</h3><span class="n">22 %</span></div><p>Hace casi todo como el activo: piensa e itera. Pero se fía de lo que dice la IA y no lo comprueba.</p></article>
+        <article><div class="cab"><h3>Pasivo</h3><span class="n">20 %</span></div><p>Le pide el resultado a la IA y lo entrega. La IA piensa por él.</p></article>
+      </div>
+  </div>
+  <div class="datos">
+    <div class="wrap">
+      <div class="dos-col">
+        <div class="graf" style="margin-top:0">
+          <p class="tit">Cómo puntúa cada perfil en los cuatro hábitos (de 1 a 5)</p>
+          <div class="leyenda"><span><i style="--c:var(--electric)"></i>Activo</span><span><i style="--c:transparent;--b:var(--electric-2)"></i>Mixto</span><span><i style="--c:var(--ink)"></i>Pasivo</span></div>
+          <svg id="graHabitos" style="max-width:600px" role="img" aria-label="Nota media de cada perfil en los cuatro hábitos: pensar primero, activo 4,0, mixto 4,2, pasivo 2,2; iterar 4,1, 4,1 y 2,3; verificar 3,8, 2,1 y 2,6; hacerlo mío 4,2, 3,8 y 3,2."></svg>
+        </div>
+        <div>
+          <div class="bloque esquinas" style="margin-top:0"><i class="e3"></i><i class="e4"></i><p><b>El perfil sorpresa es el mixto.</b> Piensa e itera tanto como el activo, pero es el que menos comprueba de los tres, incluso menos que el pasivo. No lo esperábamos: si la IA se equivoca, aprende el error.</p></div>
+        </div>
+      </div>
+      <ul class="hallazgos">
+        <li><span class="cruz" aria-hidden="true"></span><p><b>La frecuencia no decide el perfil:</b> hay un 20 % de pasivos tanto entre quienes usan la IA a diario como entre quienes la usan poco.</p></li>
+        <li><span class="cruz" aria-hidden="true"></span><p><b>Los cursos altos tienen menos pasivos:</b> 9 % en 3.º o más, frente a más del 20 % en 1.º y 2.º.</p></li>
+        <li><span class="cruz" aria-hidden="true"></span><p><b>El mixto es el que más usa la IA para estudiar:</b> para entender conceptos, hacer ejercicios y organizarse.</p></li>
+        <li><span class="cruz" aria-hidden="true"></span><p><b>Uno de cada cuatro mixtos casi nunca duda de la IA.</b> En los otros dos perfiles, nadie.</p></li>
+        <li><span class="cruz" aria-hidden="true"></span><p><b>Cada perfil busca algo distinto:</b> el pasivo, ahorrar tiempo (91 %); el mixto, sacar mejor nota (37 %, el doble que los demás).</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · USO -->
+<section class="sec uso osc-b" id="uso" data-n="04" data-nombre="Cómo la usan">
+  <div class="tec" aria-hidden="true"><span>04 Uso</span><span>Encuesta a 170 estudiantes</span></div>
+  <div class="wrap">
+    <h2 class="h-alta">Casi todos <mark>usan la IA</mark>, y <em>casi a diario</em></h2>
+    <div class="cifras">
+      <div><span class="n num-alta" data-cuenta>61 %</span><p>la usa para estudiar casi a diario</p></div>
+      <div><span class="n num-alta" data-cuenta>0</span><p>estudiantes dicen no usarla nunca</p></div>
+      <div><span class="n num-alta" data-cuenta>75 %</span><p>cree que con la IA aprende más</p></div>
+      <div><span class="n num-alta" data-cuenta>74 %</span><p>ahorra al menos 1 hora a la semana</p></div>
+    </div>
+    <div class="graf">
+      <p class="tit">Herramientas que usan (pueden marcar varias). El área de cada círculo es el porcentaje.</p>
+      <div class="burbujas" id="graHerramientas" role="img" aria-label="Gemini 82 %, ChatGPT 79 %, NotebookLM 37 %, Claude 36 %, Copilot 15 %, DeepSeek 9 %, Perplexity 6 %."></div>
+    </div>
+    <div class="dos-listas">
+      <div><h3 class="h3">Lo que más les aporta</h3><ul class="piruletas" data-lista="Entender mejor la materia|80;Ahorrar tiempo|78;Desbloquearse cuando se atascan|60;Mejorar la calidad|39;Sacar mejor nota|21"></ul></div>
+      <div><h3 class="h3">Lo que más les preocupa</h3><ul class="piruletas" data-lista="Depender demasiado|94;Que se invente datos o se equivoque|78;Plagiar sin darse cuenta|34;Aprender menos|18"></ul></div>
+    </div>
+    <ul class="hallazgos">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Se fían “bastante” de la IA:</b> el 59 %. Solo el 2 % se fía totalmente.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Dudan de la IA sobre todo cuando ya saben del tema:</b> el 86 % duda cuando ve algo raro en algo que conoce; solo el 28 % cuando la IA cita autores o leyes.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 05 · CÓMO -->
+<section class="sec como" id="como" data-n="05" data-nombre="Cómo, no cuánto">
+  <div class="tec" aria-hidden="true"><span>05 Cómo, no cuánto</span><span>Encuesta a 170 estudiantes</span></div>
+  <div class="wrap dos-col">
+    <div>
+      <h2 class="h-baja">Lo que importa es <em>cómo usas la IA</em>, no cuánto ni con qué</h2>
+      <ul class="hallazgos">
+        <li><span class="cruz" aria-hidden="true"></span><p><b>Quien usa la IA a diario la usa igual de bien</b> que quien la usa una o dos veces por semana.</p></li>
+        <li><span class="cruz" aria-hidden="true"></span><p><b>La herramienta no cambia nada:</b> usar ChatGPT, Gemini, Claude o Copilot no hace que se use mejor ni peor.</p></li>
+        <li><span class="cruz" aria-hidden="true"></span><p><b>NotebookLM es la excepción:</b> quien la usa saca 11 puntos más. Trabaja con los apuntes del propio alumno, así que es una señal de buenos hábitos.</p></li>
+        <li><span class="cruz" aria-hidden="true"></span><p><b>Lo que decide es cada persona:</b> la frecuencia y la herramienta explican muy poco; los hábitos, casi todo.</p></li>
+      </ul>
+    </div>
+    <div class="graf">
+      <p class="tit">Nota media del índice de uso activo (0–100) según la frecuencia</p>
+      <svg id="graFrecuencia" role="img" aria-label="Casi a diario 66; 1 o 2 veces por semana 67; algunas veces al mes 74; menos de 1 vez al mes, solo 8 personas, 48."></svg>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · BRECHA -->
+<section class="sec brecha osc-b" id="brecha" data-n="06" data-nombre="Profes y alumnos">
+  <div class="tec" aria-hidden="true"><span>06 Profesores y alumnos</span><span>170 estudiantes y 38 profesores</span></div>
+  <div class="wrap">
+    <h2 class="h-alta"><mark>Profesores y alumnos</mark> ven la IA <em>al revés</em></h2>
+    <p class="fuente">Misma encuesta a 170 estudiantes y a 38 profesores</p>
+    <div class="frente">
+      <div class="a"><span class="n num-alta" data-cuenta>80 %</span><p>de los alumnos dice que la IA le ayuda a entender mejor</p></div>
+      <div class="p"><span class="n num-alta" data-cuenta>5 %</span><p>de los profesores piensa lo mismo</p></div>
+    </div>
+    <div class="graf">
+      <p class="tit">% que cree que la IA debilita cada habilidad</p>
+      <div class="leyenda"><span><i style="--c:var(--electric)"></i>Alumnos</span><span><i style="--c:var(--ink)"></i>Profesores</span></div>
+      <svg id="graPesas" role="img" aria-label="Pensamiento crítico: alumnos 29 %, profesores 89 %. Comprensión profunda: 8 % y 63 %. Resolver problemas: 28 % y 68 %. Buscar y comprobar información: 24 % y 63 %. Creatividad: 44 % y 63 %. Trabajo autónomo: 50 % y 58 %."></svg>
+    </div>
+    <div class="bloque esquinas"><i class="e3"></i><i class="e4"></i><p><b>El mayor choque es la comprensión.</b> El 68 % de los alumnos cree que la IA se la refuerza; el 63 % de los profesores cree que se la debilita.</p></div>
+
+    <h3 class="h3" style="margin-top:var(--s8)">Pregunta rápida: de cada 10 alumnos, ¿cuántos entregan lo de la IA sin revisarlo?</h3>
+    <p class="lead" style="margin-top:12px">Piensa un número antes de mirar.</p>
+    <button type="button" class="destapar" aria-expanded="false" aria-controls="respSillas"><span class="cruz" aria-hidden="true"></span><span>Ver la respuesta</span></button>
+    <div class="respuesta-oculta" id="respSillas" hidden>
+      <div class="sillas" id="sillas"></div>
+      <div class="bloque esquinas"><i class="e3"></i><i class="e4"></i><p><b>Todo el mundo cree que los demás la usan peor.</b> Los alumnos lo exageran de sus compañeros y los profesores, de sus alumnos. Un estudio de la Universidad de Chicago (2026) encontró lo mismo.</p></div>
+    </div>
+    <ul class="hallazgos">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>El 82 % de los profesores cree que sabe distinguir un trabajo hecho con IA.</b> Pero en las entrevistas, los 7 reconocen que no pueden demostrarlo.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Los alumnos creen que sus notas bajarían sin IA;</b> los profesores, que se quedarían igual.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Los dos coinciden en algo:</b> la IA perjudica la creatividad y el trabajo por tu cuenta.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 07 · EVALUACIÓN -->
+<section class="sec evaluacion osc-b" id="evaluacion" data-n="07" data-nombre="Evaluación">
+  <div class="tec" aria-hidden="true"><span>07 Evaluación</span><span>170 estudiantes, 38 profesores y 7 entrevistas</span></div>
+  <div class="wrap">
+    <h2 class="h-baja">Cuando los profesores cambian cómo evalúan, la IA cambia de sitio, <em>no de forma</em></h2>
+    <p class="lead">Por la IA, muchos profesores han cambiado cómo ponen las notas: más exámenes en clase y a mano, exposiciones orales, trabajos hechos en el aula o prohibir la IA. Preguntamos a los 77 alumnos que lo han vivido.</p>
+    <div class="cifras">
+      <div><span class="n num-baja" data-cuenta>6 %</span><p>usa menos la IA en esa asignatura</p></div>
+      <div><span class="n num-baja" data-cuenta>47 %</span><p>la sigue usando, pero de otra forma: en otro momento o para otra cosa</p></div>
+    </div>
+    <div class="graf">
+      <p class="tit">Qué cambios mencionan (%)</p>
+      <div class="mariposa" id="graMariposa" role="img" aria-label="Exámenes en clase o a mano: alumnos 66 %, profesores 75 %. Detectores de IA: 57 % y 0 %. Prohibir la IA: 56 % y 12 %. Trabajos en clase: 34 % y 62 %. Exposiciones orales: 30 % y 75 %. Exámenes en vez de trabajos: 29 % y 50 %."></div>
+    </div>
+    <ul class="hallazgos">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Quienes han vivido cambios usan la IA igual de bien o de mal</b> que quienes no: los cambios no enseñan a usarla mejor.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Los alumnos viven los cambios como control</b> (detectores y prohibiciones); <b>los profesores, como otra forma de enseñar</b> (más trabajo en clase y exposiciones).</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Cambiar cuesta:</b> los profesores cuentan que corrigen más y que sienten que hacen una “labor detectivesca”.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 08 · COMPETENCIAS -->
+<section class="sec competencias osc-b" id="competencias" data-n="08" data-nombre="Competencias">
+  <div class="tec" aria-hidden="true"><span>08 Competencias</span><span>170 estudiantes e informes de empleo 2024–2026</span></div>
+  <div class="wrap">
+    <h2 class="h-alta"><mark>Usar bien la IA</mark> refuerza habilidades, y son las que <em>piden las empresas</em></h2>
+    <p class="fuente">Encuesta a 170 estudiantes · informes de empleo 2024–2026</p>
+    <div class="comp-grid">
+      <div class="graf">
+        <p class="tit">Habilidades (de 7) que cada perfil siente debilitadas</p>
+        <div class="medidores" id="graMedidores"></div>
+      </div>
+      <div class="graf">
+        <p class="tit">% que dice que la IA le refuerza la comprensión profunda</p>
+        <div class="columnas" id="graColumnas" role="img" aria-label="Activo 76 %, mixto 79 %, pasivo 32 %."></div>
+      </div>
+    </div>
+    <ul class="hallazgos">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Cuanto mejor se usa la IA, más se siente que mejora la comprensión,</b> la búsqueda de información y la resolución de problemas.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Quien la usa mejor se siente más capaz de hacer las cosas sin ella.</b></p></li>
+    </ul>
+    <h3 class="h3" style="margin-top:var(--s8)">Lo que piden las empresas</h3>
+    <ul class="hallazgos" style="margin-top:var(--s5)">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Comprobar:</b> controlar la calidad de lo que da la IA es la habilidad humana que más importa al trabajar con ella (50 %, Microsoft 2026, 20.000 trabajadores). Es justo lo que le falta al mixto.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Pensar primero:</b> los directores de recursos humanos españoles ven falta de autonomía en el 89 % de los empleados jóvenes (IESE 2025).</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Analizar:</b> 7 de cada 10 empresas consideran esencial el pensamiento analítico (Foro Económico Mundial 2025).</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Y saber usar la IA:</b> el 66 % de los directivos no contrataría a alguien sin habilidades de IA (Microsoft y LinkedIn 2024).</p></li>
+    </ul>
+    <div class="bloque"><p><b>Las empresas no piden menos IA: piden saber controlarla.</b></p></div>
+  </div>
+</section>
+
+<!-- 09 · MAPA -->
+<section class="sec mapa" id="mapa" data-n="09" data-nombre="Mapa de usos">
+  <div class="tec" aria-hidden="true"><span>09 Mapa de usos</span><span>Encuesta a 170 estudiantes</span></div>
+  <div class="wrap">
+    <h2 class="h-baja">La IA se usa sobre todo para <em>estudiar</em>, no para hacer trabajos</h2>
+    <p class="fuente">Encuesta a 170 estudiantes</p>
+    <div class="graf">
+      <p class="tit">% que la usa a menudo o siempre para cada tarea. Cada bloque es proporcional a su porcentaje.</p>
+      <div class="mapa-areas" id="graMapa" role="img" aria-label="Entender conceptos 72 %, resolver ejercicios 67 %, hacer preguntas de práctica 57 %, buscar información 48 %, resumir apuntes 48 %, corregir textos 34 %, redactar textos 32 %, programar o analizar datos 31 %, hacer esquemas 28 %, organizarse 24 %, generar ideas 21 %, preparar presentaciones 21 %, traducir 18 %."></div>
+    </div>
+    <h3 class="h3" style="margin-top:var(--s8)">El semáforo: ¿en qué tareas se aprende y en cuáles se delega?</h3>
+    <ul class="semaforo">
+      <li class="v"><span class="luz" aria-hidden="true"><i></i><i></i><i></i></span><div><h3>Verde · para aprender</h3><p>Entender conceptos y resolver ejercicios. Quien más las usa, mejor usa la IA. Y son las dos más usadas.</p></div></li>
+      <li class="a"><span class="luz" aria-hidden="true"><i></i><i></i><i></i></span><div><h3>Amarillo · depende de cómo</h3><p>Buscar información, hacer preguntas de práctica, redactar, corregir, traducir, esquemas, ideas, programar y presentaciones.</p></div></li>
+      <li class="r"><span class="luz" aria-hidden="true"><i></i><i></i><i></i></span><div><h3>Rojo · para delegar</h3><p>Resumir apuntes y organizarse. Quien más las usa, más pasivo es.</p></div></li>
+    </ul>
+    <ul class="hallazgos">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Las tareas de hacer el trabajo son las que más tiempo ahorran:</b> presentaciones, redactar, traducir y esquemas.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>El pasivo destaca en resumir apuntes y hacer esquemas:</b> tareas en las que la IA hace la síntesis por él.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>El mixto es quien más usa la IA para entender y hacer ejercicios:</b> aprende con ella, pero sin comprobar si es correcto.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10 · EXPERIMENTO 1 -->
+<section class="sec experimento osc-b" id="experimento" data-n="10" data-nombre="Experimento 1">
+  <div class="tec" aria-hidden="true"><span>10 Experimento 1</span><span>19 de noviembre de 2026</span></div>
+  <div class="wrap">
+    <h2 class="h-alta">En una clase real, la IA <mark>se equivocó con más de la mitad</mark>, y casi nadie <em>lo notó</em> a tiempo</h2>
+    <p class="fuente">Experimento 1 · Práctica con 55 alumnos, 19 de noviembre de 2026</p>
+    <h3 class="h3" style="margin-top:var(--s7)">Qué hicimos</h3>
+    <ol class="pasos">
+      <li><span><b>El material:</b> un capítulo largo del informe FOESSA (Cáritas) sobre pobreza y desigualdad en España, en PDF.</span></li>
+      <li><span><b>Los grupos:</b> 55 alumnos de una asignatura de Sociología, en 13 grupos de 4 o 5.</span></li>
+      <li><span><b>La tarea:</b> 16 preguntas en las que había que encontrar un dato y decir en qué página y apartado estaba.</span></li>
+      <li><span><b>La regla:</b> podían usar la IA. Cada respuesta se llevaba a la mesa del profesor y cada fallo restaba 0,25.</span></li>
+      <li><span><b>Nosotros:</b> observábamos a los grupos sin intervenir.</span></li>
+      <li><span><b>Al final:</b> un cuestionario individual por QR sobre cómo usaron la IA, con las mismas 8 frases del test.</span></li>
+    </ol>
+    <div class="graf">
+      <p class="tit">Antes de la clase, probamos nosotros las IAs.</p>
+      <p class="lead" style="margin-top:8px">Gemini acertó las 15 preguntas tipo test. ChatGPT acertó 14 la primera vez… y solo 6 la segunda, con el mismo PDF y las mismas preguntas.</p>
+      <div class="cifras tres" style="margin-top:var(--s5)">
+        <div><span class="n num-alta">15</span><p>Gemini, de 15</p></div>
+        <div><span class="n num-alta">14</span><p>ChatGPT, la primera vez</p></div>
+        <div><span class="n num-alta">6</span><p>ChatGPT, la segunda</p></div>
+      </div>
+    </div>
+    <h3 class="h3" style="margin-top:var(--s8)">Qué pasó</h3>
+    <div class="cifras">
+      <div><span class="n num-alta" data-cuenta>73 %</span><p>dice que su grupo usó la IA</p></div>
+      <div><span class="n num-alta" data-cuenta>88 %</span><p>de ellos le pasó el PDF entero</p></div>
+      <div><span class="n num-alta" data-cuenta>54 %</span><p>recibió alguna respuesta equivocada de la IA</p></div>
+      <div><span class="n num-alta">12 de 22</span><p>solo se dieron cuenta del error al fallar en la mesa</p></div>
+    </div>
+    <div class="graf">
+      <p class="tit">¿Para qué usaron la IA? (%) Cada cuadrícula tiene 100 casillas.</p>
+      <div class="reticulas" id="graReticulas"></div>
+    </div>
+    <ul class="hallazgos">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Con prisa y nota en juego, la IA se usa como un buscador.</b> Casi nadie la usó para entender.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Quien decía que siempre comprueba lo que dice la IA no detectó antes los errores</b> que quien decía que no. Lo que declaramos no es lo que hacemos.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>El 91 % se fía igual de la IA después de la práctica,</b> aunque a muchos les dio respuestas equivocadas.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Escondían la IA cuando pasaba un observador,</b> aunque estaba permitida.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>La pregunta más fallada fue la única en la que había que argumentar,</b> no buscar un dato.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>“No usar IA = quedar los últimos”,</b> escribió un alumno. Los grupos que más la usaron resolvieron algo más de preguntas.</p></li>
+    </ul>
+    <div class="bloque esquinas"><i class="e3"></i><i class="e4"></i><p><b>Por eso proponemos una prueba práctica para seleccionar personal:</b> una encuesta no basta para saber si alguien comprueba lo que dice la IA.</p></div>
+  </div>
+</section>
+
+<!-- 11 · PROFESORES -->
+<section class="sec profesores osc-b" id="profesores" data-n="11" data-nombre="Entrevistas">
+  <div class="tec" aria-hidden="true"><span>11 Entrevistas</span><span>7 profesores</span></div>
+  <div class="wrap">
+    <h2 class="h-baja">Lo que dicen los <em>profesores</em></h2>
+    <p class="fuente">7 entrevistas a profesores de Economía, Marketing, Sociología e Historia Económica</p>
+    <div class="tipos-prof" id="tiposProf">
+      <div class="grupo"><span class="n">3</span><h3>El escéptico</h3><p>Suele usar poco la IA y le preocupa que los alumnos dejen de pensar. Ha pasado todo a clase: papel, boli y sin móviles.</p></div>
+      <div class="grupo"><span class="n">2</span><h3>El integrador</h3><p>La usa mucho. Deja usarla si se declara y evalúa cómo razona el alumno.</p></div>
+      <div class="grupo"><span class="n">2</span><h3>El pragmático</h3><p>Ni a favor ni en contra: se adapta, pero duda de que la IA sirva para aprender.</p></div>
+    </div>
+    <ul class="hallazgos con-siete">
+      <li><span class="siete" data-on="5" aria-hidden="true"></span><p><b>5 de 7 sospechan, pero no pueden demostrar</b> que un trabajo está hecho con IA. Solo lo descubren cuando el alumno tiene que explicarlo y no sabe.</p></li>
+      <li><span class="siete" data-on="7" aria-hidden="true"></span><p><b>Los 7 han pasado tareas a clase:</b> menos trabajos para casa y más exámenes a mano, prácticas en el aula y exposiciones.</p></li>
+      <li><span class="siete" data-on="5" aria-hidden="true"></span><p><b>5 de 7 distinguen un buen uso y un mal uso de la IA,</b> y creen que lo decide el interés de cada alumno.</p></li>
+      <li><span class="siete" data-on="6" aria-hidden="true"></span><p><b>A 6 de 7 les preocupa que se deje de pensar,</b> más que la copia: que el alumno se ahorre el esfuerzo de aprender y crea que ha aprendido.</p></li>
+      <li><span class="siete" data-on="7" aria-hidden="true"></span><p><b>Los 7 desconfían de lo que declaran los alumnos,</b> y 5 reconocen que ellos también piensan que “los demás” la usan peor.</p></li>
+      <li><span class="cruz" aria-hidden="true" style="margin-left:0"></span><p><b>Creen que alguien debería enseñar a usar la IA, pero nadie lo asume:</b> unos lo mandan al instituto, otros dicen que la universidad no tiene tiempo ni medios, y otros que no es tarea de su asignatura.</p></li>
+      <li><span class="siete" data-on="4" aria-hidden="true"></span><p><b>4 de 7 creen que la mayoría de sus alumnos “termina antes, pero no aprende”.</b></p></li>
+      <li><span class="siete" data-on="6" aria-hidden="true"></span><p><b>6 de 7 apoyan enseñar a usar la IA desde 1.º.</b></p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 12 · EXPERIMENTO 2 -->
+<section class="sec examen" id="examen" data-n="12" data-nombre="Experimento 2">
+  <div class="tec" aria-hidden="true"><span>12 Experimento 2</span><span>24 de noviembre de 2026</span></div>
+  <div class="wrap">
+    <h2 class="h-alta">Con la IA la práctica sale mejor… pero <em>el examen sin ella</em>, no</h2>
+    <p class="fuente">Experimento 2 · 18 alumnos de Marketing, 24 de noviembre de 2026</p>
+    <h3 class="h3" style="margin-top:var(--s7)">Qué hicimos</h3>
+    <ol class="pasos">
+      <li><span><b>La práctica:</b> un caso de una marca ficticia (Mochibo) sobre cuota de mercado, satisfacción y NPS, en 30 minutos. Podían usar la IA como quisieran.</span></li>
+      <li><span><b>La encuesta:</b> justo después, cómo habían usado la IA y qué parte de la práctica hizo ella.</span></li>
+      <li><span><b>El examen sorpresa:</b> 8 minutos, sin IA, sin apuntes y sobre la misma práctica.</span></li>
+      <li><span><b>La comparación:</b> unimos las tres cosas de cada alumno con un código anónimo.</span></li>
+    </ol>
+
+    <h3 class="h3" style="margin-top:var(--s8)">Pregunta rápida: ¿quién crees que sacó mejor nota en el examen sin IA?</h3>
+    <p class="lead" style="margin-top:12px">Los que no usaron la IA, los que la usaron un poco o los que la usaron bastante.</p>
+    <button type="button" class="destapar" aria-expanded="false" aria-controls="respNotas"><span class="cruz" aria-hidden="true"></span><span>Ver la respuesta</span></button>
+    <div class="respuesta-oculta" id="respNotas" hidden>
+      <div class="graf" style="margin-top:var(--s5)">
+        <p class="tit">Nota media de 0 a 10: práctica con IA frente a examen sin IA</p>
+        <svg class="pendientes" id="graPendientes" role="img" aria-label="No la usaron, 3 alumnos: práctica 6,0, examen 8,0. La usaron un poco, 10 alumnos: 8,4 y 6,3. La usaron bastante, 5 alumnos: 9,2 y 4,9."></svg>
+      </div>
+      <div class="bloque esquinas"><i class="e3"></i><i class="e4"></i><p><b>Los que no usaron la IA sacaron la peor nota en la práctica y la mejor en el examen.</b> Su nota subió casi 2 puntos. Los que la usaron bastante bajaron más de 4.</p></div>
+    </div>
+
+    <div class="cifras">
+      <div class="ancha"><span class="n num-alta">8,2 → 6,2</span><p>nota media de la práctica con IA frente a la del examen sin IA</p></div>
+      <div><span class="n num-alta">−4,4</span><p>puntos que bajaron los que usaron bastante la IA</p></div>
+      <div><span class="n num-alta" data-cuenta>7,7</span><p>nota media en el examen de quienes dejaron a la IA el 40 % de la práctica o menos</p></div>
+      <div><span class="n num-alta" data-cuenta>4,7</span><p>nota media en el examen de quienes le dejaron más del 60 %</p></div>
+    </div>
+    <div class="graf">
+      <p class="tit">Nota media en el examen sin IA según la parte de la práctica que hizo la IA</p>
+      <div class="columnas-n" id="graDelega" role="img" aria-label="No la usaron 8,0; del 0 al 20 % 7,8; del 21 al 40 % 7,6; del 41 al 60 %, solo 1 alumno, 3,0; del 61 al 80 % 4,4; del 81 al 100 % 5,3."></div>
+      <div class="columnas-n-et" id="graDelegaEt" aria-hidden="true"></div>
+    </div>
+    <ul class="hallazgos">
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Lo que se nota no es si usas la IA, sino cuánto le dejas hacer.</b> Cuanto mayor fue la parte de la práctica que hizo la IA, peor fue la nota sin ella.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Quien mejor nota sacó en la práctica tiende a sacar peor nota en el examen.</b> Una nota alta con IA no dice cuánto se ha aprendido.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Comprobar lo que dice la IA apunta a mejor nota,</b> aunque con tan pocos alumnos la diferencia se queda en el límite.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Lo que cada uno decía de sus hábitos en general no predijo su nota.</b> Lo que la marcó fue cuánto trabajo le dejó a la IA en esa práctica.</p></li>
+      <li><span class="cruz" aria-hidden="true"></span><p><b>Tardar más o menos no cambió lo aprendido.</b> Lo que importó fue qué parte del trabajo hizo cada uno.</p></li>
+    </ul>
+
+    <h3 class="h3" style="margin-top:var(--s8)">¿Se puede aprender y terminar antes a la vez?</h3>
+    <div class="cifras tres">
+      <div><span class="n num-alta" data-cuenta>57 %</span><p>dice que la IA le hace aprender más y ahorrar tiempo a la vez</p></div>
+      <div><span class="n num-alta" data-cuenta>91 %</span><p>de los pasivos ahorra al menos 1 hora a la semana, el que más</p></div>
+      <div><span class="n num-alta" data-cuenta>68 %</span><p>de los pasivos cree aprender más, el que menos (activo 74 %, mixto 84 %)</p></div>
+    </div>
+    <div class="bloque esquinas"><i class="e3"></i><i class="e4"></i><p><b>Sí se puede, pero usar bien la IA cuesta tiempo.</b> Quien la usa de forma más activa cree aprender más, pero ahorra menos tiempo: lo invierte en aprender.</p></div>
+  </div>
+</section>
+
+<!-- 13 · RECOMENDACIONES -->
+<section class="sec recomendaciones osc-b" id="recomendaciones" data-n="13" data-nombre="Recomendaciones">
+  <div class="tec" aria-hidden="true"><span>13 Recomendaciones</span><span>Estudiantes, universidad y empresas</span></div>
+  <div class="wrap">
+    <h2 class="h-alta">Qué <em>proponemos</em></h2>
+    <div class="recos" id="recos">
+      <div class="reco"><h3>Para estudiantes</h3><p>No tengáis miedo de usar la IA, aunque la universidad intente evitarla: es vuestro futuro, y ahora es cuando podéis equivocaros y aprender a usarla bien. Seguid tres pasos: primero yo, luego la IA, y siempre compruebo. Y haced el test de esta página de vez en cuando.</p><p class="por">Porque comprobar es el hábito que más falta, y lo que se delega se nota en cuanto la IA desaparece.</p></div>
+      <div class="reco"><h3>Para la universidad</h3><p>Un estudio anual sobre cómo usan la IA sus estudiantes, con este trabajo como año cero. Y enseñar a usar la IA desde 1.º, en todas las carreras, evaluando el razonamiento (“¿por qué lo hiciste así?”) en lugar de solo vigilar.</p><p class="por">Porque controlar no cambia el modo de uso, y 6 de 7 profesores apoyan enseñarlo desde 1.º.</p></div>
+      <div class="reco"><h3>Para las empresas</h3><p>Una prueba práctica de selección: resolver un caso con IA, con tiempo limitado, en el que la IA comete errores, y después unas preguntas sin ella. Y aprovechar el estudio anual para conocer cómo llegan los futuros titulados.</p><p class="por">Porque lo que se declara no predice lo que se hace, y una nota conseguida con IA no dice cuánto sabe quien la consigue.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 · MÉTODO -->
+<section class="sec metodo osc-b" id="metodo" data-n="14" data-nombre="Cómo lo hicimos">
+  <div class="tec" aria-hidden="true"><span>14 Método</span><span>Octubre y noviembre de 2026</span></div>
+  <div class="wrap">
+    <h2 class="h-baja">Cómo lo hicimos y qué hay que <em>tener en cuenta</em></h2>
+    <ol class="pasos">
+      <li><span><b>Encuesta online a 170 estudiantes</b> de la Universidad de Valladolid (27 oct – 17 nov 2026). Recibimos 208 respuestas y descartamos 38 por no superar los controles de calidad.</span></li>
+      <li><span><b>La misma encuesta, adaptada, a profesores:</b> 38 registros.</span></li>
+      <li><span><b>7 entrevistas largas a profesores,</b> con dinámicas de tarjetas y casos. Las analizamos por temas y las citamos de forma anónima.</span></li>
+      <li><span><b>Dos experimentos en clase.</b> Uno con 55 alumnos de Sociología, con observación directa y cuestionario. Otro con 18 alumnos de Marketing: práctica con IA, encuesta y examen sorpresa sin IA.</span></li>
+      <li><span><b>El índice de uso activo:</b> 8 frases sobre cuatro hábitos (pensar primero, iterar, verificar y hacerlo mío), convertidas en una nota de 0 a 100. Comprobamos que las 8 frases miden lo mismo.</span></li>
+      <li><span><b>Los perfiles</b> salen de agrupar a los estudiantes según sus respuestas, no los elegimos nosotros.</span></li>
+    </ol>
+    <div class="cautela esquinas"><i class="e3"></i><i class="e4"></i>
+      <h3>Para tomar con cautela.</h3>
+      <ul>
+        <li>La muestra no representa a toda la universidad: hay más estudiantes de Economía y Empresa y de 1.º y 2.º.</li>
+        <li>Las respuestas de las encuestas son autodeclaradas: recogen lo que cada persona dice que hace, no lo que hace. El experimento muestra que no siempre coincide.</li>
+        <li>Cada experimento se hizo con un solo profesor y una sola tarea: el primero, con pocos alumnos pasivos; el segundo, con solo 18 alumnos.</li>
+        <li>Algunas diferencias son pequeñas o dudosas, como las de género o carrera, y no las hemos destacado.</li>
+        <li>Los datos de empresas vienen de informes de consultoras y tecnológicas, no de una encuesta nuestra.</li>
+      </ul>
+    </div>
   </div>
 </section>
 </main>
 
-<footer>
+<footer class="pie-web osc-b">
   <div class="wrap">
     <p><b>Econo-Reto Madison 2026</b> · Universidad de Valladolid</p>
-    <p style="margin-top:6px">Informe técnico completo disponible bajo petición.</p>
+    <p>Informe técnico completo disponible bajo petición.</p>
   </div>
 </footer>
 
+
+<!-- ===== Datos y gráficos (sin librerías; funcionan aunque falle la animación) ===== -->
 <script>
 (function () {
-  function bars(el, rows, max, unit, color) {
-    var host = document.getElementById(el);
-    rows.forEach(function (r) {
-      var d = document.createElement('div');
-      d.className = 'bar';
-      var pct = Math.max(2, r[1] / max * 100);
-      d.innerHTML = '<span>' + r[0] + '</span><div class="track"><div class="fill" style="width:' + pct + '%;' + (r[2] ? 'background:' + r[2] : (color ? 'background:' + color : '')) + '"></div><span class="val">' + r[1] + unit + '</span></div>';
-      host.appendChild(d);
-    });
-  }
-  function pairs(el, rows, max, unit, colors) {
-    var host = document.getElementById(el);
-    rows.forEach(function (r) {
-      var g = document.createElement('div');
-      g.className = 'bar pair';
-      var inner = r.slice(1).map(function (v, i) {
-        return '<div class="track"><div class="fill" style="width:' + Math.max(2, v / max * 100) + '%;background:' + colors[i] + '"></div><span class="val">' + String(v).replace('.', ',') + unit + '</span></div>';
-      }).join('');
-      g.innerHTML = '<span>' + r[0] + '</span><div class="pair-group">' + inner + '</div>';
-      host.appendChild(g);
-    });
-  }
-  var T = 'var(--blue-dark)', A = 'var(--yellow)', R = 'var(--cocoa)', M = 'var(--cocoa)';
-  pairs('habitBars', [['Pensar primero', 4.0, 4.2, 2.2], ['Iterar', 4.1, 4.1, 2.3], ['Verificar', 3.8, 2.1, 2.6], ['Hacerlo mío', 4.2, 3.8, 3.2]], 5, '', [T, A, R]);
-  bars('toolBars', [['Gemini', 82], ['ChatGPT', 79], ['NotebookLM', 37], ['Claude', 36], ['Copilot', 15], ['DeepSeek', 9], ['Perplexity', 6]], 100, ' %');
-  bars('freqBars', [['Casi a diario', 66], ['1–2 veces por semana', 67], ['Algunas veces al mes', 74], ['Menos de 1 vez al mes (solo 8)', 48]], 100, '');
-  pairs('compBars', [['Pensamiento crítico', 29, 89], ['Comprensión profunda', 8, 63], ['Resolver problemas', 28, 68], ['Buscar y comprobar información', 24, 63], ['Creatividad', 44, 63], ['Trabajo autónomo', 50, 58]], 100, ' %', [T, M]);
-  bars('guessBars', [['Lo que creen los alumnos de sus compañeros', 7.0], ['Lo que creen los profesores', 5.1], ['Lo que medimos (pasivos)', 2.0, 'var(--blue-dark)']], 10, ' de 10', 'var(--cocoa)');
-  pairs('evalBars', [['Exámenes en clase o a mano', 66, 75], ['Detectores de IA', 57, 0], ['Prohibir la IA', 56, 12], ['Trabajos en clase', 34, 62], ['Exposiciones orales', 30, 75], ['Exámenes en vez de trabajos', 29, 50]], 100, ' %', [T, M]);
-  bars('refBars', [['Activo', 76, T], ['Mixto', 79, A], ['Pasivo', 32, R]], 100, ' %');
-  bars('taskBars', [['Entender conceptos', 72, 'var(--blue-dark)'], ['Resolver ejercicios', 67, 'var(--blue-dark)'], ['Hacer preguntas de práctica', 57, A], ['Buscar información', 48, A], ['Resumir apuntes', 48, R], ['Corregir textos', 34, A], ['Redactar textos', 32, A], ['Programar o analizar datos', 31, A], ['Hacer esquemas', 28, A], ['Organizarse', 24, R], ['Generar ideas', 21, A], ['Preparar presentaciones', 21, A], ['Traducir', 18, A]], 100, ' %');
-  bars('expBars', [['Encontrar en qué parte del informe está', 56], ['Que le diera la respuesta', 44], ['Comprobar una respuesta suya', 24], ['Entender la pregunta', 7]], 100, ' %', 'var(--cocoa)');
+  var NS = 'http://www.w3.org/2000/svg';
+  function coma(v) { return String(v).replace('.', ','); }
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function txt(parent, x, y, s, attrs) { var t = el('text', Object.assign({ x: x, y: y }, attrs || {}), parent); t.textContent = s; return t; }
 
-  // Reveal
-  var btn = document.getElementById('revealBtn'), ans = document.getElementById('revealAns');
-  btn.addEventListener('click', function () {
-    var open = ans.hidden; ans.hidden = !open; btn.setAttribute('aria-expanded', String(open));
-    btn.textContent = open ? 'Ocultar la respuesta' : 'Ver la respuesta';
+  // 03 · Hábitos: gráfico de puntos en una escala de 1 a 5
+  (function () {
+    var svg = document.getElementById('graHabitos'); if (!svg) return;
+    var H = [['Pensar primero', 4.0, 4.2, 2.2], ['Iterar', 4.1, 4.1, 2.3], ['Verificar', 3.8, 2.1, 2.6], ['Hacerlo mío', 4.2, 3.8, 3.2]];
+    var W = 340, x0 = 8, x1 = 332, rowH = 78, top = 24, h = top + H.length * rowH + 10;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + h);
+    function X(v) { return x0 + (v - 1) / 4 * (x1 - x0); }
+    [1, 2, 3, 4, 5].forEach(function (v) { txt(svg, X(v), 12, v, { 'text-anchor': v === 1 ? 'start' : v === 5 ? 'end' : 'middle', 'font-size': 11, opacity: .6 }); });
+    H.forEach(function (r, i) {
+      var y = top + i * rowH + 44, g = el('g', { class: 'fila' }, svg);
+      txt(g, x0, y - 22, r[0], { 'font-size': 15, 'font-weight': 600 });
+      txt(g, x1, y - 22, coma(r[1].toFixed(1)) + ' · ' + coma(r[2].toFixed(1)) + ' · ' + coma(r[3].toFixed(1)), { 'text-anchor': 'end', 'font-size': 12, opacity: .7 });
+      el('line', { x1: x0, x2: x1, y1: y, y2: y, stroke: 'currentColor', 'stroke-opacity': .25 }, g);
+      el('circle', { class: 'pt', cx: X(r[3]), cy: y, r: 7, fill: 'var(--ink)' }, g);
+      el('circle', { class: 'pt', cx: X(r[2]), cy: y, r: 7, fill: 'none', stroke: 'var(--electric-2)', 'stroke-width': 3 }, g);
+      el('circle', { class: 'pt', cx: X(r[1]), cy: y, r: 7, fill: 'var(--electric)' }, g);
+    });
+  })();
+
+  // 04 · Herramientas: burbujas con el área proporcional
+  (function () {
+    var host = document.getElementById('graHerramientas'); if (!host) return;
+    var T = [['Gemini', 82], ['ChatGPT', 79], ['NotebookLM', 37], ['Claude', 36], ['Copilot', 15], ['DeepSeek', 9], ['Perplexity', 6]];
+    var max = 82, Dmax = Math.min(150, Math.max(110, window.innerWidth * .34));
+    T.forEach(function (t, i) {
+      var d = Dmax * Math.sqrt(t[1] / max), b = document.createElement('div');
+      b.className = 'burbuja';
+      b.innerHTML = '<svg viewBox="0 0 100 100" style="--d:' + d.toFixed(1) + 'px" aria-hidden="true"><circle cx="50" cy="50" r="49" fill="' + (i < 2 ? 'var(--electric)' : 'var(--electric-2)') + '" fill-opacity="' + (i < 2 ? 1 : .55) + '"/></svg><span class="v">' + t[1] + ' %</span><span class="nom">' + t[0] + '</span>';
+      host.appendChild(b);
+    });
+  })();
+
+  // 04 · Listas con piruleta
+  document.querySelectorAll('.piruletas[data-lista]').forEach(function (ul) {
+    ul.getAttribute('data-lista').split(';').forEach(function (it) {
+      var p = it.split('|'), li = document.createElement('li');
+      li.innerHTML = '<div class="fila"><span>' + p[0] + '</span><b>' + p[1] + ' %</b></div><div class="pista" aria-hidden="true"><i style="--v:' + p[1] + '%"></i></div>';
+      ul.appendChild(li);
+    });
   });
 
-  // Quiz
+  // 05 · Frecuencia: eje vertical de 0 a 100
+  (function () {
+    var svg = document.getElementById('graFrecuencia'); if (!svg) return;
+    var F = [['Casi a diario', 66], ['1–2 veces por semana', 67], ['Algunas veces al mes', 74], ['Menos de 1 vez al mes (solo 8)', 48]];
+    var W = 340, H = 400, ax = 56, y0 = 380, y1 = 16;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    function Y(v) { return y0 - v / 100 * (y0 - y1); }
+    el('line', { id: 'ejeFrec', x1: ax, x2: ax, y1: y1, y2: y0, stroke: 'currentColor', 'stroke-opacity': .5 }, svg);
+    [0, 25, 50, 75, 100].forEach(function (v) { el('line', { x1: ax - 6, x2: ax, y1: Y(v), y2: Y(v), stroke: 'currentColor', 'stroke-opacity': .5 }, svg); txt(svg, ax - 12, Y(v) + 4, v, { 'text-anchor': 'end', 'font-size': 11, opacity: .6 }); });
+    // Etiquetas sin solaparse
+    var S = F.map(function (f) { return { f: f, y: Y(f[1]), ly: Y(f[1]) }; }).sort(function (a, b) { return a.y - b.y; });
+    for (var i = 1; i < S.length; i++) if (S[i].ly - S[i - 1].ly < 52) S[i].ly = S[i - 1].ly + 52;
+    S.forEach(function (s) {
+      var g = el('g', { class: 'marca' }, svg);
+      el('line', { x1: ax, x2: ax + 26, y1: s.y, y2: s.y, stroke: 'var(--electric)', 'stroke-width': 2 }, g);
+      el('circle', { cx: ax, cy: s.y, r: 5, fill: 'var(--electric)' }, g);
+      el('path', { d: 'M' + (ax + 26) + ' ' + s.y + ' L' + (ax + 40) + ' ' + s.ly, stroke: 'currentColor', 'stroke-opacity': .4, fill: 'none' }, g);
+      txt(g, ax + 46, s.ly + 8, s.f[1], { 'font-family': 'Inter Tight, sans-serif', 'font-weight': 300, 'font-size': 38, 'letter-spacing': '-1.5' });
+      txt(g, ax + 104, s.ly + 2, s.f[0], { 'font-size': 13, opacity: .8 });
+    });
+  })();
+
+  // 06 · Brecha: gráfico de pesas (alumnos frente a profesores)
+  (function () {
+    var svg = document.getElementById('graPesas'); if (!svg) return;
+    var C = [['Pensamiento crítico', 29, 89], ['Comprensión profunda', 8, 63], ['Resolver problemas', 28, 68], ['Buscar y comprobar información', 24, 63], ['Creatividad', 44, 63], ['Trabajo autónomo', 50, 58]];
+    var W = 340, x0 = 22, x1 = 318, rowH = 62, h = C.length * rowH + 30;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + h);
+    function X(v) { return x0 + v / 100 * (x1 - x0); }
+    el('line', { id: 'ejePesas', x1: x0, x2: x1, y1: h - 14, y2: h - 14, stroke: 'currentColor', 'stroke-opacity': .5 }, svg);
+    [0, 50, 100].forEach(function (v) { txt(svg, X(v), h, v + ' %', { 'text-anchor': v === 0 ? 'start' : v === 100 ? 'end' : 'middle', 'font-size': 11, opacity: .6 }); });
+    C.forEach(function (c, i) {
+      var y = i * rowH + 38, g = el('g', { class: 'pesa' }, svg);
+      txt(g, x0, y - 16, c[0], { 'font-size': 14, 'font-weight': 600 });
+      el('line', { class: 'barra-p', x1: X(c[1]), x2: X(c[2]), y1: y, y2: y, stroke: 'currentColor', 'stroke-opacity': .5, 'stroke-width': 2 }, g);
+      el('circle', { cx: X(c[1]), cy: y, r: 7, fill: 'var(--electric)' }, g);
+      el('circle', { cx: X(c[2]), cy: y, r: 7, fill: 'var(--ink)', stroke: 'var(--bg)', 'stroke-width': 1.5 }, g);
+      txt(g, X(c[1]) - 12, y + 4, c[1] + ' %', { 'text-anchor': 'end', 'font-size': 12, 'font-weight': 600 });
+      txt(g, X(c[2]) + 12, y + 4, c[2] + ' %', { 'text-anchor': 'start', 'font-size': 12, 'font-weight': 600 });
+    });
+  })();
+
+  // 06 · Sillas: de cada 10, cuántos entregan sin revisar
+  (function () {
+    var host = document.getElementById('sillas'); if (!host) return;
+    var S = [['Lo que creen los alumnos de sus compañeros', 7.0, ''], ['Lo que creen los profesores', 5.1, ''], ['Lo que medimos (pasivos)', 2.0, 'medido']];
+    var silla = function (fill, clipId, frac, op) {
+      var s = '<svg viewBox="0 0 40 50" aria-hidden="true"><defs><clipPath id="' + clipId + '"><rect x="0" y="0" width="' + (40 * frac).toFixed(1) + '" height="50"/></clipPath></defs>';
+      var forma = '<path d="M9 3 Q20 -1 31 3 L29 23 Q20 26 11 23 Z"/><path d="M5 26 Q20 21 35 26 L34 32 Q20 36 6 32 Z"/><path d="M10 33 L8 48 M30 33 L32 48 M17 35 L16 46 M23 35 L24 46" stroke-width="1.6" stroke="currentColor"/>';
+      s += '<g fill="currentColor" opacity="' + op + '">' + forma + '</g>';
+      if (frac > 0) s += '<g fill="' + fill + '" stroke="' + fill + '" clip-path="url(#' + clipId + ')" style="color:' + fill + '">' + forma + '</g>';
+      return s + '</svg>';
+    };
+    S.forEach(function (r, i) {
+      var f = document.createElement('div'); f.className = 'fila ' + r[2];
+      var seats = '';
+      for (var k = 0; k < 10; k++) { var frac = Math.max(0, Math.min(1, r[1] - k)); seats += silla(r[2] ? 'var(--electric)' : 'var(--ink-2)', 'cs' + i + k, frac, .22); }
+      f.innerHTML = '<p><span>' + r[0] + '</span><b>' + coma(r[1].toFixed(1)) + ' de 10</b></p><div class="asientos">' + seats + '</div>';
+      host.appendChild(f);
+    });
+  })();
+
+  // 07 · Evaluación: mariposa
+  (function () {
+    var host = document.getElementById('graMariposa'); if (!host) return;
+    var E = [['Exámenes en clase o a mano', 66, 75], ['Detectores de IA', 57, 0], ['Prohibir la IA', 56, 12], ['Trabajos en clase', 34, 62], ['Exposiciones orales', 30, 75], ['Exámenes en vez de trabajos', 29, 50]];
+    var cab = document.createElement('div'); cab.className = 'cabeza'; cab.setAttribute('aria-hidden', 'true'); cab.innerHTML = '<span>Alumnos (lo que han visto)</span><span>Profesores (lo que dicen hacer)</span>';
+    host.appendChild(cab);
+    E.forEach(function (r) {
+      var f = document.createElement('div'); f.className = 'fila';
+      f.innerHTML = '<p>' + r[0] + '</p><div class="barras" aria-hidden="true"><div class="lado al"><span>' + r[1] + ' %</span><i style="--v:' + (r[1] * .78) + '%"></i></div><div class="lado pr"><i style="--v:' + (r[2] * .78) + '%"></i><span>' + r[2] + ' %</span></div></div>';
+      host.appendChild(f);
+    });
+  })();
+
+  // 08 · Medidores de 7 casillas y columnas
+  (function () {
+    var host = document.getElementById('graMedidores'); if (!host) return;
+    [['Activo', 1.6, 'habilidades (de 7) que el activo siente debilitadas'], ['Mixto', 2.4, 'las que siente el mixto'], ['Pasivo', 3.2, 'las que siente el pasivo: el doble que el activo']].forEach(function (m) {
+      var d = document.createElement('div'); d.className = 'medidor';
+      var c = ''; for (var k = 0; k < 7; k++) c += '<i style="--f:' + Math.max(0, Math.min(1, m[1] - k)).toFixed(2) + '"></i>';
+      d.innerHTML = '<div class="fila"><span>' + m[0] + '</span><b>' + coma(m[1].toFixed(1)) + '</b></div><div class="casillas" aria-hidden="true">' + c + '</div><p>' + m[2] + '</p>';
+      host.appendChild(d);
+    });
+    var col = document.getElementById('graColumnas');
+    [['Activo', 76], ['Mixto', 79], ['Pasivo', 32]].forEach(function (c) {
+      var d = document.createElement('div'); d.className = 'columna';
+      d.innerHTML = '<b>' + c[1] + ' %</b><i style="--h:' + (c[1] * 1.9) + 'px"></i><span>' + c[0] + '</span>';
+      col.appendChild(d);
+    });
+  })();
+
+  // 09 · Mapa de áreas (squarify) por grupos del semáforo
+  (function () {
+    var host = document.getElementById('graMapa'); if (!host) return;
+    var D = [['Entender conceptos', 72, 'v'], ['Resolver ejercicios', 67, 'v'], ['Hacer preguntas de práctica', 57, 'a'], ['Buscar información', 48, 'a'], ['Resumir apuntes', 48, 'r'], ['Corregir textos', 34, 'a'], ['Redactar textos', 32, 'a'], ['Programar o analizar datos', 31, 'a'], ['Hacer esquemas', 28, 'a'], ['Organizarse', 24, 'r'], ['Generar ideas', 21, 'a'], ['Preparar presentaciones', 21, 'a'], ['Traducir', 18, 'a']];
+    function worst(row, w) { var s = 0, mx = 0, mn = Infinity; row.forEach(function (r) { s += r.a; mx = Math.max(mx, r.a); mn = Math.min(mn, r.a); }); return Math.max(w * w * mx / (s * s), (s * s) / (w * w * mn)); }
+    function layout(items, x, y, w, h, out) {
+      if (!items.length) return;
+      var short = Math.min(w, h), row = [], i = 0;
+      while (i < items.length) { var nr = row.concat([items[i]]); if (!row.length || worst(nr, short) <= worst(row, short)) { row = nr; i++; } else break; }
+      var s = row.reduce(function (a, r) { return a + r.a; }, 0);
+      if (w >= h) { var cw = s / h, cy = y; row.forEach(function (r) { var rh = r.a / cw; out.push([r, x, cy, cw, rh]); cy += rh; }); layout(items.slice(i), x + cw, y, w - cw, h, out); }
+      else { var ch = s / w, cx = x; row.forEach(function (r) { var rw = r.a / ch; out.push([r, cx, y, rw, ch]); cx += rw; }); layout(items.slice(i), x, y + ch, w, h - ch, out); }
+    }
+    function draw() {
+      host.innerHTML = '';
+      var W = host.clientWidth, H = host.clientHeight, tot = D.reduce(function (a, d) { return a + d[1]; }, 0);
+      var items = D.map(function (d) { return { d: d, a: d[1] / tot * W * H }; }), out = [];
+      layout(items, 0, 0, W, H, out);
+      out.forEach(function (o, k) {
+        var z = document.createElement('div'); z.className = 'z ' + o[0].d[2] + (o[3] < 96 ? ' peq' : ''); z.title = o[0].d[0] + ': ' + o[0].d[1] + ' %';
+        z.style.cssText = 'left:' + o[1] + 'px;top:' + o[2] + 'px;width:' + o[3] + 'px;height:' + o[4] + 'px';
+        z.innerHTML = '<span>' + o[0].d[0] + '</span><b>' + o[0].d[1] + ' %</b>';
+        host.appendChild(z);
+      });
+    }
+    draw();
+    var rt, lastW = host.clientWidth; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { if (host.clientWidth !== lastW) { lastW = host.clientWidth; draw(); } }, 150); });
+    window.__redibujarMapa = draw;
+  })();
+
+  // 10 · Cuadrículas de 100
+  (function () {
+    var host = document.getElementById('graReticulas'); if (!host) return;
+    [['Encontrar en qué parte del informe está', 56], ['Que le diera la respuesta', 44], ['Comprobar una respuesta suya', 24], ['Entender la pregunta', 7]].forEach(function (r) {
+      var f = document.createElement('figure'), c = '';
+      for (var k = 0; k < 100; k++) c += '<i' + (k < r[1] ? ' class="on"' : '') + '></i>';
+      f.innerHTML = '<div class="rej" aria-hidden="true">' + c + '</div><figcaption><b>' + r[1] + ' %</b>' + r[0] + '</figcaption>';
+      host.appendChild(f);
+    });
+  })();
+
+  // 11 · Puntos de 7
+  (function () {
+
+    document.querySelectorAll('.siete[data-on]').forEach(function (s) { var on = +s.dataset.on, h = ''; for (var i = 0; i < 7; i++) h += '<i' + (i < on ? ' class="on"' : '') + '></i>'; s.innerHTML = h; });
+  })();
+
+  // 12 · Pendientes: práctica con IA → examen sin IA
+  (function () {
+    var svg = document.getElementById('graPendientes'); if (!svg) return;
+    var P = [['No la usaron (3)', 6.0, 8.0], ['La usaron un poco (10)', 8.4, 6.3], ['La usaron bastante (5)', 9.2, 4.9]];
+    var W = 340, H = 330, xa = 70, xb = 270, y0 = 300, y1 = 30;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    function Y(v) { return y0 - v / 10 * (y0 - y1); }
+    [xa, xb].forEach(function (x, i) { el('line', { x1: x, x2: x, y1: y1 - 6, y2: y0, stroke: 'currentColor', 'stroke-opacity': .4 }, svg); txt(svg, x, y0 + 22, i ? 'Examen sin IA' : 'Práctica con IA', { 'text-anchor': 'middle', 'font-size': 12, opacity: .8 }); });
+    [0, 5, 10].forEach(function (v) { txt(svg, xa - 46, Y(v) + 4, v, { 'font-size': 11, opacity: .55 }); });
+    var st = ['#FFFFFF', 'rgba(255,255,255,.62)', '#020414'];
+    P.forEach(function (p, i) {
+      var g = el('g', { class: 'linea' }, svg);
+      el('line', { class: 'trazo', x1: xa, y1: Y(p[1]), x2: xb, y2: Y(p[2]), stroke: st[i], 'stroke-width': i === 2 ? 4 : 3 }, g);
+      el('circle', { cx: xa, cy: Y(p[1]), r: 5, fill: st[i] }, g);
+      el('circle', { cx: xb, cy: Y(p[2]), r: 5, fill: st[i] }, g);
+      txt(g, xa - 10, Y(p[1]) + 4, coma(p[1].toFixed(1)), { 'text-anchor': 'end', 'font-size': 13, 'font-weight': 600 });
+      txt(g, xb + 10, Y(p[2]) + 4, coma(p[2].toFixed(1)), { 'text-anchor': 'start', 'font-size': 13, 'font-weight': 600 });
+    });
+    // Leyenda en lista (encima del gráfico)
+    var lg = document.createElement('div'); lg.className = 'leyenda';
+    lg.innerHTML = P.map(function (p, i) { return '<span><i style="--c:' + st[i] + ';--b:' + (i === 2 ? '#FFFFFF' : st[i]) + '"></i>' + p[0] + '</span>'; }).join('');
+    svg.parentNode.insertBefore(lg, svg);
+  })();
+
+  // 12 · Columnas: nota según la parte que hizo la IA
+  (function () {
+    var host = document.getElementById('graDelega'), et = document.getElementById('graDelegaEt'); if (!host) return;
+    [['No la usaron', 8.0], ['0–20 %', 7.8], ['21–40 %', 7.6], ['41–60 % (solo 1)', 3.0], ['61–80 %', 4.4], ['81–100 %', 5.3]].forEach(function (c, i) {
+      var d = document.createElement('div'); d.className = 'c' + (i === 0 ? ' cero' : '');
+      d.innerHTML = '<b>' + coma(c[1].toFixed(1)) + '</b><i style="--h:' + (c[1] * 22) + 'px"></i>';
+      host.appendChild(d);
+      var s = document.createElement('span'); s.textContent = c[0]; et.appendChild(s);
+    });
+  })();
+
+  // Botones de destapar
+  document.querySelectorAll('.destapar').forEach(function (b) {
+    var ans = document.getElementById(b.getAttribute('aria-controls')), lab = b.querySelector('span:last-child');
+    b.addEventListener('click', function () {
+      var abrir = ans.hidden; ans.hidden = !abrir; b.setAttribute('aria-expanded', String(abrir));
+      lab.textContent = abrir ? 'Ocultar la respuesta' : 'Ver la respuesta';
+      if (abrir && window.__alDestapar) window.__alDestapar(ans);
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    });
+  });
+
+  // ===== Test: índice de uso activo (mismo cálculo que antes) =====
   var scale = ['Nunca', 'Pocas veces', 'A veces', 'A menudo', 'Siempre'];
   var Q = [
     ['entender', 'Uso la IA para entender, no solo para entregar', 'p'],
@@ -661,119 +1159,376 @@ section.band-lemon + section, section.band + section { padding-top: 52px; }
     ['autoria', '¿Qué parte del resultado final es tuya?', 'h', ['0–20 %', '21–40 %', '41–60 %', '61–80 %', '81–100 %']]
   ];
   var qs = document.getElementById('qs');
-  Q.forEach(function (q) {
-    var opts = (q[3] || scale).map(function (lab, i) {
-      var id = 'q-' + q[0] + '-' + (i + 1);
-      return '<input type="radio" name="' + q[0] + '" id="' + id + '" value="' + (i + 1) + '"><label for="' + id + '">' + lab + '</label>';
-    }).join('');
-    var div = document.createElement('div');
-    div.className = 'q';
-    div.innerHTML = '<p>' + q[1] + '</p><div class="opts" role="radiogroup" aria-label="' + q[1] + '">' + opts + '</div>';
+  qs.innerHTML = '';
+  Q.forEach(function (q, n) {
+    var opts = (q[3] || scale).map(function (lab, i) { return '<button type="button" data-v="' + (i + 1) + '" aria-pressed="false"><span>' + lab + '</span><span class="k">' + (i + 1) + '</span></button>'; }).join('');
+    var div = document.createElement('div'); div.className = 'qpaso'; div.hidden = n > 0;
+    div.innerHTML = '<h3 tabindex="-1">' + q[1] + '</h3><div class="qops" role="group" aria-label="' + q[1] + '">' + opts + '</div>';
     qs.appendChild(div);
   });
-  var C = {
-    'Activo': [4.015, 4.122, 3.847, 4.173],
-    'Mixto': [4.171, 4.118, 2.145, 3.750],
-    'Pasivo': [2.221, 2.324, 2.632, 3.221]
-  };
+  var C = { 'Activo': [4.015, 4.122, 3.847, 4.173], 'Mixto': [4.171, 4.118, 2.145, 3.750], 'Pasivo': [2.221, 2.324, 2.632, 3.221] };
   var info = {
-    'Activo': ['p-act', 'Usas la IA como un profesor particular: piensas, preguntas, compruebas y lo haces tuyo. Como el 58 % de los estudiantes.'],
-    'Mixto': ['p-mix', 'Piensas e iteras con la IA, pero te fías de lo que dice sin comprobarlo. Como el 22 % de los estudiantes. Tu siguiente paso: contrastar lo importante con otra fuente.'],
-    'Pasivo': ['p-pas', 'Dejas que la IA haga el trabajo por ti. Como el 20 % de los estudiantes. Tu siguiente paso: intentarlo tú primero y usar la IA para entender, no para entregar.']
+    'Activo': 'Usas la IA como un profesor particular: piensas, preguntas, compruebas y lo haces tuyo. Como el 58 % de los estudiantes.',
+    'Mixto': 'Piensas e iteras con la IA, pero te fías de lo que dice sin comprobarlo. Como el 22 % de los estudiantes. Tu siguiente paso: contrastar lo importante con otra fuente.',
+    'Pasivo': 'Dejas que la IA haga el trabajo por ti. Como el 20 % de los estudiantes. Tu siguiente paso: intentarlo tú primero y usar la IA para entender, no para entregar.'
   };
-  document.getElementById('quizBtn').addEventListener('click', function () {
-    var v = {}, missing = 0;
-    Q.forEach(function (q) {
-      var c = document.querySelector('input[name="' + q[0] + '"]:checked');
-      if (!c) missing++; else v[q[0]] = +c.value;
-    });
-    var out = document.getElementById('quizOut');
-    if (missing) { out.innerHTML = '<p class="t-red"><b>Te falta' + (missing > 1 ? 'n ' + missing + ' frases' : ' 1 frase') + ' por responder.</b></p>'; return; }
+  var steps = qs.children, cur = 0, v = {}, back = document.getElementById('qBack');
+  var count = document.getElementById('qCount'), fill = document.getElementById('qFill'), out = document.getElementById('quizOut');
+  function show(n, focus) {
+    for (var i = 0; i < steps.length; i++) steps[i].hidden = i !== n;
+    cur = n; out.innerHTML = '';
+    if (n < steps.length) { count.textContent = 'Frase ' + (n + 1) + ' de ' + Q.length; if (focus) steps[n].querySelector('h3').focus({ preventScroll: true }); if (window.__entraPaso) window.__entraPaso(steps[n]); }
+    fill.style.transform = 'scaleX(' + (Math.min(n, Q.length) / Q.length) + ')';
+    back.hidden = n === 0 || n >= Q.length;
+  }
+  qs.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var step = b.closest('.qpaso'), n = Array.prototype.indexOf.call(steps, step);
+    step.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    v[Q[n][0]] = +b.dataset.v;
+    setTimeout(function () { if (n + 1 < Q.length) show(n + 1, true); else result(); }, 360);
+  });
+  back.addEventListener('click', function () { show(Math.max(0, cur - 1), true); });
+  function result() {
+    show(Q.length); count.textContent = 'Tu resultado';
     var d = [(v.entender + v.antes) / 2, (v.repreg + v.explicar) / 2, (v.contrasto + v.detecto) / 2, (v.reescribo + v.autoria) / 2];
     var sum = 0; Q.forEach(function (q) { sum += v[q[0]]; });
     var iua = Math.round((sum / 8 - 1) / 4 * 100);
     var best = null, bd = Infinity;
-    Object.keys(C).forEach(function (k) {
-      var dist = 0; for (var i = 0; i < 4; i++) dist += Math.pow(d[i] - C[k][i], 2);
-      if (dist < bd) { bd = dist; best = k; }
-    });
-    out.innerHTML = '<div class="result persona ' + info[best][0] + '"><div class="head"><span class="num">' + iua + ' / 100</span></div><h3>Tu perfil: ' + best + '</h3><p>' + info[best][1] + '</p><p style="margin-top:8px;font-size:14px">La media de los estudiantes es 66.</p></div>';
-  });
+    Object.keys(C).forEach(function (k) { var dist = 0; for (var i = 0; i < 4; i++) dist += Math.pow(d[i] - C[k][i], 2); if (dist < bd) { bd = dist; best = k; } });
+    out.innerHTML = '<div class="qres"><div class="grande"><span class="n" id="qNum">' + iua + '</span><small>de 100</small></div>' +
+      '<div class="regla" aria-hidden="true"><span class="eje"></span>' + [0, 25, 50, 75, 100].map(function (t) { return '<span class="t" style="left:' + t + '%"></span>'; }).join('') +
+      '<span class="m" style="left:66%">media 66<i></i></span><span class="m tu" id="qTu" style="left:' + iua + '%">tú<i></i></span><span class="ext" style="left:0">0</span><span class="ext" style="right:0">100</span></div>' +
+      '<p class="sr">Tu índice es ' + iua + ' de 100; la media de los estudiantes es 66.</p>' +
+      '<p class="perfil" tabindex="-1" id="qPerfil">Tu perfil<em>' + best + '</em></p><p>' + info[best] + '</p>' +
+      '<p class="peq">La media de los estudiantes es 66.</p><p class="peq">Ojo: en el experimento 2, lo que decidió la nota sin IA no fue lo que cada uno decía de sí mismo, sino cuánto trabajo dejó a la IA.</p>' +
+      '<button type="button" class="destapar otra" id="qOtra"><span class="cruz" aria-hidden="true"></span><span>Volver a empezar</span></button></div>';
+    document.getElementById('qPerfil').focus({ preventScroll: true });
+    document.getElementById('qOtra').addEventListener('click', function () { v = {}; qs.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); show(0, true); });
+    if (window.__resultado) window.__resultado(out, iua);
+  }
+  show(0, false);
+
+  // ===== Barra e índice =====
+  var ind = document.getElementById('indice'), bi = document.getElementById('btnIndice'), bc = document.getElementById('btnCerrar');
+  function abrirIndice(a) { ind.hidden = !a; bi.setAttribute('aria-expanded', String(a)); document.body.style.overflow = a ? 'hidden' : ''; if (a) ind.querySelector('a').focus(); else bi.focus(); }
+  bi.addEventListener('click', function () { abrirIndice(ind.hidden); });
+  bc.addEventListener('click', function () { abrirIndice(false); });
+  ind.addEventListener('click', function (e) { if (e.target.closest('a')) { ind.hidden = true; bi.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !ind.hidden) abrirIndice(false); });
+
+  // Dónde estoy
+  var donde = document.getElementById('donde'), secs = document.querySelectorAll('.sec[data-n]');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var s = e.target; donde.textContent = s.dataset.n === '00' ? '' : s.dataset.n + ' ' + s.dataset.nombre; } }); }, { rootMargin: '-45% 0px -54% 0px' });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+  var prog = document.getElementById('progreso');
+  addEventListener('scroll', function () { var m = document.documentElement.scrollHeight - innerHeight; prog.style.transform = 'scaleX(' + (m > 0 ? scrollY / m : 0) + ')'; }, { passive: true });
+
+  // Ajuste del título de portada al ancho
+  var h1 = document.getElementById('titulo');
+  function ajusta() {
+    h1.style.fontSize = '';
+    var box = h1.clientWidth * (innerWidth > 900 ? .8 : 1), w = 0;
+    h1.querySelectorAll('.l > span').forEach(function (s) { w = Math.max(w, s.scrollWidth); });
+    if (w) h1.style.fontSize = Math.min(170, parseFloat(getComputedStyle(h1).fontSize) * box / w * .97) + 'px';
+  }
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { ajusta(); if (window.__redibujarMapa) window.__redibujarMapa(); if (window.ScrollTrigger) ScrollTrigger.refresh(); });
+  var ra; addEventListener('resize', function () { clearTimeout(ra); ra = setTimeout(ajusta, 150); });
 })();
 </script>
+<!-- Fondo: canvas generado una vez por sección; al bajar, cada escena se funde con la siguiente -->
+<script>
+/* Motor del fondo: formas → difuminado (campo suave) → grano de aerógrafo. Corre en un worker si se puede. */
+function motorFondo() {
+
+  function rng(seed) { var s = seed >>> 0 || 1; return function () { s ^= s << 13; s >>>= 0; s ^= s >> 17; s ^= s << 5; s >>>= 0; return s / 4294967296; }; }
+  function mezcla(lut, t) {
+    if (t <= lut[0][0]) return lut[0][1];
+    for (var i = 1; i < lut.length; i++) if (t <= lut[i][0]) {
+      var a = lut[i - 1], b = lut[i], k = (t - a[0]) / (b[0] - a[0]);
+      return [a[1][0] + (b[1][0] - a[1][0]) * k, a[1][1] + (b[1][1] - a[1][1]) * k, a[1][2] + (b[1][2] - a[1][2]) * k];
+    }
+    return lut[lut.length - 1][1];
+  }
+  // Valor de una forma en un punto (x, y en px)
+  function forma(f, x, y, u, W, H) {
+    var cx = f.x * W, cy = f.y * H, dx = x - cx, dy = y - cy;
+    var c = Math.cos(f.rot || 0), s = Math.sin(f.rot || 0);
+    var px = dx * c + dy * s, py = -dx * s + dy * c;
+    var rx = f.rx * u, ry = f.ry * u;
+    var th = Math.atan2(py / ry, px / rx);
+    var wob = 1; if (f.w) for (var k = 0; k < f.w.length; k++) wob += f.w[k][0] * Math.sin((k + 2) * th + f.w[k][1]);
+    var rho = Math.sqrt(px * px / (rx * rx) + py * py / (ry * ry)) / wob;
+    var amp = f.a * (1 + (f.v || 0) * Math.sin(th + (f.vf || 0)) + (f.v2 || 0) * Math.sin(2 * th + (f.vf2 || 0)));
+    if (amp < 0) amp = 0;
+    var sg = f.s * u;
+    if (f.t === 'anillo') { var d = (rho - 1) * (rx + ry) / 2; return amp * Math.exp(-d * d / (2 * sg * sg)); }
+    // mancha: núcleo lleno que se deshace
+    var e = Math.max(0, rho - (f.n || 0)) * (rx + ry) / 2;
+    return amp * Math.exp(-e * e / (2 * sg * sg));
+  }
+  function datos(esc, W, H, q) {
+    var cw = Math.round(W * q), ch = Math.round(H * q);
+    var u = Math.min(W, H * .95);
+    // 1) campo a baja resolución (difuminado analítico)
+    var st = 6, gw = Math.ceil(W / st) + 2, gh = Math.ceil(H / st) + 2, campo = new Float32Array(gw * gh);
+    // nubosidad: ruido de baja frecuencia que hace irregular el azul
+    var nr = rng((esc.semilla || 7) * 31), ns = esc.nubeEscala || 70, nbw = Math.ceil(W / ns) + 2, nbh = Math.ceil(H / ns) + 2, nube = new Float32Array(nbw * nbh);
+    for (var z0 = 0; z0 < nube.length; z0++) nube[z0] = nr();
+    function nubeEn(x, y) { var fx = x / ns, fy = y / ns, i = fx | 0, j = fy | 0, tx = fx - i, ty = fy - j; i = i % (nbw - 1); j = j % (nbh - 1); tx = tx * tx * (3 - 2 * tx); ty = ty * ty * (3 - 2 * ty); var o = j * nbw + i; return (nube[o] * (1 - tx) + nube[o + 1] * tx) * (1 - ty) + (nube[o + nbw] * (1 - tx) + nube[o + nbw + 1] * tx) * ty; }
+    var nk = esc.nube == null ? .5 : esc.nube;
+    for (var j = 0; j < gh; j++) for (var i = 0; i < gw; i++) {
+      var x = i * st, y = j * st, sum = 0;
+      for (var k = 0; k < esc.formas.length; k++) sum += forma(esc.formas[k], x, y, u, W, H);
+      sum *= 1 - nk / 2 + nk * (nubeEn(x, y) * .65 + nubeEn(x * 2.3 + 500, y * 2.3) * .35);
+      campo[j * gw + i] = 1 - Math.exp(-sum * (esc.ganancia || 1.4));
+    }
+    // 2) LUT de color
+    var N = 512, lut = new Uint8ClampedArray(N * 3);
+    for (var n = 0; n < N; n++) { var c = mezcla(esc.lut, n / (N - 1)); lut[n * 3] = c[0]; lut[n * 3 + 1] = c[1]; lut[n * 3 + 2] = c[2]; }
+    // 3) píxel a píxel: campo interpolado + grano de aerógrafo
+    var d = new Uint8ClampedArray(cw * ch * 4), r = rng(esc.semilla || 7), G = esc.grano, gb = esc.granoFondo || 0;
+    // grano de punto fino: una partícula ocupa ~1 px CSS
+    var gs = Math.max(1, Math.round(q * (esc.punto || 1))), nw = Math.ceil(cw / gs) + 1, nh = Math.ceil(ch / gs) + 1, ruido = new Float32Array(nw * nh);
+    for (var z = 0; z < ruido.length; z++) ruido[z] = r() + r() - 1;
+    for (var py = 0; py < ch; py++) {
+      var fy = py / q / st, j0 = fy | 0, ty = fy - j0;
+      for (var px = 0; px < cw; px++) {
+        var fx = px / q / st, i0 = fx | 0, tx = fx - i0, o = j0 * gw + i0;
+        var t = (campo[o] * (1 - tx) + campo[o + 1] * tx) * (1 - ty) + (campo[o + gw] * (1 - tx) + campo[o + gw + 1] * tx) * ty;
+        var nn = ruido[((py / gs) | 0) * nw + ((px / gs) | 0)] * .8 + (r() - .5) * .4;
+        t += nn * (G * (t * (1 - t) * 2.6 + t * .25) + gb);
+        t = t < 0 ? 0 : t > 1 ? 1 : t;
+        var li = (t * (N - 1)) | 0, p = (py * cw + px) * 4;
+        d[p] = lut[li * 3]; d[p + 1] = lut[li * 3 + 1]; d[p + 2] = lut[li * 3 + 2]; d[p + 3] = 255;
+      }
+    }
+    return { w: cw, h: ch, px: d };
+  }
+  
+  function mx(a, b, k) { return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k]; }
+
+  // ---------- VERSIÓN A: anillos y lazos azules con grano de aerógrafo (ref. 18) ----------
+  var lutA = [[0,[242,243,247]],[.16,[226,232,246]],[.38,[188,204,241]],[.6,[136,163,237]],[.8,[84,120,237]],[1,[34,82,244]]];
+  var portadaA = [
+    { t:'mancha', x:.3, y:.25, rx:.5, ry:.4, s:.3, a:.22, n:0 },
+    { t:'mancha', x:.8, y:.8, rx:.4, ry:.3, s:.25, a:.18, n:0 },
+    { t:'anillo', x:.60, y:.37, rx:.46, ry:.30, rot:-.12, s:.08, a:.75, v:.45, vf:2.4, v2:.25, vf2:1, w:[[.1,1],[.05,2]] },
+    { t:'anillo', x:.47, y:.71, rx:.56, ry:.38, rot:.15, s:.095, a:.85, v:.35, vf:-1.2, v2:.3, vf2:2.5, w:[[.12,.4],[.04,1.6]] },
+    { t:'anillo', x:.60, y:.53, rx:.22, ry:.08, rot:.12, s:.04, a:.55, v:.6, vf:.5 },
+    { t:'anillo', x:.02, y:.16, rx:.24, ry:.36, rot:.1, s:.075, a:.7, v:.4, vf:1.6 },
+    { t:'anillo', x:-.25, y:.40, rx:.42, ry:.62, rot:.08, s:.10, a:.55, v:.5, vf:0, v2:.3 },
+    { t:'anillo', x:.36, y:-.06, rx:.14, ry:.22, rot:.35, s:.07, a:.6, v:.4, vf:1.6 },
+    { t:'anillo', x:.86, y:-.05, rx:.12, ry:.2, rot:-.35, s:.07, a:.5, v:.4, vf:2 },
+    { t:'anillo', x:1.2, y:.58, rx:.32, ry:.5, rot:-.1, s:.09, a:.45, v:.5, vf:3 },
+    { t:'mancha', x:.22, y:.6, rx:.06, ry:.05, s:.05, a:.35, n:0 },
+    { t:'mancha', x:.82, y:.6, rx:.06, ry:.05, s:.05, a:.3, n:0 }
+  ];
+  // Composiciones de las secciones: [x, y, rx, ry, giro] de cada anillo; el resto sale de la semilla
+  var planA = [
+    null,
+    [[.92,.22,.42,.3,.3],[.1,.78,.5,.34,-.2],[.62,.62,.2,.08,.1]],
+    [[.18,.3,.48,.36,-.3],[.9,.82,.4,.46,.2],[.5,.5,.18,.07,0]],
+    [[.75,.4,.55,.42,.15],[-.05,.9,.36,.3,.4],[.15,.12,.2,.14,-.4]],
+    [[.3,.62,.5,.4,.25],[1.05,.15,.38,.3,-.2],[.72,.86,.22,.09,.2]],
+    [[.95,.5,.42,.55,0],[.12,.2,.34,.24,.5],[.3,.85,.4,.22,-.1]],
+    [[.5,.28,.62,.3,-.08],[.5,.82,.55,.3,.1],[-.1,.55,.3,.4,.2]],
+    [[.08,.45,.46,.5,.1],[.88,.25,.3,.22,-.4],[.7,.8,.34,.18,.3]],
+    [[.65,.7,.5,.36,-.2],[.2,.2,.42,.26,.25],[1.1,.3,.3,.4,0]],
+    [[.4,.4,.6,.45,.4],[.9,.9,.3,.2,-.2],[.05,.05,.3,.2,0]],
+    [[.85,.6,.46,.4,-.3],[.15,.32,.32,.4,.2],[.5,.08,.3,.12,.1]],
+    [[.3,.5,.5,.55,0],[.9,.18,.3,.25,.3],[.75,.85,.3,.16,-.2]],
+    [[.6,.3,.5,.3,.2],[.35,.75,.58,.34,-.15],[.62,.53,.2,.07,.1]],
+    [[.1,.65,.5,.42,-.1],[.85,.3,.42,.32,.2],[.5,.95,.3,.15,0]],
+    [[.55,.45,.6,.4,.1],[-.1,.1,.3,.3,0],[1.05,.92,.3,.3,0]]
+  ];
+  function escenaA(i) {
+    var formas;
+    if (i === 0) formas = portadaA;
+    else {
+      var r = rng(101 + i * 17), p = planA[i];
+      formas = [
+        { t:'mancha', x:r(), y:r(), rx:.5, ry:.4, s:.3, a:.18, n:0 },
+        { t:'mancha', x:r(), y:r(), rx:.4, ry:.3, s:.25, a:.14, n:0 }
+      ];
+      p.forEach(function (q, k) {
+        formas.push({ t:'anillo', x:q[0], y:q[1], rx:q[2], ry:q[3], rot:q[4], s: q[2] < .25 ? .05 : .1 + r() * .03,
+          a: (k === 0 ? .7 : .58) + r() * .12, v:.55 + r() * .25, vf:r() * 6.3, v2:.25 + r() * .15, vf2:r() * 6.3, w:[[.1 + r() * .08, r() * 6], [.05 + r() * .04, r() * 6]] });
+        // un segundo trazo pegado al primero, como en el aerógrafo
+        if (q[2] >= .25) formas.push({ t:'anillo', x:q[0] + (r() - .5) * .12, y:q[1] + (r() - .5) * .08, rx:q[2] * (.75 + r() * .2), ry:q[3] * (.8 + r() * .3), rot:q[4] + (r() - .5), s:.09, a:.3 + r() * .15, v:.8, vf:r() * 6.3, w:[[.12, r() * 6]] });
+      });
+    }
+    return { lut: lutA, grano: .17, granoFondo: .045, ganancia: i === 0 ? 1.05 : .7, punto: 1, nube: .7, semilla: 11 + i, formas: formas };
+  }
+
+  // ---------- VERSIÓN B: manchas azules con núcleo oscuro que se oscurecen al bajar (ref. 14 → 23–25) ----------
+  function lutB(bg, core) {
+    var oscuro = (bg[0] + bg[1] + bg[2]) / 3 < 100;
+    if (oscuro) return [[0, bg], [.12, mx(bg, [16, 34, 130], .45)], [.3, [20, 48, 178]], [.5, [22, 54, 196]], [.64, [14, 34, 140]], [.76, [6, 14, 62]], [.88, [3, 4, 16]], [1, core]];
+    return [[0, bg], [.18, mx(bg, [190, 192, 255], .6)], [.4, [112, 118, 252]], [.58, [44, 52, 226]], [.68, [36, 44, 214]], [.78, mx([22, 28, 170], core, .35)], [.92, mx([16, 20, 128], core, .7)], [1, core]];
+  }
+    // fondo de cada sección: blanco en la portada, gris claro en el test y, desde perfiles, cada vez más oscuro, con tres secciones claras intercaladas (como, mapa, examen)
+  var fondosB = [[252,252,254],[246,247,250],[236,238,244],
+                 [30,34,56],[26,29,50],[244,245,249],[20,22,39],[17,19,34],[15,16,30],[242,243,248],[11,12,22],[9,10,18],[240,241,247],[6,6,12],[5,5,9]];
+  var OSCURO_DESDE = 3;
+  // [x, y, rx, ry, giro, intensidad]
+  var planB = [
+    null,
+    [[1.22,-.02,.42,.36,.3,1.5],[-.2,1.04,.36,.3,0,1.3]],
+    [[-.22,.12,.4,.36,.2,1.4],[1.2,.95,.34,.3,0,1.3]],
+    [[.72,.3,.5,.42,.3,1.6],[.08,.9,.14,.1,0,.9]],
+    [[.25,.62,.55,.45,-.2,1.7],[.95,.08,.22,.18,0,1]],
+    [[1.22,-.06,.3,.24,.2,1.3],[-.22,1.06,.28,.22,0,1.2]],
+    [[.5,1.05,.72,.38,0,1.8],[.15,.2,.3,.25,0,1.2]],
+    [[.65,.42,.55,.48,.4,1.7],[.1,.85,.12,.09,0,.9]],
+    [[.25,.6,.6,.5,-.2,1.8],[.9,.12,.2,.16,0,1]],
+    [[-.22,-.06,.3,.24,.3,1.3],[1.22,1.06,.28,.22,0,1.2]],
+    [[.5,.45,.72,.58,0,2.0]],
+    [[.2,.3,.5,.45,.3,1.7],[.95,.85,.35,.3,0,1.4]],
+    [[1.22,1.06,.3,.24,.2,1.3],[-.22,-.04,.26,.2,0,1.2]],
+    [[.5,.4,.7,.6,0,2.0],[.85,.95,.2,.12,0,.9]],
+    [[.4,.55,.75,.6,.2,2.0]]
+  ];
+  function escenaB(i) {
+    var bg = fondosB[i], oscuro = (bg[0] + bg[1] + bg[2]) / 3 < 100;
+    var core = oscuro ? [2, 2, 5] : mx([14, 18, 112], [10, 13, 84], Math.min(1, i / 2));
+    var formas;
+    if (i === 0) formas = [
+      { t:'mancha', x:.56, y:.47, rx:.56, ry:.44, rot:.5, s:.22, a:1.6, n:.3, w:[[.1,.5],[.06,2]] },
+      { t:'mancha', x:.22, y:.46, rx:.3, ry:.22, rot:.2, s:.16, a:1.0, n:.2 },
+      { t:'mancha', x:.5, y:.66, rx:.28, ry:.2, rot:.2, s:.17, a:.9, n:.15 },
+      { t:'mancha', x:.18, y:.8, rx:.07, ry:.045, s:.07, a:.75, n:0 },
+      { t:'mancha', x:.1, y:.62, rx:.16, ry:.12, rot:.2, s:.14, a:.8, n:.1 },
+      { t:'mancha', x:.3, y:.18, rx:.5, ry:.3, s:.3, a:.35, n:0 }
+    ];
+    else {
+      var r = rng(301 + i * 13);
+      formas = planB[i].map(function (q) { return { t:'mancha', x:q[0], y:q[1], rx:q[2], ry:q[3], rot:q[4], s: oscuro ? .26 + q[2] * .16 : .17 + q[2] * .12, a:q[5] * (oscuro ? 1.7 : 1), n:oscuro ? .1 : .25, w:[[.06 + r() * .06, r() * 6], [.03 + r() * .04, r() * 6]] }; });
+      // en lo oscuro, cada mancha deja un resplandor azul amplio alrededor (ref. 24 y 25)
+      if (oscuro) planB[i].forEach(function (q) { formas.push({ t:'mancha', x:q[0], y:q[1], rx:q[2] * 1.5, ry:q[3] * 1.5, rot:q[4], s:.32, a:.4, n:0 }); });
+      formas.push({ t:'mancha', x:r(), y:r(), rx:.5, ry:.4, s:.3, a:oscuro ? .15 : .22, n:0 });
+    }
+    return { lut: lutB(bg, core), grano: oscuro ? .09 : .07, granoFondo: oscuro ? .03 : .015, ganancia: 1, punto: 1, nube: .2, semilla: 21 + i, formas: formas, oscuro: oscuro, bg: bg };
+  }
+  
+
+  return { datos: datos, escena: function (v, i) { return v === 'b' ? escenaB(i) : escenaA(i); }, total: 15 };
+}
+/* Fondo continuo: cada sección tiene su escena; al bajar, una escena se funde con la siguiente (solo opacity y transform). */
+(function () {
+  var raiz = document.documentElement, v = raiz.getAttribute('data-fondo') === 'b' ? 'b' : 'a';
+  var cont = document.getElementById('fondo'); if (!cont || !window.Uint8ClampedArray) return;
+  var secs = Array.prototype.slice.call(document.querySelectorAll('.sec[data-n]'));
+  var quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var M = motorFondo(), total = Math.min(M.total, secs.length);
+  var W = 0, H = 0, Q = 1, gen = 0, cache = {}, pedidos = {}, worker = null;
+
+  try {
+    var src = 'var M=(' + motorFondo.toString() + ')();onmessage=function(e){var d=e.data,r=M.datos(M.escena(d.v,d.i),d.W,d.H,d.q);postMessage({i:d.i,gen:d.gen,w:r.w,h:r.h,px:r.px.buffer},[r.px.buffer]);};';
+    worker = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
+    worker.onmessage = function (e) { recibe(e.data.i, e.data.gen, e.data.w, e.data.h, new Uint8ClampedArray(e.data.px)); };
+    worker.onerror = function () { worker = null; pedidos = {}; actualiza(); };
+  } catch (e) { worker = null; }
+
+  function medidas() {
+    var w = cont.clientWidth, h = cont.clientHeight;
+    if (w === W && Math.abs(h - H) < 120) return false;
+    W = w; H = h;
+    Q = Math.max(1, Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(1.4e6 / (W * H))));
+    gen++; for (var k in cache) cache[k].remove(); cache = {}; pedidos = {};
+    return true;
+  }
+  function recibe(i, g, w, h, px) {
+    if (g !== gen) return;
+    var c = document.createElement('canvas'); c.width = w; c.height = h;
+    c.getContext('2d').putImageData(new ImageData(px, w, h), 0, 0);
+    c.style.opacity = 0; cont.appendChild(c); cache[i] = c; delete pedidos[i];
+    if (!cont.classList.contains('listo')) cont.classList.add('listo');
+    actualiza();
+  }
+  function pide(i) {
+    if (i < 0 || i >= total || cache[i] || pedidos[i]) return;
+    pedidos[i] = true;
+    var g = gen;
+    if (worker) worker.postMessage({ v: v, i: i, W: W, H: H, q: Q, gen: g });
+    else setTimeout(function () { if (g !== gen) return; var r = M.datos(M.escena(v, i), W, H, Q); recibe(i, g, r.w, r.h, r.px); }, 30);
+  }
+  // Posiciones de las secciones (se recalculan si cambia la altura de la página)
+  var tops = [];
+  function mide() { var y = window.pageYOffset; tops = secs.map(function (s) { return s.getBoundingClientRect().top + y; }); }
+  var pend = false;
+  function actualiza() {
+    pend = false;
+    var y = window.pageYOffset, vh = window.innerHeight, k = 0;
+    for (var i = 1; i < total; i++) if (tops[i] <= y + vh) k = i;
+    var f = k === 0 ? 1 : Math.min(1, Math.max(0, (y + vh - tops[k]) / vh));
+    var abajo = f >= 1 ? k : k - 1, arriba = f >= 1 ? -1 : k;
+    pide(abajo); pide(arriba); pide(k + 1); pide(abajo - 1);
+    // limpia lo que queda lejos
+    for (var c in cache) if (Math.abs(c - k) > 2) { cache[c].remove(); delete cache[c]; }
+    for (var j in cache) {
+      var el = cache[j], n = +j, o = 0, t = '';
+      if (n === abajo) { o = 1; t = quieto ? '' : 'translate3d(0,' + (-2.5 * (arriba < 0 ? 0 : f)) + '%,0) scale(' + (1.04 + .05 * (arriba < 0 ? 0 : f)) + ')'; }
+      else if (n === arriba) { o = cache[abajo] ? f : 1; t = quieto ? '' : 'translate3d(0,' + (2.5 * (1 - f)) + '%,0) scale(' + (1.09 - .05 * f) + ')'; }
+      el.style.opacity = o; el.style.transform = t; el.style.zIndex = n === arriba ? 2 : 1;
+    }
+    // tono de la barra según la sección que hay debajo
+    var actual = f > .5 ? k : Math.max(0, k - 1);
+    raiz.classList.toggle('barra-osc', !!(secs[actual] && secs[actual].classList.contains('osc-b') && v === 'b'));
+  }
+  function alScroll() { if (!pend) { pend = true; requestAnimationFrame(actualiza); } }
+  function todo() { medidas(); mide(); actualiza(); }
+  todo();
+  addEventListener('scroll', alScroll, { passive: true });
+  var rt; addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(todo, 200); });
+  if ('ResizeObserver' in window) new ResizeObserver(function () { mide(); alScroll(); }).observe(document.body);
+  else setInterval(function () { mide(); }, 1500);
+})();
+</script>
+<!-- Animación sencilla: GSAP + ScrollTrigger. Si no cargan, la página se lee igual. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function () {
-  var root = document.documentElement;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  root.classList.add('js');
-  requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('ready'); }); });
+  if (!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var mm = gsap.matchMedia(), E = 'power2.out';
 
-  // Portada: se desliza y se desvanece al bajar
-  var hero = document.querySelector('header.hero');
-  var ticking = false;
-  function onScroll() {
-    if (ticking) return; ticking = true;
-    requestAnimationFrame(function () {
-      var p = Math.min(1, Math.max(0, window.scrollY / (hero.offsetHeight || 1)));
-      hero.style.setProperty('--p', reduce ? 0 : p.toFixed(3));
-      ticking = false;
-    });
-  }
-  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  mm.add('(prefers-reduced-motion: no-preference)', function () {
+    // Portada: el título y la frase entran suaves
+    gsap.from('#titulo .l > span', { y: 28, opacity: 0, duration: 1, ease: E, stagger: .1, delay: .1 });
+    gsap.from('.portada .respuesta, .portada .tec, .portada .pie', { opacity: 0, duration: 1, ease: E, delay: .6 });
 
-  // Bloques que aparecen al bajar
-  var sel = 'main section > h2, main section > h3, main section > .lead, main section > .source, main section > .callout, main section > .quiz, main section > .bars, main section > .card, main section > .semaforo > *, main section > .reveal, .grid > *, .facts > li, .steps > li, .reco > *';
-  var items = Array.prototype.slice.call(document.querySelectorAll(sel));
-  items.forEach(function (el) {
-    el.classList.add('rv');
-    var sibs = el.parentElement.children, i = Array.prototype.indexOf.call(sibs, el);
-    if (el.parentElement.matches('.grid, .facts, .steps, .reco, .semaforo')) el.style.setProperty('--d', (Math.min(i, 6) * 0.08) + 's');
+    // Textos y bloques: suben un poco y aparecen, en el orden en que llegan
+    var lista = ':not(ul):not(ol):not(.cifras):not(.desc-perfiles):not(.tipos-prof):not(.recos):not(.dos-col):not(.dos-listas)';
+    var piezas = $$('.sec:not(.portada) .wrap > ' + lista + ', .dos-col > ' + lista + ', .dos-listas > *, .hallazgos > li, .pasos > li, .cifras > div, .desc-perfiles > article, .tipos-prof > .grupo, .recos > .reco, .semaforo > li');
+    gsap.set(piezas, { opacity: 0, y: 22 });
+    ScrollTrigger.batch(piezas, { start: 'top 90%', once: true, onEnter: function (b) { gsap.to(b, { opacity: 1, y: 0, duration: .9, ease: E, stagger: .07, overwrite: true }); } });
+
+    // Gráficos: se construyen al entrar, sin rebotes
+    function alEntrar(el, fn) { if (el) ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: function () { fn(el); } }); }
+    alEntrar(document.getElementById('graHabitos'), function (g) { gsap.from($$('circle', g), { opacity: 0, duration: .8, ease: E, stagger: .03, delay: .2 }); });
+    alEntrar(document.getElementById('graHerramientas'), function (g) { gsap.from($$('svg', g), { scale: .6, opacity: 0, duration: 1, ease: E, stagger: .06 }); });
+    $$('.piruletas').forEach(function (u) { alEntrar(u, function () { gsap.from($$('.pista i', u), { scaleX: 0, duration: 1.1, ease: E, stagger: .06 }); }); });
+    alEntrar(document.getElementById('graFrecuencia'), function (g) { gsap.from($$(':scope > *', g), { opacity: 0, duration: .9, ease: E, stagger: .03 }); });
+    alEntrar(document.getElementById('graPesas'), function (g) { gsap.from($$('.pesa', g), { opacity: 0, x: -10, duration: .9, ease: E, stagger: .08 }); });
+    alEntrar(document.getElementById('graMariposa'), function (g) { gsap.from($$('.lado i', g), { scaleX: 0, duration: 1, ease: E, stagger: .04 }); });
+    alEntrar(document.getElementById('graMedidores'), function (g) { gsap.from($$('.casillas i', g), { opacity: 0, duration: .6, ease: E, stagger: .02 }); });
+    alEntrar(document.getElementById('graColumnas'), function (g) { gsap.from($$('i', g), { scaleY: 0, transformOrigin: '50% 100%', duration: 1.1, ease: E, stagger: .1 }); });
+    alEntrar(document.getElementById('graMapa'), function (g) { gsap.from($$('.z', g), { opacity: 0, duration: .8, ease: E, stagger: .03 }); });
+    alEntrar(document.getElementById('graReticulas'), function (g) { gsap.from($$('i.on', g), { opacity: 0, duration: .5, ease: E, stagger: { amount: .8 } }); });
+    alEntrar(document.getElementById('graDelega'), function (g) { gsap.from($$('i', g), { scaleY: 0, duration: 1.1, ease: E, stagger: .08 }); });
+
+    window.__entraPaso = function (paso) { gsap.from(paso, { opacity: 0, y: 12, duration: .5, ease: E }); };
+    window.__resultado = function (out) { gsap.from(out.children, { opacity: 0, y: 14, duration: .7, ease: E, stagger: .08 }); };
+    window.__alDestapar = function (ans) { if (ans) gsap.from(ans, { opacity: 0, y: 14, duration: .7, ease: E }); };
   });
-  document.querySelectorAll('.bars').forEach(function (b) {
-    b.classList.add('rv');
-    b.querySelectorAll('.fill').forEach(function (f, i) { f.style.setProperty('--d', (0.1 + Math.min(i, 14) * 0.04) + 's'); });
-  });
-
-  function countUp(el) {
-    var t = el.textContent.trim(), m = t.match(/^(\d+)(,\d+)?(\s?%)?$/);
-    if (!m || reduce) return;
-    var end = parseFloat((m[1] + (m[2] || '')).replace(',', '.')), dec = m[2] ? m[2].length - 1 : 0, suf = m[3] || '', t0 = null;
-    function step(ts) {
-      if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / 1100); k = 1 - Math.pow(1 - k, 3);
-      el.textContent = (end * k).toFixed(dec).replace('.', ',') + suf;
-      if (k < 1) requestAnimationFrame(step); else el.textContent = t;
-    }
-    requestAnimationFrame(step);
-  }
-
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('in');
-        e.target.querySelectorAll('.num').forEach(countUp);
-        if (e.target.matches('.num')) countUp(e.target);
-        io.unobserve(e.target);
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
-
-    // Navegación: resalta la sección visible
-    var links = {}; document.querySelectorAll('nav.chips a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
-    var bar = document.querySelector('nav.chips .wrap');
-    var nio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        var a = links[e.target.id]; if (!a || !e.isIntersecting) return;
-        Object.keys(links).forEach(function (k) { links[k].classList.remove('on'); });
-        a.classList.add('on');
-        bar.scrollTo({ left: a.offsetLeft - 18, behavior: reduce ? 'auto' : 'smooth' });
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    document.querySelectorAll('main section[id]').forEach(function (sec) { nio.observe(sec); });
-  } else {
-    document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); });
-  }
 })();
 </script>
+
 </body>
 </html>
