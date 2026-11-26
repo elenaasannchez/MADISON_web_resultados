@@ -94,3 +94,18 @@ Referencias que no uso: 03 (multitud con foco, se solaparía con las siluetas), 
 
 ### Gráficos
 Ningún tipo se repite seguido: puntos → burbujas → eje → pesas → mariposa → medidores → mapa de áreas → cuadrículas → cabezas → pendientes. Todos en SVG o HTML a mano, sin librerías de gráficos, con los mismos números que tenía la web.
+
+## Fases 2 a 7 · Lo que he decidido por el camino
+
+- **Tema por defecto: oscuro.** El azul eléctrico y el grano lucen más sobre negro, y en la sala de la presentación la pantalla del móvil molesta menos. El claro está entero y se elige con el botón de la barra, con `?tema=claro` o con `#tema-claro` (para vistas previas que quitan los parámetros).
+- **Acento según el tema:** en oscuro, las palabras en Playfair y las cifras usan un azul más claro (`#8193FF`) porque el eléctrico puro no se leía bien sobre negro; en claro, el eléctrico (`#1F38F2`).
+- **Semáforo sin colores de semáforo:** como no se puede usar amarillo ni verde, la luz encendida va arriba (aprender), en medio (depende) o abajo (delegar). Los nombres “Verde · Amarillo · Rojo” se mantienen porque son el contenido.
+- **Mapa de áreas:** las celdas pequeñas usan una letra menor y, si el nombre no cabe, se corta con puntos suspensivos; el nombre completo está en el texto alternativo del gráfico.
+- **Etiquetas de las siluetas:** iban como “pills”, que el proyecto prohíbe; ahora son texto con una línea fina encima.
+- **Cartón rasgado:** el papel se ha agrandado para que el hueco nunca deje ver el fondo por los bordes.
+- **Regla del resultado del test:** “tú” va encima de la línea y “media 66” debajo, para que no se pisen cuando el resultado está cerca de la media.
+- **Momentos fijados (pin):** solo uno, las siluetas de perfiles (`+=180%` de scroll). El resto de momentos se disparan al entrar o se mueven con el scroll sin fijar la pantalla, para no pelearse con la barra del navegador del móvil (`ignoreMobileResize`).
+- **Títulos de voz baja:** se parten en palabras con JS para que suban línea a línea (sin SplitText, que en la versión 3.12 es de pago).
+- **Lenis:** se carga solo en ordenador con ratón y sin movimiento reducido; en el móvil no se descarga.
+- **Imagen para WhatsApp:** `og-image.jpg` (1200×630) compuesta aparte con la portada, y `icono.png` para el icono del iPhone. La ruta de `og:image` es relativa: hay que cambiarla por la URL absoluta al publicar.
+- **Revisión con design-critique (resumen):** lo que más fallaba en la primera captura era la barra (la marca partía en dos líneas en el móvil), el contraste del acento sobre negro, las cifras 80 % / 5 % que se partían, el fondo de círculos de “Uso” que parecía papel pintado (ahora son cuatro círculos grandes) y la tarjeta de pesas que crecía demasiado en ordenador (los gráficos SVG tienen un ancho máximo de 720 px).
