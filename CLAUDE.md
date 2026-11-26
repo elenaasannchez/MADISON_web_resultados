@@ -39,4 +39,4 @@ Dos versiones, sin interruptor en la web: **A** = anillos y lazos azules con gra
 - En las cautelas del final tiene que aparecer: datos autodeclarados, muestra pequeña, etc. **No** mencionar las réplicas de la encuesta de profesores ni que el trabajo se hizo con IA.
 
 ## Pendiente
-- Publicar en un hosting gratuito (Netlify Drop o GitHub Pages), poner la URL absoluta en `og:image` (`https://…/og-image.jpg`) y hacer el QR con esa URL.
+- Publicada con GitHub Pages desde `main`: https://elenaasannchez.github.io/MADISON_web_resultados/ (QR en la carpeta del proyecto, `/mnt/project-files/qr/`).
