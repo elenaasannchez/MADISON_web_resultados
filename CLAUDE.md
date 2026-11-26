@@ -16,7 +16,7 @@ El sistema de diseño completo y el porqué de cada decisión están en `DECISIO
 Negro azulado, blancos rotos, grises fríos y, sobre todo, **azul eléctrico**. **Nada de amarillo** ni colores de las referencias. Todo va en variables CSS (`--bg`, `--ink`, `--electric`…) sobre fondo claro. En la versión B, las secciones con `.osc-b` (de perfiles al final) cambian a texto claro porque su fondo es oscuro.
 
 ## Fondos
-Dos versiones, sin interruptor en la web: **A** = anillos y lazos azules con grano de aerógrafo sobre blanco roto (ref. 18); **B** (por defecto, elegida por Elena el 26 nov) = manchas azules con núcleo negro que se van oscureciendo al bajar (ref. 14 → 23–25). Es un solo estampado que cambia de forma en cada sección y se funde al hacer scroll. Se pinta en canvas (formas → difuminado → grano), una imagen por sección, y solo se anima con `opacity` y `transform`. Las escenas de cada sección están en el script «Motor del fondo» de `index.html` (`escenaA`, `escenaB`).
+Dos versiones, sin interruptor en la web: **A** = anillos y lazos azules con grano de aerógrafo sobre blanco roto (ref. 18); **B** (por defecto, elegida por Elena el 26 nov) = manchas azules con núcleo negro que se van oscureciendo al bajar (ref. 14 → 23–25), con tres secciones claras intercaladas (cómo, mapa y examen) para dar ritmo. Es un solo estampado que cambia de forma en cada sección y se funde al hacer scroll. Se pinta en canvas (formas → difuminado → grano), una imagen por sección, y solo se anima con `opacity` y `transform`. Las escenas de cada sección están en el script «Motor del fondo» de `index.html` (`escenaA`, `escenaB`).
 
 ## Tipografías: dos voces
 - **Voz alta** (golpes): Archivo 900 cursiva en mayúsculas, palabra clave en Playfair Display cursiva, cifras en Anton.

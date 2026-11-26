@@ -610,7 +610,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 05 · CÓMO -->
-<section class="sec como osc-b" id="como" data-n="05" data-nombre="Cómo, no cuánto">
+<section class="sec como" id="como" data-n="05" data-nombre="Cómo, no cuánto">
   <div class="tec" aria-hidden="true"><span>05 Cómo, no cuánto</span><span>Encuesta a 170 estudiantes</span></div>
   <div class="wrap dos-col">
     <div>
@@ -715,7 +715,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 09 · MAPA -->
-<section class="sec mapa osc-b" id="mapa" data-n="09" data-nombre="Mapa de usos">
+<section class="sec mapa" id="mapa" data-n="09" data-nombre="Mapa de usos">
   <div class="tec" aria-hidden="true"><span>09 Mapa de usos</span><span>Encuesta a 170 estudiantes</span></div>
   <div class="wrap">
     <h2 class="h-baja">La IA se usa sobre todo para <em>estudiar</em>, no para hacer trabajos</h2>
@@ -810,7 +810,7 @@ svg[id^="gra"] { max-width: 720px; }
 </section>
 
 <!-- 12 · EXPERIMENTO 2 -->
-<section class="sec examen osc-b" id="examen" data-n="12" data-nombre="Experimento 2">
+<section class="sec examen" id="examen" data-n="12" data-nombre="Experimento 2">
   <div class="tec" aria-hidden="true"><span>12 Experimento 2</span><span>24 de noviembre de 2026</span></div>
   <div class="wrap">
     <h2 class="h-alta">Con la IA la práctica sale mejor… pero <em>el examen sin ella</em>, no</h2>
@@ -1368,10 +1368,9 @@ function motorFondo() {
     if (oscuro) return [[0, bg], [.12, mx(bg, [16, 34, 130], .45)], [.3, [20, 48, 178]], [.5, [22, 54, 196]], [.64, [14, 34, 140]], [.76, [6, 14, 62]], [.88, [3, 4, 16]], [1, core]];
     return [[0, bg], [.18, mx(bg, [190, 192, 255], .6)], [.4, [112, 118, 252]], [.58, [44, 52, 226]], [.68, [36, 44, 214]], [.78, mx([22, 28, 170], core, .35)], [.92, mx([16, 20, 128], core, .7)], [1, core]];
   }
-  // fondo de cada sección: claro al principio, oscuro desde la 7
-  // fondo de cada sección: blanco en la portada, gris claro en el test y, desde perfiles, cada vez más oscuro (de azul noche a casi negro)
+    // fondo de cada sección: blanco en la portada, gris claro en el test y, desde perfiles, cada vez más oscuro, con tres secciones claras intercaladas (como, mapa, examen)
   var fondosB = [[252,252,254],[246,247,250],[236,238,244],
-                 [30,34,56],[26,29,50],[23,26,44],[20,22,39],[17,19,34],[15,16,30],[13,14,26],[11,12,22],[9,10,18],[8,8,15],[6,6,12],[5,5,9]];
+                 [30,34,56],[26,29,50],[244,245,249],[20,22,39],[17,19,34],[15,16,30],[242,243,248],[11,12,22],[9,10,18],[240,241,247],[6,6,12],[5,5,9]];
   var OSCURO_DESDE = 3;
   // [x, y, rx, ry, giro, intensidad]
   var planB = [
@@ -1380,20 +1379,20 @@ function motorFondo() {
     [[-.22,.12,.4,.36,.2,1.4],[1.2,.95,.34,.3,0,1.3]],
     [[.72,.3,.5,.42,.3,1.6],[.08,.9,.14,.1,0,.9]],
     [[.25,.62,.55,.45,-.2,1.7],[.95,.08,.22,.18,0,1]],
-    [[.85,.5,.48,.46,.1,1.7],[.1,.12,.26,.2,0,1.1]],
+    [[1.22,-.06,.3,.24,.2,1.3],[-.22,1.06,.28,.22,0,1.2]],
     [[.5,1.05,.72,.38,0,1.8],[.15,.2,.3,.25,0,1.2]],
     [[.65,.42,.55,.48,.4,1.7],[.1,.85,.12,.09,0,.9]],
     [[.25,.6,.6,.5,-.2,1.8],[.9,.12,.2,.16,0,1]],
-    [[.8,.35,.5,.45,.1,1.7],[.15,.92,.3,.2,0,1.2]],
+    [[-.22,-.06,.3,.24,.3,1.3],[1.22,1.06,.28,.22,0,1.2]],
     [[.5,.45,.72,.58,0,2.0]],
     [[.2,.3,.5,.45,.3,1.7],[.95,.85,.35,.3,0,1.4]],
-    [[.7,.65,.62,.5,-.2,1.9],[.1,.08,.2,.15,0,1]],
+    [[1.22,1.06,.3,.24,.2,1.3],[-.22,-.04,.26,.2,0,1.2]],
     [[.5,.4,.7,.6,0,2.0],[.85,.95,.2,.12,0,.9]],
     [[.4,.55,.75,.6,.2,2.0]]
   ];
   function escenaB(i) {
-    var bg = fondosB[i], oscuro = i >= OSCURO_DESDE;
-    var core = oscuro ? [2, 2, 5] : mx([14, 18, 112], [10, 13, 84], i / 2);
+    var bg = fondosB[i], oscuro = (bg[0] + bg[1] + bg[2]) / 3 < 100;
+    var core = oscuro ? [2, 2, 5] : mx([14, 18, 112], [10, 13, 84], Math.min(1, i / 2));
     var formas;
     if (i === 0) formas = [
       { t:'mancha', x:.56, y:.47, rx:.56, ry:.44, rot:.5, s:.22, a:1.6, n:.3, w:[[.1,.5],[.06,2]] },

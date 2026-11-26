@@ -4,7 +4,7 @@
 
 **Fondos (dos versiones para elegir)**
 - `?fondo=a`: anillos y lazos azules muy difuminados con grano de aerógrafo sobre blanco roto, como la referencia 18.
-- `?fondo=b` (por defecto, la elegida): manchas de azul ultramar con núcleo negro; empieza claro (ref. 14) y se oscurece al bajar hasta casi negro (ref. 23–25). Desde perfiles, el texto pasa a claro.
+- `?fondo=b` (por defecto, la elegida): manchas de azul ultramar con núcleo negro; empieza claro (ref. 14) y se oscurece al bajar hasta casi negro (ref. 23–25), con tres secciones claras intercaladas (cómo, mapa y examen). En las oscuras, el texto pasa a claro.
 - En las dos, el estampado cambia de posición, tamaño e intensidad en cada sección y se transforma suavemente al hacer scroll. Se pinta en canvas, una vez por sección, y solo se anima opacidad y posición.
 
 **Qué se ha quitado**
