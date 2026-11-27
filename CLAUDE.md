@@ -39,4 +39,4 @@ Dos versiones, sin interruptor en la web: **A** = anillos y lazos azules con gra
 - En las cautelas del final tiene que aparecer: datos autodeclarados, muestra pequeña, etc. **No** mencionar las réplicas de la encuesta de profesores ni que el trabajo se hizo con IA.
 
 ## Pendiente
-- Publicada con GitHub Pages desde `main`: https://econoreto.github.io/ (QR en la carpeta del proyecto, `/mnt/project-files/qr/`).
+- Publicada con GitHub Pages desde `main`: https://elenaasannchez.github.io/MADISON_web_resultados/ (QR en la carpeta del proyecto, `/mnt/project-files/qr/`).
